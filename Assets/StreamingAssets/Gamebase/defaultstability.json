@@ -1,0 +1,26 @@
+{
+    "alpha": {
+        "useFlag": true,
+        "useFlagSpecificUser": false,
+        "logLevel": "INFO",
+        "appKey": "vXvDFyE2ZDHW1BMXRiux",
+        "appKeyVersion": 2,
+        "initFailCount": 5
+    },
+    "beta": {
+        "useFlag": true,
+        "useFlagSpecificUser": false,
+        "logLevel": "INFO",
+        "appKey": "GoFJ4lRuPemQaCRxkZnu",
+        "appKeyVersion": 2,
+        "initFailCount": 5
+    },
+    "real": {
+        "useFlag": true,
+        "useFlagSpecificUser": false,
+        "logLevel": "INFO",
+        "appKey": "05ed7RP4H0FCV6IjnmIB",
+        "appKeyVersion": 2,
+        "initFailCount": 5
+    }
+}

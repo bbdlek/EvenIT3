@@ -1,0 +1,8 @@
+digraph "Gamebase.Push"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="{Gamebase.Push\n||+ RegisterPush()\l+ QueryPush()\l+ SetSandboxMode()\l+ RegisterPush()\l+ QueryTokenInfo()\l+ GetNotificationOptions()\l+ QueryNotificationAllowed()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="The Push class provides registering push token API to ToastCloud Push Server and querying push token ..."];
+}

@@ -1,0 +1,6 @@
+framework module NHNCloudUnityLogger {
+  umbrella header "NHNCloudUnityLogger.h"
+
+  export *
+  module * { export * }
+}

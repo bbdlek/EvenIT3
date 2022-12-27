@@ -1,0 +1,8 @@
+digraph "Gamebase.Purchase"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [label="{Gamebase.Purchase\n||+ RequestPurchase()\l+ RequestPurchase()\l+ RequestPurchase()\l+ RequestItemListOfNotConsumed()\l+ RequestItemListPurchasable()\l+ RequestItemListAtIAPConsole()\l+ SetPromotionIAPHandler()\l+ RequestActivatedPurchases()\l+ RequestRetryTransaction()\l+ SetStoreCode()\l+ GetStoreCode()\l}",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="The Purchase class provides several APIs related to purchasing processes."];
+}

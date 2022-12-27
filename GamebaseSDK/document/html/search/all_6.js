@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['imagenotice_0',['ImageNotice',['../class_toast_1_1_gamebase_1_1_gamebase_1_1_image_notice.html',1,'Toast::Gamebase::Gamebase']]],
+  ['info_1',['Info',['../class_toast_1_1_gamebase_1_1_gamebase_1_1_logger_a901ef58642e55a32dc14f71315d5feb4.html#a901ef58642e55a32dc14f71315d5feb4',1,'Toast::Gamebase::Gamebase::Logger']]],
+  ['initialize_2',['Initialize',['../class_toast_1_1_gamebase_1_1_gamebase_aac34a0e8edee061f43306b3d8e059060.html#aac34a0e8edee061f43306b3d8e059060',1,'Toast.Gamebase.Gamebase.Initialize(GamebaseCallback.GamebaseDelegate&lt; GamebaseResponse.Launching.LaunchingInfo &gt; callback)'],['../class_toast_1_1_gamebase_1_1_gamebase_a13557cd250149824ad54ae8817fa7b5d.html#a13557cd250149824ad54ae8817fa7b5d',1,'Toast.Gamebase.Gamebase.Initialize(GamebaseRequest.GamebaseConfiguration configuration, GamebaseCallback.GamebaseDelegate&lt; GamebaseResponse.Launching.LaunchingInfo &gt; callback)'],['../class_toast_1_1_gamebase_1_1_gamebase_1_1_logger_afbb5a1984d712081fe9f51bfeac83e70.html#afbb5a1984d712081fe9f51bfeac83e70',1,'Toast.Gamebase.Gamebase.Logger.Initialize()']]],
+  ['isconnected_3',['IsConnected',['../class_toast_1_1_gamebase_1_1_gamebase_1_1_network_a48bca14d41772555382e77f707fa4579.html#a48bca14d41772555382e77f707fa4579',1,'Toast.Gamebase.Gamebase.Network.IsConnected()'],['../class_toast_1_1_gamebase_1_1_gamebase_1_1_network_a90602ef4e520e8808bb0d8520e95b073.html#a90602ef4e520e8808bb0d8520e95b073',1,'Toast.Gamebase.Gamebase.Network.IsConnected(GamebaseCallback.DataDelegate&lt; bool &gt; callback)']]],
+  ['issandbox_4',['IsSandbox',['../class_toast_1_1_gamebase_1_1_gamebase_a7acf1bad624f5c38e2097b509e69e9f8.html#a7acf1bad624f5c38e2097b509e69e9f8',1,'Toast::Gamebase::Gamebase']]],
+  ['isshowingtermsview_5',['IsShowingTermsView',['../class_toast_1_1_gamebase_1_1_gamebase_1_1_terms_a86b311177c0c60a9b817fe61bc4b62f3.html#a86b311177c0c60a9b817fe61bc4b62f3',1,'Toast::Gamebase::Gamebase::Terms']]],
+  ['issuccess_6',['IsSuccess',['../class_toast_1_1_gamebase_1_1_gamebase_aefb6abf0b90df4a52f5e85f6576222f8.html#aefb6abf0b90df4a52f5e85f6576222f8',1,'Toast::Gamebase::Gamebase']]],
+  ['issuetransferaccount_7',['IssueTransferAccount',['../class_toast_1_1_gamebase_1_1_gamebase_a888dcb7305c6ffbc91b2157d2ace5a41.html#a888dcb7305c6ffbc91b2157d2ace5a41',1,'Toast::Gamebase::Gamebase']]]
+];
