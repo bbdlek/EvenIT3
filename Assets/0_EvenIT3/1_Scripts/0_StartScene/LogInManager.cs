@@ -47,6 +47,7 @@ public class LogInManager : MonoBehaviour
             {
                 string userId = authToken.member.userId;
                 Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
+                AfterLogin();
             }
             else
             {
@@ -76,6 +77,7 @@ public class LogInManager : MonoBehaviour
             {
                 string userId = authToken.member.userId;
                 Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
+                AfterLogin();
             }
             else
             {
@@ -131,6 +133,7 @@ public class LogInManager : MonoBehaviour
     {
         if (_savedPushConfiguration != null)
         {
+            Debug.Log("RegisterPush");
             Gamebase.Push.RegisterPush(_savedPushConfiguration, (error) =>
             {
                 

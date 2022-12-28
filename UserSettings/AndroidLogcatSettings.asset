@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
         "name": "com.DefaultCompany.EvenIT3",
-        "processId": 27109,
+        "processId": 13627,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,24 @@
             "deviceId": "LMV500N53b05663",
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 27109,
+            "exited": true
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 9641,
+            "exited": true
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 11471,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 13627,
             "exited": false
         }
     ],

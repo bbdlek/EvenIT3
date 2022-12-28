@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "784491189850",
+    "firebase_url": "https://evenit3-dabbc-default-rtdb.firebaseio.com",
+    "project_id": "evenit3-dabbc",
+    "storage_bucket": "evenit3-dabbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784491189850:android:356511e132c86973aaea63",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.EvenIT3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784491189850-6ph605j0322vugrqnf5jtr8pjcq2heih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.DefaultCompany.EvenIT3",
+            "certificate_hash": "ba33cb9073211bbbb42fb0e84b745972d1bd76a6"
+          }
+        },
+        {
+          "client_id": "784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
