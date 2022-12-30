@@ -13,6 +13,7 @@ public class LogInManager : MonoBehaviour
             if (Gamebase.IsSuccess(error))
             {
                 Debug.Log("Login succeeded.");
+                AfterLogin();
             }
             else
             {
@@ -32,6 +33,8 @@ public class LogInManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Try to login using a specifec IdP");
+                    AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.Login);
+                    ShowTermsView();
                     //Gamebase.Login("ProviderName", (authToken, error) => {});
                 }
             }
@@ -136,8 +139,55 @@ public class LogInManager : MonoBehaviour
             Debug.Log("RegisterPush");
             Gamebase.Push.RegisterPush(_savedPushConfiguration, (error) =>
             {
-                
+                if (Gamebase.IsSuccess(error))
+                {
+                    AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.TouchToStart);
+                    UserManager.Instance.userID = Gamebase.GetUserID();
+                }
+                else
+                {
+                    Debug.Log(string.Format("SaveTerms failed. error:{0}", error));
+                }
             });
         }
+        else
+        {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.TouchToStart);
+            UserManager.Instance.userID = Gamebase.GetUserID();
+        }
+    }
+
+    public void LogOut()
+    {
+        Gamebase.Logout((error) =>
+        {
+            if (Gamebase.IsSuccess(error))
+            {
+                Debug.Log("Logout succeeded.");
+                UserManager.Instance.ClearUserManager();
+                AppManagerScript.Instance.ChangeScene(SceneName.StartScene);
+            }
+            else
+            {
+                Debug.Log(string.Format("Logout failed. error is {0}", error));
+            }
+        });
+    }
+
+    public void WithDraw()
+    {
+        Gamebase.Withdraw((error) =>
+        {
+            if (Gamebase.IsSuccess(error))
+            {
+                Debug.Log("Withdraw succeeded.");
+                UserManager.Instance.ClearUserManager();
+                AppManagerScript.Instance.ChangeScene(SceneName.StartScene);
+            }
+            else
+            {
+                Debug.Log(string.Format("Withdraw failed. error is {0}", error));
+            }
+        });
     }
 }
