@@ -28,7 +28,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
 
     private async void CheckNewUser()
     {
-        if (!await DBManagerScript.Instance.CheckNewUser(UserManager.Instance.userID))
+        if (!await FBManagerScript.Instance.CheckNewUser(UserManager.Instance.userID))
         {
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.SetNickNamePanel);
         }

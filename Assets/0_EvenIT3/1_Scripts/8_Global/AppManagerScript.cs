@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class AppManagerScript : Singleton<AppManagerScript>
 {
     private GamabaseManager _gamabaseManager;
-    private DBManagerScript _dbManager;
+    private FBManagerScript _fbManager;
     public GameObject sceneManagerObject;
 
     public SceneName sceneName;
@@ -16,7 +16,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
     {
         SetApp();
         RemoveDuplicates();
-        _dbManager = GetComponent<DBManagerScript>();
+        _fbManager = GetComponent<FBManagerScript>();
         _gamabaseManager = GetComponent<GamabaseManager>();
     }
 
@@ -32,7 +32,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
 
     private void InitApp()
     {
-        _dbManager.InitFirebase();
+        _fbManager.InitFirebase();
         _gamabaseManager.Initialize();
     }
     

@@ -1455,6 +1455,7 @@ GameObject:
   - component: {fileID: 2112035518}
   - component: {fileID: 2112035517}
   - component: {fileID: 2112035514}
+  - component: {fileID: 2112035519}
   m_Layer: 0
   m_Name: AppManager
   m_TagString: Untagged
@@ -1529,3 +1530,107 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25aa515beaf00de4fb05e931d3c7ca3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2112035519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112035513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b3599f05ca38546ac05ff0fcd62ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snackDB:
+  - no: 1
+    name: circlebread_bread
+    name_kr: "\uB465\uADFC\uB2EC"
+    type: 0
+    P2A: 
+    iconNo: 0
+    explain: 
+    amulet_icon: 
+  teacherDB:
+  - no: 0
+    name: koreanT
+    name_kr: "\uC2E0\uC785 \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
+    grade: 1
+    watchingTime: 0.8
+    maxDecibel: 75
+    watchingNum: 8
+    skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
+    skillType: "\uB3CC\uC544\uBCF4\uAE30 \uD69F\uC218 N\uD68C \uC99D\uAC00"
+    NN: 0
+    explain: 
+  stageDB:
+  - no: 1
+    name: stage_01
+    teacher:
+      no: 0
+      name: koreanT
+      name_kr: "\uC2E0\uC785 \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
+      grade: 1
+      watchingTime: 0.8
+      maxDecibel: 75
+      watchingNum: 8
+      skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
+      skillType: "\uB3CC\uC544\uBCF4\uAE30 \uD69F\uC218 N\uD68C \uC99D\uAC00"
+      NN: 0
+      explain: 
+    snackList:
+    - no: 1
+      name: circlebread_bread
+      name_kr: "\uB465\uADFC\uB2EC"
+      type: 0
+      P2A: 
+      iconNo: 0
+      explain: 
+      amulet_icon: 
+    reward_1: 1
+    reward_2: 2
+    reward_3: 3
+  itemDB:
+  - no: 1
+    name: ice_clock
+    name_kr: "\uC5BC\uC74C\uC2DC\uACC4"
+    buff: "N\uCD08\uB3D9\uC548 \uC81C\uD55C\uC2DC\uAC04 \uBA48\uCDA4"
+    NN: 10
+    icon: 
+    effect: 
+    sound: 
+  - no: 2
+    name: milk
+    name_kr: "\uC6B0\uC720"
+    buff: "5\uCD08 \uB3D9\uC548 \uAC04\uC2DD \uBA39\uB294 \uC18D\uB3C4 N% \uC99D\uAC00"
+    NN: 10
+    icon: 
+    effect: 
+    sound: 
+  - no: 3
+    name: mask
+    name_kr: "\uB9C8\uC2A4\uD06C"
+    buff: "5\uCD08 \uB3D9\uC548 \uBAA8\uB4E0 \uAC04\uC2DD\uC758 \uB370\uC2DC\uBCA8
+      \uBC1C\uC0DD \uB7C9 N% \uAC10\uC18C"
+    NN: 5
+    icon: 
+    effect: 
+    sound: 
+  - no: 4
+    name: shield
+    name_kr: "\uAC74\uCE58\uC694\uC815\uC758 \uAC00\uD638"
+    buff: "\uB370\uC2DC\uBCA8/\uB3CC\uC544\uBCF4\uAE30\uB85C \uC778\uD55C \uAC8C\uC784
+      \uC624\uBC84 \uC2DC \uAE30\uD68C 1\uD68C \uC81C\uACF5"
+    NN: 0
+    icon: 
+    effect: 
+    sound: 
+  - no: 5
+    name: plus_time
+    name_kr: "\uACE0\uC7A5\uB09C \uC2DC\uACC4"
+    buff: "\uC81C\uD55C\uC2DC\uAC04 \uB9CC\uB8CC\uB85C \uC778\uD55C \uAC8C\uC784
+      \uC624\uBC84 \uC2DC N\uCD08 \uCD94\uAC00 \uC81C\uACF5"
+    NN: 10
+    icon: 
+    effect: 
+    sound: 
