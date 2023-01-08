@@ -68,6 +68,17 @@ public class InGameSceneUIManager : UIControllerScript
             case InGameSceneButtons.FailedLookPanelRefuseBtn:
                 OnClickFailedLookPanelRefuseBtn();
                 break;
+            
+            //FailedDecibel
+            case InGameSceneButtons.FailedDecibelPanelCloseBtn:
+                OnClickFailedDecibelPanelCloseBtn();
+                break;
+            case InGameSceneButtons.FailedDecibelPanelBuyBtn:
+                OnClickFailedDecibelPanelBuyBtn();
+                break;
+            case InGameSceneButtons.FailedDecibelPanelRefuseBtn:
+                OnClickFailedDecibelPanelRefuseBtn();
+                break;
 
             //FailedOver
             case InGameSceneButtons.FailedOverPanelCloseBtn:
@@ -113,6 +124,11 @@ public class InGameSceneUIManager : UIControllerScript
         FailedLookPanelCloseBtn,
         FailedLookPanelBuyBtn,
         FailedLookPanelRefuseBtn,
+        
+        //FailedDecibel
+        FailedDecibelPanelCloseBtn,
+        FailedDecibelPanelBuyBtn,
+        FailedDecibelPanelRefuseBtn,
         
         //FailedOver
         FailedOverPanelCloseBtn,
@@ -171,6 +187,26 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
+    //FailedDecibel
+    private void OnClickFailedDecibelPanelCloseBtn()
+    {
+        OnClickFailedDecibelPanelRefuseBtn();
+    }
+    
+    private void OnClickFailedDecibelPanelBuyBtn()
+    {
+        GameManager.Instance.player.curDecibelAmount = 0;
+        GameManager.Instance.shieldItem = 0;
+        Time.timeScale = 1;
+        FindUIObject("FailedDecibelPanel").SetActive(false);
+        GameManager.Instance.gameState = GameManager.GameState.InGame;
+    }
+    
+    private void OnClickFailedDecibelPanelRefuseBtn()
+    {
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
+    }
+    
     //FailedOver
     private void OnClickFailedOverPanelCloseBtn()
     {
@@ -180,6 +216,7 @@ public class InGameSceneUIManager : UIControllerScript
     private void OnClickFailedOverPanelBuyBtn()
     {
         GameManager.Instance.curTime = DBManagerScript.Instance.itemDB[4].NN;
+        GameManager.Instance.shieldItem = 0;
         Time.timeScale = 1;
         TimerOff();
         FindUIObject("FailedOverPanel").SetActive(false);

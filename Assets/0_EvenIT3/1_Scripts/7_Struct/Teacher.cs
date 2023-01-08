@@ -12,7 +12,8 @@ public struct Teacher
     public int grade;
     public float watchingTime;
     public float maxDecibel;
-    public int watchingNum;
+    public float minDelay;
+    public float maxDelay;
     public string skillName;
     public string skillType;
     public float NN;

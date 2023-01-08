@@ -13,4 +13,5 @@ public class Stage
     public int reward_1;
     public int reward_2;
     public int reward_3;
+    public float stageTime;
 }

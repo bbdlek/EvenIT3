@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Google.Apis.Services;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -18,14 +19,15 @@ public class DBManagerScript : Singleton<DBManagerScript>
 
     private void Start()
     {
-        
+        BaseClientService.Initializer initializer = new BaseClientService.Initializer();
+        initializer.ApiKey = "AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY";
     }
     
     IEnumerator ObtainSheetData()
     {
         UnityWebRequest www =
             UnityWebRequest.Get(
-                "https://opensheet.elk.sh/1FRIyCWP4AwuW2Sv7gSotXzDETzmF8vrdexVR93YsfgQ/snack");
+                "https://drive.google.com/uc?export=download&id=1u1h-5dEZUSupamAgJ_fJEN3vbqc6RB7sgfkOjaiZGJg");
         yield return www.SendWebRequest();
         if (www.isNetworkError || www.isHttpError)
         {
@@ -38,5 +40,5 @@ public class DBManagerScript : Singleton<DBManagerScript>
             Debug.Log(json);
         }
     }
-    
+
 }

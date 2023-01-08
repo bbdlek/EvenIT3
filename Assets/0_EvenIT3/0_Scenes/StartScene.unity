@@ -1558,7 +1558,8 @@ MonoBehaviour:
     grade: 1
     watchingTime: 0.8
     maxDecibel: 75
-    watchingNum: 8
+    minDelay: 0
+    maxDelay: 0
     skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
     skillType: "\uB3CC\uC544\uBCF4\uAE30 \uD69F\uC218 N\uD68C \uC99D\uAC00"
     NN: 0
@@ -1573,7 +1574,8 @@ MonoBehaviour:
       grade: 1
       watchingTime: 0.8
       maxDecibel: 75
-      watchingNum: 8
+      minDelay: 6
+      maxDelay: 12
       skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
       skillType: "\uB3CC\uC544\uBCF4\uAE30 \uD69F\uC218 N\uD68C \uC99D\uAC00"
       NN: 0
@@ -1590,6 +1592,7 @@ MonoBehaviour:
     reward_1: 1
     reward_2: 2
     reward_3: 3
+    stageTime: 100
   itemDB:
   - no: 1
     name: ice_clock

@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     //필요 변수
     public float quantity;
     public Snack selectedSnack;
+    public int shieldItem;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class GameManager : Singleton<GameManager>
             TimerCount();
             CheckDecibel();
             CheckQuantity();
+            CheckTurn();
         }
     }
 
@@ -51,6 +53,7 @@ public class GameManager : Singleton<GameManager>
         //Stage
         SetStageInfo();
         SelectSnack();
+        shieldItem = 1;
 
         //Timer
         curTime = setTime;
@@ -69,6 +72,7 @@ public class GameManager : Singleton<GameManager>
         curStage.reward_1 = DBManagerScript.Instance.stageDB[0].reward_1;
         curStage.reward_2 = DBManagerScript.Instance.stageDB[0].reward_2;
         curStage.reward_3 = DBManagerScript.Instance.stageDB[0].reward_3;
+        setTime = DBManagerScript.Instance.stageDB[0].stageTime;
     }
 
     private void SelectSnack()
@@ -79,7 +83,7 @@ public class GameManager : Singleton<GameManager>
     }
     
     //Timer
-    public float setTime = 60f;
+    public float setTime = 100f;
     public float curTime;
     public bool _isTimer;
     
@@ -94,6 +98,16 @@ public class GameManager : Singleton<GameManager>
                 _isTimer = false;
                 curTime = 0;
                 Time.timeScale = 0;
+                if (shieldItem == 0)
+                {
+                    inGameSceneUIManager.FindUIObject("FailedOverPanelBuyBtn").GetComponent<UnityEngine.UI.Button>()
+                        .interactable = false;
+                }
+                else
+                {
+                    inGameSceneUIManager.FindUIObject("FailedOverPanelBuyBtn").GetComponent<UnityEngine.UI.Button>()
+                        .interactable = true;
+                }
                 inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
             }
         }
@@ -105,12 +119,32 @@ public class GameManager : Singleton<GameManager>
         float decibel = player.curDecibelAmount;
         inGameSceneUIManager.FindUIObject("DecibelTxt").GetComponent<TMPro.TMP_Text>().text =
             Mathf.Round(decibel * 10) / 10 + " db";
+        if (curStage.teacher.maxDecibel - 15f <= decibel && teacher.teacherState == TeacherController.TeacherState.Idle)
+        {
+            inGameSceneUIManager.FindUIObject("TeacherBubbleTxt").GetComponent<TMPro.TMP_Text>().text = "무슨 소리가 들리는 것 같은데...";
+            inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(true);
+        }
+        else
+        {
+            inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(false);
+        }
         if (curStage.teacher.maxDecibel <= decibel)
         {
+            inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(false);
             Debug.Log("Failed");
             gameState = GameState.Pause;
             Time.timeScale = 0;
-            inGameSceneUIManager.FindUIObject("FailedLookPanel").SetActive(true);
+            if (shieldItem == 0)
+            {
+                inGameSceneUIManager.FindUIObject("FailedDecibelPanelBuyBtn").GetComponent<UnityEngine.UI.Button>()
+                    .interactable = false;
+            }
+            else
+            {
+                inGameSceneUIManager.FindUIObject("FailedDecibelPanelBuyBtn").GetComponent<UnityEngine.UI.Button>()
+                    .interactable = true;
+            }
+            inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
         }
     }
 
@@ -123,6 +157,20 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("Succeed");
             gameState = GameState.Pause;
             Time.timeScale = 0;
+        }
+    }
+
+    private void CheckTurn()
+    {
+        if (teacher.teacherState == TeacherController.TeacherState.Look)
+        {
+            if (player.playerState == Player.State.Eating)
+            {
+                Debug.Log("Failed");
+                gameState = GameState.Pause;
+                Time.timeScale = 0;
+                inGameSceneUIManager.FindUIObject("FailedLookPanel").SetActive(true);
+            }
         }
     }
     
