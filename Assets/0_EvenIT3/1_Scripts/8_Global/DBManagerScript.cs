@@ -1,14 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Services;
-using Google.Apis.Sheets.v4;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
-using Data = Google.Apis.Sheets.v4.Data;
 
 public class DBManagerScript : Singleton<DBManagerScript>
 {
@@ -22,11 +18,10 @@ public class DBManagerScript : Singleton<DBManagerScript>
         
     }
 
-    private SheetsService sheetsService;
 
     private void Start()
     {
-        sheetsService = new SheetsService(new BaseClientService.Initializer
+        /*sheetsService = new SheetsService(new BaseClientService.Initializer
         {
             HttpClientInitializer = GetCredential(),
             ApplicationName = "SheetTest",
@@ -43,8 +38,8 @@ public class DBManagerScript : Singleton<DBManagerScript>
 
         Data.BatchUpdateSpreadsheetResponse response = request.Execute();
         
-        Debug.Log(JsonConvert.SerializeObject(response));
-        //StartCoroutine(ObtainSheetData());
+        Debug.Log(JsonConvert.SerializeObject(response));*/
+        StartCoroutine(ObtainSheetData());
     }
 
     IEnumerator ObtainSheetData()
@@ -59,15 +54,11 @@ public class DBManagerScript : Singleton<DBManagerScript>
         }
         else
         {
-            string json = JsonConvert.SerializeObject(www.downloadHandler.text);
+            //string json = JsonConvert.SerializeObject(www.downloadHandler.text);
+            string json = www.downloadHandler.text;
             json.Replace("]", "");
             Debug.Log(json);
         }
-    }
-
-    public static UserCredential GetCredential()
-    {
-        return null;
     }
 
 }

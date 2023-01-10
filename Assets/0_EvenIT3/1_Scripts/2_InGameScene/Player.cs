@@ -81,9 +81,11 @@ public class Player : Singleton<Player>
     public IEnumerator Buff_Ice()
     {
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1BtnActive").SetActive(true);
         GameManager.Instance._isTimer = false;
         yield return new WaitForSeconds(DBManagerScript.Instance.itemDB[0].NN);
         GameManager.Instance._isTimer = true;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1BtnActive").SetActive(false);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
@@ -91,9 +93,11 @@ public class Player : Singleton<Player>
     {
         float prevEatingSpeed = eatingSpeed;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(true);
         eatingSpeed += eatingSpeed * DBManagerScript.Instance.itemDB[2].NN / 100;
         yield return new WaitForSeconds(5f);
         eatingSpeed = prevEatingSpeed;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(false);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
@@ -101,9 +105,11 @@ public class Player : Singleton<Player>
     {
         float prevDecibelAmount = decibelAmount;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(true);
         decibelAmount -= decibelAmount * DBManagerScript.Instance.itemDB[1].NN / 100;
         yield return new WaitForSeconds(5f);
         decibelAmount = prevDecibelAmount;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(false);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
     

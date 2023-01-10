@@ -1506,6 +1506,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneManagerObject: {fileID: 0}
   sceneName: 0
+  selectedChapter: 1
+  selectedStage: 1
 --- !u!114 &2112035517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1544,7 +1546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snackDB:
   - no: 1
-    name: circlebread_bread
+    name: jundulung_snack
     name_kr: "\uB465\uADFC\uB2EC"
     type: 0
     P2A: 
@@ -1567,28 +1569,8 @@ MonoBehaviour:
   stageDB:
   - no: 1
     name: stage_01
-    teacher:
-      no: 0
-      name: koreanT
-      name_kr: "\uC2E0\uC785 \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
-      grade: 1
-      watchingTime: 0.8
-      maxDecibel: 75
-      minDelay: 6
-      maxDelay: 12
-      skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
-      skillType: "\uB3CC\uC544\uBCF4\uAE30 \uD69F\uC218 N\uD68C \uC99D\uAC00"
-      NN: 0
-      explain: 
-    snackList:
-    - no: 1
-      name: circlebread_bread
-      name_kr: "\uB465\uADFC\uB2EC"
-      type: 0
-      P2A: 
-      iconNo: 0
-      explain: 
-      amulet_icon: 
+    teacherNo: 1
+    snackNoList: 00000000
     reward_1: 1
     reward_2: 2
     reward_3: 3

@@ -8,8 +8,8 @@ public class Stage
 {
     public int no;
     public string name;
-    public Teacher teacher;
-    public List<Snack> snackList;
+    public int teacherNo;
+    public List<int> snackNoList;
     public int reward_1;
     public int reward_2;
     public int reward_3;

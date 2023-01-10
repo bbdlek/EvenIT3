@@ -12,6 +12,9 @@ public class AppManagerScript : Singleton<AppManagerScript>
 
     public SceneName sceneName;
 
+    public int selectedChapter;
+    public int selectedStage;
+
     public override void Awake()
     {
         SetApp();

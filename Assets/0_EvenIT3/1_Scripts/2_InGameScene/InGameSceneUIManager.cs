@@ -269,26 +269,12 @@ public class InGameSceneUIManager : UIControllerScript
 
     public void TimerUpdate(float percentage)
     {
-        FindUIObject("TimerGaugeSlider").GetComponent<Slider>().value = percentage;
-        if (percentage > 0.33f)
-        {
-            FindUIObject("TimerGaugeIcon1On").SetActive(true);
-        }
-        
-        if (percentage > 0.66f)
-        {
-            FindUIObject("TimerGaugeIcon2On").SetActive(true);
-        }
-        
-        if (percentage > 0.99f)
-        {
-            FindUIObject("TimerGaugeIcon3On").SetActive(true);
-        }
+        FindUIObject("TimerGaugeFill").GetComponent<Image>().fillAmount = percentage;
     }
 
     public void QuantityUpdate(float percentage)
     {
-        FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = percentage;
+        FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = 1 - percentage;
     }
 
     public void TimerOff()
