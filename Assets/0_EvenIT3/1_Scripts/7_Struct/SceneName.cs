@@ -6,4 +6,5 @@ public enum SceneName
 {
     StartScene,
     MainMenuScene,
+    InGameScene
 }

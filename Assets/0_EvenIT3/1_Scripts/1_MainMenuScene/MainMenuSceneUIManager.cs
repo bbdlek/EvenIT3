@@ -69,6 +69,9 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             
             //Stage
+            case MainMenuSceneButtons.Stage1Btn:
+                OnClickStage1Btn();
+                break;
         
             //Achievement
             case MainMenuSceneButtons.AchievementCloseBtn:
@@ -121,6 +124,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         ProfileMoveBtn,
         
         //Stage
+        Stage1Btn,
         
         //Achievement
         AchievementCloseBtn,
@@ -146,7 +150,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickSetNickNameConfirmBtn()
     {
         string nickName = FindUIObject("SetNickNameInputField").GetComponent<TMP_InputField>().text;
-        DBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
+        FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
         FindUIObject("SetNickNamePanel").SetActive(false);
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
@@ -188,6 +192,10 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
     
     //Stage
+    private void OnClickStage1Btn()
+    {
+        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+    }
         
     //Achievement
     private void OnClickAchievementCloseBtn()
@@ -224,7 +232,7 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickOptionWithDrawBtn()
     {
-        DBManagerScript.Instance.DeleteCurrentUser(UserManager.Instance.userID);
+        FBManagerScript.Instance.DeleteCurrentUser(UserManager.Instance.userID);
         AppManagerScript.Instance.GetComponent<LogInManager>().WithDraw();
     }
     
