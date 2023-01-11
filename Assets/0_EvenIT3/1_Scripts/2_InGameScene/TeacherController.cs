@@ -26,7 +26,8 @@ public class TeacherController : MonoBehaviour
 
 
     private int _stageNum;
-    private void Start()
+
+    public void SetUpTeacher()
     {
         _teacherImg = teacherObj.GetComponent<Image>();
         teacherState = TeacherState.Idle;
@@ -100,6 +101,7 @@ public class TeacherController : MonoBehaviour
         teacherState = TeacherState.Look;
         yield return new WaitForSeconds(_watchingTime);
         teacherState = TeacherState.Idle;
+        StartCoroutine(LookCoroutine());
     }
 
 }

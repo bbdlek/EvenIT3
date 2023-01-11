@@ -42,6 +42,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
 
     public void ChangeScene(SceneName changeSceneName)
     {
+        Time.timeScale = 1;
         sceneName = changeSceneName;
         SceneManager.LoadScene(sceneName.ToString());
     }

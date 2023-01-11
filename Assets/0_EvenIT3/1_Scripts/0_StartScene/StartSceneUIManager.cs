@@ -44,8 +44,8 @@ public class StartSceneUIManager : UIControllerScript
             case StartSceneButtons.GoogleLoginBtn:
                 OnClickGoogleLoginBtn();
                 break;
-            case StartSceneButtons.GuestLoginBtn:
-                OnClickGuestLoginBtn();
+            case StartSceneButtons.FBLoginBtn:
+                OnClickFBLoginBtn();
                 break;
             case StartSceneButtons.TouchToStartBtn:
                 OnClickTouchToStartBtn();
@@ -57,7 +57,7 @@ public class StartSceneUIManager : UIControllerScript
     {
         //Login
         GoogleLoginBtn,
-        GuestLoginBtn,
+        FBLoginBtn,
         
         //TouchToStart
         TouchToStartBtn,
@@ -71,6 +71,13 @@ public class StartSceneUIManager : UIControllerScript
     private void OnClickGuestLoginBtn()
     {
         AppManagerScript.Instance.GetComponent<LogInManager>().GuestLogin();
+    }
+    private void OnClickFBLoginBtn()
+    {
+        if(Application.isEditor)
+            AppManagerScript.Instance.GetComponent<LogInManager>().GuestLogin();
+        else
+            AppManagerScript.Instance.GetComponent<LogInManager>().FBLogin();
     }
 
     private void OnClickTouchToStartBtn()
