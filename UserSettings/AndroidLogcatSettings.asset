@@ -3,8 +3,8 @@
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
         "name": "com.DefaultCompany.EvenIT3",
-        "processId": 16733,
-        "exited": true
+        "processId": 16033,
+        "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
@@ -37,6 +37,12 @@
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 16733,
             "exited": true
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 16033,
+            "exited": false
         }
     ],
     "m_Tags": {
