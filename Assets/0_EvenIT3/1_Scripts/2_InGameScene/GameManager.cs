@@ -29,6 +29,8 @@ public class GameManager : Singleton<GameManager>
     public int shieldItem;
     public int timerItem;
     public float maxDecibel;
+    [SerializeField] private int curSnack;
+    [SerializeField] private int maxSnack;
 
     public override void Awake()
     {
@@ -69,6 +71,7 @@ public class GameManager : Singleton<GameManager>
     private void InitStage()
     {
         shieldItem = 1;
+        timerItem = 1;
 
         //Timer
         curTime = setTime;
@@ -132,27 +135,18 @@ public class GameManager : Singleton<GameManager>
     private void SetStageInfo()
     {
         curStage = DBManagerScript.Instance.stageDB[_stageNum];
-        /*curStage = new Stage();
-        curStage.no = DBManagerScript.Instance.stageDB[_stageNum].no;
-        curStage.name = DBManagerScript.Instance.stageDB[_stageNum].name;
-        curStage.teacherNo = DBManagerScript.Instance.stageDB[_stageNum].teacherNo;
-        curStage.snackNoList = DBManagerScript.Instance.stageDB[_stageNum].snackNoList.ToList();
-        curStage.reward_1 = DBManagerScript.Instance.stageDB[_stageNum].reward_1;
-        curStage.reward_2 = DBManagerScript.Instance.stageDB[_stageNum].reward_2;
-        curStage.reward_3 = DBManagerScript.Instance.stageDB[_stageNum].reward_3;*/
         setTime = DBManagerScript.Instance.stageDB[_stageNum].stageTime;
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo - 1].maxDecibel;
+        maxSnack = DBManagerScript.Instance.stageDB[_stageNum].snackNoList.Count;
+        curSnack = 0;
     }
 
     private void SelectSnack()
     {
-        Debug.Log(curStage.snackNoList.Count);
-        Debug.Log(_stageNum);
-        int rand = Random.Range((int)0, (int)DBManagerScript.Instance.stageDB[_stageNum].snackNoList.Count);
-        Debug.Log(rand);
-        int select = DBManagerScript.Instance.stageDB[_stageNum].snackNoList[rand];
+        int select = DBManagerScript.Instance.stageDB[_stageNum].snackNoList[curSnack];
         Debug.Log(select);
         selectedSnack = DBManagerScript.Instance.snackDB[select - 1];
+        inGameSceneUIManager.FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = 1;
         inGameSceneUIManager.FindUIObject("QuantityBG").GetComponent<Image>().sprite =
             Resources.Load<Sprite>("Snacks/" + selectedSnack.name);
         inGameSceneUIManager.FindUIObject("QuantitySnackIcon").GetComponent<Image>().sprite =
@@ -175,15 +169,9 @@ public class GameManager : Singleton<GameManager>
             {
                 _isTimer = false;
                 curTime = 0;
-                Time.timeScale = 0;
-                if (timerItem == 0)
-                {
-                    inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
-                }
-                else
-                {
-                    inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
-                }
+                if(gameState == GameState.InGame)
+                    StartCoroutine(FailedMotion(0));
+                gameState = GameState.Pause;
             }
         }
     }
@@ -223,16 +211,9 @@ public class GameManager : Singleton<GameManager>
                 inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(false);
             }
             Debug.Log("Failed");
+            if(gameState == GameState.InGame)
+                StartCoroutine(FailedMotion(1));
             gameState = GameState.Pause;
-            Time.timeScale = 0;
-            if (shieldItem == 0)
-            {
-                inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
-            }
-            else
-            {
-                inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
-            }
         }
     }
 
@@ -244,102 +225,116 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.Log("Succeed");
             CheckSucceed();
-            gameState = GameState.Pause;
-            Time.timeScale = 0;
         }
     }
 
     [SerializeField] private float remainTime;
     private void CheckSucceed()
     {
-        remainTime = curTime;
-        Debug.Log(remainTime);
-        switch (AppManagerScript.Instance.selectedChapter)
+        if (curSnack< maxSnack - 1)
         {
-            case 1:
-                if (remainTime >= 40)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 30 && remainTime < 40)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
-            case 2:
-                if (remainTime >= 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 20 && remainTime < 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
-            case 3:
-                if (remainTime >= 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 10 && remainTime < 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 10)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
-            case 4:
-                if (remainTime >= 40)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 30 && remainTime < 40)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
-            case 5:
-                if (remainTime >= 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 20 && remainTime < 30)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
-            case 6:
-                if (remainTime >= 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(3);
-                }
-                else if(remainTime >= 10 && remainTime < 20)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(2);
-                }
-                else if(remainTime < 10)
-                {
-                    inGameSceneUIManager.SetUpStarIcons(1);
-                }
-                break;
+            curSnack++;
+            SelectSnack();
+        }
+        else
+        {
+            remainTime = curTime;
+            Debug.Log(remainTime);
+            switch (AppManagerScript.Instance.selectedChapter)
+            {
+                case 1:
+                    if (remainTime >= 40)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 30 && remainTime < 40)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+                case 2:
+                    if (remainTime >= 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 20 && remainTime < 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+                case 3:
+                    if (remainTime >= 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 10 && remainTime < 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 10)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+                case 4:
+                    if (remainTime >= 40)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 30 && remainTime < 40)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+                case 5:
+                    if (remainTime >= 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 20 && remainTime < 30)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+                case 6:
+                    if (remainTime >= 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(3);
+                    }
+                    else if (remainTime >= 10 && remainTime < 20)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(2);
+                    }
+                    else if (remainTime < 10)
+                    {
+                        inGameSceneUIManager.SetUpStarIcons(1);
+                    }
+
+                    break;
+            }
+            gameState = GameState.Pause;
+            Time.timeScale = 0;
         }
     }
 
@@ -350,8 +345,33 @@ public class GameManager : Singleton<GameManager>
             if (player.playerState == Player.State.Eating)
             {
                 Debug.Log("Failed");
+                if(gameState == GameState.InGame)
+                    StartCoroutine(FailedMotion(1));
                 gameState = GameState.Pause;
-                Time.timeScale = 0;
+            }
+        }
+    }
+
+    private IEnumerator FailedMotion(int type) // type 0: Timer, Decibel
+    {
+        player.playerState = Player.State.Idle;
+        inGameSceneUIManager.FindUIObject("SurpriseEffect").SetActive(true);
+        yield return new WaitForSeconds(1f);
+        teacher.teacherState = TeacherController.TeacherState.End;
+        yield return new WaitForSeconds(0.5f);
+        switch (type)
+        {
+            case 0:
+                if (timerItem == 0)
+                {
+                    inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
+                }
+                else
+                {
+                    inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
+                }
+                break;
+            case 1:
                 if (shieldItem == 0)
                 {
                     inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
@@ -360,8 +380,10 @@ public class GameManager : Singleton<GameManager>
                 {
                     inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
                 }
-            }
+                break;
         }
+        
+        Time.timeScale = 0;
     }
     
 }

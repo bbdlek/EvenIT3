@@ -3,70 +3,40 @@
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
         "name": "com.DefaultCompany.EvenIT3",
-        "processId": 4364,
-        "exited": false
+        "processId": 16733,
+        "exited": true
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "LMV500N53b05663",
-            "name": "com.lge.launcher3",
-            "processId": 3157,
-            "exited": false
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 6043,
-            "exited": true
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 8839,
-            "exited": true
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 9452,
-            "exited": true
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 9872,
-            "exited": true
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 10223,
-            "exited": false
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 10720,
-            "exited": false
-        },
-        {
-            "deviceId": "LMV500N53b05663",
-            "name": "com.DefaultCompany.EvenIT3",
-            "processId": 11564,
-            "exited": false
-        },
-        {
-            "deviceId": "LMV500N53b05663",
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 12048,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "LMV500N53b05663",
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 4364,
+            "exited": true
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 15554,
+            "exited": true
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.lge.launcher3",
+            "processId": 3154,
             "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 16733,
+            "exited": true
         }
     ],
     "m_Tags": {

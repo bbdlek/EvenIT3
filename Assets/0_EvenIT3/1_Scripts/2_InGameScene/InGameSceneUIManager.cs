@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -212,12 +213,14 @@ public class InGameSceneUIManager : UIControllerScript
     {
         Time.timeScale = 1;
         FindUIObject("FailedLookPanel").SetActive(false);
+        FindUIObject("SurpriseEffect").SetActive(false);
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
-    private void OnClickFailedLookPanelRefuseBtn()
+    public void OnClickFailedLookPanelRefuseBtn()
     {
-        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
+        FindUIObject("FailedLookPanel").SetActive(false);
+        FindUIObject("EasyFailPanel").SetActive(true);
     }
     
     //FailedDecibel
@@ -232,12 +235,14 @@ public class InGameSceneUIManager : UIControllerScript
         GameManager.Instance.shieldItem = 0;
         Time.timeScale = 1;
         FindUIObject("FailedDecibelPanel").SetActive(false);
+        FindUIObject("SurpriseEffect").SetActive(false);
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
-    private void OnClickFailedDecibelPanelRefuseBtn()
+    public void OnClickFailedDecibelPanelRefuseBtn()
     {
-        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
+        FindUIObject("FailedDecibelPanel").SetActive(false);
+        FindUIObject("EasyFailPanel").SetActive(true);
     }
     
     //FailedOver
@@ -251,16 +256,16 @@ public class InGameSceneUIManager : UIControllerScript
         GameManager.Instance.curTime = DBManagerScript.Instance.itemDB[4].NN;
         GameManager.Instance.timerItem = 0;
         Time.timeScale = 1;
-        TimerOff();
         FindUIObject("FailedOverPanel").SetActive(false);
+        FindUIObject("SurpriseEffect").SetActive(false);
         GameManager.Instance._isTimer = true;
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
-    private void OnClickFailedOverPanelRefuseBtn()
+    public void OnClickFailedOverPanelRefuseBtn()
     {
-        Time.timeScale = 1;
-        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
+        FindUIObject("FailedOverPanel").SetActive(false);
+        FindUIObject("EasyFailPanel").SetActive(true);
     }
 
     private void OnClickEasyClearPanelMainMenuBtn()
@@ -359,16 +364,12 @@ public class InGameSceneUIManager : UIControllerScript
 
     public void QuantityUpdate(float percentage)
     {
-        FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = 1 - percentage;
+        if (Mathf.RoundToInt(percentage * 100) % 5 == 0)
+        {
+            FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = 1 - percentage;   
+        }
     }
 
-    public void TimerOff()
-    {
-        FindUIObject("TimerGaugeIcon1On").SetActive(false);
-        FindUIObject("TimerGaugeIcon2On").SetActive(false);
-        FindUIObject("TimerGaugeIcon3On").SetActive(false);
-    }
-    
     public void PressEatBtnDown()
     {
         Player.Instance.playerState = Player.State.Eating;

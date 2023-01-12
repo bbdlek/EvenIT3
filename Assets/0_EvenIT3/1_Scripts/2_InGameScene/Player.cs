@@ -66,12 +66,14 @@ public class Player : Singleton<Player>
         if (playerState == State.Eating)
         {
             playerObj.GetComponent<Animator>().SetBool("isEating", true);
+            playerObj.transform.GetChild(1).gameObject.SetActive(true);
             curDecibelAmount += Time.deltaTime * decibelAmount;
             curQuantity += Time.deltaTime * GameManager.Instance.quantity * eatingSpeed / 100;
         }
         else if(playerState == State.Idle)
         {
             playerObj.GetComponent<Animator>().SetBool("isEating", false);
+            playerObj.transform.GetChild(1).gameObject.SetActive(false);
             curDecibelAmount -= Time.deltaTime * desDecibelAmount;
         }
 
@@ -86,7 +88,7 @@ public class Player : Singleton<Player>
         yield return new WaitForSeconds(DBManagerScript.Instance.itemDB[0].NN);
         GameManager.Instance._isTimer = true;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1BtnActive").SetActive(false);
-        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
+        //GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
     public IEnumerator Buff_Milk()
@@ -95,10 +97,10 @@ public class Player : Singleton<Player>
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(true);
         eatingSpeed += eatingSpeed * DBManagerScript.Instance.itemDB[2].NN / 100;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         eatingSpeed = prevEatingSpeed;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(false);
-        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
+        //GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
 
     public IEnumerator Buff_Mask()
@@ -107,10 +109,10 @@ public class Player : Singleton<Player>
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(true);
         decibelAmount -= decibelAmount * DBManagerScript.Instance.itemDB[1].NN / 100;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         decibelAmount = prevDecibelAmount;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(false);
-        GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
+        //GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }
     
     
