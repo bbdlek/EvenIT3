@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
         "name": "com.DefaultCompany.EvenIT3",
-        "processId": 16033,
+        "processId": 17641,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -42,6 +42,12 @@
             "deviceId": "LMV500N53b05663",
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 16033,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.DefaultCompany.EvenIT3",
+            "processId": 17641,
             "exited": false
         }
     ],

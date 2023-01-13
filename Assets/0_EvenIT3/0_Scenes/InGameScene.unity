@@ -7269,6 +7269,8 @@ MonoBehaviour:
   shieldItem: 0
   timerItem: 0
   maxDecibel: 0
+  curSnack: 0
+  maxSnack: 0
   setTime: 20
   curTime: 0
   _isTimer: 0

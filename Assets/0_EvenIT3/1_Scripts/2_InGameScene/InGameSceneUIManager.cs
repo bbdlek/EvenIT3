@@ -214,6 +214,7 @@ public class InGameSceneUIManager : UIControllerScript
         Time.timeScale = 1;
         FindUIObject("FailedLookPanel").SetActive(false);
         FindUIObject("SurpriseEffect").SetActive(false);
+        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
@@ -236,6 +237,7 @@ public class InGameSceneUIManager : UIControllerScript
         Time.timeScale = 1;
         FindUIObject("FailedDecibelPanel").SetActive(false);
         FindUIObject("SurpriseEffect").SetActive(false);
+        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
@@ -259,6 +261,7 @@ public class InGameSceneUIManager : UIControllerScript
         FindUIObject("FailedOverPanel").SetActive(false);
         FindUIObject("SurpriseEffect").SetActive(false);
         GameManager.Instance._isTimer = true;
+        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
