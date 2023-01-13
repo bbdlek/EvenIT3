@@ -28,9 +28,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-common:20.2.0' // Assets/Firebase/Editor/AppDependencies.xml:13
     implementation 'com.google.firebase:firebase-database:20.1.0' // Assets/Firebase/Editor/DatabaseDependencies.xml:13
     implementation 'com.google.firebase:firebase-database-unity:10.3.0' // Assets/Firebase/Editor/DatabaseDependencies.xml:22
-    implementation 'com.toast.android.gamebase:gamebase-adapter-auth-google:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:5
-    implementation 'com.toast.android.gamebase:gamebase-adapter-purchase-google:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:6
-    implementation 'com.toast.android.gamebase:gamebase-adapter-push-fcm:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:7
+    implementation 'com.toast.android.gamebase:gamebase-adapter-auth-facebook:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:5
+    implementation 'com.toast.android.gamebase:gamebase-adapter-auth-google:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:6
+    implementation 'com.toast.android.gamebase:gamebase-adapter-purchase-google:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:7
+    implementation 'com.toast.android.gamebase:gamebase-adapter-push-fcm:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:8
     implementation 'com.toast.android.gamebase:gamebase-sdk:2.44.2' // Assets/NhnCloud/GamebaseTools/SettingTool/Editor/gamebaseAllDependencies.xml:4
 // Android Resolver Dependencies End
 **DEPS**}

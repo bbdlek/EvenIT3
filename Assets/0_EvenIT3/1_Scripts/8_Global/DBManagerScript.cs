@@ -13,6 +13,8 @@ public class DBManagerScript : Singleton<DBManagerScript>
     public List<Stage> stageDB;
     public List<Item> itemDB;
 
+    [SerializeField] private string _apiKey;
+
     private void GetSnackTypeDB()
     {
         
@@ -46,7 +48,7 @@ public class DBManagerScript : Singleton<DBManagerScript>
     {
         UnityWebRequest www =
             UnityWebRequest.Get(
-                "https://sheets.googleapis.com/v4/spreadsheets/1u1h-5dEZUSupamAgJ_fJEN3vbqc6RB7sgfkOjaiZGJg/values/SheetTest?key=AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY");
+                "https://sheets.googleapis.com/v4/spreadsheets/1u1h-5dEZUSupamAgJ_fJEN3vbqc6RB7sgfkOjaiZGJg/values/SheetTest?" + _apiKey);
         yield return www.SendWebRequest();
         if (www.isNetworkError || www.isHttpError)
         {

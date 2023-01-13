@@ -10,7 +10,7 @@ public class TeacherController : MonoBehaviour
 {
     public enum TeacherState
     {
-        Idle, BeforeLook, Look
+        Idle, BeforeLook, Look, End
     }
     
     [SerializeField] private GameObject teacherObj;
@@ -20,15 +20,18 @@ public class TeacherController : MonoBehaviour
     private float _watchingTime;
     public Sprite teacherBack;
     public Sprite teacherFront;
+    public Sprite teacherAngry;
     public Sprite[] teacherBacks;
     public Sprite[] teacherFronts;
-    private Image _teacherImg;
+    public Sprite[] teacherAngrySprites;
+    public Image teacherImg;
 
 
     private int _stageNum;
-    private void Start()
+
+    public void SetUpTeacher()
     {
-        _teacherImg = teacherObj.GetComponent<Image>();
+        teacherImg = teacherObj.GetComponent<Image>();
         teacherState = TeacherState.Idle;
         _minDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo - 1].minDelay;
         _maxDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo - 1].maxDelay;
@@ -64,20 +67,27 @@ public class TeacherController : MonoBehaviour
     private IEnumerator EnglishSkill()
     {
         yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo - 1].NN);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(true);
         GameManager.Instance.maxDecibel += 30f;
         yield return new WaitForSeconds(3f);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
         GameManager.Instance.maxDecibel -= 30f;
+        StartCoroutine(EnglishSkill());
     }
 
     private void Update()
     {
         if (teacherState == TeacherState.Look)
         {
-            _teacherImg.sprite = teacherFront;
+            teacherImg.sprite = teacherFront;
+        }
+        else if(teacherState == TeacherState.End)
+        {
+            teacherImg.sprite = teacherAngry;
         }
         else
         {
-            _teacherImg.sprite = teacherBack;
+            teacherImg.sprite = teacherBack;
         }
     }
 
@@ -85,6 +95,7 @@ public class TeacherController : MonoBehaviour
     {
         teacherBack = teacherBacks[teacherNo];
         teacherFront = teacherFronts[teacherNo];
+        teacherAngry = teacherAngrySprites[teacherNo];
     }
 
     private IEnumerator LookCoroutine()
@@ -100,6 +111,7 @@ public class TeacherController : MonoBehaviour
         teacherState = TeacherState.Look;
         yield return new WaitForSeconds(_watchingTime);
         teacherState = TeacherState.Idle;
+        StartCoroutine(LookCoroutine());
     }
 
 }

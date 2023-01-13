@@ -101,6 +101,36 @@ public class LogInManager : MonoBehaviour
         });
     }
     
+    // 구글 로그인
+    public void FBLogin()
+    {
+        Gamebase.Login(GamebaseAuthProvider.FACEBOOK, (authToken, error) =>
+        {
+            if (Gamebase.IsSuccess(error))
+            {
+                string userId = authToken.member.userId;
+                Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
+                AfterLogin();
+            }
+            else
+            {
+                // Check the error code and handle the error appropriately.
+                Debug.Log(string.Format("Login failed. error is {0}", error));
+                if (error.code == (int)GamebaseErrorCode.SOCKET_ERROR || error.code == (int)GamebaseErrorCode.SOCKET_RESPONSE_TIMEOUT)
+                {
+                    Debug.Log(string.Format("Retry Login or notify an error message to the user. : {0}", error.message));
+                }
+                else if (error.code == GamebaseErrorCode.BANNED_MEMBER)
+                {
+                    GamebaseResponse.Auth.BanInfo banInfo = GamebaseResponse.Auth.BanInfo.From(error);
+                    if (banInfo != null)
+                    {
+                    }
+                }
+            }
+        });
+    }
+    
     // 약관 표시
     static GamebaseRequest.Push.PushConfiguration _savedPushConfiguration = null;
     

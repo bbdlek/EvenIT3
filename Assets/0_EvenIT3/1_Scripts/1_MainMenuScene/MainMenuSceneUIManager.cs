@@ -69,10 +69,10 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             
             //Stage
-            case MainMenuSceneButtons.Stage1Btn:
-                OnClickStage1Btn();
+            case MainMenuSceneButtons.StageStartBtn:
+                OnClickStageStartBtn();
                 break;
-        
+
             //Achievement
             case MainMenuSceneButtons.AchievementCloseBtn:
                 OnClickAchievementCloseBtn();
@@ -125,6 +125,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         //Stage
         Stage1Btn,
+        StageStartBtn,
         
         //Achievement
         AchievementCloseBtn,
@@ -192,8 +193,10 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
     
     //Stage
-    private void OnClickStage1Btn()
+    private void OnClickStageStartBtn()
     {
+        AppManagerScript.Instance.selectedChapter = int.Parse(FindUIObject("StageChap").GetComponent<TMP_InputField>().text);
+        AppManagerScript.Instance.selectedStage = int.Parse(FindUIObject("StageStage").GetComponent<TMP_InputField>().text);
         AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
     }
         
