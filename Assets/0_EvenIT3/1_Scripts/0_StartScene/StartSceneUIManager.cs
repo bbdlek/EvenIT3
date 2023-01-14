@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,6 +25,7 @@ public class StartSceneUIManager : UIControllerScript
                 Button tempButton = FindUIObject(enumArray[i]).GetOrAddComponent<Button>();
                 int temp = i;
                 tempButton.onClick.AddListener(() => ButtonOnClick(temp));
+                tempButton.onClick.AddListener(() => MasterAudio.PlaySound("IconCLick"));
             }
             catch (Exception)
             {

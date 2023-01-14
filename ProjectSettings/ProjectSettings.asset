@@ -764,7 +764,10 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: PHY2D_ENABLED
+    Standalone: PHY2D_ENABLED
+    iPhone: PHY2D_ENABLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

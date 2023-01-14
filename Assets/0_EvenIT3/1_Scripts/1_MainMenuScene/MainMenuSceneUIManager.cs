@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using TMPro;
+using Toast.Gamebase;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +14,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        InitSettingUI();
     }
 
     private void AddOnClick()
@@ -24,6 +27,7 @@ public class MainMenuSceneUIManager : UIControllerScript
                 Button tempButton = FindUIObject(enumArray[i]).GetOrAddComponent<Button>();
                 int temp = i;
                 tempButton.onClick.AddListener(() => ButtonOnClick(temp));
+                tempButton.onClick.AddListener(() => MasterAudio.PlaySound("IconCLick"));
             }
             catch (Exception)
             {
@@ -94,6 +98,18 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.OptionCloseBtn:
                 OnClickOptionCloseBtn();
                 break;
+            case MainMenuSceneButtons.CustomerServicePanelTerm1BG:
+                OnClickOptionTerm1Btn();
+                break;
+            case MainMenuSceneButtons.CustomerServicePanelTerm2BG:
+                OnClickOptionTerm2Btn();
+                break;
+            case MainMenuSceneButtons.CustomerServicePanelBlogBG:
+                OnClickOptionBlogBtn();
+                break;
+            case MainMenuSceneButtons.CustomerServicePanelInstaBG:
+                OnClickOptionInstaBtn();
+                break;
             case MainMenuSceneButtons.OptionLogOutBtn:
                 OnClickOptionLogOutBtn();
                 break;
@@ -140,6 +156,11 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         //Option
         OptionCloseBtn,
+        CustomerServicePanelTerm1BG,
+        CustomerServicePanelTerm2BG,
+        CustomerServicePanelBlogBG,
+        CustomerServicePanelInstaBG,
+        
         OptionLogOutBtn,
         OptionWithDrawBtn,
         
@@ -225,7 +246,28 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickOptionCloseBtn()
     {
         //++Save
+        JsonHelper.SaveSettings(AppManagerScript.Instance.appSettings);
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    private void OnClickOptionTerm1Btn()
+    {
+        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos/sample.html");
+    }
+    
+    private void OnClickOptionTerm2Btn()
+    {
+        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos/sample.html");
+    }
+    
+    private void OnClickOptionBlogBtn()
+    {
+        Application.OpenURL("https://m.blog.naver.com/snackcatcher");
+    }
+    
+    private void OnClickOptionInstaBtn()
+    {
+        Application.OpenURL("https://www.instagram.com/snackcatcher_official/");
     }
 
     private void OnClickOptionLogOutBtn()
@@ -313,4 +355,59 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
 
     #endregion
+    
+    
+    //Settings
+
+    private void InitSettingUI()
+    {
+        FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value =
+            AppManagerScript.Instance.appSettings.BgmVolume;
+        FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value =
+            AppManagerScript.Instance.appSettings.EffectVolume;
+        FindUIObject("OptionVibrationOnToggle").GetComponent<Toggle>().isOn =
+            AppManagerScript.Instance.appSettings.IsVibration;
+        Gamebase.Push.QueryTokenInfo((data, error)=> 
+        {
+            if (Gamebase.IsSuccess(error)) 
+            {
+                // Succeeded.
+                bool enablePush = data.agreement.pushEnabled;
+                FindUIObject("OptionPushOnToggle").GetComponent<Toggle>().isOn = enablePush;
+            }
+        });
+
+    }
+    
+    public void SettingBgmVolume()
+    {
+        MasterAudio.Instance._masterPlaylistVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
+    }
+    
+    public void SettingEffectVolume()
+    {
+        MasterAudio.Instance._masterPlaylistVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
+    }
+
+    public void SettingVibration()
+    {
+        AppManagerScript.Instance.appSettings.IsVibration =
+            FindUIObject("OptionVibrationOnToggle").GetComponent<Toggle>().isOn;
+    }
+
+    public void SettingPushAlarm()
+    {
+        GamebaseRequest.Push.PushConfiguration pushConfiguration = new GamebaseRequest.Push.PushConfiguration();
+        Gamebase.Push.RegisterPush(pushConfiguration, (error) =>
+        {
+            if (Gamebase.IsSuccess(error))
+            {
+                pushConfiguration.pushEnabled = FindUIObject("OptionPushOnToggle").GetComponent<Toggle>().isOn;     
+            }
+            else
+            {
+                Debug.Log(string.Format("SaveTerms failed. error:{0}", error));
+            }
+        });
+    }
 }
