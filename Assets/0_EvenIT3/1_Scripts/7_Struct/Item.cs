@@ -15,3 +15,9 @@ public class Item
     public string effect;
     public string sound;
 }
+
+[Serializable]
+public class ItemDB
+{
+    public Item[] item;
+}

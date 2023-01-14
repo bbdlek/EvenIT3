@@ -19,10 +19,10 @@ public class StartSceneManagerScript : MonoBehaviour
         if (!startSceneUIManager) startSceneUIManager = FindObjectOfType<StartSceneUIManager>();
 
         startSceneUIManager.InitSetup(gameObject);
-        if (UserManager.Instance != null)
+        /*if (UserManager.Instance != null)
         {
             AppManagerScript.Instance.GetComponent<LogInManager>().LoginForLastLoggedInProvider();
-        }
+        }*/
     }
 
 }

@@ -33,29 +33,9 @@ public class Player : Singleton<Player>
 
     public void SetBasePlayerStat()
     {
-        switch (GameManager.Instance.selectedSnack.type)
-        {
-            case SnackType.Bread:
-                decibelAmount = 15;
-                GameManager.Instance.quantity = 100;
-                eatingSpeed = 4;
-                break;
-            case SnackType.Cookie:
-                decibelAmount = 23;
-                GameManager.Instance.quantity = 75;
-                eatingSpeed = 5;
-                break;
-            case SnackType.Snack:
-                decibelAmount = 45;
-                GameManager.Instance.quantity = 80;
-                eatingSpeed = 8;
-                break;
-            case SnackType.Candy:
-                decibelAmount = 55;
-                GameManager.Instance.quantity = 63;
-                eatingSpeed = 6;
-                break;
-        }
+        decibelAmount = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].decibel;
+        GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
+        eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;
 
         curDecibelAmount = 0;
         curQuantity = 0;

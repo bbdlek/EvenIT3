@@ -80,7 +80,7 @@ public class GamabaseManager : MonoBehaviour
                             // 테스트 중
                             Debug.Log("IN_TEST");
                             transform.AddComponent<GamebaseEventManager>();
-                            GetComponent<LogInManager>().LoginForLastLoggedInProvider();
+                            //GetComponent<LogInManager>().LoginForLastLoggedInProvider();
                             break;
                         }
                         case GamebaseLaunchingStatus.IN_REVIEW:

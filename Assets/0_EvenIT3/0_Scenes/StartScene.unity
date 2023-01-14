@@ -612,7 +612,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1581876347}
   m_Father: {fileID: 233338049}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1384,6 +1385,141 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559348102}
   m_CullTransparentMesh: 1
+--- !u!1 &1581876346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1581876347}
+  - component: {fileID: 1581876349}
+  - component: {fileID: 1581876348}
+  m_Layer: 5
+  m_Name: DBInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1581876347
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581876346}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684069099}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1581876348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581876346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "DB \uB2E4\uC6B4\uB85C\uB4DC\uC911..."
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: ab386f38a4a43794482057babe127184, type: 2}
+  m_sharedMaterial: {fileID: 8770315909153911398, guid: ab386f38a4a43794482057babe127184, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1581876349
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581876346}
+  m_CullTransparentMesh: 1
 --- !u!1 &1870582172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,331 +1758,290 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snackDB:
-  - no: 1
+  - no: 0
     name: circlebread_bread
     name_kr: "\uB465\uADFC\uB2EC"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 2
+  - no: 0
     name: cribba_bread
     name_kr: "\uD06C\uB9AC\uBE60"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 3
+  - no: 0
     name: monster_bread
     name_kr: "\uBAAC\uC2A4\uD130\uBE75"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 4
+  - no: 0
     name: gombo_bread
     name_kr: "\uACF0\uBCF4\uBE75"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 5
+  - no: 0
     name: danpat_bread
     name_kr: "\uB2E8\uD325\uBE75"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 6
+  - no: 0
     name: hureshpang_bread
     name_kr: "\uD6C4\uB808\uC26C\uD321"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 7
+  - no: 0
     name: bangabnaegi_bread
     name_kr: "\uBC18\uAC11\uB0B4\uAE30"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 8
+  - no: 0
     name: maereokpizza_bread
     name_kr: "\uB9E4\uB825\uD53C\uC790"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 9
+  - no: 0
     name: donasse_bread
     name_kr: "\uB3C4\uB098\uC4F0"
     type: 0
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 10
+  - no: 0
     name: "\uC218\uC218\uBE75"
     name_kr: "\uB9C8\uAC00\uB810"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 11
+  - no: 0
     name: Ogeoli_candy
     name_kr: "\uC624\uAC70\uB9AC\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 12
+  - no: 0
     name: zadumat_candy
     name_kr: "\uC790\uB450\uB9DB\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 13
+  - no: 0
     name: coffee_candy
     name_kr: "\uCEE4\uD53C\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 14
+  - no: 0
     name: nurunbab_candy
     name_kr: "\uB204\uB8EC\uBC25\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 15
+  - no: 0
     name: anbang_candy
     name_kr: "\uC548\uBC29\uCE94\uB514"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 16
+  - no: 0
     name: wangnunR_candy
     name_kr: "\uC655\uB208\uC54C\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 17
+  - no: 0
     name: bawe_candy
     name_kr: "\uBC14\uC704\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 18
+  - no: 0
     name: sheosheo_candy
     name_kr: "\uC154\uC154"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 19
+  - no: 0
     name: dongmu_candy
     name_kr: "\uB3D9\uBB34"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 20
+  - no: 0
     name: dojang_candy
     name_kr: "\uB3C4\uC7A5\uC0AC\uD0D5"
     type: 3
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 21
+  - no: 0
     name: ggaedolyee_snack
     name_kr: "\uAE68\uB3CC\uC774"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 22
+  - no: 0
     name: anchakani_snack
     name_kr: "\uC548\uCC28\uCE74\uB2C8"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 23
+  - no: 0
     name: jundulung_snack
     name_kr: "\uC804\uB450\uB801"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 24
+  - no: 0
     name: Rgamzachip_snack
     name_kr: "\uC54C\uAC10\uC790\uCE69"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 25
+  - no: 0
     name: smallpoll_snack
     name_kr: "\uC2A4\uBAB0\uD3F4"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 26
+  - no: 0
     name: nunucorn_snack
     name_kr: "\uB108\uB108\uCF58"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 27
+  - no: 0
     name: byeongjang_snack
     name_kr: "\uBCD1\uC7A5\uC2A4\uB0B5"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 28
+  - no: 0
     name: bongchoco_snack
     name_kr: "\uBD09\uBD09 \uCD08\uCF5C\uB9BF"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 29
+  - no: 0
     name: pizzatime_snack
     name_kr: "\uD53C\uC790\uC2DC\uAC04"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 30
+  - no: 0
     name: cookiejjang_snack
     name_kr: "\uCFE0\uD0A4\uC9F1\uCD08\uCF54\uC18D"
     type: 2
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 31
+  - no: 0
     name: magaring_cookie
     name_kr: "\uB9C8\uAC00\uB9C1"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 32
+  - no: 0
     name: nice_cookie
     name_kr: "\uB098\uC774\uC2A4"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 33
+  - no: 0
     name: jeongpai_cookie
     name_kr: "\uC815\uD30C\uC774"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 34
+  - no: 0
     name: mongshell_cookie
     name_kr: "\uBABD\uC140"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 35
+  - no: 0
     name: nuneanddine_cookie
     name_kr: "\uB204\uB124\uC548\uB760\uB124"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 36
+  - no: 0
     name: magarell_cookie
     name_kr: "\uB9C8\uAC00\uB810"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 37
+  - no: 0
     name: smallpie_cookie
     name_kr: "\uC2A4\uBAB0\uD30C\uC774"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 38
+  - no: 0
     name: purenchipie_cookie
     name_kr: "\uD478\uB80C\uCE58\uD30C\uC774"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 39
+  - no: 0
     name: abbasonpie_cookie
     name_kr: "\uC544\uBE60\uC190\uD30C\uC774"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
-  - no: 40
+  - no: 0
     name: crownsando_cookie
     name_kr: "\uC655\uAD00\uC0B0\uB3C4"
     type: 1
-    P2A: 
-    iconNo: 0
+    P2A: 0
+    icon: 
     explain: 
-    amulet_icon: 
   teacherDB:
   - no: 1
     name: koreanT
     name_kr: "\uC2E0\uC785 \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 1
     watchingTime: 0.8
     maxDecibel: 75
     minDelay: 6
@@ -1955,10 +2050,13 @@ MonoBehaviour:
     skillType: "min delay N\uCD08 \uAC10\uC18C"
     NN: 0
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 2
     name: koreanT_easy
     name_kr: "\uB2A5\uC219\uD55C \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 2
     watchingTime: 0.8
     maxDecibel: 75
     minDelay: 6
@@ -1967,10 +2065,13 @@ MonoBehaviour:
     skillType: "min delay N\uCD08 \uAC10\uC18C"
     NN: 1
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 3
     name: koreanT_normal
     name_kr: "\uBCA0\uD14C\uB791 \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 3
     watchingTime: 0.8
     maxDecibel: 75
     minDelay: 6
@@ -1979,10 +2080,13 @@ MonoBehaviour:
     skillType: "min delay N\uCD08 \uAC10\uC18C"
     NN: 2
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 4
     name: koreanT_hard
     name_kr: "\uC7A0\uC2DD\uB41C \uAD6D\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 4
     watchingTime: 0.8
     maxDecibel: 75
     minDelay: 6
@@ -1991,10 +2095,13 @@ MonoBehaviour:
     skillType: "min delay N\uCD08 \uAC10\uC18C"
     NN: 3
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 5
     name: historyT
     name_kr: "\uC2E0\uC785 \uC5ED\uC0AC \uC120\uC0DD\uB2D8"
-    grade: 1
     watchingTime: 2
     maxDecibel: 87
     minDelay: 9
@@ -2004,10 +2111,13 @@ MonoBehaviour:
       \uB298\uC5B4\uB0A8"
     NN: 0
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 6
     name: historyT_easy
     name_kr: "\uB2A5\uC219\uD55C \uC5ED\uC0AC \uC120\uC0DD\uB2D8"
-    grade: 2
     watchingTime: 2
     maxDecibel: 87
     minDelay: 9
@@ -2017,10 +2127,13 @@ MonoBehaviour:
       \uB298\uC5B4\uB0A8"
     NN: 1
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 7
     name: historyT_normal
     name_kr: "\uC2E0\uC785 \uC5ED\uC0AC \uC120\uC0DD\uB2D8"
-    grade: 3
     watchingTime: 2
     maxDecibel: 87
     minDelay: 9
@@ -2030,10 +2143,13 @@ MonoBehaviour:
       \uB298\uC5B4\uB0A8"
     NN: 2
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 8
     name: historyT_hard
     name_kr: "\uC7A0\uC2DD\uB41C \uC5ED\uC0AC \uC120\uC0DD\uB2D8"
-    grade: 4
     watchingTime: 2
     maxDecibel: 87
     minDelay: 9
@@ -2043,10 +2159,13 @@ MonoBehaviour:
       \uB298\uC5B4\uB0A8"
     NN: 3
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 9
     name: musicT
     name_kr: "\uC2E0\uC785 \uC74C\uC545 \uC120\uC0DD\uB2D8"
-    grade: 1
     watchingTime: 0.5
     maxDecibel: 60
     minDelay: 10
@@ -2056,10 +2175,13 @@ MonoBehaviour:
       N \uAC10\uC18C"
     NN: 0
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 10
     name: musicT_easy
     name_kr: "\uB2A5\uC219\uD55C \uC74C\uC545 \uC120\uC0DD\uB2D8"
-    grade: 2
     watchingTime: 0.5
     maxDecibel: 60
     minDelay: 10
@@ -2069,10 +2191,13 @@ MonoBehaviour:
       N \uAC10\uC18C"
     NN: 1
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 11
     name: musicT_normal
     name_kr: "\uBCA0\uD14C\uB791 \uC74C\uC545 \uC120\uC0DD\uB2D8"
-    grade: 3
     watchingTime: 0.5
     maxDecibel: 60
     minDelay: 10
@@ -2082,10 +2207,13 @@ MonoBehaviour:
       N \uAC10\uC18C"
     NN: 2
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 12
     name: musicT_hard
     name_kr: "\uC7A0\uC2DD\uB41C \uC74C\uC545 \uC120\uC0DD\uB2D8"
-    grade: 4
     watchingTime: 0.5
     maxDecibel: 60
     minDelay: 10
@@ -2095,10 +2223,13 @@ MonoBehaviour:
       N \uAC10\uC18C"
     NN: 3
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 13
     name: englishT
     name_kr: "\uC2E0\uC785 \uC601\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 1
     watchingTime: 0.8
     maxDecibel: 50
     minDelay: 10
@@ -2108,10 +2239,13 @@ MonoBehaviour:
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
     NN: 5
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 14
     name: englishT_easy
     name_kr: "\uB2A5\uC219\uD55C \uC601\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 2
     watchingTime: 0.8
     maxDecibel: 50
     minDelay: 10
@@ -2121,10 +2255,13 @@ MonoBehaviour:
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
     NN: 7
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 15
     name: englishT_normal
     name_kr: "\uBCA0\uD14C\uB791 \uC601\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 3
     watchingTime: 0.8
     maxDecibel: 50
     minDelay: 10
@@ -2134,10 +2271,13 @@ MonoBehaviour:
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
     NN: 9
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   - no: 16
     name: englishT_hard
     name_kr: "\uC7A0\uC2DD\uB41C \uC601\uC5B4 \uC120\uC0DD\uB2D8"
-    grade: 4
     watchingTime: 0.8
     maxDecibel: 50
     minDelay: 10
@@ -2147,103 +2287,131 @@ MonoBehaviour:
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
     NN: 11
     explain: 
+    art_front: 
+    art_back: 
+    art_angry: 
+    sound_angry: 
   stageDB:
   - no: 1
     name: stage 1-1
     teacherNo: 1
-    snackNoList: 01000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 1
     reward_2: 2
     reward_3: 3
-    stageTime: 100
+    stageTime: 0
   - no: 2
     name: stage 1-2
     teacherNo: 5
-    snackNoList: 0b000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 2
     reward_2: 3
     reward_3: 4
-    stageTime: 100
+    stageTime: 0
   - no: 3
     name: stage 1-3
     teacherNo: 9
-    snackNoList: 15000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 3
     reward_2: 4
     reward_3: 5
-    stageTime: 100
+    stageTime: 0
   - no: 4
     name: stage 1-4
     teacherNo: 13
-    snackNoList: 1f000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 4
     reward_2: 5
     reward_3: 6
-    stageTime: 100
+    stageTime: 0
   - no: 5
     name: stage 2-1
     teacherNo: 2
-    snackNoList: 0200000003000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 5
     reward_2: 6
     reward_3: 7
-    stageTime: 120
+    stageTime: 0
   - no: 6
     name: stage 2-2
     teacherNo: 6
-    snackNoList: 0c0000000d000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 6
     reward_2: 7
     reward_3: 8
-    stageTime: 120
+    stageTime: 0
   - no: 7
     name: stage 2-3
     teacherNo: 10
-    snackNoList: 1600000017000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 7
     reward_2: 8
     reward_3: 9
-    stageTime: 120
+    stageTime: 0
   - no: 8
     name: stage 2-4
     teacherNo: 14
-    snackNoList: 2000000021000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 8
     reward_2: 9
     reward_3: 10
-    stageTime: 120
+    stageTime: 0
   - no: 9
     name: stage 3-1
     teacherNo: 3
-    snackNoList: 040000000500000006000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 9
     reward_2: 10
     reward_3: 11
-    stageTime: 140
+    stageTime: 0
   - no: 10
     name: stage 3-2
     teacherNo: 7
-    snackNoList: 0e0000000f00000010000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 10
     reward_2: 11
     reward_3: 12
-    stageTime: 140
+    stageTime: 0
   - no: 11
     name: stage 3-3
     teacherNo: 11
-    snackNoList: 18000000190000001a000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 11
     reward_2: 12
     reward_3: 13
-    stageTime: 140
+    stageTime: 0
   - no: 12
     name: stage 3-4
     teacherNo: 15
-    snackNoList: 220000002300000024000000
+    snack1: 0
+    snack2: 0
+    snack3: 0
     reward_1: 12
     reward_2: 13
     reward_3: 14
-    stageTime: 140
+    stageTime: 0
   itemDB:
   - no: 1
     name: ice_clock
@@ -2288,4 +2456,9 @@ MonoBehaviour:
     icon: 
     effect: 
     sound: 
-  _apiKey: key=AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY
+  snackTypeDB: []
+  stageUrl: https://drive.google.com/uc?export=download&id=1KHlOQ_2aMnGSPVN3O-TXTszTXG4HuHJk
+  teacherUrl: https://drive.google.com/uc?export=download&id=1POpOui5GJsHhRqta2nV0xbRBXkH4eZ4U
+  snackUrl: https://drive.google.com/uc?export=download&id=1wsiS5L_WKQFDUszErUhwjYnOGX2O9hAS
+  itemUrl: https://drive.google.com/uc?export=download&id=1_IWvCOQqCuTG9hT0aWGLiI33Uw9LIjzv
+  snackTypeUrl: https://drive.google.com/uc?export=download&id=1FuWGWtcgI2wmHL-UPsKjA1Y5y2mjwI8R

@@ -33,9 +33,9 @@ public class TeacherController : MonoBehaviour
     {
         teacherImg = teacherObj.GetComponent<Image>();
         teacherState = TeacherState.Idle;
-        _minDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo - 1].minDelay;
-        _maxDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo - 1].maxDelay;
-        _watchingTime = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo - 1].watchingTime;
+        _minDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo].minDelay;
+        _maxDelay = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo].maxDelay;
+        _watchingTime = DBManagerScript.Instance.teacherDB[GameManager.Instance.curStage.teacherNo].watchingTime;
 
         StartCoroutine(LookCoroutine());
         _stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
@@ -48,15 +48,15 @@ public class TeacherController : MonoBehaviour
          _teacherNo = DBManagerScript.Instance.stageDB[_stageNum].teacherNo;
         if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 5)
         {
-            _minDelay -= DBManagerScript.Instance.teacherDB[_teacherNo - 1].NN;
+            _minDelay -= DBManagerScript.Instance.teacherDB[_teacherNo].NN;
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 9)
         {
-            GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount * DBManagerScript.Instance.teacherDB[_teacherNo - 1].NN;
+            GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount * DBManagerScript.Instance.teacherDB[_teacherNo].NN;
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 13)
         {
-            GameManager.Instance.maxDecibel -= DBManagerScript.Instance.teacherDB[_teacherNo - 1].NN;
+            GameManager.Instance.maxDecibel -= DBManagerScript.Instance.teacherDB[_teacherNo].NN;
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 17)
         {
@@ -66,7 +66,7 @@ public class TeacherController : MonoBehaviour
 
     private IEnumerator EnglishSkill()
     {
-        yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo - 1].NN);
+        yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(true);
         GameManager.Instance.maxDecibel += 30f;
         yield return new WaitForSeconds(3f);

@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SnackType
-{
-    Bread, Cookie, Snack, Candy 
-}
-
 [Serializable]
 public class Snack
 {
-    public string no;
+    public int no;
     public string name;
     public string name_kr;
-    public SnackType type;
-    public string P2A;
-    public int iconNo;
+    public int type;
+    public int P2A;
+    public string icon;
     public string explain;
-    public string amulet_icon;
+}
+
+[Serializable]
+public class SnackDB
+{
+    public Snack[] snack;
 }

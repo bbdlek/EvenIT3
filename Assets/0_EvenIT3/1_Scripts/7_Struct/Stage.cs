@@ -9,9 +9,17 @@ public class Stage
     public int no;
     public string name;
     public int teacherNo;
-    public List<int> snackNoList;
+    public int snack1;
+    public int snack2;
+    public int snack3;
     public int reward_1;
     public int reward_2;
     public int reward_3;
     public float stageTime;
+}
+
+[Serializable]
+public class StageDB
+{
+    public Stage[] stage;
 }

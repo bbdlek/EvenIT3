@@ -136,16 +136,29 @@ public class GameManager : Singleton<GameManager>
     {
         curStage = DBManagerScript.Instance.stageDB[_stageNum];
         setTime = DBManagerScript.Instance.stageDB[_stageNum].stageTime;
-        maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo - 1].maxDecibel;
-        maxSnack = DBManagerScript.Instance.stageDB[_stageNum].snackNoList.Count;
+        maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
+        maxSnack = 3;
+        if (DBManagerScript.Instance.stageDB[_stageNum].snack3 == -1) maxSnack = 2;
+        if (DBManagerScript.Instance.stageDB[_stageNum].snack2 == -1) maxSnack = 1;
         curSnack = 0;
     }
 
     private void SelectSnack()
     {
-        int select = DBManagerScript.Instance.stageDB[_stageNum].snackNoList[curSnack];
-        Debug.Log(select);
-        selectedSnack = DBManagerScript.Instance.snackDB[select - 1];
+        int select = 0;
+        switch (curSnack)
+        {
+            case 0:
+                select = DBManagerScript.Instance.stageDB[_stageNum].snack1;
+                break;
+            case 1:
+                select = DBManagerScript.Instance.stageDB[_stageNum].snack2;
+                break;
+            case 2:
+                select = DBManagerScript.Instance.stageDB[_stageNum].snack3;
+                break;
+        }
+        selectedSnack = DBManagerScript.Instance.snackDB[select];
         inGameSceneUIManager.FindUIObject("QuantitySnackIcon").GetComponent<Image>().fillAmount = 1;
         inGameSceneUIManager.FindUIObject("QuantityBG").GetComponent<Image>().sprite =
             Resources.Load<Sprite>("Snacks/" + selectedSnack.name);
