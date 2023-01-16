@@ -16864,8 +16864,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f59f646bd07b142ab17cd41b054ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gachaview: {fileID: 391773601}
-  Itemview: {fileID: 1967713821}
+  GachaView: {fileID: 0}
+  ItemView: {fileID: 0}
   PackageView: {fileID: 1964047245}
   PaidView: {fileID: 157530365}
   GachaBtn: {fileID: 2098094016}
@@ -16874,10 +16874,6 @@ MonoBehaviour:
   PaidBtn: {fileID: 1791500317}
   red: {r: 0.8396226, g: 0.2732734, b: 0.2732734, a: 0.7294118}
   yellow: {r: 1, g: 0.95476747, b: 0.15566039, a: 0.7294118}
-  isGacha: 0
-  isItem: 0
-  isPackage: 0
-  isPaid: 0
 --- !u!1 &1601579645
 GameObject:
   m_ObjectHideFlags: 0
