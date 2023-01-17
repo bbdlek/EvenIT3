@@ -891,18 +891,18 @@ MonoBehaviour:
       m_ExpandedIDs: c64dfdffd64ffdff2c50fdffe251fdff1052fdff3c52fdffc45bfdff7c5dfdff585ffdffbc6cfdff5671fdff9071fdfffa71fdff6e77fdffd47afdff7e7cfdff7ea5fdff52a6fdff00a7fdffb8a8fdff8aadfdff3eb1fdff72b4fdfffcb8fdff38d2fdff40dbfdffc2dbfdff7edffdff36e1fdff3afafdff9001feff3607feff4c2ffeffea32feffba38feff0239feff143bfeff9e3cfeff4643feffee46feffe49afeff9c9cfeff36a0feff90a1feff42a9feffbea9feff18abfeffb4b3feffbab5feffcebafeff78bbfeffd2bcfeff1ebffeff24c1feff4cf0feff72f0feffbcf3feff22f5feff22f8feffb61cffff1022ffff6823ffff0224ffff3e29ffff982affffda2bffff902dffff1462ffff0e66ffff3ad9ffff26fbfffff4ffffff9c670000dc6700001c680000506a000024740000e8640200587e0200c87e0200f4820200e0830200b8890200528b0200c28b02006c970200dc970200caca0200c0cc02005a4c0400ca4c0400d64e040060550400c873040038740400369b0400a69b04004e9c0400b29d040014a704001ec3040044cf0400b4cf0400c0d1040022db040090f4040006f5040034f704009e5a0500ac5a050038680500006b05003a6e0500e2740500aa770500e47a050080b9050048bc0500beed0500ceed050030f105000e4b0600a6570600c85806002cda0600e0090700a80c0700e20f070080160700b82f0700da3007003c3307009a420700bc4307001e580700405907008882070030a0070030b20700a4c80700f8df0700d6190800
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: MainCharacter
+        m_OriginalName: MainCharacter
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 27172
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 

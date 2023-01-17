@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    public GameObject Gachaview, Itemview, PackageView, PaidView;
+    public GameObject GachaView, ItemView, PackageView, PaidView;
     public Image GachaBtn, ItemBtn, PackageBtn, PaidBtn;
     public Color red, yellow;
-    public bool isGacha, isItem, isPackage, isPaid;
 
     // 매점 버튼을 누르면 호출
     public void ClickShop()
@@ -25,15 +24,10 @@ public class Shop : MonoBehaviour
     // 가챠
     public void ClickGacha()
     {
-        Gachaview.SetActive(true);
-        Itemview.SetActive(false);
+        GachaView.SetActive(true);
+        ItemView.SetActive(false);
         PackageView.SetActive(false);
         PaidView.SetActive(false);
-
-        isGacha = true;
-        isItem = false;
-        isPackage = false;
-        isPaid = false;
 
         GachaBtn.color = red;
         ItemBtn.color = yellow;
@@ -44,15 +38,10 @@ public class Shop : MonoBehaviour
     // 아이템
     public void ClickItem()
     {
-        Gachaview.SetActive(false);
-        Itemview.SetActive(true);
+        GachaView.SetActive(false);
+        ItemView.SetActive(true);
         PackageView.SetActive(false);
         PaidView.SetActive(false);
-
-        isGacha = false;
-        isItem = true;
-        isPackage = false;
-        isPaid = false;
 
         GachaBtn.color = yellow;
         ItemBtn.color = red;
@@ -63,15 +52,10 @@ public class Shop : MonoBehaviour
     // 패키지
     public void ClickPackage()
     {
-        Gachaview.SetActive(false);
-        Itemview.SetActive(false);
+        GachaView.SetActive(false);
+        ItemView.SetActive(false);
         PackageView.SetActive(true);
         PaidView.SetActive(false);
-
-        isGacha = false;
-        isItem = false;
-        isPackage = true;
-        isPaid = false;
 
         GachaBtn.color = yellow;
         ItemBtn.color = yellow;
@@ -82,15 +66,10 @@ public class Shop : MonoBehaviour
     // 유료재화
     public void ClickPaid()
     {
-        Gachaview.SetActive(false);
-        Itemview.SetActive(false);
+        GachaView.SetActive(false);
+        ItemView.SetActive(false);
         PackageView.SetActive(false);
         PaidView.SetActive(true);
-
-        isGacha = false;
-        isItem = false;
-        isPackage = false;
-        isPaid = true;
 
         GachaBtn.color = yellow;
         ItemBtn.color = yellow;
