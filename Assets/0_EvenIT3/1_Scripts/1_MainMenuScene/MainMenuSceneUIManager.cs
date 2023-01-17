@@ -17,6 +17,17 @@ public class MainMenuSceneUIManager : UIControllerScript
         InitSettingUI();
     }
 
+    public void CheckRestart()
+    {
+        if (AppManagerScript.Instance.isRestart)
+        {
+            ChangeUI(MainMenuScenePanels.StagePanel);
+            OnClickChapterSelectBtn(AppManagerScript.Instance.selectedChapter);
+            OnClickChapterToStage(AppManagerScript.Instance.selectedStage);
+            AppManagerScript.Instance.isRestart = false;
+        }
+    }
+
     private void AddOnClick()
     {
         string[] enumArray = Enum.GetNames(typeof(MainMenuSceneButtons));
@@ -70,6 +81,45 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuSceneButtons.ProfileMoveBtn:
                 OnClickProfileMoveBtn();
+                break;
+            
+            //Chapter
+            case MainMenuSceneButtons.Chapter1SelectBtn:
+                OnClickChapterSelectBtn(1);
+                break;
+            case MainMenuSceneButtons.Chapter2SelectBtn:
+                OnClickChapterSelectBtn(2);
+                break;
+            case MainMenuSceneButtons.Chapter3SelectBtn:
+                OnClickChapterSelectBtn(3);
+                break;
+            case MainMenuSceneButtons.Chapter4SelectBtn:
+                OnClickChapterSelectBtn(4);
+                break;
+            case MainMenuSceneButtons.Chapter5SelectBtn:
+                OnClickChapterSelectBtn(5);
+                break;
+            case MainMenuSceneButtons.Chapter6SelectBtn:
+                OnClickChapterSelectBtn(6);
+                break;
+            case MainMenuSceneButtons.ChapterPageCloseBtn:
+                OnClickChapterPageCloseBtn();
+                break;
+            
+            case MainMenuSceneButtons.ChapterToStage1:
+                OnClickChapterToStage(1);
+                break;
+            case MainMenuSceneButtons.ChapterToStage2:
+                OnClickChapterToStage(2);
+                break;
+            case MainMenuSceneButtons.ChapterToStage3:
+                OnClickChapterToStage(3);
+                break;
+            case MainMenuSceneButtons.ChapterToStage4:
+                OnClickChapterToStage(4);
+                break;
+            case MainMenuSceneButtons.StagePageCloseBtn:
+                OnClickStagePageCloseBtn();
                 break;
             
             //Stage
@@ -139,8 +189,22 @@ public class MainMenuSceneUIManager : UIControllerScript
         OptionMoveBtn,
         ProfileMoveBtn,
         
+        //Chapter
+        Chapter1SelectBtn,
+        Chapter2SelectBtn,
+        Chapter3SelectBtn,
+        Chapter4SelectBtn,
+        Chapter5SelectBtn,
+        Chapter6SelectBtn,
+        ChapterPageCloseBtn,
+        
+        ChapterToStage1,
+        ChapterToStage2,
+        ChapterToStage3,
+        ChapterToStage4,
+        StagePageCloseBtn,
+
         //Stage
-        Stage1Btn,
         StageStartBtn,
         
         //Achievement
@@ -213,11 +277,88 @@ public class MainMenuSceneUIManager : UIControllerScript
         ChangeUI(MainMenuScenePanels.ProfilePanel);
     }
     
+    //Chapter
+    
+    private void OnClickChapterSelectBtn(int chapter)
+    {
+        AppManagerScript.Instance.selectedChapter = chapter;
+        FindUIObject("ChapterPageHeader").GetComponent<TMP_Text>().text = "챕터 " + chapter;
+        string body = null;
+        switch (chapter)
+        {
+            case 1:
+                body = "충치요정의 등장";
+                break;
+            case 2:
+                body = "충치요정의 발악";
+                break;
+            case 3:
+                body = "결전, 충치요정을 봉인해라!";
+                break;
+            case 4:
+                body = "다시 나타난 충치 요정?!";
+                break;
+            case 5:
+                body = "새로운 충치 요정의 정체";
+                break;
+            case 6:
+                body = "상상도 못한 진실";
+                break;
+        }
+        FindUIObject("ChapterPageBody").GetComponent<TMP_Text>().text = body;
+        
+        //별 불러오기
+    }
+
+    private void OnClickChapterPageCloseBtn()
+    {
+        ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    private void OnClickChapterToStage(int stage)
+    {
+        AppManagerScript.Instance.selectedStage = stage;
+        switch (stage)
+        {
+            case 1:
+                FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>("Stage/art_teacher_korean");
+                break;
+            case 2:
+                FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>("Stage/art_teacher_history");
+                break;
+            case 3:
+                FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>("Stage/art_teacher_music");
+                break;
+            case 4:
+                FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
+                    Resources.Load<Sprite>("Stage/art_teacher_english");
+                break;
+        }
+        FindUIObject("StagePageHeader").GetComponent<TMP_Text>().text = "Stage " +
+                                                                        AppManagerScript.Instance.selectedChapter +
+                                                                        "-" + AppManagerScript.Instance.selectedStage;
+        FindUIObject("ChapterPageBG").SetActive(false);
+        FindUIObject("StagePageBG").SetActive(true);
+    }
+    
+    private void OnClickStagePageCloseBtn()
+    {
+        FindUIObject("ChapterPageBG").SetActive(true);
+        FindUIObject("StagePageBG").SetActive(false);
+    }
+    
     //Stage
     private void OnClickStageStartBtn()
     {
-        AppManagerScript.Instance.selectedChapter = int.Parse(FindUIObject("StageChap").GetComponent<TMP_InputField>().text);
-        AppManagerScript.Instance.selectedStage = int.Parse(FindUIObject("StageStage").GetComponent<TMP_InputField>().text);
+        AppManagerScript.Instance.selectedItem = new[]
+        {
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn,
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn,
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn
+        };
         AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
     }
         
@@ -311,7 +452,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("SetNickNamePanel").SetActive(false);
         FindUIObject("StoryPanel").SetActive(false);
         FindUIObject("MainMenuTouchPanel").SetActive(false);
-        FindUIObject("StagePanel").SetActive(false);
+        FindUIObject("ChapterPanel").SetActive(false);
         FindUIObject("AchievementPanel").SetActive(false);
         FindUIObject("CollectionPanel").SetActive(false);
         FindUIObject("ShopPanel").SetActive(false);
@@ -331,7 +472,9 @@ public class MainMenuSceneUIManager : UIControllerScript
                 FindUIObject("MainMenuTouchPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.StagePanel:
-                FindUIObject("StagePanel").SetActive(true);
+                FindUIObject("ChapterPageBG").SetActive(true);
+                FindUIObject("StagePageBG").SetActive(false);
+                FindUIObject("ChapterPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.AchievementPanel:
                 FindUIObject("AchievementPanel").SetActive(true);

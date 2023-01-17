@@ -22,12 +22,15 @@ public class GameManager : Singleton<GameManager>
     public TeacherController teacher;
 
     [SerializeField] private int _stageNum;
-    
+
     //필요 변수
     public float quantity;
     public Snack selectedSnack;
     public int shieldItem;
     public int timerItem;
+    public int milkItem;
+    public int clockItem;
+    public int maskItem;
     public float maxDecibel;
     [SerializeField] private int curSnack;
     [SerializeField] private int maxSnack;
@@ -72,6 +75,10 @@ public class GameManager : Singleton<GameManager>
     {
         shieldItem = 1;
         timerItem = 1;
+        milkItem = AppManagerScript.Instance.selectedItem[0] ? 1 : 0;
+        clockItem = AppManagerScript.Instance.selectedItem[1] ? 1 : 0;
+        maskItem = AppManagerScript.Instance.selectedItem[2] ? 1 : 0;
+        
 
         //Timer
         curTime = setTime;
@@ -190,12 +197,16 @@ public class GameManager : Singleton<GameManager>
     }
     
     //Decibel
+    public Gradient gradient;
     private void CheckDecibel()
     {
-        inGameSceneUIManager.FindUIObject("DecibelImg_eating").SetActive(false);
+        /*inGameSceneUIManager.FindUIObject("DecibelImg_eating").SetActive(false);
         inGameSceneUIManager.FindUIObject("DecibelImg_normal").SetActive(false);
-        inGameSceneUIManager.FindUIObject("DecibelImg_warning").SetActive(false);
+        inGameSceneUIManager.FindUIObject("DecibelImg_warning").SetActive(false);*/
         float decibel = player.curDecibelAmount;
+        float decibelPercent = decibel / maxDecibel;
+        inGameSceneUIManager.FindUIObject("DecibelImg_Color").GetComponent<Image>().color =
+            gradient.Evaluate(decibelPercent);
         if (maxDecibel - 15f <= decibel)
         {
             if( teacher.teacherState == TeacherController.TeacherState.Idle)
@@ -204,7 +215,7 @@ public class GameManager : Singleton<GameManager>
                     "무슨 소리가 들리는 것 같은데...";
                 inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(true);
             }
-            inGameSceneUIManager.FindUIObject("DecibelImg_warning").SetActive(true);
+            //inGameSceneUIManager.FindUIObject("DecibelImg_warning").SetActive(true);
         }
         else 
         {
@@ -212,10 +223,10 @@ public class GameManager : Singleton<GameManager>
             {
                 inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(false);
             }
-            if(player.playerState == Player.State.Eating)
+            /*if(player.playerState == Player.State.Eating)
                 inGameSceneUIManager.FindUIObject("DecibelImg_eating").SetActive(true);
             else
-                inGameSceneUIManager.FindUIObject("DecibelImg_normal").SetActive(true);
+                inGameSceneUIManager.FindUIObject("DecibelImg_normal").SetActive(true);*/
         }
         if (maxDecibel <= decibel)
         {

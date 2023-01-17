@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
   <string name="firebase_database_url" translatable="false">https://evenit3-dabbc-default-rtdb.firebaseio.com</string>
   <string name="gcm_defaultSenderId" translatable="false">784491189850</string>
   <string name="google_storage_bucket" translatable="false">evenit3-dabbc.appspot.com</string>
   <string name="project_id" translatable="false">evenit3-dabbc</string>
-  <string name="google_api_key" translatable="false">AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY</string>
-  <string name="google_app_id" translatable="false">1:784491189850:android:356511e132c86973aaea63</string>
-  <string name="default_android_client_id" translatable="false">784491189850-6ph605j0322vugrqnf5jtr8pjcq2heih.apps.googleusercontent.com</string>
+  <string name="google_api_key" translatable="false">AIzaSyA8Jrp1oj1zT6K-5O64RDxbpIHLGfDvYmw</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA8Jrp1oj1zT6K-5O64RDxbpIHLGfDvYmw</string>
+  <string name="google_app_id" translatable="false">1:784491189850:android:ce63bf4e161b030aaaea63</string>
   <string name="default_web_client_id" translatable="false">784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com</string>
 </resources>

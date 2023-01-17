@@ -8,6 +8,7 @@ public class Stage
 {
     public int no;
     public string name;
+    public string name_kr;
     public int teacherNo;
     public int snack1;
     public int snack2;

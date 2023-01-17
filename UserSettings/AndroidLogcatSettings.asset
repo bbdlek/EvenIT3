@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "LMV500N53b05663",
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
-        "name": "com.DefaultCompany.EvenIT3",
-        "processId": 25021,
+        "name": "com.Snacks.SnackCatcher",
+        "processId": 30241,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -78,6 +78,12 @@
             "deviceId": "LMV500N53b05663",
             "name": "com.DefaultCompany.EvenIT3",
             "processId": 25021,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 30241,
             "exited": false
         }
     ],

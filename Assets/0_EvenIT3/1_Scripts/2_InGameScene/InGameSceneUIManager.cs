@@ -195,7 +195,8 @@ public class InGameSceneUIManager : UIControllerScript
 
     private void OnClickPausePanelReplayBtn()
     {
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        AppManagerScript.Instance.isRestart = true;
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
     private void OnClickPausePanelMainMenuBtn()
@@ -280,11 +281,13 @@ public class InGameSceneUIManager : UIControllerScript
     private void OnClickEasyClearPanelRetryBtn()
     {
         Time.timeScale = 1;
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        AppManagerScript.Instance.isRestart = true;
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
     private void OnClickEasyClearPanelNextStageBtn()
     {
+        AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 4)
         {
             AppManagerScript.Instance.selectedChapter += 1;
@@ -295,7 +298,7 @@ public class InGameSceneUIManager : UIControllerScript
             AppManagerScript.Instance.selectedStage += 1;
         }
         Time.timeScale = 1;
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 
     private void OnClickEasyFailPanelMainMenuBtn()
@@ -306,6 +309,7 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickEasyFailPanelPrevStageBtn()
     {
+        AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 1)
         {
             AppManagerScript.Instance.selectedChapter -= 1;
@@ -315,12 +319,13 @@ public class InGameSceneUIManager : UIControllerScript
         {
             AppManagerScript.Instance.selectedStage -= 1;
         }
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
     private void OnClickEasyFailPanelRetryBtn()
     {
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        AppManagerScript.Instance.isRestart = true;
+        AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 
     //Item

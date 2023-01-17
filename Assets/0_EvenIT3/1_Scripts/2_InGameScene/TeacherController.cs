@@ -96,6 +96,8 @@ public class TeacherController : MonoBehaviour
         teacherBack = teacherBacks[teacherNo];
         teacherFront = teacherFronts[teacherNo];
         teacherAngry = teacherAngrySprites[teacherNo];
+        teacherObj.GetComponent<Animator>().SetInteger("StageNum", AppManagerScript.Instance.selectedStage);
+        teacherObj.GetComponent<Animator>().enabled = true;
     }
 
     private IEnumerator LookCoroutine()
@@ -109,8 +111,10 @@ public class TeacherController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(false);
         teacherState = TeacherState.Look;
+        teacherObj.GetComponent<Animator>().enabled = false;
         yield return new WaitForSeconds(_watchingTime);
         teacherState = TeacherState.Idle;
+        teacherObj.GetComponent<Animator>().enabled = true;
         StartCoroutine(LookCoroutine());
     }
 

@@ -35,6 +35,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
         else
         {
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.MainMenuTouchPanel);
+            mainMenuSceneUIManager.CheckRestart();
         }
     }
 }

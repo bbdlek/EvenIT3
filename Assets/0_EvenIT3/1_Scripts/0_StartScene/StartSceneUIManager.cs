@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DarkTonic.MasterAudio;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Sequence = DG.Tweening.Sequence;
 
 public class StartSceneUIManager : UIControllerScript
 {
@@ -13,6 +15,8 @@ public class StartSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        LoadingSequence();
+        FindUIObject("VersionTxt").GetComponent<TMP_Text>().text = "ver " + Application.version;
     }
 
     private void AddOnClick()
@@ -46,7 +50,7 @@ public class StartSceneUIManager : UIControllerScript
             case StartSceneButtons.GoogleLoginBtn:
                 OnClickGoogleLoginBtn();
                 break;
-            case StartSceneButtons.FBLoginBtn:
+            case StartSceneButtons.FacebookLoginBtn:
                 OnClickFBLoginBtn();
                 break;
             case StartSceneButtons.TouchToStartBtn:
@@ -59,7 +63,7 @@ public class StartSceneUIManager : UIControllerScript
     {
         //Login
         GoogleLoginBtn,
-        FBLoginBtn,
+        FacebookLoginBtn,
         
         //TouchToStart
         TouchToStartBtn,
@@ -139,13 +143,41 @@ public class StartSceneUIManager : UIControllerScript
                 break;*/
             case StartScenePanels.Login:
                 FindUIObject("LoginPanel").SetActive(true);
+                TitleOpened();
                 break;
             case StartScenePanels.TouchToStart:
                 FindUIObject("TouchToStartPanel").SetActive(true);
+                TtsBlink();
                 break;
-            
+
         }
     }
 
     #endregion
+
+    private Sequence _titleSequence;
+
+    private void LoadingSequence()
+    {
+        FindUIObject("DBInfo").GetComponent<TMP_Text>().DOText("출석부 쓰는중...", 1f).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    private void TitleOpened()
+    {
+        _titleSequence = DOTween.Sequence().OnStart(() =>
+            {
+                FindUIObject("LoginHeadImage").transform.localScale = Vector3.zero;
+                var color = FindUIObject("LoginHeadImage").GetComponent<Image>().color;
+                color.a = 0f;
+            })
+            .Append(FindUIObject("LoginHeadImage").transform.DOScale(1, 1).SetEase(Ease.OutBounce))
+            .Join(FindUIObject("LoginHeadImage").GetComponent<Image>().DOFade(1, 1))
+            .SetDelay(0.5f);
+    }
+
+    private void TtsBlink()
+    {
+        FindUIObject("TouchToStartTxt").GetComponent<TMP_Text>().DOFade(0, 1f).SetEase(Ease.InQuad)
+            .SetLoops(-1, LoopType.Yoyo);
+    }
 }
