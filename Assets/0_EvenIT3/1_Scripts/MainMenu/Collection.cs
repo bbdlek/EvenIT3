@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Collection : MonoBehaviour
 {
     public GameObject ExView, OneView, TwoView, ThreeView, Three2View, FourView, FiveView, SixView;
+    public Image ExBtn, OneBtn, TwoBtn, ThreeBtn, Three2Btn, FourBtn, FiveBtn, SixBtn;
+
+
 
     // น๖วม
     public void ClickEx()

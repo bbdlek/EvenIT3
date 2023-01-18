@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 84
+  controlID: 50
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 83
+  controlID: 49
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 150
+  controlID: 61
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 82
+  controlID: 48
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 47
+  controlID: 119
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -656,9 +656,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1304.0312, y: 786.4949, z: -11.414408}
+    m_Target: {x: 1360.6887, y: 591.3226, z: -3.1730075}
     speed: 2
-    m_Value: {x: 1304.0312, y: 786.4949, z: -11.414408}
+    m_Value: {x: 1366.0686, y: 596.2466, z: -2.7043211}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -709,9 +709,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1158.9906
+    m_Target: 1088.4089
     speed: 2
-    m_Value: 1158.9906
+    m_Value: 1041.5397
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -767,20 +767,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 246a0000
-      m_LastClickedID: 27172
-      m_ExpandedIDs: 26fbffff9e650000326900004e6a00007a6b0000fe6c0000526e0000906f0000107000002c7100004c72000092730000
+      m_SelectedIDs: 9c9b0000
+      m_LastClickedID: 39836
+      m_ExpandedIDs: f6e0ffff76ebfffff6ebffff2cf7ffff26fbffff9e6500007a6b0000fe6c00005a6e0000986f00005472000024780000307800004a78000074780000c8830000c6890000ec890000ae900000b8900000e89500009c9b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: MainCharacter
-        m_OriginalName: MainCharacter
+        m_Name: GoogleLoginBtn
+        m_OriginalName: GoogleLoginBtn
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 27172
+        m_UserData: 35308
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -898,22 +898,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - "Assets/Assets/2. \uD504\uB85C\uD544"
+    - "Assets/Assets/7. \uB3C4\uAC10"
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 56
   m_LastFolders:
-  - "Assets/Assets/2. \uD504\uB85C\uD544"
+  - "Assets/Assets/7. \uB3C4\uAC10"
   m_LastFoldersGridSize: 56
   m_LastProjectPath: C:\Users\USER\Documents\GitHub\EvenIT3
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: c4770000
-    m_LastClickedID: 30660
-    m_ExpandedIDs: 000000009477000096770000987700009a770000c477000000ca9a3b
+    scrollPos: {x: 0, y: 351}
+    m_SelectedIDs: e2770000
+    m_LastClickedID: 30690
+    m_ExpandedIDs: 00000000a0770000a2770000a4770000a6770000a877000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -941,7 +941,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009477000096770000987700009a7700009c770000
+    m_ExpandedIDs: 00000000a0770000a2770000a4770000a6770000a8770000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1097,18 +1097,18 @@ MonoBehaviour:
       y: 21
       width: 615
       height: 519
-    m_Scale: {x: 0.2544061, y: 0.2544061}
-    m_Translation: {x: 313.25162, y: 259.5}
+    m_Scale: {x: 0.29754776, y: 0.29754776}
+    m_Translation: {x: 262.83447, y: 259.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1231.3054
-      y: -1020.0227
-      width: 2417.395
-      height: 2040.0454
+      x: -883.3354
+      y: -872.1289
+      width: 2066.895
+      height: 1744.2578
     m_MinimalGUI: 1
   m_defaultScale: 0.24023438
   m_LastWindowPixelSize: {x: 615, y: 540}
