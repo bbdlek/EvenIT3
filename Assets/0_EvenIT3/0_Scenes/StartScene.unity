@@ -305,7 +305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ca9bf8dbd148d443b59c9b735fbbfcb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: deef3be95122be3409549ef23c01c3c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -909,7 +909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -26.977, y: -132}
+  m_AnchoredPosition: {x: -59, y: -156}
   m_SizeDelta: {x: 1177.3467, y: 2264.7617}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &565689630
@@ -2842,7 +2842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -26.977, y: -319}
+  m_AnchoredPosition: {x: -59, y: -343}
   m_SizeDelta: {x: 1177.347, y: 2264.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1871645419
@@ -2953,7 +2953,6 @@ GameObject:
   - component: {fileID: 2112035517}
   - component: {fileID: 2112035514}
   - component: {fileID: 2112035519}
-  - component: {fileID: 2112035520}
   m_Layer: 0
   m_Name: AppManager
   m_TagString: Untagged
@@ -3766,26 +3765,3 @@ MonoBehaviour:
   snackUrl: https://drive.google.com/uc?export=download&id=1wsiS5L_WKQFDUszErUhwjYnOGX2O9hAS
   itemUrl: https://drive.google.com/uc?export=download&id=1_IWvCOQqCuTG9hT0aWGLiI33Uw9LIjzv
   snackTypeUrl: https://drive.google.com/uc?export=download&id=1FuWGWtcgI2wmHL-UPsKjA1Y5y2mjwI8R
---- !u!114 &2112035520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112035513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8552e03b3ddfc6e40ac7277e5ce46203, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userID: 
-  userData:
-    Commodities:
-      Gold: 0
-      Silver: 0
-    milkItem: 0
-    clockItem: 0
-    maskItem: 0
-    nickName: 
-  energy: 0
-  heartRechargeInterval: 1

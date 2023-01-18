@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/0_EvenIT3/0_Scenes/test.unity
+    guid: 36feced92cc7c224ba92cc30c8eb42c1
   - enabled: 1
     path: Assets/0_EvenIT3/0_Scenes/StartScene.unity
     guid: 9e920b109c89dd8449d3db0f40033d9d

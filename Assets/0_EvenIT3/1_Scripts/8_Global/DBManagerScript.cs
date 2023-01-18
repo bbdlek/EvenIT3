@@ -104,6 +104,7 @@ public class DBManagerScript : Singleton<DBManagerScript>
         }
         
         GetComponent<LogInManager>().LoginForLastLoggedInProvider();
+        AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.TitleOpened();
     }
     
 

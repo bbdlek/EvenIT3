@@ -12,6 +12,8 @@ public class User
     public int maskItem;
     public string nickName;
 
+    public List<int> starList;
+
     public void NewUser(string nickName)
     {
         this.nickName = nickName;
@@ -19,5 +21,6 @@ public class User
         milkItem = 10;
         clockItem = 10;
         maskItem = 10;
+        starList = new List<int>();
     }
 }

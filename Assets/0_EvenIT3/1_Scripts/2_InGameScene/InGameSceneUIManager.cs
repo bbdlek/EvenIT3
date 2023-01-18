@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class InGameSceneUIManager : UIControllerScript
 {
@@ -201,6 +202,7 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickPausePanelMainMenuBtn()
     {
+        AppManagerScript.Instance.isRestart = false;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 
@@ -290,8 +292,11 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 4)
         {
-            AppManagerScript.Instance.selectedChapter += 1;
-            AppManagerScript.Instance.selectedStage = 1;
+            if(AppManagerScript.Instance.selectedChapter != 4)
+            {
+                AppManagerScript.Instance.selectedChapter += 1;
+                AppManagerScript.Instance.selectedStage = 1;
+            }
         }
         else
         {
@@ -312,8 +317,11 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 1)
         {
-            AppManagerScript.Instance.selectedChapter -= 1;
-            AppManagerScript.Instance.selectedStage = 4;
+            if(AppManagerScript.Instance.selectedChapter != 1)
+            {
+                AppManagerScript.Instance.selectedChapter -= 1;
+                AppManagerScript.Instance.selectedStage = 4;
+            }
         }
         else
         {
@@ -388,8 +396,37 @@ public class InGameSceneUIManager : UIControllerScript
         Player.Instance.playerState = Player.State.Idle;
     }
 
+    [SerializeField] private GameObject rewardPrefab;
+    public List<Snack> rewardSnacks;
+    public List<Sprite> rewardIcons;
+
     public void SetUpStarIcons(int stars)
     {
+        rewardSnacks = new List<Snack>();
+        int rewardSnacksCount;
+        rewardIcons = new List<Sprite>();
+        switch (GameManager.Instance.maxSnack)
+        {
+            case 1:
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1]);
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1].name));
+                break;
+            case 2:
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1]);
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2]);
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1].name));
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2].name));
+                break;
+            case 3:
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1]);
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2]);
+                rewardSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack3]);
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1].name));
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2].name));
+                rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack3].name));
+                break;
+        }
+        
         //Easy
         FindUIObject("EasyClearPanelStars1").SetActive(false);
         FindUIObject("EasyClearPanelStars2").SetActive(false);
@@ -398,14 +435,49 @@ public class InGameSceneUIManager : UIControllerScript
         {
             case 1:
                 FindUIObject("EasyClearPanelStars1").SetActive(true);
+                rewardSnacksCount = Random.Range(0, 3);
+                if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
+                {
+                    UserManager.Instance.userData.starList.Add(1);
+                }
+                else
+                {
+                    UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 1;
+                }
                 break;
             case 2:
                 FindUIObject("EasyClearPanelStars2").SetActive(true);
+                rewardSnacksCount = Random.Range(1, 4);
+                if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
+                {
+                    UserManager.Instance.userData.starList.Add(2);
+                }
+                else
+                {
+                    UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 2;
+                }
                 break;
             case 3:
                 FindUIObject("EasyClearPanelStars3").SetActive(true);
+                rewardSnacksCount = Random.Range(2, 5);
+                if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
+                {
+                    UserManager.Instance.userData.starList.Add(3);
+                }
+                else
+                {
+                    UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 3;
+                }
                 break;
         }
+
+        for (int i = 0; i < GameManager.Instance.maxSnack; i++)
+        {
+            GameObject tempReward =  Instantiate(rewardPrefab, FindUIObject("EasyClearPanelRewards").transform);
+            Debug.Log(rewardIcons[i]);
+            tempReward.GetComponent<Image>().sprite = rewardIcons[i];
+        }
+        FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("EasyClearPanel").SetActive(true);
     }
 }

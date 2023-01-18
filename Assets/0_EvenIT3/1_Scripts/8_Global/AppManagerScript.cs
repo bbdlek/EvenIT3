@@ -34,6 +34,14 @@ public class AppManagerScript : Singleton<AppManagerScript>
         InitApp();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _fbManager.UpdateCurrentUser();
+        }
+    }
+
     private void SetApp()
     {
         Application.targetFrameRate = 60;
@@ -87,7 +95,8 @@ public class AppManagerScript : Singleton<AppManagerScript>
             }
             else
             {
-                JsonHelper.SaveSettings(new Settings(1, 1, true));
+                appSettings = new Settings(1, 1, true);
+                JsonHelper.SaveSettings(appSettings);
             }
         }
         else

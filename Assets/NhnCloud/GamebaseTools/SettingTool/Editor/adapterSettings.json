@@ -49,7 +49,7 @@
             "adapters"                         : [
                 {
                     "name" : "Facebook",
-                    "used" : true,
+                    "used" : false,
                     "canOnlyChooseEitherUnityOrNative" : true,
                     "fileName"                         : "com.toast.android.gamebase:gamebase-adapter-auth-facebook",
                     "moreInfo"                         : null

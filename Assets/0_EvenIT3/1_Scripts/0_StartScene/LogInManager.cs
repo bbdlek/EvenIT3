@@ -186,6 +186,7 @@ public class LogInManager : MonoBehaviour
             AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.TouchToStart);
             UserManager.Instance.userID = Gamebase.GetUserID();
         }
+        FBManagerScript.Instance.GetUserData();
     }
 
     public void LogOut()

@@ -24,6 +24,7 @@ public class Player : Singleton<Player>
     {
         playerState = State.Idle;
         playerObj = GameManager.Instance.inGameSceneUIManager.FindUIObject("Player");
+        curDecibelAmount = 0;
     }
 
     private void Update()
@@ -36,8 +37,6 @@ public class Player : Singleton<Player>
         decibelAmount = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].decibel;
         GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
         eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;
-
-        curDecibelAmount = 0;
         curQuantity = 0;
     }
 

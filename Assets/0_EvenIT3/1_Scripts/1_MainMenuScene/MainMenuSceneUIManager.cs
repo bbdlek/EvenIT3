@@ -14,6 +14,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        InitProfile();
         InitSettingUI();
     }
 
@@ -63,6 +64,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             //Move Btns
             case MainMenuSceneButtons.StageMoveBtn:
                 OnClickStageMoveBtn();
+                OnClickChapterSelectBtn(1);
                 break;
             case MainMenuSceneButtons.AchievementMoveBtn:
                 OnClickAchievementMoveBtn();
@@ -336,12 +338,13 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickChapterSelectBtn(int chapter)
     {
         AppManagerScript.Instance.selectedChapter = chapter;
+        CheckStageStar();
         FindUIObject("ChapterPageHeader").GetComponent<TMP_Text>().text = "챕터 " + chapter;
         string body = null;
         switch (chapter)
         {
             case 1:
-                body = "충치요정의 등장";
+                body = "충치요정의 등장!";
                 break;
             case 2:
                 body = "충치요정의 발악";
@@ -372,6 +375,8 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickChapterToStage(int stage)
     {
         AppManagerScript.Instance.selectedStage = stage;
+        int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+        CheckStageEnable();
         switch (stage)
         {
             case 1:
@@ -394,6 +399,8 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("StagePageHeader").GetComponent<TMP_Text>().text = "Stage " +
                                                                         AppManagerScript.Instance.selectedChapter +
                                                                         "-" + AppManagerScript.Instance.selectedStage;
+        FindUIObject("StagePageTeacherName").GetComponent<TMP_Text>().text = DBManagerScript.Instance.teacherDB[DBManagerScript.Instance.stageDB[stageNum].teacherNo ].name_kr;
+        FindUIObject("StagePageTeacherExplain").GetComponent<TMP_Text>().text = DBManagerScript.Instance.teacherDB[DBManagerScript.Instance.stageDB[stageNum].teacherNo ].explain;
         FindUIObject("ChapterPageBG").SetActive(false);
         FindUIObject("StagePageBG").SetActive(true);
     }
@@ -407,12 +414,9 @@ public class MainMenuSceneUIManager : UIControllerScript
     //Stage
     private void OnClickStageStartBtn()
     {
-        AppManagerScript.Instance.selectedItem = new[]
-        {
-            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn,
-            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn,
-            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn
-        };
+        AppManagerScript.Instance.selectedItem[0] = FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn;
+        AppManagerScript.Instance.selectedItem[1] = FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn;
+        AppManagerScript.Instance.selectedItem[2] = FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn;
         if (FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn) UserManager.Instance.userData.milkItem--;
         if (FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn) UserManager.Instance.userData.clockItem--;
         if (FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn) UserManager.Instance.userData.maskItem--;
@@ -665,6 +669,12 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     #endregion
     
+    //Profile
+    private void InitProfile()
+    {
+        FindUIObject("ProfileNickNameBody").GetComponent<TMP_Text>().text = UserManager.Instance.userData.nickName;
+    }
+    
     
     //Settings
 
@@ -687,7 +697,13 @@ public class MainMenuSceneUIManager : UIControllerScript
         });
 
     }
-    
+
+    private void Update()
+    {
+        SettingBgmVolume();
+        SettingEffectVolume();
+    }
+
     public void SettingBgmVolume()
     {
         MasterAudio.Instance._masterPlaylistVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
@@ -695,7 +711,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     public void SettingEffectVolume()
     {
-        MasterAudio.Instance._masterPlaylistVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
+        MasterAudio.Instance._masterAudioVolume = FindUIObject("OptionSoundPanelEffectSlider").GetComponent<Slider>().value;
     }
 
     public void SettingVibration()
@@ -739,5 +755,78 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
+    }
+    
+    //Stage
+    public void CheckStageStar()
+    {
+        int chapter = (AppManagerScript.Instance.selectedChapter - 1) * 4;
+        Debug.Log(chapter);
+        if (chapter + 0 < UserManager.Instance.userData.starList.Count)
+        {
+            SetStageStar(UserManager.Instance.userData.starList[chapter + 0], FindUIObject("Stage1Stars"));
+        }
+        else
+        {
+            SetStageStar(0, FindUIObject("Stage1Stars"));
+        }
+        if (chapter + 1 < UserManager.Instance.userData.starList.Count)
+        {
+            SetStageStar(UserManager.Instance.userData.starList[chapter + 1], FindUIObject("Stage2Stars"));
+        }
+        else
+        {
+            SetStageStar(0, FindUIObject("Stage2Stars"));
+        }
+        if (chapter + 2 < UserManager.Instance.userData.starList.Count)
+        {
+            SetStageStar(UserManager.Instance.userData.starList[chapter + 2], FindUIObject("Stage3Stars"));
+        }
+        else
+        {
+            SetStageStar(0, FindUIObject("Stage3Stars"));
+        }
+        if (chapter + 3 < UserManager.Instance.userData.starList.Count)
+        {
+            SetStageStar(UserManager.Instance.userData.starList[chapter + 3], FindUIObject("Stage4Stars"));
+        }
+        else
+        {
+            SetStageStar(0, FindUIObject("Stage4Stars"));
+        }
+    }
+
+    private void SetStageStar(int star, GameObject go)
+    {
+        switch (star)
+        {
+            case 0:
+                go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Stage/icon_stagechoice_star_0");
+                break;
+            case 1:
+                go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Stage/icon_stagechoice_star_1");
+                break;
+            case 2:
+                go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Stage/icon_stagechoice_star_2");
+                break;
+            case 3:
+                go.GetComponent<Image>().sprite = Resources.Load<Sprite>("Stage/icon_stagechoice_star_3");
+                break;
+        }
+    }
+    
+    public void CheckStageEnable()
+    {
+        int stageIndex = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+        if (UserManager.Instance.userData.starList.Count < stageIndex)
+        {
+            //Disable
+            FindUIObject("StageStartBtn").GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            //Enable
+            FindUIObject("StageStartBtn").GetComponent<Button>().interactable = true;
+        }
     }
 }

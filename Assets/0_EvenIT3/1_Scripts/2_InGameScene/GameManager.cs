@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
     public Player player;
     public TeacherController teacher;
 
-    [SerializeField] private int _stageNum;
+    public int stageNum;
 
     //필요 변수
     public float quantity;
@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     public int maskItem;
     public float maxDecibel;
     [SerializeField] private int curSnack;
-    [SerializeField] private int maxSnack;
+    public int maxSnack;
 
     public override void Awake()
     {
@@ -41,17 +41,17 @@ public class GameManager : Singleton<GameManager>
         inGameSceneUIManager.InitSetup(gameObject);
         player = GetComponent<Player>();
         teacher = GetComponent<TeacherController>();
-        _stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+        stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
         //Stage
         SetStageInfo();
+        SetStageUI();
+        teacher.SetUpTeacher();
     }
 
     private void Start()
     {
         SelectSnack();
-        SetStageUI();
         InitStage();
-        teacher.SetUpTeacher();
         gameState = GameState.InGame;
         
         //GameStart
@@ -78,6 +78,9 @@ public class GameManager : Singleton<GameManager>
         milkItem = AppManagerScript.Instance.selectedItem[0] ? 1 : 0;
         clockItem = AppManagerScript.Instance.selectedItem[1] ? 1 : 0;
         maskItem = AppManagerScript.Instance.selectedItem[2] ? 1 : 0;
+        inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<Button>().interactable = AppManagerScript.Instance.selectedItem[0];
+        inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<Button>().interactable = AppManagerScript.Instance.selectedItem[1];
+        inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<Button>().interactable = AppManagerScript.Instance.selectedItem[2];
         
 
         //Timer
@@ -86,25 +89,25 @@ public class GameManager : Singleton<GameManager>
 
     private void SetStageUI()
     {
-        if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 5)
+        if (DBManagerScript.Instance.stageDB[stageNum].teacherNo < 4)
         {
             teacher.SetTeacherImg(0);
             inGameSceneUIManager.FindUIObject("BG_Board").GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Stage/art_languageteacher_board");
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 9)
+        else if (DBManagerScript.Instance.stageDB[stageNum].teacherNo < 8)
         {
             teacher.SetTeacherImg(1);
             inGameSceneUIManager.FindUIObject("BG_Board").GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Stage/art_history teacher_board");
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 13)
+        else if (DBManagerScript.Instance.stageDB[stageNum].teacherNo < 12)
         {
             teacher.SetTeacherImg(2);
             inGameSceneUIManager.FindUIObject("BG_Board").GetComponent<Image>().sprite =
                 Resources.Load<Sprite>("Stage/art_music teacher_board");
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 17)
+        else if (DBManagerScript.Instance.stageDB[stageNum].teacherNo < 16)
         {
             teacher.SetTeacherImg(3);
             inGameSceneUIManager.FindUIObject("BG_Board").GetComponent<Image>().sprite =
@@ -141,14 +144,15 @@ public class GameManager : Singleton<GameManager>
     
     private void SetStageInfo()
     {
-        curStage = DBManagerScript.Instance.stageDB[_stageNum];
-        setTime = DBManagerScript.Instance.stageDB[_stageNum].stageTime;
+        curStage = DBManagerScript.Instance.stageDB[stageNum];
+        setTime = DBManagerScript.Instance.stageDB[stageNum].stageTime;
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
         maxSnack = 3;
-        if (DBManagerScript.Instance.stageDB[_stageNum].snack3 == -1) maxSnack = 2;
-        if (DBManagerScript.Instance.stageDB[_stageNum].snack2 == -1) maxSnack = 1;
+        if (DBManagerScript.Instance.stageDB[stageNum].snack3 == -1) maxSnack = 2;
+        if (DBManagerScript.Instance.stageDB[stageNum].snack2 == -1) maxSnack = 1;
         curSnack = 0;
     }
+    
 
     private void SelectSnack()
     {
@@ -156,13 +160,13 @@ public class GameManager : Singleton<GameManager>
         switch (curSnack)
         {
             case 0:
-                select = DBManagerScript.Instance.stageDB[_stageNum].snack1;
+                select = DBManagerScript.Instance.stageDB[stageNum].snack1;
                 break;
             case 1:
-                select = DBManagerScript.Instance.stageDB[_stageNum].snack2;
+                select = DBManagerScript.Instance.stageDB[stageNum].snack2;
                 break;
             case 2:
-                select = DBManagerScript.Instance.stageDB[_stageNum].snack3;
+                select = DBManagerScript.Instance.stageDB[stageNum].snack3;
                 break;
         }
         selectedSnack = DBManagerScript.Instance.snackDB[select];
@@ -381,6 +385,7 @@ public class GameManager : Singleton<GameManager>
         player.playerState = Player.State.Idle;
         inGameSceneUIManager.FindUIObject("SurpriseEffect").SetActive(true);
         yield return new WaitForSeconds(1f);
+        teacher.teacherObj.GetComponent<Animator>().enabled = false;
         teacher.teacherState = TeacherController.TeacherState.End;
         yield return new WaitForSeconds(0.5f);
         switch (type)
@@ -406,8 +411,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 break;
         }
-        
+
         Time.timeScale = 0;
     }
-    
+
 }

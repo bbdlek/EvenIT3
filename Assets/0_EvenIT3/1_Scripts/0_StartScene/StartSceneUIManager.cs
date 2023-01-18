@@ -24,6 +24,7 @@ public class StartSceneUIManager : UIControllerScript
     {
         if (AppManagerScript.Instance.isWithDraw)
         {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.TitleOpened();
             ChangeUI(StartScenePanels.Login);
         }
     }
@@ -97,7 +98,6 @@ public class StartSceneUIManager : UIControllerScript
 
     private void OnClickTouchToStartBtn()
     {
-        FBManagerScript.Instance.GetUserData();
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 
@@ -153,7 +153,6 @@ public class StartSceneUIManager : UIControllerScript
                 break;*/
             case StartScenePanels.Login:
                 FindUIObject("LoginPanel").SetActive(true);
-                TitleOpened();
                 break;
             case StartScenePanels.TouchToStart:
                 FindUIObject("TouchToStartPanel").SetActive(true);
@@ -172,7 +171,7 @@ public class StartSceneUIManager : UIControllerScript
         FindUIObject("DBInfo").GetComponent<TMP_Text>().DOText("출석부 쓰는중...", 1f).SetLoops(-1, LoopType.Yoyo);
     }
 
-    private void TitleOpened()
+    public void TitleOpened()
     {
         _titleSequence = DOTween.Sequence().OnStart(() =>
             {

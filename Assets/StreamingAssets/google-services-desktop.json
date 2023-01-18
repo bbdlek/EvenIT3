@@ -8,49 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:784491189850:android:2f4eaaaf1a872e31aaea63",
-        "android_client_info": {
-          "package_name": "com.EvenIT3.SnackCatcher"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "784491189850-h7irrvp8nils7dc5f33piaeubvbt3evq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.EvenIT3.SnackCatcher",
-            "certificate_hash": "ba33cb9073211bbbb42fb0e84b745972d1bd76a6"
-          }
-        },
-        {
-          "client_id": "784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA8Jrp1oj1zT6K-5O64RDxbpIHLGfDvYmw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:784491189850:android:ce63bf4e161b030aaaea63",
+        "mobilesdk_app_id": "1:784491189850:android:515f8d3e3e3c5e42aaea63",
         "android_client_info": {
           "package_name": "com.Snacks.SnackCatcher"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "784491189850-t8lm45jlsivq2amlm159eg3bi289m8g7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Snacks.SnackCatcher",
+            "certificate_hash": "ba33cb9073211bbbb42fb0e84b745972d1bd76a6"
+          }
+        },
         {
           "client_id": "784491189850-2ecf18ciln8mqm5gr4na5lqor6ndsueq.apps.googleusercontent.com",
           "client_type": 3

@@ -13,7 +13,7 @@ public class TeacherController : MonoBehaviour
         Idle, BeforeLook, Look, End
     }
     
-    [SerializeField] private GameObject teacherObj;
+    public GameObject teacherObj;
     public TeacherState teacherState;
     private float _minDelay = 3;
     private float _maxDelay = 12;
@@ -46,19 +46,20 @@ public class TeacherController : MonoBehaviour
     private void SetTeacherSkill()
     {
          _teacherNo = DBManagerScript.Instance.stageDB[_stageNum].teacherNo;
-        if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 5)
+        if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 4)
         {
             _minDelay -= DBManagerScript.Instance.teacherDB[_teacherNo].NN;
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 9)
+        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 8)
         {
-            GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount * DBManagerScript.Instance.teacherDB[_teacherNo].NN;
+            GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount *
+                DBManagerScript.Instance.teacherDB[_teacherNo].NN / 100;
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 13)
+        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 12)
         {
             GameManager.Instance.maxDecibel -= DBManagerScript.Instance.teacherDB[_teacherNo].NN;
         }
-        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 17)
+        else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 16)
         {
             StartCoroutine(EnglishSkill());
         }
@@ -71,6 +72,7 @@ public class TeacherController : MonoBehaviour
         GameManager.Instance.maxDecibel += 30f;
         yield return new WaitForSeconds(3f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
+        GameManager.Instance.player.curDecibelAmount -= 30f;
         GameManager.Instance.maxDecibel -= 30f;
         StartCoroutine(EnglishSkill());
     }
@@ -93,10 +95,11 @@ public class TeacherController : MonoBehaviour
 
     public void SetTeacherImg(int teacherNo)
     {
+        Debug.Log(teacherNo);
         teacherBack = teacherBacks[teacherNo];
         teacherFront = teacherFronts[teacherNo];
         teacherAngry = teacherAngrySprites[teacherNo];
-        teacherObj.GetComponent<Animator>().SetInteger("StageNum", AppManagerScript.Instance.selectedStage);
+        teacherObj.GetComponent<Animator>().SetInteger("StageNum", AppManagerScript.Instance.selectedStage - 1);
         teacherObj.GetComponent<Animator>().enabled = true;
     }
 
