@@ -17,6 +17,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
     public int selectedStage;
     public bool[] selectedItem = new bool[3];
     public bool isRestart = false;
+    public bool isWithDraw = false;
 
     public Settings appSettings;
     
@@ -83,6 +84,10 @@ public class AppManagerScript : Singleton<AppManagerScript>
             if(PlayerPrefs.GetInt("IsFirst") == 1)
             {
                 appSettings = JsonHelper.Load();
+            }
+            else
+            {
+                JsonHelper.SaveSettings(new Settings(1, 1, true));
             }
         }
         else

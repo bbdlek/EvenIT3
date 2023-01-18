@@ -15,8 +15,17 @@ public class StartSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        CheckLogOut();
         LoadingSequence();
         FindUIObject("VersionTxt").GetComponent<TMP_Text>().text = "ver " + Application.version;
+    }
+
+    private void CheckLogOut()
+    {
+        if (AppManagerScript.Instance.isWithDraw)
+        {
+            ChangeUI(StartScenePanels.Login);
+        }
     }
 
     private void AddOnClick()
@@ -88,6 +97,7 @@ public class StartSceneUIManager : UIControllerScript
 
     private void OnClickTouchToStartBtn()
     {
+        FBManagerScript.Instance.GetUserData();
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 

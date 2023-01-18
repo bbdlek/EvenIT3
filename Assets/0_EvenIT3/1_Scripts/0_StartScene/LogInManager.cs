@@ -171,6 +171,7 @@ public class LogInManager : MonoBehaviour
             {
                 if (Gamebase.IsSuccess(error))
                 {
+                    AppManagerScript.Instance.isWithDraw = false;
                     AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.TouchToStart);
                     UserManager.Instance.userID = Gamebase.GetUserID();
                 }

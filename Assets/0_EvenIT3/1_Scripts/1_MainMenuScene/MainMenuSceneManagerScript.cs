@@ -36,6 +36,8 @@ public class MainMenuSceneManagerScript : MonoBehaviour
         {
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.MainMenuTouchPanel);
             mainMenuSceneUIManager.CheckRestart();
+            mainMenuSceneUIManager.ResetCommodities();
+            mainMenuSceneUIManager.ResetItems();
         }
     }
 }

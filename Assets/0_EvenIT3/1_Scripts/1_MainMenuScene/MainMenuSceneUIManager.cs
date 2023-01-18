@@ -136,12 +136,45 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             
             //Collection
-        
+            case MainMenuSceneButtons.CollectionCloseBtn:
+                OnClickCollectionCloseBtn();
+                break;
+            case MainMenuSceneButtons.BuffBtn:
+                OnClickBuffBtn();
+                break;
+            case MainMenuSceneButtons.Chapter1Btn:
+                OnClickChapter1Btn();
+                break;
+            case MainMenuSceneButtons.Chapter2Btn:
+                OnClickChapter2Btn();
+                break;
+            case MainMenuSceneButtons.Chapter3Btn:
+                OnClickChapter3Btn();
+                break;
+            case MainMenuSceneButtons.NextPage_Btn:
+                OnClickNextPage_Btn();
+                break;
+            case MainMenuSceneButtons.Chapter4Btn:
+                OnClickChapter4Btn();
+                break;
+            case MainMenuSceneButtons.Chapter5Btn:
+                OnClickChapter5Btn();
+                break;
+            case MainMenuSceneButtons.Chapter6Btn:
+                OnClickChapter6Btn();
+                break;
+            
             //Shop
-        
+            case MainMenuSceneButtons.ShopCloseBtn:
+                OnClickShopCloseBtn();
+                break;
+            
             //Inventory
             case MainMenuSceneButtons.InventoryCloseBtn:
                 OnClickInventoryCloseBtn();
+                break;
+            case MainMenuSceneButtons.InventoryGoToShopBtn:
+                OnClickInventoryGoToShopBtn();
                 break;
         
             //Option
@@ -212,11 +245,22 @@ public class MainMenuSceneUIManager : UIControllerScript
         AchievementAllObtainBtn,
         
         //Collection
-        
+        CollectionCloseBtn,
+        BuffBtn,
+        Chapter1Btn,
+        Chapter2Btn,
+        Chapter3Btn,
+        NextPage_Btn,
+        Chapter4Btn,
+        Chapter5Btn,
+        Chapter6Btn,
+
         //Shop
+        ShopCloseBtn,
         
         //Inventory
         InventoryCloseBtn,
+        InventoryGoToShopBtn,
         
         //Option
         OptionCloseBtn,
@@ -238,6 +282,8 @@ public class MainMenuSceneUIManager : UIControllerScript
         string nickName = FindUIObject("SetNickNameInputField").GetComponent<TMP_InputField>().text;
         FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
         FindUIObject("SetNickNamePanel").SetActive(false);
+        ResetCommodities();
+        ResetItems();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
@@ -254,6 +300,14 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     private void OnClickCollectionMoveBtn()
     {
+        FindUIObject("CollectionExplainPanel").SetActive(true);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
         ChangeUI(MainMenuScenePanels.CollectionPanel);
     }
     
@@ -359,6 +413,10 @@ public class MainMenuSceneUIManager : UIControllerScript
             FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn,
             FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn
         };
+        if (FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn) UserManager.Instance.userData.milkItem--;
+        if (FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn) UserManager.Instance.userData.clockItem--;
+        if (FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn) UserManager.Instance.userData.maskItem--;
+        
         AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
     }
         
@@ -374,13 +432,117 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
     
     //Collection
+    private void OnClickCollectionCloseBtn()
+    {
+        ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    private void OnClickBuffBtn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(true);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+
+    private void OnClickChapter1Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(true);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+    private void OnClickChapter2Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(true);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+    private void OnClickChapter3Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(true);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+
+    private void OnClickNextPage_Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(true);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+    private void OnClickChapter4Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(true);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+    private void OnClickChapter5Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(true);
+        FindUIObject("Chapter6Panel").SetActive(false);
+    }
+    private void OnClickChapter6Btn()
+    {
+        FindUIObject("CollectionExplainPanel").SetActive(false);
+        FindUIObject("Chapter1Panel").SetActive(false);
+        FindUIObject("Chapter2Panel").SetActive(false);
+        FindUIObject("Chapter3Panel").SetActive(false);
+        FindUIObject("Chapter3Panel2").SetActive(false);
+        FindUIObject("Chapter4Panel").SetActive(false);
+        FindUIObject("Chapter5Panel").SetActive(false);
+        FindUIObject("Chapter6Panel").SetActive(true);
+    }
         
     //Shop
+    private void OnClickShopCloseBtn()
+    {
+        ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
         
     //Inventory
     private void OnClickInventoryCloseBtn()
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    private void OnClickInventoryGoToShopBtn()
+    {
+        ChangeUI(MainMenuScenePanels.ShopPanel);
     }
         
     //Option
@@ -413,11 +575,15 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickOptionLogOutBtn()
     {
+        AppManagerScript.Instance.isWithDraw = true;
+        PlayerPrefs.SetInt("IsFirst", 0);
         AppManagerScript.Instance.GetComponent<LogInManager>().LogOut();
     }
 
     private void OnClickOptionWithDrawBtn()
     {
+        AppManagerScript.Instance.isWithDraw = true;
+        PlayerPrefs.SetInt("IsFirst", 0);
         FBManagerScript.Instance.DeleteCurrentUser(UserManager.Instance.userID);
         AppManagerScript.Instance.GetComponent<LogInManager>().WithDraw();
     }
@@ -552,5 +718,26 @@ public class MainMenuSceneUIManager : UIControllerScript
                 Debug.Log(string.Format("SaveTerms failed. error:{0}", error));
             }
         });
+    }
+    
+    //Commodities
+    public void ResetCommodities()
+    {
+        Debug.Log(FindUIObject("FreeTxt"));
+        FindUIObject("FreeTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+        FindUIObject("PaidTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+    }
+
+    public void ResetItems()
+    {
+        FindUIObject("InventoryClockText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.clockItem + "개";
+        FindUIObject("InventoryMilkText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.milkItem + "개";
+        FindUIObject("InventoryMaskText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.maskItem + "개";
+        FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
     }
 }

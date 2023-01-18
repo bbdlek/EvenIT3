@@ -9,21 +9,26 @@ public class UserManager : Singleton<UserManager>
     public string userID;
     public User userData;
 
+    public override void Awake()
+    {
+        base.Awake();
+        RemoveDuplicates();
+    }
+
     private void Start()
     {
-        FBManagerScript.Instance.GetUserData();
-        InitEnergy();
+        //InitEnergy();
     }
 
     private void OnApplicationFocus(bool hasFocus)
     {
-        EnergyApplicationFocus(hasFocus);
+        //EnergyApplicationFocus(hasFocus);
     }
 
     private void OnApplicationQuit()
     {
-        SaveEnergyInfo();
-        SaveAppQuitTime();
+        //SaveEnergyInfo();
+        //SaveAppQuitTime();
     }
 
     #region UserData
@@ -76,7 +81,8 @@ public class UserManager : Singleton<UserManager>
 
     public void SaveEnergyInfo()
     {
-        FBManagerScript.Instance.SaveEnergyAmount(userID, energy);
+        if(!AppManagerScript.Instance.isWithDraw)
+            FBManagerScript.Instance.SaveEnergyAmount(userID, energy);
     }
 
     public void LoadAppQuitTime()
@@ -86,7 +92,8 @@ public class UserManager : Singleton<UserManager>
 
     public void SaveAppQuitTime()
     {
-        FBManagerScript.Instance.SaveQuitTime(userID, DateTime.Now.ToLocalTime().ToBinary().ToString());
+        if(!AppManagerScript.Instance.isWithDraw)
+            FBManagerScript.Instance.SaveQuitTime(userID, DateTime.Now.ToLocalTime().ToBinary().ToString());
     }
 
     public void SetRechargeScheduler(Action onFinish = null)

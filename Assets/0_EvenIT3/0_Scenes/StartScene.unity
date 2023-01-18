@@ -2953,6 +2953,7 @@ GameObject:
   - component: {fileID: 2112035517}
   - component: {fileID: 2112035514}
   - component: {fileID: 2112035519}
+  - component: {fileID: 2112035520}
   m_Layer: 0
   m_Name: AppManager
   m_TagString: Untagged
@@ -3007,6 +3008,7 @@ MonoBehaviour:
   selectedStage: 1
   selectedItem: 000000
   isRestart: 0
+  isWithDraw: 0
   appSettings:
     BgmVolume: 0
     EffectVolume: 0
@@ -3764,3 +3766,26 @@ MonoBehaviour:
   snackUrl: https://drive.google.com/uc?export=download&id=1wsiS5L_WKQFDUszErUhwjYnOGX2O9hAS
   itemUrl: https://drive.google.com/uc?export=download&id=1_IWvCOQqCuTG9hT0aWGLiI33Uw9LIjzv
   snackTypeUrl: https://drive.google.com/uc?export=download&id=1FuWGWtcgI2wmHL-UPsKjA1Y5y2mjwI8R
+--- !u!114 &2112035520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112035513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8552e03b3ddfc6e40ac7277e5ce46203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userID: 
+  userData:
+    Commodities:
+      Gold: 0
+      Silver: 0
+    milkItem: 0
+    clockItem: 0
+    maskItem: 0
+    nickName: 
+  energy: 0
+  heartRechargeInterval: 1

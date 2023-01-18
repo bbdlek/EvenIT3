@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using Newtonsoft.Json;
 using Toast.Gamebase;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FBManagerScript : Singleton<FBManagerScript>
@@ -22,6 +24,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 FirebaseApp = FirebaseApp.DefaultInstance;
 
                 InitDatabase();
+                transform.AddComponent<UserManager>();
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             } else {
                 Debug.LogError(System.String.Format(
@@ -54,8 +57,8 @@ public class FBManagerScript : Singleton<FBManagerScript>
             {
                 snapshot = task.Result;
                 // Do something with snapshot...
-                var json = snapshot.GetRawJsonValue();
-                UserManager.Instance.userData = JsonUtility.FromJson<User>(json);
+                //GetUserData();
+                Debug.Log(snapshot.HasChild(userId));
                 return snapshot.HasChild(userId);
             }
             return snapshot != null && snapshot.HasChild(userId);
@@ -83,8 +86,8 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     public void GetUserData()
     {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child("UserData");
-        reference.Child(UserManager.Instance.userID).GetValueAsync().ContinueWith(task =>
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(UserManager.Instance.userID).Child("UserData");
+        reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
@@ -94,7 +97,9 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 var snapshot = task.Result;
                 string json = snapshot.GetRawJsonValue();
                 Debug.Log(json);
+                Debug.Log(JsonUtility.FromJson<User>(json));
                 UserManager.Instance.userData = JsonUtility.FromJson<User>(json);
+
             }
         });
     }
@@ -103,6 +108,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
     {
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
         string json = JsonUtility.ToJson(UserManager.Instance.userData);
+        Debug.Log(json);
 
         reference.Child(Gamebase.GetUserID()).Child("UserData").SetRawJsonValueAsync(json);
     }
