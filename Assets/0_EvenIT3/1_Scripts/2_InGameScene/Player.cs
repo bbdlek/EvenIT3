@@ -36,12 +36,13 @@ public class Player : Singleton<Player>
     public void SetBasePlayerStat()
     {
         decibelAmount = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].decibel;
-        if (AppManagerScript.Instance.buff[1]) decibelAmount -= desDecibelAmount * 0.07f;
+        if (AppManagerScript.Instance.buff[1]) decibelAmount -= desDecibelAmount * DBManagerScript.Instance.buffDB[1].NN / 100;
         GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
-        if (AppManagerScript.Instance.buff[0]) GameManager.Instance.quantity -= GameManager.Instance.quantity * 0.05f;
+        if (AppManagerScript.Instance.buff[0]) GameManager.Instance.quantity -= GameManager.Instance.quantity * DBManagerScript.Instance.buffDB[0].NN / 100;
         eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;
         curQuantity = 0;
     }
+    
 
     private void Eating()
     {
@@ -50,16 +51,16 @@ public class Player : Singleton<Player>
             switch (GameManager.Instance.selectedSnack.type)
             {
                 case 0:
-                    StartCoroutine(MasterAudio.PlaySoundAndWaitUntilFinished("Eating_Bread"));
+                    MasterAudio.PlaySound("Eating_Cookie");
                     break;
                 case 1:
-                    StartCoroutine(MasterAudio.PlaySoundAndWaitUntilFinished("Eating_Candy"));
+                    MasterAudio.PlaySound("Eating_Candy");
                     break;
                 case 2:
-                    StartCoroutine(MasterAudio.PlaySoundAndWaitUntilFinished("Eating_Snack"));
+                    MasterAudio.PlaySound("Eating_Cookie");
                     break;
                 case 3:
-                    StartCoroutine(MasterAudio.PlaySoundAndWaitUntilFinished("Eating_Cookie"));
+                    MasterAudio.PlaySound("Eating_Cookie");
                     break;
                 
             }
@@ -70,6 +71,7 @@ public class Player : Singleton<Player>
         }
         else if(playerState == State.Idle)
         {
+            MasterAudio.StopBus("Eating");
             playerObj.GetComponent<Animator>().SetBool("isEating", false);
             playerObj.transform.GetChild(1).gameObject.SetActive(false);
             curDecibelAmount -= Time.deltaTime * desDecibelAmount;

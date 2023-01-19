@@ -15,12 +15,14 @@ public class DBManagerScript : Singleton<DBManagerScript>
     public Stage[] stageDB;
     public Item[] itemDB;
     public SnackType[] snackTypeDB;
+    public Buff[] buffDB;
 
     [SerializeField] private string stageUrl;
     [SerializeField] private string teacherUrl;
     [SerializeField] private string snackUrl;
     [SerializeField] private string itemUrl;
     [SerializeField] private string snackTypeUrl;
+    [SerializeField] private string buffUrl;
 
     private void Start()
     {
@@ -101,6 +103,21 @@ public class DBManagerScript : Singleton<DBManagerScript>
             //snackTypeDB = JsonConvert.DeserializeObject<SnackType[]>(snackTypeData);
             var snackTypeDataBase = JsonUtility.FromJson<SnackTypeDB>("{\"snackType\":" + snackTypeData + "}");
             snackTypeDB = snackTypeDataBase.snackType;
+        }
+        
+        var uwr_Buff = new UnityWebRequest(buffUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Buff = Path.Combine(Application.persistentDataPath, "Buff.json");
+        uwr_Buff.downloadHandler = new DownloadHandlerFile(path_Buff);
+        yield return uwr_Buff.SendWebRequest();
+        if (uwr_Buff.isNetworkError || uwr_Buff.isHttpError)
+            Debug.LogError(uwr_Buff.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_Buff);
+            var buffData = File.ReadAllText(Application.persistentDataPath + "/Buff.json");
+            //snackTypeDB = JsonConvert.DeserializeObject<SnackType[]>(snackTypeData);
+            var buffDataBase = JsonUtility.FromJson<BuffDB>("{\"buff\":" + buffData + "}");
+            buffDB = buffDataBase.buff;
         }
         
         GetComponent<LogInManager>().LoginForLastLoggedInProvider();

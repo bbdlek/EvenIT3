@@ -17,10 +17,10 @@ public class User
     public void NewUser(string nickName)
     {
         this.nickName = nickName;
-        Commodities = new Commodities(0, 0);
-        milkItem = 10;
-        clockItem = 10;
-        maskItem = 10;
+        Commodities = new Commodities(33333, 33333);
+        milkItem = 333;
+        clockItem = 333;
+        maskItem = 333;
         starList = new List<int>();
     }
 }

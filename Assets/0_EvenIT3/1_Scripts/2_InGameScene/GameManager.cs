@@ -149,7 +149,7 @@ public class GameManager : Singleton<GameManager>
         curStage = DBManagerScript.Instance.stageDB[stageNum];
         setTime = DBManagerScript.Instance.stageDB[stageNum].stageTime;
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
-        if (AppManagerScript.Instance.buff[2]) maxDecibel += maxDecibel * 0.07f;
+        if (AppManagerScript.Instance.buff[2]) maxDecibel += maxDecibel * DBManagerScript.Instance.buffDB[2].NN / 100;
         maxSnack = 3;
         if (DBManagerScript.Instance.stageDB[stageNum].snack3 == -1) maxSnack = 2;
         if (DBManagerScript.Instance.stageDB[stageNum].snack2 == -1) maxSnack = 1;

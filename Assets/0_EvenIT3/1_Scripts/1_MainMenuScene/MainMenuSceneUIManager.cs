@@ -173,6 +173,21 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.ShopCloseBtn:
                 OnClickShopCloseBtn();
                 break;
+            case MainMenuSceneButtons.ClockBtn:
+                OnClickClockBtn();
+                break;
+            case MainMenuSceneButtons.MaskBtn:
+                OnClickMaskBtn();
+                break;
+            case MainMenuSceneButtons.MilkBtn:
+                OnClickMilkBtn();
+                break;
+            case MainMenuSceneButtons.BuyCheckYesBtn:
+                OnClickBuyCheckYesBtn();
+                break;
+            case MainMenuSceneButtons.BuyCheckNoBtn:
+                OnClickBuyCheckNoBtn();
+                break;
             
             //Inventory
             case MainMenuSceneButtons.InventoryCloseBtn:
@@ -262,6 +277,16 @@ public class MainMenuSceneUIManager : UIControllerScript
 
         //Shop
         ShopCloseBtn,
+            //Gotcha
+        
+            //Item
+        ClockBtn,
+        MaskBtn,
+        MilkBtn,
+            //BuyCheck
+        BuyCheckYesBtn,
+        BuyCheckNoBtn,
+        
         
         //Inventory
         InventoryCloseBtn,
@@ -324,11 +349,14 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickShopMoveBtn()
     {
         MasterAudio.PlaySound("DoorClick");
+        FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
         ChangeUI(MainMenuScenePanels.ShopPanel);
     }
     
     private void OnClickInventoryMoveBtn()
     {
+        ResetItems();
         MasterAudio.PlaySound("InventoryClick");
         ChangeUI(MainMenuScenePanels.InventoryPanel);
     }
@@ -547,6 +575,38 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
+
+    private void OnClickClockBtn()
+    {
+        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        FindUIObject("BuyCheckPopup").SetActive(true);
+    }
+    
+    private void OnClickMaskBtn()
+    {
+        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        FindUIObject("BuyCheckPopup").SetActive(true);
+    }
+    
+    private void OnClickMilkBtn()
+    {
+        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        FindUIObject("BuyCheckPopup").SetActive(true);
+    }
+
+    private void OnClickBuyCheckYesBtn()
+    {
+        UserManager.Instance.userData.clockItem++;
+        UserManager.Instance.userData.Commodities.Silver -= 900;
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+        FindUIObject("BuyCheckPopup").SetActive(false);
+    }
+    
+    private void OnClickBuyCheckNoBtn()
+    {
+        FindUIObject("BuyCheckPopup").SetActive(false);
+    }
         
     //Inventory
     private void OnClickInventoryCloseBtn()
@@ -689,7 +749,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         if (UserManager.Instance.userData.starList.Count > 0)
         {
-            FindUIObject("Buff1Txt").GetComponent<TMP_Text>().text = "간식 양 5% 감소";
+            FindUIObject("Buff1Txt").GetComponent<TMP_Text>().text = "간식 양 " + DBManagerScript.Instance.buffDB[0].NN + "% 감소";
             FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
             FindUIObject("Buff1Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[0] = true;
@@ -697,7 +757,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         if (UserManager.Instance.userData.starList.Count > 5)
         {
-            FindUIObject("Buff2Txt").GetComponent<TMP_Text>().text = "발생 데시벨 5% 감소";
+            FindUIObject("Buff2Txt").GetComponent<TMP_Text>().text = "발생 데시벨 " + DBManagerScript.Instance.buffDB[1].NN + "% 감소";
             FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
             FindUIObject("Buff2Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[1] = true;
@@ -705,7 +765,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         if (UserManager.Instance.userData.starList.Count > 8)
         {
-            FindUIObject("Buff3Txt").GetComponent<TMP_Text>().text = "최대 데시벨 7% 증가";
+            FindUIObject("Buff3Txt").GetComponent<TMP_Text>().text = "최대 데시벨 " + DBManagerScript.Instance.buffDB[2].NN + "% 증가";
             FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
             FindUIObject("Buff3Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[2] = true;
@@ -739,6 +799,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         SettingBgmVolume();
         SettingEffectVolume();
+        ResetCommodities();
     }
 
     public void SettingBgmVolume()
@@ -772,6 +833,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             }
         });
     }
+    
     
     //Commodities
     public void ResetCommodities()
