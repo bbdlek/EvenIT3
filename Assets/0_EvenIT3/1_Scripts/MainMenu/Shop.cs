@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    public GameObject GachaView, ItemView, PackageView, PaidView;
+    public GameObject GachaView, ItemView, PackageView, PaidView, BuyCheckView;
     public Image GachaBtn, ItemBtn, PackageBtn, PaidBtn;
     public Color red, yellow;
 
@@ -75,5 +75,20 @@ public class Shop : MonoBehaviour
         ItemBtn.color = yellow;
         PackageBtn.color = yellow;
         PaidBtn.color = red;
+    }
+
+    public void ClickBuy()
+    {
+        BuyCheckView.SetActive(true);
+    }
+
+    public void ClickBuyYes()
+    {
+        BuyCheckView.SetActive(false);
+    }
+
+    public void ClickBuyNo()
+    {
+        BuyCheckView.SetActive(false);
     }
 }
