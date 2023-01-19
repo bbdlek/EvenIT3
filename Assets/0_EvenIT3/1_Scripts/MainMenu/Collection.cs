@@ -120,7 +120,7 @@ public class Collection : MonoBehaviour
         CountTxt.text = "(" + count + "/20)";
         if (count > 0)
         {
-            GetComponent<Image>().material = None;
+            //GetComponent<Image>().material = ;
         }
     }
 }
