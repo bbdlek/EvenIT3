@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ public class GameManager : Singleton<GameManager>
 
     public override void Awake()
     {
+        MasterAudio.ChangePlaylistByName("BGM_Stage");
         inGameSceneUIManager = FindObjectOfType<InGameSceneUIManager>();
         inGameSceneUIManager.InitSetup(gameObject);
         player = GetComponent<Player>();
@@ -147,6 +149,7 @@ public class GameManager : Singleton<GameManager>
         curStage = DBManagerScript.Instance.stageDB[stageNum];
         setTime = DBManagerScript.Instance.stageDB[stageNum].stageTime;
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
+        if (AppManagerScript.Instance.buff[2]) maxDecibel += maxDecibel * 0.07f;
         maxSnack = 3;
         if (DBManagerScript.Instance.stageDB[stageNum].snack3 == -1) maxSnack = 2;
         if (DBManagerScript.Instance.stageDB[stageNum].snack2 == -1) maxSnack = 1;
@@ -268,6 +271,7 @@ public class GameManager : Singleton<GameManager>
         {
             remainTime = curTime;
             Debug.Log(remainTime);
+            MasterAudio.PlaySound("GameClear");
             switch (AppManagerScript.Instance.selectedChapter)
             {
                 case 1:
@@ -388,6 +392,7 @@ public class GameManager : Singleton<GameManager>
         teacher.teacherObj.GetComponent<Animator>().enabled = false;
         teacher.teacherState = TeacherController.TeacherState.End;
         yield return new WaitForSeconds(0.5f);
+        MasterAudio.PlaySound("GameOver");
         switch (type)
         {
             case 0:

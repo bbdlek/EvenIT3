@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class AppManagerScript : Singleton<AppManagerScript>
 {
@@ -20,6 +21,8 @@ public class AppManagerScript : Singleton<AppManagerScript>
     public bool isWithDraw = false;
 
     public Settings appSettings;
+
+    public bool[] buff = new bool[5];
     
     public override void Awake()
     {
@@ -32,14 +35,6 @@ public class AppManagerScript : Singleton<AppManagerScript>
     private void Start()
     {
         InitApp();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _fbManager.UpdateCurrentUser();
-        }
     }
 
     private void SetApp()

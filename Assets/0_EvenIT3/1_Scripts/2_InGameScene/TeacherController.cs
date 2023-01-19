@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -12,9 +13,26 @@ public class TeacherController : MonoBehaviour
     {
         Idle, BeforeLook, Look, End
     }
+
+    private TeacherState _teacherState;
     
     public GameObject teacherObj;
-    public TeacherState teacherState;
+
+    public TeacherState teacherState
+    {
+        get
+        {
+            return _teacherState;
+        }
+        set
+        {
+            _teacherState = value;
+            if (value == TeacherState.End)
+            {
+                MasterAudio.PlaySound("Teacher_Annoying");
+            }
+        }
+    }
     private float _minDelay = 3;
     private float _maxDelay = 12;
     private float _watchingTime;
@@ -26,6 +44,7 @@ public class TeacherController : MonoBehaviour
     public Sprite[] teacherAngrySprites;
     public Image teacherImg;
 
+    [SerializeField] private bool isEnglishSkill = false;
 
     private int _stageNum;
 
@@ -68,12 +87,20 @@ public class TeacherController : MonoBehaviour
     private IEnumerator EnglishSkill()
     {
         yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);
+        if (teacherState != TeacherState.Idle)
+        {
+            StartCoroutine(EnglishSkill());
+            yield break;
+        }
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(true);
+        MasterAudio.PlaySound("Skill_English");
         GameManager.Instance.maxDecibel += 30f;
+        isEnglishSkill = true;
         yield return new WaitForSeconds(3f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
         GameManager.Instance.player.curDecibelAmount -= 30f;
         GameManager.Instance.maxDecibel -= 30f;
+        isEnglishSkill = false;
         StartCoroutine(EnglishSkill());
     }
 
@@ -107,7 +134,14 @@ public class TeacherController : MonoBehaviour
     {
         float turnTime = Random.Range(_minDelay, _maxDelay);
         yield return new WaitForSeconds(turnTime);
+        if (isEnglishSkill)
+        {
+            StartCoroutine(LookCoroutine());
+            yield break;
+        }
         teacherState = TeacherState.BeforeLook;
+        if (_teacherNo < 8) MasterAudio.PlaySound("ManTeacher");
+        else MasterAudio.PlaySound("WomanTeacher");
         GameManager.Instance.inGameSceneUIManager.FindUIObject("TeacherBubbleTxt").GetComponent<TMPro.TMP_Text>().text =
             "큼큼...";
         GameManager.Instance.inGameSceneUIManager.FindUIObject("TeacherBubble").SetActive(true);

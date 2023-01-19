@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -442,7 +443,8 @@ public class InGameSceneUIManager : UIControllerScript
                 }
                 else
                 {
-                    UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 1;
+                    if(UserManager.Instance.userData.starList[GameManager.Instance.stageNum] < 1)
+                        UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 1;
                 }
                 break;
             case 2:
@@ -454,7 +456,8 @@ public class InGameSceneUIManager : UIControllerScript
                 }
                 else
                 {
-                    UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 2;
+                    if(UserManager.Instance.userData.starList[GameManager.Instance.stageNum] < 2)
+                        UserManager.Instance.userData.starList[GameManager.Instance.stageNum] = 2;
                 }
                 break;
             case 3:

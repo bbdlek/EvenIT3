@@ -14,8 +14,11 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
-        InitProfile();
-        InitSettingUI();
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("Diabled");
     }
 
     public void CheckRestart()
@@ -283,15 +286,19 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         string nickName = FindUIObject("SetNickNameInputField").GetComponent<TMP_InputField>().text;
         FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
+        FBManagerScript.Instance.GetUserData();
         FindUIObject("SetNickNamePanel").SetActive(false);
         ResetCommodities();
         ResetItems();
+        InitProfile();
+        InitCollection();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
     //Move Btns
     private void OnClickStageMoveBtn()
     {
+        MasterAudio.PlaySound("StageClick");
         ChangeUI(MainMenuScenePanels.StagePanel);
     }
     
@@ -302,6 +309,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     private void OnClickCollectionMoveBtn()
     {
+        MasterAudio.PlaySound("CollectionClick");
         FindUIObject("CollectionExplainPanel").SetActive(true);
         FindUIObject("Chapter1Panel").SetActive(false);
         FindUIObject("Chapter2Panel").SetActive(false);
@@ -315,11 +323,13 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     private void OnClickShopMoveBtn()
     {
+        MasterAudio.PlaySound("DoorClick");
         ChangeUI(MainMenuScenePanels.ShopPanel);
     }
     
     private void OnClickInventoryMoveBtn()
     {
+        MasterAudio.PlaySound("InventoryClick");
         ChangeUI(MainMenuScenePanels.InventoryPanel);
     }
     
@@ -670,15 +680,42 @@ public class MainMenuSceneUIManager : UIControllerScript
     #endregion
     
     //Profile
-    private void InitProfile()
+    public void InitProfile()
     {
         FindUIObject("ProfileNickNameBody").GetComponent<TMP_Text>().text = UserManager.Instance.userData.nickName;
+    }
+
+    public void InitCollection()
+    {
+        if (UserManager.Instance.userData.starList.Count > 0)
+        {
+            FindUIObject("Buff1Txt").GetComponent<TMP_Text>().text = "간식 양 5% 감소";
+            FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff1Stamp Img").SetActive(true);
+            AppManagerScript.Instance.buff[0] = true;
+        }
+        
+        if (UserManager.Instance.userData.starList.Count > 5)
+        {
+            FindUIObject("Buff2Txt").GetComponent<TMP_Text>().text = "발생 데시벨 5% 감소";
+            FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff2Stamp Img").SetActive(true);
+            AppManagerScript.Instance.buff[1] = true;
+        }
+        
+        if (UserManager.Instance.userData.starList.Count > 8)
+        {
+            FindUIObject("Buff3Txt").GetComponent<TMP_Text>().text = "최대 데시벨 7% 증가";
+            FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff3Stamp Img").SetActive(true);
+            AppManagerScript.Instance.buff[2] = true;
+        }
     }
     
     
     //Settings
 
-    private void InitSettingUI()
+    public void InitSettingUI()
     {
         FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value =
             AppManagerScript.Instance.appSettings.BgmVolume;
