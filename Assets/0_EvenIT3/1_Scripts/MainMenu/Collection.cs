@@ -23,6 +23,8 @@ public class Collection : MonoBehaviour
         FourView.SetActive(false);
         FiveView.SetActive(false);
         SixView.SetActive(false);
+
+        
     }
 
     // 1ц╘ем
@@ -120,7 +122,7 @@ public class Collection : MonoBehaviour
         CountTxt.text = "(" + count + "/20)";
         if (count > 0)
         {
-            //GetComponent<Image>().material = ;
+
         }
     }
 }
