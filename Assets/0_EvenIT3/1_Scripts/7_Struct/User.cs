@@ -11,6 +11,8 @@ public class User
     public int clockItem;
     public int maskItem;
     public string nickName;
+    public int profileImageIndex;
+    public int profileEdgeIndex;
 
     public List<int> starList;
     public List<int> snackList;
@@ -24,5 +26,8 @@ public class User
         maskItem = 333;
         starList = new List<int>();
         snackList = new List<int>(DBManagerScript.Instance.snackDB.Length);
+
+        profileImageIndex = 0;
+        profileEdgeIndex = 0;
     }
 }

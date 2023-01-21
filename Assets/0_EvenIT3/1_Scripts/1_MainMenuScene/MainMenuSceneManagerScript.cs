@@ -43,6 +43,10 @@ public class MainMenuSceneManagerScript : MonoBehaviour
             mainMenuSceneUIManager.InitProfile();
             mainMenuSceneUIManager.SetCollectionNum();
             mainMenuSceneUIManager.InitCollection();
+            mainMenuSceneUIManager.InitProfileEdges();
+            mainMenuSceneUIManager.InitProfileImages();
+            mainMenuSceneUIManager.InitProfileCollection();
+            mainMenuSceneUIManager.InitProfileScore();
         }
         mainMenuSceneUIManager.InitSettingUI();
     }

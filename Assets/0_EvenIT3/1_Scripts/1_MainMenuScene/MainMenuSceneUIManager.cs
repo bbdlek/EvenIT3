@@ -14,6 +14,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        InitProfileSprites();
     }
 
     private void OnDisable()
@@ -224,6 +225,21 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.ProfileCloseBtn:
                 OnClickProfileCloseBtn();
                 break;
+            case MainMenuSceneButtons.ProfileImageEditBtn:
+                OnClickProfileImageEditBtn();
+                break;
+            case MainMenuSceneButtons.ProfileNickNameEditBtn:
+                OnClickProfileNickNameEditBtn();
+                break;
+            case MainMenuSceneButtons.ProfileEdgeBtn:
+                OnClickProfileEdgeBtn();
+                break;
+            case MainMenuSceneButtons.ProfileEditBtn:
+                OnClickProfileEditBtn();
+                break;
+            case MainMenuSceneButtons.ProfileEditCloseBtn:
+                OnClickProfileEditCloseBtn();
+                break;
 
         }
     }
@@ -304,6 +320,11 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         //Profile
         ProfileCloseBtn,
+        ProfileImageEditBtn,
+        ProfileNickNameEditBtn,
+        ProfileEditBtn,
+        ProfileEdgeBtn,
+        ProfileEditCloseBtn
     }
     
     //Set Nick Name
@@ -318,6 +339,10 @@ public class MainMenuSceneUIManager : UIControllerScript
         InitProfile();
         SetCollectionNum();
         InitCollection();
+        InitProfileEdges();
+        InitProfileImages();
+        InitProfileCollection();
+        InitProfileScore();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
@@ -697,11 +722,128 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
     
     //Profile
+
+    private Sprite[] _profileImageList;
+    private Sprite[] _profileEdgeList;
+    
+    [SerializeField] private GameObject profileEditRosterPrefab;
+
+    public void InitProfileCollection()
+    {
+        Debug.Log((float)collection / DBManagerScript.Instance.snackDB.Length);
+        FindUIObject("ProfileCollectionPercentageBody").GetComponent<TMP_Text>().text =
+            ((float)collection / DBManagerScript.Instance.snackDB.Length).ToString("F2");
+    }
+
+    public void InitProfileScore()
+    {
+        
+    }
+    
+    private void InitProfileSprites()
+    {
+        _profileImageList = Resources.LoadAll<Sprite>($"ProfileImages");
+        _profileEdgeList = Resources.LoadAll<Sprite>($"ProfileEdges");
+        tempSelectProfileEdge = UserManager.Instance.userData.profileImageIndex;
+        tempSelectProfileEdge = UserManager.Instance.userData.profileEdgeIndex;
+    }
+
+    [SerializeField] private int tempSelectProfileImage;
+    [SerializeField] private int tempSelectProfileEdge;
+    
+    public void InitProfileImages()
+    {
+        FindUIObject("ProfileImage").GetComponent<Image>().sprite =
+            _profileImageList[UserManager.Instance.userData.profileImageIndex];
+        
+        Transform profileImageContent = FindUIObject("ProfileEditPopupImagePanelContent").transform;
+        for (int i = 0; i < _profileImageList.Length; i++)
+        {
+            GameObject tempProfile = Instantiate(profileEditRosterPrefab, profileImageContent);
+            tempProfile.GetComponent<Image>().sprite = _profileEdgeList[UserManager.Instance.userData.profileEdgeIndex];
+            tempProfile.transform.GetChild(0).GetComponent<Image>().sprite = _profileImageList[i];
+            tempProfile.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                MasterAudio.PlaySound("IconClick");
+                tempSelectProfileImage = tempProfile.transform.GetSiblingIndex();
+                for (int j = 0; j < FindUIObject("ProfileEditPopupEdgePanelContent").transform.childCount; j++)
+                {
+                    FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(j).GetChild(0).GetComponent<Image>().sprite = _profileImageList[tempSelectProfileImage];
+                }
+            });
+        }
+    }
+    
+    public void InitProfileEdges()
+    {
+        FindUIObject("ProfileImageBG").GetComponent<Image>().sprite =
+            _profileEdgeList[UserManager.Instance.userData.profileEdgeIndex];
+        
+        Transform profileImageContent = FindUIObject("ProfileEditPopupEdgePanelContent").transform;
+        for (int i = 0; i < _profileEdgeList.Length; i++)
+        {
+            GameObject tempProfile = Instantiate(profileEditRosterPrefab, profileImageContent);
+            tempProfile.GetComponent<Image>().sprite = _profileEdgeList[i];
+            tempProfile.transform.GetChild(0).GetComponent<Image>().sprite = _profileImageList[UserManager.Instance.userData.profileImageIndex];
+            tempProfile.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                MasterAudio.PlaySound("IconClick");
+                tempSelectProfileEdge = tempProfile.transform.GetSiblingIndex();
+                for (int j = 0; j < FindUIObject("ProfileEditPopupImagePanelContent").transform.childCount; j++)
+                {
+                    FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(j).GetComponent<Image>().sprite = _profileEdgeList[tempSelectProfileEdge];
+                }
+            });
+        }
+    }
+    
     private void OnClickProfileCloseBtn()
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
+    private void OnClickProfileImageEditBtn()
+    {
+        FindUIObject("ProfileEdgeBtn").transform.SetSiblingIndex(1);
+        FindUIObject("ProfileEditBtn").transform.SetSiblingIndex(4);
+        FindUIObject("ProfileEditPopupEdgePanel").SetActive(false);
+        FindUIObject("ProfileEditPopupImagePanel").SetActive(true);
+        FindUIObject("ProfileEditPopup").SetActive(true);
+        
+    }
+
+    private void OnClickProfileNickNameEditBtn()
+    {
+        
+    }
+
+    private void OnClickProfileEdgeBtn()
+    {
+        FindUIObject("ProfileEdgeBtn").transform.SetSiblingIndex(4);
+        FindUIObject("ProfileEditBtn").transform.SetSiblingIndex(1);
+        FindUIObject("ProfileEditPopupEdgePanel").SetActive(true);
+        FindUIObject("ProfileEditPopupImagePanel").SetActive(false);
+    }
+
+    private void OnClickProfileEditBtn()
+    {
+        FindUIObject("ProfileEdgeBtn").transform.SetSiblingIndex(1);
+        FindUIObject("ProfileEditBtn").transform.SetSiblingIndex(4);
+        FindUIObject("ProfileEditPopupEdgePanel").SetActive(false);
+        FindUIObject("ProfileEditPopupImagePanel").SetActive(true);
+    }
+
+    private void OnClickProfileEditCloseBtn()
+    {
+        UserManager.Instance.userData.profileEdgeIndex = tempSelectProfileEdge;
+        UserManager.Instance.userData.profileImageIndex = tempSelectProfileImage;
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindUIObject("ProfileImage").GetComponent<Image>().sprite =
+            _profileImageList[UserManager.Instance.userData.profileImageIndex];
+        FindUIObject("ProfileImageBG").GetComponent<Image>().sprite =
+            _profileEdgeList[UserManager.Instance.userData.profileEdgeIndex];
+        FindUIObject("ProfileEditPopup").SetActive(false);
+    }
 
     #endregion
 
