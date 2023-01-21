@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Story6 : MonoBehaviour
+{
+    public Text ChatTxt, CharacterNameTxt;
+
+    public string writerTxt = "";
+
+    void Start()
+    {
+        StartCoroutine(Text());
+    }
+
+    IEnumerator NormalChat(string narrator, string narration)
+    {
+        CharacterNameTxt.text = narrator;
+        writerTxt = "";
+
+        for (int i = 0; i < narration.Length; i++)
+        {
+            writerTxt += narration[i];
+            ChatTxt.text = writerTxt;
+            yield return null;
+        }
+
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator Text()
+    {
+        yield return StartCoroutine(NormalChat("2-2", "아슬아슬 위태로운 줄타기"));
+        yield return StartCoroutine(NormalChat("주인공", "와....위험했다..."));
+        yield return StartCoroutine(NormalChat("건치 요정", "그러게, 보는 내가 더 조마조마하더라.\n그래도 잘하고 있어! 역시 너한테 맡기길 잘했어 ㅎㅎ"));
+        yield return StartCoroutine(NormalChat("주인공", "(부끄러워하며) 그러지마아~ 부끄럽잖아~빨리 부적 모으러 가자!"));
+    }
+}

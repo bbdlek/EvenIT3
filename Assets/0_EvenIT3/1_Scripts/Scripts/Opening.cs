@@ -26,13 +26,22 @@ public class Opening : MonoBehaviour
             ChatTxt.text = writerTxt;
             yield return null;
         }
+
+        while(true)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+            yield return null;
+        }
     }
 
     IEnumerator Text()
     {
         yield return StartCoroutine(NormalChat("나래이션", "오래전... 이 학교에는 아이들을 충치로 고통받게 만드는 충치 요정이 살고 있었다는 전설이 내려오고 있는데..."));
         yield return StartCoroutine(NormalChat("나래이션", "몇십 년 후…\n땡땡 년도 어느 날 지각한 벌로 창고 청소를 하던 주인공... 실수로 항아리를 깨버렸다\n선생님에게 혼나기 싫었던 주인공은 급하게 깨진 조각들을 버리고 집으로 돌아갔다."));
-        yield return StartCoroutine(NormalChat("", "\n                  다 음 날                  "));
+        yield return StartCoroutine(NormalChat("", "다 음 날                            "));
         yield return StartCoroutine(NormalChat("", "등교하는데 아침부터 이가 욱신거린다... 아픈 것을 참으며 교실에 도착했는데 분위기가 이상하다?"));
         yield return StartCoroutine(NormalChat("", "반 친구들이 모두 볼을 감싸고 고통스러워하고 있다?"));
         yield return StartCoroutine(NormalChat("주인공", "(앞자리 친구에게) 야! 무슨 일이야?"));
