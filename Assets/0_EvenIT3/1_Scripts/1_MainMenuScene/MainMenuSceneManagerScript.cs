@@ -41,6 +41,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
             mainMenuSceneUIManager.ResetCommodities();
             mainMenuSceneUIManager.ResetItems();
             mainMenuSceneUIManager.InitProfile();
+            mainMenuSceneUIManager.SetCollectionNum();
             mainMenuSceneUIManager.InitCollection();
         }
         mainMenuSceneUIManager.InitSettingUI();

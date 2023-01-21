@@ -15,6 +15,24 @@ public class InGameSceneUIManager : UIControllerScript
     {
         base.InitSetup(scriptObject);
         AddOnClick();
+        InitEasyStars();
+    }
+
+    private void InitEasyStars()
+    {
+        stageSnacks = new List<Snack>();
+        if (DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1 != -1)
+        {
+            stageSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack1]);
+        }
+        if (DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2 != -1)
+        {
+            stageSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack2]);
+        }
+        if (DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack3 != -1)
+        {
+            stageSnacks.Add(DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack3]);
+        }
     }
     
     private void AddOnClick()
@@ -94,26 +112,26 @@ public class InGameSceneUIManager : UIControllerScript
                 OnClickFailedOverPanelRefuseBtn();
                 break;
             
-            //EasyClear
-            case InGameSceneButtons.EasyClearPanelMainMenuBtn:
-                OnClickEasyClearPanelMainMenuBtn();
+            //Clear
+            case InGameSceneButtons.ClearPanelMainMenuBtn:
+                OnClickClearPanelMainMenuBtn();
                 break;
-            case InGameSceneButtons.EasyClearPanelRetryBtn:
-                OnClickEasyClearPanelRetryBtn();
+            case InGameSceneButtons.ClearPanelRetryBtn:
+                OnClickClearPanelRetryBtn();
                 break;
-            case InGameSceneButtons.EasyClearPanelNextStageBtn:
-                OnClickEasyClearPanelNextStageBtn();
+            case InGameSceneButtons.ClearPanelNextStageBtn:
+                OnClickClearPanelNextStageBtn();
                 break;
             
-            //EasyFail
-            case InGameSceneButtons.EasyFailPanelMainMenuBtn:
-                OnClickEasyFailPanelMainMenuBtn();
+            //Fail
+            case InGameSceneButtons.FailPanelMainMenuBtn:
+                OnClickFailPanelMainMenuBtn();
                 break;
-            case InGameSceneButtons.EasyFailPanelPrevStageBtn:
-                OnClickEasyFailPanelPrevStageBtn();
+            case InGameSceneButtons.FailPanelPrevStageBtn:
+                OnClickFailPanelPrevStageBtn();
                 break;
-            case InGameSceneButtons.EasyFailPanelRetryBtn:
-                OnClickEasyFailPanelRetryBtn();
+            case InGameSceneButtons.FailPanelRetryBtn:
+                OnClickFailPanelRetryBtn();
                 break;
             
             //Item
@@ -160,15 +178,15 @@ public class InGameSceneUIManager : UIControllerScript
         FailedOverPanelBuyBtn,
         FailedOverPanelRefuseBtn,
         
-        //EasyClearPanel
-        EasyClearPanelMainMenuBtn,
-        EasyClearPanelRetryBtn,
-        EasyClearPanelNextStageBtn,
+        //ClearPanel
+        ClearPanelMainMenuBtn,
+        ClearPanelRetryBtn,
+        ClearPanelNextStageBtn,
         
-        //EasyFailPanel
-        EasyFailPanelMainMenuBtn,
-        EasyFailPanelPrevStageBtn,
-        EasyFailPanelRetryBtn,
+        //FailPanel
+        FailPanelMainMenuBtn,
+        FailPanelPrevStageBtn,
+        FailPanelRetryBtn,
         
     }
     
@@ -225,7 +243,7 @@ public class InGameSceneUIManager : UIControllerScript
     public void OnClickFailedLookPanelRefuseBtn()
     {
         FindUIObject("FailedLookPanel").SetActive(false);
-        FindUIObject("EasyFailPanel").SetActive(true);
+        FindUIObject("FailPanel").SetActive(true);
     }
     
     //FailedDecibel
@@ -248,7 +266,7 @@ public class InGameSceneUIManager : UIControllerScript
     public void OnClickFailedDecibelPanelRefuseBtn()
     {
         FindUIObject("FailedDecibelPanel").SetActive(false);
-        FindUIObject("EasyFailPanel").SetActive(true);
+        FindUIObject("FailPanel").SetActive(true);
     }
     
     //FailedOver
@@ -272,23 +290,23 @@ public class InGameSceneUIManager : UIControllerScript
     public void OnClickFailedOverPanelRefuseBtn()
     {
         FindUIObject("FailedOverPanel").SetActive(false);
-        FindUIObject("EasyFailPanel").SetActive(true);
+        FindUIObject("FailPanel").SetActive(true);
     }
 
-    private void OnClickEasyClearPanelMainMenuBtn()
+    private void OnClickClearPanelMainMenuBtn()
     {
         Time.timeScale = 1;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
-    private void OnClickEasyClearPanelRetryBtn()
+    private void OnClickClearPanelRetryBtn()
     {
         Time.timeScale = 1;
         AppManagerScript.Instance.isRestart = true;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
-    private void OnClickEasyClearPanelNextStageBtn()
+    private void OnClickClearPanelNextStageBtn()
     {
         AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 4)
@@ -307,13 +325,13 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
 
-    private void OnClickEasyFailPanelMainMenuBtn()
+    private void OnClickFailPanelMainMenuBtn()
     {
         Time.timeScale = 1;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
-    private void OnClickEasyFailPanelPrevStageBtn()
+    private void OnClickFailPanelPrevStageBtn()
     {
         AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 1)
@@ -331,7 +349,7 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }
     
-    private void OnClickEasyFailPanelRetryBtn()
+    private void OnClickFailPanelRetryBtn()
     {
         AppManagerScript.Instance.isRestart = true;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
@@ -397,15 +415,23 @@ public class InGameSceneUIManager : UIControllerScript
         Player.Instance.playerState = Player.State.Idle;
     }
 
-    [SerializeField] private GameObject rewardPrefab;
+    [SerializeField] private GameObject rewardSnackPrefab;
+    public int maxSnackNum;
+    public int divide1;
+    public int divide2;
+    public int divide3;
     public List<Snack> rewardSnacks;
     public List<Sprite> rewardIcons;
+    public List<int> rewardSnackNums;
+    public int rewardSilverNum;
+    public int rewardGoldNum;
+    public List<Snack> stageSnacks;
 
     public void SetUpStarIcons(int stars)
     {
-        rewardSnacks = new List<Snack>();
-        int rewardSnacksCount;
-        rewardIcons = new List<Sprite>();
+        rewardGoldNum = 0;
+        int snackNum;
+
         switch (GameManager.Instance.maxSnack)
         {
             case 1:
@@ -427,16 +453,32 @@ public class InGameSceneUIManager : UIControllerScript
                 rewardIcons.Add(Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[GameManager.Instance.stageNum].snack3].name));
                 break;
         }
-        
-        //Easy
-        FindUIObject("EasyClearPanelStars1").SetActive(false);
-        FindUIObject("EasyClearPanelStars2").SetActive(false);
-        FindUIObject("EasyClearPanelStars3").SetActive(false);
+
+        /*if (UserManager.Instance.userData.snackList[snackNum] == 20)
+        {
+            SetUpStarIcons(stars);
+            return;
+        }*/
+
+        //
+        FindUIObject("ClearPanelStars1").SetActive(false);
+        FindUIObject("ClearPanelStars2").SetActive(false);
+        FindUIObject("ClearPanelStars3").SetActive(false);
+        rewardSnackNums = new List<int>();
         switch (stars)
         {
             case 1:
-                FindUIObject("EasyClearPanelStars1").SetActive(true);
-                rewardSnacksCount = Random.Range(0, 3);
+                FindUIObject("ClearPanelStars1").SetActive(true);
+                if(GameManager.Instance.stageNum < 12)
+                {
+                    maxSnackNum = Random.Range(0, 3);
+                    rewardSilverNum = 100;
+                }
+                else
+                {
+                    maxSnackNum = Random.Range(0, 4);
+                    rewardSilverNum = 300;
+                }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
                     UserManager.Instance.userData.starList.Add(1);
@@ -448,8 +490,17 @@ public class InGameSceneUIManager : UIControllerScript
                 }
                 break;
             case 2:
-                FindUIObject("EasyClearPanelStars2").SetActive(true);
-                rewardSnacksCount = Random.Range(1, 4);
+                FindUIObject("ClearPanelStars2").SetActive(true);
+                if(GameManager.Instance.stageNum < 12)
+                {
+                    maxSnackNum = Random.Range(1, 4);
+                    rewardSilverNum = 200;
+                }
+                else
+                {
+                    maxSnackNum = Random.Range(1, 5);
+                    rewardSilverNum = 400;
+                }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
                     UserManager.Instance.userData.starList.Add(2);
@@ -461,8 +512,17 @@ public class InGameSceneUIManager : UIControllerScript
                 }
                 break;
             case 3:
-                FindUIObject("EasyClearPanelStars3").SetActive(true);
-                rewardSnacksCount = Random.Range(2, 5);
+                FindUIObject("ClearPanelStars3").SetActive(true);
+                if(GameManager.Instance.stageNum < 12)
+                {
+                    maxSnackNum = Random.Range(2, 5);
+                    rewardSilverNum = 300;
+                }
+                else
+                {
+                    maxSnackNum = Random.Range(2, 6);
+                    rewardSilverNum = 500;
+                }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
                     UserManager.Instance.userData.starList.Add(3);
@@ -474,13 +534,110 @@ public class InGameSceneUIManager : UIControllerScript
                 break;
         }
 
-        for (int i = 0; i < GameManager.Instance.maxSnack; i++)
+        if (GameManager.Instance.isFirst)
         {
-            GameObject tempReward =  Instantiate(rewardPrefab, FindUIObject("EasyClearPanelRewards").transform);
-            Debug.Log(rewardIcons[i]);
-            tempReward.GetComponent<Image>().sprite = rewardIcons[i];
+            maxSnackNum = 2;
+            rewardSilverNum = 500;
+            rewardGoldNum = 5;
+            
+            switch (GameManager.Instance.maxSnack)
+            {
+                case 1:
+                    divide1 = maxSnackNum;
+                    rewardSnackNums.Add(divide1);
+                    break;
+                case 2:
+                    divide1 = Random.Range(0, maxSnackNum + 1);
+                    divide2 = maxSnackNum - divide1;
+                    rewardSnackNums.Add(divide1);
+                    rewardSnackNums.Add(divide2);
+                    break;
+                case 3:
+                    divide1 = Random.Range(0, maxSnackNum + 1);
+                    divide2 = Random.Range(0, maxSnackNum - divide1 + 1);
+                    divide3 = maxSnackNum - divide1 - divide2;
+                    rewardSnackNums.Add(divide1);
+                    rewardSnackNums.Add(divide2);
+                    rewardSnackNums.Add(divide3);
+                    break;
+            }
+            
+            GameObject GoldReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+            GoldReward.GetComponent<Image>().sprite = Resources.Load<Sprite>("Rewards/Reward_Gold");
+            GoldReward.GetComponentInChildren<TMP_Text>().text = rewardGoldNum.ToString();
+            
+            GameObject SilverReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+            SilverReward.GetComponent<Image>().sprite = Resources.Load<Sprite>("Rewards/Reward_Silver");
+            SilverReward.GetComponentInChildren<TMP_Text>().text = rewardSilverNum.ToString();
+
+            for (int i = 0; i < rewardSnackNums.Count; i++)
+            {
+                if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] == 20)
+                {
+                    rewardSnackNums[i] = 0;
+                }
+                if (rewardSnackNums[i] != 0)
+                {
+                    GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                    SnackReward.GetComponent<Image>().sprite = rewardIcons[i];
+                    SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[i].ToString();
+                }
+            }
         }
+        else
+        {
+            GameObject SilverReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+            SilverReward.GetComponent<Image>().sprite = Resources.Load<Sprite>("Rewards/Reward_Silver");
+            SilverReward.GetComponentInChildren<TMP_Text>().text = rewardSilverNum.ToString();
+            switch (GameManager.Instance.maxSnack)
+            {
+                case 1:
+                    divide1 = maxSnackNum;
+                    rewardSnackNums.Add(divide1);
+                    break;
+                case 2:
+                    divide1 = Random.Range(0, maxSnackNum + 1);
+                    divide2 = maxSnackNum - divide1;
+                    rewardSnackNums.Add(divide1);
+                    rewardSnackNums.Add(divide2);
+                    break;
+                case 3:
+                    divide1 = Random.Range(0, maxSnackNum + 1);
+                    divide2 = Random.Range(0, maxSnackNum - divide1 + 1);
+                    divide3 = maxSnackNum - divide1 - divide2;
+                    rewardSnackNums.Add(divide1);
+                    rewardSnackNums.Add(divide2);
+                    rewardSnackNums.Add(divide3);
+                    break;
+            }
+
+            for (int i = 0; i < rewardSnackNums.Count; i++)
+            {
+                if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] == 20)
+                {
+                    rewardSnackNums[i] = 0;
+                }
+                if (rewardSnackNums[i] != 0)
+                {
+                    GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                    SnackReward.GetComponent<Image>().sprite = rewardIcons[i];
+                    SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[i].ToString();
+                }
+            }
+        }
+
+        UserManager.Instance.userData.Commodities.Gold += rewardGoldNum;
+        UserManager.Instance.userData.Commodities.Silver += rewardSilverNum;
+        for (int i = 0; i < rewardSnacks.Count; i++)
+        {
+            UserManager.Instance.userData.snackList[rewardSnacks[i].no] += rewardSnackNums[i];
+            if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] > 20)
+            {
+                UserManager.Instance.userData.snackList[rewardSnacks[i].no] = 20;
+            } 
+        }
+
         FBManagerScript.Instance.UpdateCurrentUser();
-        FindUIObject("EasyClearPanel").SetActive(true);
+        FindUIObject("ClearPanel").SetActive(true);
     }
 }

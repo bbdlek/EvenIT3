@@ -316,6 +316,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         ResetCommodities();
         ResetItems();
         InitProfile();
+        SetCollectionNum();
         InitCollection();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
@@ -439,6 +440,27 @@ public class MainMenuSceneUIManager : UIControllerScript
                                                                         "-" + AppManagerScript.Instance.selectedStage;
         FindUIObject("StagePageTeacherName").GetComponent<TMP_Text>().text = DBManagerScript.Instance.teacherDB[DBManagerScript.Instance.stageDB[stageNum].teacherNo ].name_kr;
         FindUIObject("StagePageTeacherExplain").GetComponent<TMP_Text>().text = DBManagerScript.Instance.teacherDB[DBManagerScript.Instance.stageDB[stageNum].teacherNo ].explain;
+
+        if(stageNum < 12)
+        {
+            //Check Item
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem != 0;
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem != 0;
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.clockItem != 0;
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = UserManager.Instance.userData.clockItem != 0;
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.maskItem != 0;
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = UserManager.Instance.userData.maskItem != 0;
+        }
+        else
+        {
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = false;
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = false;
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = false;
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = false;
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = false;
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = false;    
+        }
+
         FindUIObject("ChapterPageBG").SetActive(false);
         FindUIObject("StagePageBG").SetActive(true);
     }
@@ -452,14 +474,26 @@ public class MainMenuSceneUIManager : UIControllerScript
     //Stage
     private void OnClickStageStartBtn()
     {
-        AppManagerScript.Instance.selectedItem[0] = FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn;
-        AppManagerScript.Instance.selectedItem[1] = FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn;
-        AppManagerScript.Instance.selectedItem[2] = FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn;
-        if (FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn) UserManager.Instance.userData.milkItem--;
-        if (FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn) UserManager.Instance.userData.clockItem--;
-        if (FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn) UserManager.Instance.userData.maskItem--;
-        
-        AppManagerScript.Instance.ChangeScene(SceneName.InGameScene);
+        int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+        if(stageNum < 12)
+        {
+            AppManagerScript.Instance.selectedItem[0] = FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn;
+            AppManagerScript.Instance.selectedItem[1] = FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn;
+            AppManagerScript.Instance.selectedItem[2] = FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn;
+            if (FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn) UserManager.Instance.userData.milkItem--;
+            if (FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn) UserManager.Instance.userData.clockItem--;
+            if (FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn) UserManager.Instance.userData.maskItem--;
+
+            AppManagerScript.Instance.ChangeScene(SceneName.InGameScene_Easy);
+        }
+        else
+        {
+            AppManagerScript.Instance.selectedItem[0] = false;
+            AppManagerScript.Instance.selectedItem[1] = false;
+            AppManagerScript.Instance.selectedItem[2] = false;
+            
+            AppManagerScript.Instance.ChangeScene(SceneName.InGameScene_Hard);
+        }
     }
         
     //Achievement
@@ -745,30 +779,70 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("ProfileNickNameBody").GetComponent<TMP_Text>().text = UserManager.Instance.userData.nickName;
     }
 
+    [SerializeField] private int collection;
+
+    public void SetCollectionNum()
+    {
+        collection = 0;
+        for (int i = 0; i < UserManager.Instance.userData.snackList.Count; i++)
+        {
+            if (FindUIObject(DBManagerScript.Instance.snackDB[i].name))
+            {
+                FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(2).GetComponent<Text>().text =
+                    "(" + UserManager.Instance.userData.snackList[i] + "/20)";
+
+                if (UserManager.Instance.userData.snackList[i] == 20)
+                {
+                    collection++;
+                    FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(0).GetComponent<Image>()
+                        .material = null;
+                    FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(3).gameObject
+                        .SetActive(true);
+                }
+            }
+        }
+    }
+
     public void InitCollection()
     {
-        if (UserManager.Instance.userData.starList.Count > 0)
+        if (collection >= 1)
         {
             FindUIObject("Buff1Txt").GetComponent<TMP_Text>().text = "간식 양 " + DBManagerScript.Instance.buffDB[0].NN + "% 감소";
-            FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 1) + "/1)";
             FindUIObject("Buff1Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[0] = true;
         }
         
-        if (UserManager.Instance.userData.starList.Count > 5)
+        if (collection >= 5)
         {
             FindUIObject("Buff2Txt").GetComponent<TMP_Text>().text = "발생 데시벨 " + DBManagerScript.Instance.buffDB[1].NN + "% 감소";
-            FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 5) + "/5)";
             FindUIObject("Buff2Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[1] = true;
         }
         
-        if (UserManager.Instance.userData.starList.Count > 8)
+        if (collection >= 15)
         {
             FindUIObject("Buff3Txt").GetComponent<TMP_Text>().text = "최대 데시벨 " + DBManagerScript.Instance.buffDB[2].NN + "% 증가";
-            FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(1/1)";
+            FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 15) + "/15)";
             FindUIObject("Buff3Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[2] = true;
+        }
+        
+        if (collection >= 25)
+        {
+            FindUIObject("Buff4Txt").GetComponent<TMP_Text>().text = "발생 데시벨 " + DBManagerScript.Instance.buffDB[3].NN + "% 감소";
+            FindUIObject("Buff4CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 25) + "/25)";
+            FindUIObject("Buff4Stamp Img").SetActive(true);
+            AppManagerScript.Instance.buff[3] = true;
+        }
+        
+        if (collection >= 35)
+        {
+            FindUIObject("Buff4Txt").GetComponent<TMP_Text>().text = "최대 데시벨 " + DBManagerScript.Instance.buffDB[4].NN + "% 증가";
+            FindUIObject("Buff4CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 35) + "/35)";
+            FindUIObject("Buff4Stamp Img").SetActive(true);
+            AppManagerScript.Instance.buff[4] = true;
         }
     }
     
@@ -848,12 +922,12 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("InventoryClockText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.clockItem + "개";
         FindUIObject("InventoryMilkText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.milkItem + "개";
         FindUIObject("InventoryMaskText").GetComponent<TMP_Text>().text = "보유량 : " + UserManager.Instance.userData.maskItem + "개";
-        FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
+        /*FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
-        FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
+        FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;*/
     }
     
     //Stage

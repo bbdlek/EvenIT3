@@ -99,6 +99,14 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 Debug.Log(json);
                 Debug.Log(JsonUtility.FromJson<User>(json));
                 UserManager.Instance.userData = JsonUtility.FromJson<User>(json);
+                Debug.Log(DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count);
+                if (UserManager.Instance.userData.snackList.Count != DBManagerScript.Instance.snackDB.Length)
+                {
+                    for (int i = 0; i < DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count + 1; i++)
+                    {
+                        UserManager.Instance.userData.snackList.Add(0);
+                    }
+                }
 
             }
         });

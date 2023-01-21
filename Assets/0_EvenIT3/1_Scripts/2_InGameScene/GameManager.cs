@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GameState gameState;
+    public bool isFirst = true;
     
     public InGameSceneUIManager inGameSceneUIManager;
     public Stage curStage;
@@ -44,6 +45,7 @@ public class GameManager : Singleton<GameManager>
         player = GetComponent<Player>();
         teacher = GetComponent<TeacherController>();
         stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+        CheckIsFirst();
         //Stage
         SetStageInfo();
         SetStageUI();
@@ -69,6 +71,11 @@ public class GameManager : Singleton<GameManager>
             CheckQuantity();
             CheckTurn();
         }
+    }
+
+    private void CheckIsFirst()
+    {
+        isFirst = UserManager.Instance.userData.starList.Count < stageNum + 1;
     }
 
     //Set Stage
@@ -149,7 +156,10 @@ public class GameManager : Singleton<GameManager>
         curStage = DBManagerScript.Instance.stageDB[stageNum];
         setTime = DBManagerScript.Instance.stageDB[stageNum].stageTime;
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
-        if (AppManagerScript.Instance.buff[2]) maxDecibel += maxDecibel * DBManagerScript.Instance.buffDB[2].NN / 100;
+        float decibelBuff = 0;
+        if (AppManagerScript.Instance.buff[2]) decibelBuff += DBManagerScript.Instance.buffDB[2].NN;
+        if (AppManagerScript.Instance.buff[4]) decibelBuff += DBManagerScript.Instance.buffDB[4].NN;
+        maxDecibel += maxDecibel * decibelBuff / 100;
         maxSnack = 3;
         if (DBManagerScript.Instance.stageDB[stageNum].snack3 == -1) maxSnack = 2;
         if (DBManagerScript.Instance.stageDB[stageNum].snack2 == -1) maxSnack = 1;

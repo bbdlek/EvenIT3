@@ -36,7 +36,10 @@ public class Player : Singleton<Player>
     public void SetBasePlayerStat()
     {
         decibelAmount = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].decibel;
-        if (AppManagerScript.Instance.buff[1]) decibelAmount -= desDecibelAmount * DBManagerScript.Instance.buffDB[1].NN / 100;
+        float decibelBuff = 0;
+        if (AppManagerScript.Instance.buff[1]) decibelBuff += DBManagerScript.Instance.buffDB[1].NN;
+        if (AppManagerScript.Instance.buff[3]) decibelBuff += DBManagerScript.Instance.buffDB[3].NN;
+        decibelAmount -= desDecibelAmount * decibelBuff / 100;
         GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
         if (AppManagerScript.Instance.buff[0]) GameManager.Instance.quantity -= GameManager.Instance.quantity * DBManagerScript.Instance.buffDB[0].NN / 100;
         eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;

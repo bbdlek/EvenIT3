@@ -13,6 +13,7 @@ public class User
     public string nickName;
 
     public List<int> starList;
+    public List<int> snackList;
 
     public void NewUser(string nickName)
     {
@@ -22,5 +23,6 @@ public class User
         clockItem = 333;
         maskItem = 333;
         starList = new List<int>();
+        snackList = new List<int>(DBManagerScript.Instance.snackDB.Length);
     }
 }
