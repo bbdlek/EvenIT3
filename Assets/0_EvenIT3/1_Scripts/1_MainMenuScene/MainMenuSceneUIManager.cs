@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using DarkTonic.MasterAudio;
 using TMPro;
 using Toast.Gamebase;
@@ -240,6 +242,12 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.ProfileEditCloseBtn:
                 OnClickProfileEditCloseBtn();
                 break;
+            case MainMenuSceneButtons.EditNickNameConfirmBtn:
+                OnClickEditNickNameConfirmBtn();
+                break;
+            case MainMenuSceneButtons.EditNickNamePanelCloseBtn:
+                OnClickEditNickNamePanelCloseBtn();
+                break;
 
         }
     }
@@ -324,26 +332,52 @@ public class MainMenuSceneUIManager : UIControllerScript
         ProfileNickNameEditBtn,
         ProfileEditBtn,
         ProfileEdgeBtn,
-        ProfileEditCloseBtn
+        ProfileEditCloseBtn,
+        EditNickNameConfirmBtn,
+        EditNickNamePanelCloseBtn,
     }
     
     //Set Nick Name
-    private void OnClickSetNickNameConfirmBtn()
+    private async Task OnClickSetNickNameConfirmBtn()
     {
-        string nickName = FindUIObject("SetNickNameInputField").GetComponent<TMP_InputField>().text;
-        FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
-        FBManagerScript.Instance.GetUserData();
-        FindUIObject("SetNickNamePanel").SetActive(false);
-        ResetCommodities();
-        ResetItems();
-        InitProfile();
-        SetCollectionNum();
-        InitCollection();
-        InitProfileEdges();
-        InitProfileImages();
-        InitProfileCollection();
-        InitProfileScore();
-        ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+        string nickName = FindUIObject("SetNickNameInput").GetComponent<TMP_InputField>().text;
+        string errorTxt;
+        // 1 ~ 6글자
+        if (nickName.Length < 1 || nickName.Length > 6)
+        {
+            errorTxt = "1~6자의 영문 대소문자, 숫자, 한글만 가능합니다.";
+            FindUIObject("SetNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        // 중복
+        else if (await FBManagerScript.Instance.CheckNicknameExist(nickName))
+        {
+            errorTxt = "중복된 닉네임입니다.";
+            FindUIObject("SetNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        // 특수문자
+        else if (Regex.IsMatch(nickName, @"[^a-zA-Z0-9가-힣]"))
+        {
+            errorTxt = "1~6자의 영문 대소문자, 숫자, 한글만 가능합니다.";
+            FindUIObject("SetNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        else
+        {
+            errorTxt = "";
+            FindUIObject("SetNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+            FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
+            FBManagerScript.Instance.GetUserData();
+            FindUIObject("SetNickNamePanel").SetActive(false);
+            ResetCommodities();
+            ResetItems();
+            InitProfile();
+            SetCollectionNum();
+            InitCollection();
+            InitProfileEdges();
+            InitProfileImages();
+            InitProfileCollection();
+            InitProfileScore();
+            ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+        }
     }
 
     //Move Btns
@@ -377,7 +411,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         MasterAudio.PlaySound("DoorClick");
         FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
         FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
-        ChangeUI(MainMenuScenePanels.ShopPanel);
+        FindUIObject("ShopMoveBtn").GetComponent<Animator>().SetTrigger("OpenDoor");
     }
     
     private void OnClickInventoryMoveBtn()
@@ -744,8 +778,6 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         _profileImageList = Resources.LoadAll<Sprite>($"ProfileImages");
         _profileEdgeList = Resources.LoadAll<Sprite>($"ProfileEdges");
-        tempSelectProfileEdge = UserManager.Instance.userData.profileImageIndex;
-        tempSelectProfileEdge = UserManager.Instance.userData.profileEdgeIndex;
     }
 
     [SerializeField] private int tempSelectProfileImage;
@@ -753,6 +785,8 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     public void InitProfileImages()
     {
+        tempSelectProfileEdge = UserManager.Instance.userData.profileImageIndex;
+        tempSelectProfileEdge = UserManager.Instance.userData.profileEdgeIndex;
         FindUIObject("ProfileImage").GetComponent<Image>().sprite =
             _profileImageList[UserManager.Instance.userData.profileImageIndex];
         
@@ -766,11 +800,33 @@ public class MainMenuSceneUIManager : UIControllerScript
             {
                 MasterAudio.PlaySound("IconClick");
                 tempSelectProfileImage = tempProfile.transform.GetSiblingIndex();
+                for (int k = 0; k < FindUIObject("ProfileEditPopupImagePanelContent").transform.childCount; k++)
+                {
+                    var color = FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(k).GetChild(1).GetComponent<Image>().color;
+                    color.a = 0;
+                    FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(k).GetChild(1).GetComponent<Image>().color = color;
+                }
                 for (int j = 0; j < FindUIObject("ProfileEditPopupEdgePanelContent").transform.childCount; j++)
                 {
                     FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(j).GetChild(0).GetComponent<Image>().sprite = _profileImageList[tempSelectProfileImage];
                 }
+
+                var colorTemp = tempProfile.transform.GetChild(1).GetComponent<Image>().color;
+                colorTemp.a = 1;
+                tempProfile.transform.GetChild(1).GetComponent<Image>().color = colorTemp;
             });
+            if (i == UserManager.Instance.userData.profileImageIndex)
+            {
+                var color = FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color;
+                color.a = 1;
+                FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color = color;
+            }
+            else
+            {
+                var color = FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color;
+                color.a = 0;
+                FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color = color;
+            }
         }
     }
     
@@ -789,12 +845,34 @@ public class MainMenuSceneUIManager : UIControllerScript
             {
                 MasterAudio.PlaySound("IconClick");
                 tempSelectProfileEdge = tempProfile.transform.GetSiblingIndex();
+                for (int k = 0; k < FindUIObject("ProfileEditPopupEdgePanelContent").transform.childCount; k++)
+                {
+                    var color = FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(k).GetChild(1).GetComponent<Image>().color;
+                    color.a = 0;
+                    FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(k).GetChild(1).GetComponent<Image>().color = color;
+                }
                 for (int j = 0; j < FindUIObject("ProfileEditPopupImagePanelContent").transform.childCount; j++)
                 {
                     FindUIObject("ProfileEditPopupImagePanelContent").transform.GetChild(j).GetComponent<Image>().sprite = _profileEdgeList[tempSelectProfileEdge];
                 }
+                var colorTemp = tempProfile.transform.GetChild(1).GetComponent<Image>().color;
+                colorTemp.a = 1;
+                tempProfile.transform.GetChild(1).GetComponent<Image>().color = colorTemp;
             });
+            if (i == UserManager.Instance.userData.profileEdgeIndex)
+            {
+                var color = FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color;
+                color.a = 1;
+                FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color = color;
+            }
+            else
+            {
+                var color = FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color;
+                color.a = 0;
+                FindUIObject("ProfileEditPopupEdgePanelContent").transform.GetChild(i).GetChild(1).GetComponent<Image>().color = color;
+            }
         }
+        
     }
     
     private void OnClickProfileCloseBtn()
@@ -814,7 +892,7 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickProfileNickNameEditBtn()
     {
-        
+        FindUIObject("EditNickNamePanel").SetActive(true);
     }
 
     private void OnClickProfileEdgeBtn()
@@ -843,6 +921,46 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("ProfileImageBG").GetComponent<Image>().sprite =
             _profileEdgeList[UserManager.Instance.userData.profileEdgeIndex];
         FindUIObject("ProfileEditPopup").SetActive(false);
+    }
+
+    private async void OnClickEditNickNameConfirmBtn()
+    {
+        string nickName = FindUIObject("EditNickNameInput").GetComponent<TMP_InputField>().text;
+        string errorTxt;
+        // 1 ~ 6글자
+        if (nickName.Length < 1 || nickName.Length > 6)
+        {
+            errorTxt = "1~6자의 영문 대소문자, 숫자, 한글만 가능합니다.";
+            FindUIObject("EditNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        // 중복
+        else if (await FBManagerScript.Instance.CheckNicknameExist(nickName))
+        {
+            errorTxt = "중복된 닉네임입니다.";
+            FindUIObject("EditNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        // 특수문자
+        else if (Regex.IsMatch(nickName, @"[^a-zA-Z0-9가-힣]"))
+        {
+            errorTxt = "1~6자의 영문 대소문자, 숫자, 한글만 가능합니다.";
+            FindUIObject("EditNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+        }
+        else
+        {
+            errorTxt = "";
+            FindUIObject("SetNickNameInputErrorTxt").GetComponent<TMP_Text>().text = errorTxt;
+            UserManager.Instance.userData.nickName = nickName;
+            FBManagerScript.Instance.UpdateCurrentUser();
+            FindUIObject("SetNickNamePanel").SetActive(false);
+            InitProfile();
+            ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+        }
+        FindUIObject("EditNickNamePanel").SetActive(false);
+    }
+
+    private void OnClickEditNickNamePanelCloseBtn()
+    {
+        FindUIObject("EditNickNamePanel").SetActive(false);
     }
 
     #endregion
@@ -933,11 +1051,15 @@ public class MainMenuSceneUIManager : UIControllerScript
                 FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(2).GetComponent<Text>().text =
                     "(" + UserManager.Instance.userData.snackList[i] + "/20)";
 
+                if (UserManager.Instance.userData.snackList[i] > 0)
+                {
+                    FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(0).GetComponent<Image>()
+                        .material = null;
+                }
+                
                 if (UserManager.Instance.userData.snackList[i] == 20)
                 {
                     collection++;
-                    FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(0).GetComponent<Image>()
-                        .material = null;
                     FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(3).gameObject
                         .SetActive(true);
                 }
@@ -1054,9 +1176,11 @@ public class MainMenuSceneUIManager : UIControllerScript
     //Commodities
     public void ResetCommodities()
     {
-        Debug.Log(FindUIObject("FreeTxt"));
-        FindUIObject("FreeTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
-        FindUIObject("PaidTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        if(UserManager.Instance)
+        {
+            FindUIObject("FreeTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+            FindUIObject("PaidTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        }
     }
 
     public void ResetItems()
@@ -1143,5 +1267,16 @@ public class MainMenuSceneUIManager : UIControllerScript
             //Enable
             FindUIObject("StageStartBtn").GetComponent<Button>().interactable = true;
         }
+    }
+
+    public void CheckNickName()
+    {
+        
+    }
+
+    public void UpdateSetNickNameUI()
+    {
+        string nickName = FindUIObject("SetNickNameInput").GetComponent<TMP_InputField>().text;
+        FindUIObject("SetNickNameInputLength").GetComponent<TMP_Text>().text = nickName.Length + "/" + 6;
     }
 }

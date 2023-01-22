@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Toast.Gamebase;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FBManagerScript : Singleton<FBManagerScript>
 {
@@ -80,6 +81,8 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     public void DeleteCurrentUser(string userId)
     {
+        var nickRef = FirebaseDatabase.DefaultInstance.GetReference("NickName");
+        nickRef.Child(UserManager.Instance.userData.nickName).RemoveValueAsync();
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userId);
         reference.RemoveValueAsync();
     }
@@ -121,11 +124,6 @@ public class FBManagerScript : Singleton<FBManagerScript>
         reference.Child(Gamebase.GetUserID()).Child("UserData").SetRawJsonValueAsync(json);
     }
 
-    public void UpdateNickName()
-    {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(Gamebase.GetUserID());
-        string key = reference.Push().Key;
-    }
 
     public void GetEnergyAmount(string uid)
     {
@@ -175,6 +173,32 @@ public class FBManagerScript : Singleton<FBManagerScript>
     {
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(uid);
         reference.Child("Energy").Child("AppQuitTime").SetValueAsync(quitTime);
+    }
+    
+    public async Task<bool> CheckNicknameExist(string nickName)
+    {
+        bool isNickNameExist = false;
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
+        await reference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.Log("Get QuitTime Error");
+            }
+            else if(task.IsCompletedSuccessfully)
+            {
+                DataSnapshot snapshot = task.Result;
+                foreach (var dataSnapshot in snapshot.Children)
+                {
+                    if ((string)dataSnapshot.Child("UserData").Child("nickName").Value == nickName)
+                    {
+                        Debug.Log("Exist");
+                        isNickNameExist = true;
+                    }
+                }
+            }
+        });
+        return isNickNameExist;
     }
 
     #endregion

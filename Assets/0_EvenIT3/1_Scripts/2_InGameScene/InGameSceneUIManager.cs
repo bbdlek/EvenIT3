@@ -260,6 +260,7 @@ public class InGameSceneUIManager : UIControllerScript
         FindUIObject("FailedDecibelPanel").SetActive(false);
         FindUIObject("SurpriseEffect").SetActive(false);
         GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
+        GameManager.Instance.player.playerState = Player.State.Idle;
         GameManager.Instance.gameState = GameManager.GameState.InGame;
     }
     
@@ -374,24 +375,6 @@ public class InGameSceneUIManager : UIControllerScript
     
     #endregion
 
-    #region Change UI
-
-    public enum InGameScenePanels
-    {
-
-    }
-
-    public void ChangeUI(InGameScenePanels mainMenuScenePanels)
-    {
-        switch (mainMenuScenePanels)
-        {
-            /*case MainMenuScenePanels.SetNickNamePanel:
-                FindUIObject("SetNickNamePanel").SetActive(true);
-                break;*/
-        }
-    }
-    #endregion
-
     public void TimerUpdate(float percentage)
     {
         FindUIObject("TimerGaugeFill").GetComponent<Image>().fillAmount = percentage;
@@ -430,7 +413,6 @@ public class InGameSceneUIManager : UIControllerScript
     public void SetUpStarIcons(int stars)
     {
         rewardGoldNum = 0;
-        int snackNum;
 
         switch (GameManager.Instance.maxSnack)
         {

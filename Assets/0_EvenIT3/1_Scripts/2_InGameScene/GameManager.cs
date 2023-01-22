@@ -408,7 +408,7 @@ public class GameManager : Singleton<GameManager>
             case 0:
                 if (timerItem == 0)
                 {
-                    inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
+                    inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                 }
                 else
                 {
@@ -418,7 +418,7 @@ public class GameManager : Singleton<GameManager>
             case 1:
                 if (shieldItem == 0)
                 {
-                    inGameSceneUIManager.FindUIObject("EasyFailPanel").SetActive(true);
+                    inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                 }
                 else
                 {
