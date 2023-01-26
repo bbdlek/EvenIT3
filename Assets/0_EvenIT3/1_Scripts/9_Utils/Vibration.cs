@@ -11,7 +11,7 @@ public static class Vibration
 #endif
     public static void Vibrate()
     {
-        if (!AppManagerScript.Instance.appSettings.IsVibration) return;
+        if (!AppManagerScript.Instance.isVibration) return;
 #if UNITY_ANDROID && !UNITY_EDITOR
         AndroidVibrator.Call("vibrate");
 #else
@@ -21,7 +21,7 @@ public static class Vibration
  
     public static void Vibrate(long milliseconds)
     {
-        if (!AppManagerScript.Instance.appSettings.IsVibration) return;
+        if (!AppManagerScript.Instance.isVibration) return;
 #if UNITY_ANDROID && !UNITY_EDITOR
         AndroidVibrator.Call("vibrate", milliseconds);
 #else
@@ -30,7 +30,7 @@ public static class Vibration
     }
     public static void Vibrate(long[] pattern, int repeat)
     {
-        if (!AppManagerScript.Instance.appSettings.IsVibration) return;
+        if (!AppManagerScript.Instance.isVibration) return;
 #if UNITY_ANDROID && !UNITY_EDITOR
         AndroidVibrator.Call("vibrate", pattern, repeat);
 #else
@@ -40,7 +40,7 @@ public static class Vibration
  
     public static void Cancel()
     {
-        if (!AppManagerScript.Instance.appSettings.IsVibration) return;
+        if (!AppManagerScript.Instance.isVibration) return;
 #if UNITY_ANDROID && !UNITY_EDITOR
             AndroidVibrator.Call("cancel");
 #endif

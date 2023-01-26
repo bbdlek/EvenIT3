@@ -13,10 +13,6 @@ public class MainMenuSceneManagerScript : MonoBehaviour
     {
         MasterAudio.ChangePlaylistByName("BGM_Main");
         InitSceneManager();
-    }
-
-    private void Start()
-    {
         CheckNewUser();
         mainMenuSceneUIManager.InitSetup(gameObject);
     }
@@ -48,6 +44,5 @@ public class MainMenuSceneManagerScript : MonoBehaviour
             mainMenuSceneUIManager.InitProfileCollection();
             mainMenuSceneUIManager.InitProfileScore();
         }
-        mainMenuSceneUIManager.InitSettingUI();
     }
 }

@@ -17,11 +17,12 @@ public class MainMenuSceneUIManager : UIControllerScript
         base.InitSetup(scriptObject);
         AddOnClick();
         InitProfileSprites();
+        InitSettingUI();
     }
 
     private void OnDisable()
     {
-        Debug.Log("Diabled");
+        Debug.Log("Disabled");
     }
 
     public void CheckRestart()
@@ -64,7 +65,9 @@ public class MainMenuSceneUIManager : UIControllerScript
         {
             //Set Nick Name
             case MainMenuSceneButtons.SetNickNameConfirmBtn:
+#pragma warning disable CS4014
                 OnClickSetNickNameConfirmBtn();
+#pragma warning restore CS4014
                 break;
             
             //Move Btns
@@ -176,6 +179,33 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.ShopCloseBtn:
                 OnClickShopCloseBtn();
                 break;
+            case MainMenuSceneButtons.GachaBtn:
+                GetComponent<Shop>().ClickGacha();
+                break;
+            case MainMenuSceneButtons.ItemBtn:
+                GetComponent<Shop>().ClickItem();
+                break;
+            case MainMenuSceneButtons.PackageBtn:
+                GetComponent<Shop>().ClickPackage();
+                break;
+            case MainMenuSceneButtons.MoneyBtn:
+                GetComponent<Shop>().ClickPaid();
+                break;
+            
+            case MainMenuSceneButtons.NormalGachaOnce:
+                OnClickNormalGachaOnce();
+                break;
+            case MainMenuSceneButtons.NormalGachaFifth:
+                OnClickNormalGachaFifth();
+                break;
+            case MainMenuSceneButtons.HighGachaOnce:
+                OnClickHighGachaOnce();
+                break;
+            case MainMenuSceneButtons.HighGachaFifth:
+                OnClickHighGachaFifth();
+                break;
+            
+            
             case MainMenuSceneButtons.ClockBtn:
                 OnClickClockBtn();
                 break;
@@ -185,6 +215,33 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.MilkBtn:
                 OnClickMilkBtn();
                 break;
+
+            case MainMenuSceneButtons.Package1Btn:
+                OnClickPackage1Btn();
+                break;
+            case MainMenuSceneButtons.Package2Btn:
+                OnClickPackage2Btn();
+                break;
+            
+            case MainMenuSceneButtons.Free1Btn:
+                OnClickFree1Btn();
+                break;
+            case MainMenuSceneButtons.Free2Btn:
+                OnClickFree2Btn();
+                break;
+            case MainMenuSceneButtons.Free3Btn:
+                OnClickFree3Btn();
+                break;
+            case MainMenuSceneButtons.Paid1Btn:
+                OnClickPaid1Btn();
+                break;
+            case MainMenuSceneButtons.Paid2Btn:
+                OnClickPaid2Btn();
+                break;
+            case MainMenuSceneButtons.Paid3Btn:
+                OnClickPaid3Btn();
+                break;
+            
             case MainMenuSceneButtons.BuyCheckYesBtn:
                 OnClickBuyCheckYesBtn();
                 break;
@@ -301,12 +358,34 @@ public class MainMenuSceneUIManager : UIControllerScript
 
         //Shop
         ShopCloseBtn,
+        GachaBtn,
+        ItemBtn,
+        PackageBtn,
+        MoneyBtn,
+
             //Gotcha
-        
+        NormalGachaOnce,
+        NormalGachaFifth,
+        HighGachaOnce,
+        HighGachaFifth,
+
             //Item
         ClockBtn,
         MaskBtn,
         MilkBtn,
+        
+            //Package
+        Package1Btn,
+        Package2Btn,
+        
+            //Money
+        Free1Btn,
+        Free2Btn,
+        Free3Btn,
+        Paid1Btn,
+        Paid2Btn,
+        Paid3Btn,
+        
             //BuyCheck
         BuyCheckYesBtn,
         BuyCheckNoBtn,
@@ -385,6 +464,9 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         MasterAudio.PlaySound("StageClick");
         ChangeUI(MainMenuScenePanels.StagePanel);
+        FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+        FindUIObject("Chapter5SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+        FindUIObject("Chapter6SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
     }
     
     private void OnClickAchievementMoveBtn()
@@ -403,6 +485,9 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("Chapter4Panel").SetActive(false);
         FindUIObject("Chapter5Panel").SetActive(false);
         FindUIObject("Chapter6Panel").SetActive(false);
+        FindUIObject("Chapter4Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+        FindUIObject("Chapter5Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+        FindUIObject("Chapter6Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
         ChangeUI(MainMenuScenePanels.CollectionPanel);
     }
     
@@ -509,6 +594,9 @@ public class MainMenuSceneUIManager : UIControllerScript
             FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = UserManager.Instance.userData.clockItem != 0;
             FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.maskItem != 0;
             FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = UserManager.Instance.userData.maskItem != 0;
+            FindUIObject("StagePageItem1Cross").SetActive(false);
+            FindUIObject("StagePageItem2Cross").SetActive(false);
+            FindUIObject("StagePageItem3Cross").SetActive(false);
         }
         else
         {
@@ -517,7 +605,10 @@ public class MainMenuSceneUIManager : UIControllerScript
             FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = false;
             FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = false;
             FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = false;
-            FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = false;    
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = false;
+            FindUIObject("StagePageItem1Cross").SetActive(true);
+            FindUIObject("StagePageItem2Cross").SetActive(true);
+            FindUIObject("StagePageItem3Cross").SetActive(true);
         }
 
         FindUIObject("ChapterPageBG").SetActive(false);
@@ -669,28 +760,105 @@ public class MainMenuSceneUIManager : UIControllerScript
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
+    [SerializeField] private ShopItemList itemType;
+
+    private void OnClickNormalGachaOnce()
+    {
+        itemType = ShopItemList.NormalGacha1;
+    }
+    
+    private void OnClickNormalGachaFifth()
+    {
+        itemType = ShopItemList.NormalGacha5;
+    }
+    
+    private void OnClickHighGachaOnce()
+    {
+        itemType = ShopItemList.SpecialGacha1;
+    }
+    
+    private void OnClickHighGachaFifth()
+    {
+        itemType = ShopItemList.SpecialGacha5;
+    }
+
     private void OnClickClockBtn()
     {
-        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        if(UserManager.Instance.userData.Commodities.Silver < 1300) return;
+        itemType = ShopItemList.ClockItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickMaskBtn()
     {
         if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        itemType = ShopItemList.MaskItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickMilkBtn()
     {
         if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        itemType = ShopItemList.MilkItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
+    }
+
+    private void OnClickPackage1Btn()
+    {
+        itemType = ShopItemList.Package1;
+    }
+    
+    private void OnClickPackage2Btn()
+    {
+        itemType = ShopItemList.Package2;
+    }
+
+    private void OnClickFree1Btn()
+    {
+        itemType = ShopItemList.Silver1000;
+    }
+    
+    private void OnClickFree2Btn()
+    {
+        itemType = ShopItemList.Silver5000;
+    }
+    
+    private void OnClickFree3Btn()
+    {
+        itemType = ShopItemList.Silver10000;
+    }
+
+    private void OnClickPaid1Btn()
+    {
+        itemType = ShopItemList.Gold1;
+    }
+    private void OnClickPaid2Btn()
+    {
+        itemType = ShopItemList.Gold10;
+    }
+    private void OnClickPaid3Btn()
+    {
+        itemType = ShopItemList.Gold20;
     }
 
     private void OnClickBuyCheckYesBtn()
     {
-        UserManager.Instance.userData.clockItem++;
-        UserManager.Instance.userData.Commodities.Silver -= 900;
+        switch (itemType)
+        {
+            case ShopItemList.ClockItem:
+                UserManager.Instance.userData.clockItem++;
+                UserManager.Instance.userData.Commodities.Silver -= 1300;
+                break;
+            case ShopItemList.MaskItem:
+                UserManager.Instance.userData.maskItem++;
+                UserManager.Instance.userData.Commodities.Silver -= 900;
+                break;
+            case ShopItemList.MilkItem:
+                UserManager.Instance.userData.milkItem++;
+                UserManager.Instance.userData.Commodities.Silver -= 900;
+                break;
+        }
+        
         FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
         FindUIObject("BuyCheckPopup").SetActive(false);
@@ -716,7 +884,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickOptionCloseBtn()
     {
         //++Save
-        JsonHelper.SaveSettings(AppManagerScript.Instance.appSettings);
+        AppManagerScript.Instance.SaveSettings();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
@@ -766,7 +934,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         Debug.Log((float)collection / DBManagerScript.Instance.snackDB.Length);
         FindUIObject("ProfileCollectionPercentageBody").GetComponent<TMP_Text>().text =
-            ((float)collection / DBManagerScript.Instance.snackDB.Length).ToString("F2");
+            ((float)collection / DBManagerScript.Instance.snackDB.Length * 100).ToString("F2");
     }
 
     public void InitProfileScore()
@@ -953,9 +1121,9 @@ public class MainMenuSceneUIManager : UIControllerScript
             FBManagerScript.Instance.UpdateCurrentUser();
             FindUIObject("SetNickNamePanel").SetActive(false);
             InitProfile();
+            FindUIObject("EditNickNamePanel").SetActive(false);
             ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
         }
-        FindUIObject("EditNickNamePanel").SetActive(false);
     }
 
     private void OnClickEditNickNamePanelCloseBtn()
@@ -1103,9 +1271,9 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         if (collection >= 35)
         {
-            FindUIObject("Buff4Txt").GetComponent<TMP_Text>().text = "최대 데시벨 " + DBManagerScript.Instance.buffDB[4].NN + "% 증가";
-            FindUIObject("Buff4CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 35) + "/35)";
-            FindUIObject("Buff4Stamp Img").SetActive(true);
+            FindUIObject("Buff5Txt").GetComponent<TMP_Text>().text = "먹는 속도 " + DBManagerScript.Instance.buffDB[4].NN + " 증가";
+            FindUIObject("Buff5CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 35) + "/35)";
+            FindUIObject("Buff5Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[4] = true;
         }
     }
@@ -1116,11 +1284,11 @@ public class MainMenuSceneUIManager : UIControllerScript
     public void InitSettingUI()
     {
         FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value =
-            AppManagerScript.Instance.appSettings.BgmVolume;
-        FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value =
-            AppManagerScript.Instance.appSettings.EffectVolume;
+            AppManagerScript.Instance.bgmVolume;
+        FindUIObject("OptionSoundPanelEffectSlider").GetComponent<Slider>().value =
+            AppManagerScript.Instance.effectVolume;
         FindUIObject("OptionVibrationOnToggle").GetComponent<Toggle>().isOn =
-            AppManagerScript.Instance.appSettings.IsVibration;
+            AppManagerScript.Instance.isVibration;
         Gamebase.Push.QueryTokenInfo((data, error)=> 
         {
             if (Gamebase.IsSuccess(error)) 
@@ -1142,18 +1310,19 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     public void SettingBgmVolume()
     {
-        MasterAudio.Instance._masterPlaylistVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
+        AppManagerScript.Instance.bgmVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
+        MasterAudio.PlaylistMasterVolume = FindUIObject("OptionSoundPanelBGSlider").GetComponent<Slider>().value;
     }
     
     public void SettingEffectVolume()
     {
+        AppManagerScript.Instance.effectVolume = FindUIObject("OptionSoundPanelEffectSlider").GetComponent<Slider>().value;
         MasterAudio.Instance._masterAudioVolume = FindUIObject("OptionSoundPanelEffectSlider").GetComponent<Slider>().value;
     }
 
     public void SettingVibration()
     {
-        AppManagerScript.Instance.appSettings.IsVibration =
-            FindUIObject("OptionVibrationOnToggle").GetComponent<Toggle>().isOn;
+        AppManagerScript.Instance.isVibration = FindUIObject("OptionVibrationOnToggle").GetComponent<Toggle>().isOn;
     }
 
     public void SettingPushAlarm()
@@ -1267,11 +1436,6 @@ public class MainMenuSceneUIManager : UIControllerScript
             //Enable
             FindUIObject("StageStartBtn").GetComponent<Button>().interactable = true;
         }
-    }
-
-    public void CheckNickName()
-    {
-        
     }
 
     public void UpdateSetNickNameUI()

@@ -124,24 +124,6 @@ public class FBManagerScript : Singleton<FBManagerScript>
         reference.Child(Gamebase.GetUserID()).Child("UserData").SetRawJsonValueAsync(json);
     }
 
-
-    public void GetEnergyAmount(string uid)
-    {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(uid);
-        reference.Child("Energy").Child("EnergyAmount").GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted)
-            {
-                Debug.Log("Get Energy Error");
-            }
-            else if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                UserManager.Instance.energy = (int)snapshot.Value;
-            }
-        });
-    }
-
     public void SaveEnergyAmount(string uid, int energyAmount)
     {
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(uid);

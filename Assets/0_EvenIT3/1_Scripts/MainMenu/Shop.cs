@@ -8,19 +8,6 @@ public class Shop : MonoBehaviour
     public GameObject GachaView, ItemView, PackageView, PaidView, BuyCheckView;
     public Image GachaBtn, ItemBtn, PackageBtn, PaidBtn;
     public Color red, yellow;
-
-    // 매점 버튼을 누르면 호출
-    public void ClickShop()
-    {
-        gameObject.SetActive(true);
-    }
-
-    // 돌아가기 버튼을 누르면 호출
-    public void ClickBack()
-    {
-        gameObject.SetActive(false);
-    }
-
     // 가챠
     public void ClickGacha()
     {
