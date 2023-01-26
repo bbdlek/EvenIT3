@@ -19,8 +19,18 @@ public class AppManagerScript : Singleton<AppManagerScript>
     public bool[] selectedItem = new bool[3];
     public bool isRestart = false;
     public bool isWithDraw = false;
+    public bool isStageTutorial = false;
 
-    public Settings appSettings;
+    #region Settings
+
+    //배경음악
+    public float bgmVolume;
+    //효과음
+    public float effectVolume;
+    //진동효과
+    public bool isVibration;
+
+    #endregion
 
     public bool[] buff = new bool[5];
     
@@ -82,29 +92,57 @@ public class AppManagerScript : Singleton<AppManagerScript>
 
     private void InitSettings()
     {
-        if(PlayerPrefs.HasKey("IsFirst"))
+        if(PlayerPrefs.HasKey("bgmVolume"))
         {
-            if(PlayerPrefs.GetInt("IsFirst") == 1)
-            {
-                appSettings = JsonHelper.Load();
-            }
-            else
-            {
-                appSettings = new Settings(1, 1, true);
-                JsonHelper.SaveSettings(appSettings);
-            }
+            bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
         }
         else
         {
-            PlayerPrefs.SetInt("IsFirst", 1);
-            JsonHelper.SaveSettings(new Settings(1, 1, true));
+            PlayerPrefs.SetFloat("bgmVolume", 1);
+            bgmVolume = PlayerPrefs.GetFloat("bgmVolume");
+        }
+        
+        if(PlayerPrefs.HasKey("effectVolume"))
+        {
+            effectVolume = PlayerPrefs.GetFloat("effectVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("effectVolume", 1);
+            effectVolume = PlayerPrefs.GetFloat("effectVolume");
+        }
+
+        if (PlayerPrefs.HasKey("isVibration"))
+        {
+            isVibration = PlayerPrefs.GetInt("isVibration") == 1;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("isVibration", 1);
+            isVibration = PlayerPrefs.GetInt("isVibration") == 1;
         }
         //배경음악
-        MasterAudio.Instance._masterPlaylistVolume = appSettings.BgmVolume;
+        MasterAudio.PlaylistMasterVolume = bgmVolume;
         //효과음
-        MasterAudio.Instance._masterAudioVolume = appSettings.EffectVolume;
+        MasterAudio.Instance._masterAudioVolume = effectVolume;
         //진동
         //푸시알림
+    }
+
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetFloat("bgmVolume", bgmVolume);
+        PlayerPrefs.SetFloat("effectVolume", effectVolume);
+        
+        switch (isVibration)
+        {
+            case true:
+                PlayerPrefs.SetInt("isVibration", 1);
+                break;
+            case false:
+                PlayerPrefs.SetInt("isVibration", 0);
+                break;
+        }
     }
     
 }

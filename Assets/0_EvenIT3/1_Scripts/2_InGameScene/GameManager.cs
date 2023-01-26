@@ -39,7 +39,10 @@ public class GameManager : Singleton<GameManager>
 
     public override void Awake()
     {
-        MasterAudio.ChangePlaylistByName("BGM_Stage");
+        if(AppManagerScript.Instance.sceneName == SceneName.InGameScene_Easy)
+            MasterAudio.ChangePlaylistByName("BGM_Stage_Easy");
+        else if(AppManagerScript.Instance.sceneName == SceneName.InGameScene_Hard)
+            MasterAudio.ChangePlaylistByName("BGM_Stage_Hard");
         inGameSceneUIManager = FindObjectOfType<InGameSceneUIManager>();
         inGameSceneUIManager.InitSetup(gameObject);
         player = GetComponent<Player>();
@@ -57,6 +60,13 @@ public class GameManager : Singleton<GameManager>
         SelectSnack();
         InitStage();
         gameState = GameState.InGame;
+
+        if (AppManagerScript.Instance.isStageTutorial)
+        {
+            inGameSceneUIManager.FindUIObject("Tutorial3").SetActive(true);
+            gameState = GameState.Pause;
+            Time.timeScale = 0;
+        }
         
         //GameStart
         _isTimer = true;
@@ -141,8 +151,8 @@ public class GameManager : Singleton<GameManager>
                 inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 40 / 100, -44);
                 break;
             case 5:
-                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 20 / 120, -44);
-                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 120, -44);
+                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 120, -44);
+                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 40 / 120, -44);
                 break;
             case 6:
                 inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 10 / 140, -44);
@@ -158,7 +168,6 @@ public class GameManager : Singleton<GameManager>
         maxDecibel = DBManagerScript.Instance.teacherDB[curStage.teacherNo].maxDecibel;
         float decibelBuff = 0;
         if (AppManagerScript.Instance.buff[2]) decibelBuff += DBManagerScript.Instance.buffDB[2].NN;
-        if (AppManagerScript.Instance.buff[4]) decibelBuff += DBManagerScript.Instance.buffDB[4].NN;
         maxDecibel += maxDecibel * decibelBuff / 100;
         maxSnack = 3;
         if (DBManagerScript.Instance.stageDB[stageNum].snack3 == -1) maxSnack = 2;
@@ -170,16 +179,40 @@ public class GameManager : Singleton<GameManager>
     private void SelectSnack()
     {
         int select = 0;
+        int selectNext = 0;
         switch (curSnack)
         {
             case 0:
                 select = DBManagerScript.Instance.stageDB[stageNum].snack1;
+                if (maxSnack > 1)
+                {
+                    selectNext = DBManagerScript.Instance.stageDB[stageNum].snack2;
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").SetActive(true);
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").GetComponent<Image>().sprite =
+                        Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[selectNext].name);
+                }
+                else
+                {
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").SetActive(false);
+                }
                 break;
             case 1:
                 select = DBManagerScript.Instance.stageDB[stageNum].snack2;
+                if (maxSnack > 2)
+                {
+                    selectNext = DBManagerScript.Instance.stageDB[stageNum].snack3;
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").SetActive(true);
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").GetComponent<Image>().sprite =
+                        Resources.Load<Sprite>("Snacks/" + DBManagerScript.Instance.snackDB[selectNext].name);
+                }
+                else
+                {
+                    inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").SetActive(false);
+                }
                 break;
             case 2:
                 select = DBManagerScript.Instance.stageDB[stageNum].snack3;
+                inGameSceneUIManager.FindUIObject("QuantitySnackIconNext").SetActive(false);
                 break;
         }
         selectedSnack = DBManagerScript.Instance.snackDB[select];
@@ -345,15 +378,15 @@ public class GameManager : Singleton<GameManager>
 
                     break;
                 case 5:
-                    if (remainTime >= 30)
+                    if (remainTime >= 40)
                     {
                         inGameSceneUIManager.SetUpStarIcons(3);
                     }
-                    else if (remainTime >= 20 && remainTime < 30)
+                    else if (remainTime >= 30 && remainTime < 40)
                     {
                         inGameSceneUIManager.SetUpStarIcons(2);
                     }
-                    else if (remainTime < 20)
+                    else if (remainTime < 30)
                     {
                         inGameSceneUIManager.SetUpStarIcons(1);
                     }
@@ -402,22 +435,25 @@ public class GameManager : Singleton<GameManager>
         teacher.teacherObj.GetComponent<Animator>().enabled = false;
         teacher.teacherState = TeacherController.TeacherState.End;
         yield return new WaitForSeconds(0.5f);
-        MasterAudio.PlaySound("GameOver");
         switch (type)
         {
             case 0:
                 if (timerItem == 0)
                 {
+                    MasterAudio.PlaySound("GameOver");
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                 }
                 else
                 {
+                    if(AppManagerScript.Instance.isStageTutorial)
+                        inGameSceneUIManager.FindUIObject("Mini").SetActive(true);
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
                 break;
             case 1:
                 if (shieldItem == 0)
                 {
+                    MasterAudio.PlaySound("GameOver");
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                 }
                 else

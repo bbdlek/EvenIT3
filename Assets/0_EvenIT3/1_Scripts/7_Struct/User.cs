@@ -17,6 +17,9 @@ public class User
     public List<int> starList;
     public List<int> snackList;
 
+    public int energy;
+    public string lastDate;
+
     public void NewUser(string nickName)
     {
         this.nickName = nickName;

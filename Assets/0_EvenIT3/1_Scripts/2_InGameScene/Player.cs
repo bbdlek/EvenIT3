@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DarkTonic.MasterAudio;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : Singleton<Player>
 {
@@ -43,6 +44,8 @@ public class Player : Singleton<Player>
         GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
         if (AppManagerScript.Instance.buff[0]) GameManager.Instance.quantity -= GameManager.Instance.quantity * DBManagerScript.Instance.buffDB[0].NN / 100;
         eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;
+        if (AppManagerScript.Instance.buff[4]) eatingSpeed += DBManagerScript.Instance.buffDB[4].NN;
+        
         curQuantity = 0;
     }
     
@@ -51,21 +54,13 @@ public class Player : Singleton<Player>
     {
         if (playerState == State.Eating)
         {
-            switch (GameManager.Instance.selectedSnack.type)
+            if (GameManager.Instance.selectedSnack.type is 1 or 5 or 9 or 13)
             {
-                case 0:
-                    MasterAudio.PlaySound("Eating_Cookie");
-                    break;
-                case 1:
-                    MasterAudio.PlaySound("Eating_Candy");
-                    break;
-                case 2:
-                    MasterAudio.PlaySound("Eating_Cookie");
-                    break;
-                case 3:
-                    MasterAudio.PlaySound("Eating_Cookie");
-                    break;
-                
+                MasterAudio.PlaySound("Eating_Candy");
+            }
+            else
+            {
+                MasterAudio.PlaySound("Eating_Cookie");
             }
             playerObj.GetComponent<Animator>().SetBool("isEating", true);
             playerObj.transform.GetChild(1).gameObject.SetActive(true);
@@ -83,14 +78,21 @@ public class Player : Singleton<Player>
         if (curDecibelAmount < 0) curDecibelAmount = 0;
     }
 
+    [SerializeField] private Sprite timerNormal;
+    [SerializeField] private Sprite timerIce;
+
     public IEnumerator Buff_Ice()
     {
         MasterAudio.PlaySound("Item_Clock");
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1BtnActive").SetActive(true);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("TimerGauge").GetComponent<UnityEngine.UI.Image>().sprite = timerIce;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("TimerGaugeFill").GetComponent<UnityEngine.UI.Image>().sprite = timerIce;
         GameManager.Instance._isTimer = false;
         yield return new WaitForSeconds(DBManagerScript.Instance.itemDB[0].NN);
         GameManager.Instance._isTimer = true;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("TimerGaugeFill").GetComponent<UnityEngine.UI.Image>().sprite = timerNormal;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("TimerGauge").GetComponent<UnityEngine.UI.Image>().sprite = timerNormal;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1BtnActive").SetActive(false);
         //GameManager.Instance.inGameSceneUIManager.FindUIObject("Item1Btn").GetComponent<UnityEngine.UI.Button>().interactable = true;
     }

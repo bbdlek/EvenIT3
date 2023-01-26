@@ -3578,7 +3578,7 @@ MonoBehaviour:
   newGroupSpatialType: 1
   newGroupSpatialBlend: 1
   musicPlaylists:
-  - isExpanded: 0
+  - isExpanded: 1
     playlistName: BGM_Main
     songTransitionType: 1
     MusicSettings:
@@ -3589,7 +3589,7 @@ MonoBehaviour:
       resourceFileName: 
       volume: 1
       pitch: 1
-      isExpanded: 0
+      isExpanded: 1
       isLoop: 1
       isChecked: 1
       metadataStringValues: []
@@ -3622,8 +3622,8 @@ MonoBehaviour:
     newMetadataPropType: 1
     newMetadataPropRequired: 1
     newMetadataPropCanHaveMult: 0
-  - isExpanded: 0
-    playlistName: BGM_Stage
+  - isExpanded: 1
+    playlistName: BGM_Stage_Hard
     songTransitionType: 1
     MusicSettings:
     - alias: 
@@ -3633,7 +3633,51 @@ MonoBehaviour:
       resourceFileName: 
       volume: 1
       pitch: 1
-      isExpanded: 0
+      isExpanded: 1
+      isLoop: 1
+      isChecked: 1
+      metadataStringValues: []
+      metadataBoolValues: []
+      metadataIntValues: []
+      metadataFloatValues: []
+      metadataExpanded: 1
+      songStartTimeMode: 0
+      customStartTime: 0
+      customStartTimeMax: 0
+      lastKnownTimePoint: 0
+      wasLastKnownTimePointSet: 0
+      songIndex: 0
+      sectionStartTime: 0
+      sectionEndTime: 0
+      songStartedEventExpanded: 0
+      songStartedCustomEvent: 
+      songChangedEventExpanded: 0
+      songChangedCustomEvent: 
+    bulkLocationMode: 0
+    crossfadeMode: 0
+    crossFadeTime: 1
+    fadeInFirstSong: 0
+    fadeOutLastSong: 0
+    bulkEditMode: 0
+    isTemporary: 0
+    showMetadata: 0
+    songMetadataProps: []
+    newMetadataPropName: PropertyName
+    newMetadataPropType: 1
+    newMetadataPropRequired: 1
+    newMetadataPropCanHaveMult: 0
+  - isExpanded: 1
+    playlistName: BGM_Stage_Easy
+    songTransitionType: 1
+    MusicSettings:
+    - alias: 
+      audLocation: 0
+      clip: {fileID: 8300000, guid: eebd920cfe2f55642860aaba20e12ee0, type: 3}
+      songName: sound_stage_easy_BGM
+      resourceFileName: 
+      volume: 1
+      pitch: 1
+      isExpanded: 1
       isLoop: 1
       isChecked: 1
       metadataStringValues: []

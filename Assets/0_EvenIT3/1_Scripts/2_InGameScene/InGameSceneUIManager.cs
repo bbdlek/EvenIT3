@@ -244,6 +244,7 @@ public class InGameSceneUIManager : UIControllerScript
     {
         FindUIObject("FailedLookPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
+        MasterAudio.PlaySound("GameOver");
     }
     
     //FailedDecibel
@@ -268,6 +269,7 @@ public class InGameSceneUIManager : UIControllerScript
     {
         FindUIObject("FailedDecibelPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
+        MasterAudio.PlaySound("GameOver");
     }
     
     //FailedOver
@@ -292,6 +294,7 @@ public class InGameSceneUIManager : UIControllerScript
     {
         FindUIObject("FailedOverPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
+        MasterAudio.PlaySound("GameOver");
     }
 
     private void OnClickClearPanelMainMenuBtn()
@@ -312,7 +315,7 @@ public class InGameSceneUIManager : UIControllerScript
         AppManagerScript.Instance.isRestart = true;
         if (AppManagerScript.Instance.selectedStage == 4)
         {
-            if(AppManagerScript.Instance.selectedChapter != 4)
+            if(AppManagerScript.Instance.selectedChapter != 6)
             {
                 AppManagerScript.Instance.selectedChapter += 1;
                 AppManagerScript.Instance.selectedStage = 1;
@@ -458,7 +461,7 @@ public class InGameSceneUIManager : UIControllerScript
                 }
                 else
                 {
-                    maxSnackNum = Random.Range(0, 4);
+                    maxSnackNum = Random.Range(0, 3);
                     rewardSilverNum = 300;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
@@ -475,12 +478,12 @@ public class InGameSceneUIManager : UIControllerScript
                 FindUIObject("ClearPanelStars2").SetActive(true);
                 if(GameManager.Instance.stageNum < 12)
                 {
-                    maxSnackNum = Random.Range(1, 4);
+                    maxSnackNum = Random.Range(0, 3);
                     rewardSilverNum = 200;
                 }
                 else
                 {
-                    maxSnackNum = Random.Range(1, 5);
+                    maxSnackNum = Random.Range(1, 3);
                     rewardSilverNum = 400;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
@@ -497,12 +500,12 @@ public class InGameSceneUIManager : UIControllerScript
                 FindUIObject("ClearPanelStars3").SetActive(true);
                 if(GameManager.Instance.stageNum < 12)
                 {
-                    maxSnackNum = Random.Range(2, 5);
+                    maxSnackNum = Random.Range(1, 3);
                     rewardSilverNum = 300;
                 }
                 else
                 {
-                    maxSnackNum = Random.Range(2, 6);
+                    maxSnackNum = Random.Range(1, 4);
                     rewardSilverNum = 500;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
