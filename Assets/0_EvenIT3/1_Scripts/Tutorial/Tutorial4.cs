@@ -8,10 +8,13 @@ public class Tutorial4 : MonoBehaviour
     public GameObject T4View4, T4View5, T4View6, T4View7, T4View8, T4View9, T4View10, T4View11, T4View12, T4View13, T4View14, T4View15, T4View16, T4View17, T4View18;
     public Image T4Btn4, T4Btn5, T4Btn6, T4Btn7, T4Btn8, vBtn9, vBtn10, T4Btn11, T4Btn12, T4Btn13, T4Btn14, T4Btn15, T4Btn16, T4Btn17, T4Btn18;
 
+    public GameObject Collection;
+
     public void T4Click4()
     {
         T4View4.SetActive(false);
         T4View5.SetActive(true);
+        Collection.GetComponent<Collection>().ClickOne();
     }
 
     public void T4Click5()
@@ -48,6 +51,7 @@ public class Tutorial4 : MonoBehaviour
     {
         T4View10.SetActive(false);
         T4View11.SetActive(true);
+        Collection.GetComponent<Collection>().ClickEx();
     }
 
     public void T4Click11()

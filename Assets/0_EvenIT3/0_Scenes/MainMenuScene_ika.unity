@@ -21514,7 +21514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &484815301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21557,6 +21557,7 @@ MonoBehaviour:
   T4Btn16: {fileID: 912032633}
   T4Btn17: {fileID: 710800150}
   T4Btn18: {fileID: 675849449}
+  Collection: {fileID: 0}
 --- !u!224 &484815302
 RectTransform:
   m_ObjectHideFlags: 0
