@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tutorial2 : MonoBehaviour
+public class Tutorial4 : MonoBehaviour
 {
-    public GameObject View1, View2, View3, View4, View5, View6, View7, View8, View9, View10, View11, View12, View13, View14, View15, View16, View17;
-    public Image Btn1, Btn2, Btn3, Btn4, Btn5, Btn6, Btn7, Btn8, Btn9, Btn10, Btn11, Btn12, Btn13, Btn14, Btn15, Btn16, Btn17;
+    public GameObject View1, View2, View3, View4, View5, View6, View7, View8, View9, View10, View11, View12, View13, View14, View15, View16, View17, View18;
+    public Image Btn1, Btn2, Btn3, Btn4, Btn5, Btn6, Btn7, Btn8, Btn9, Btn10, Btn11, Btn12, Btn13, Btn14, Btn15, Btn16, Btn17, Btn18;
 
     public void Click1()
     {
@@ -107,6 +107,12 @@ public class Tutorial2 : MonoBehaviour
     public void Click17()
     {
         View17.SetActive(false);
+        View18.SetActive(true);
+    }
+
+    public void Click18()
+    {
+        View18.SetActive(false);
 
     }
 }
