@@ -5,108 +5,108 @@ using UnityEngine.UI;
 
 public class Tutorial2 : MonoBehaviour
 {
-    public GameObject View1, View2, View3, View4, View5, View6, View7, View8, View9, View10, View11, View12, View13, View14, View15, View16, View17;
-    public Image Btn1, Btn2, Btn3, Btn4, Btn5, Btn6, Btn7, Btn8, Btn9, Btn10, Btn11, Btn12, Btn13, Btn14, Btn15, Btn16, Btn17;
+    public GameObject T2View1, T2View2, T2View3, T2View4, T2View5, T2View6, T2View7, T2View8, T2View9, T2View10, T2View11, T2View12, T2View13, T2View14, T2View15, T2View16, T2View17;
+    public Image T2Btn1, T2Btn2, T2Btn3, T2Btn4, T2Btn5, T2Btn6, T2Btn7, T2Btn8, T2Btn9, T2Btn10, T2Btn11, T2Btn12, T2Btn13, T2Btn14, T2Btn15, T2Btn16, T2Btn17;
 
-    public void Click1()
+    public void T2Click1()
     {
-        View1.SetActive(false);
-        View2.SetActive(true);
+        T2View1.SetActive(false);
+        T2View2.SetActive(true);
     }
 
-    public void Click2()
+    public void T2Click2()
     {
-        View2.SetActive(false);
-        View3.SetActive(true);
+        T2View2.SetActive(false);
+        T2View3.SetActive(true);
     }
 
-    public void Click3()
+    public void T2Click3()
     {
-        View3.SetActive(false);
-        View4.SetActive(true);
+        T2View3.SetActive(false);
+        T2View4.SetActive(true);
     }
 
-    public void Click4()
+    public void T2Click4()
     {
-        View4.SetActive(false);
-        View5.SetActive(true);
+        T2View4.SetActive(false);
+        T2View5.SetActive(true);
     }
 
-    public void Click5()
+    public void T2Click5()
     {
-        View5.SetActive(false);
-        View6.SetActive(true);
+        T2View5.SetActive(false);
+        T2View6.SetActive(true);
     }
 
-    public void Click6()
+    public void T2Click6()
     {
-        View6.SetActive(false);
-        View7.SetActive(true);
+        T2View6.SetActive(false);
+        T2View7.SetActive(true);
     }
 
-    public void Click7()
+    public void T2Click7()
     {
-        View7.SetActive(false);
-        View8.SetActive(true);
+        T2View7.SetActive(false);
+        T2View8.SetActive(true);
     }
 
-    public void Click8()
+    public void T2Click8()
     {
-        View8.SetActive(false);
-        View9.SetActive(true);
+        T2View8.SetActive(false);
+        T2View9.SetActive(true);
     }
 
-    public void Click9()
+    public void T2Click9()
     {
-        View9.SetActive(false);
-        View10.SetActive(true);
+        T2View9.SetActive(false);
+        T2View10.SetActive(true);
     }
 
-    public void Click10()
+    public void T2Click10()
     {
-        View10.SetActive(false);
-        View11.SetActive(true);
+        T2View10.SetActive(false);
+        T2View11.SetActive(true);
     }
 
-    public void Click11()
+    public void T2Click11()
     {
-        View11.SetActive(false);
-        View12.SetActive(true);
+        T2View11.SetActive(false);
+        T2View12.SetActive(true);
     }
 
-    public void Click12()
+    public void T2Click12()
     {
-        View12.SetActive(false);
-        View13.SetActive(true);
+        T2View12.SetActive(false);
+        T2View13.SetActive(true);
     }
 
-    public void Click13()
+    public void T2Click13()
     {
-        View13.SetActive(false);
-        View14.SetActive(true);
+        T2View13.SetActive(false);
+        T2View14.SetActive(true);
     }
 
-    public void Click14()
+    public void T2Click14()
     {
-        View14.SetActive(false);
-        View15.SetActive(true);
+        T2View14.SetActive(false);
+        T2View15.SetActive(true);
     }
 
-    public void Click15()
+    public void T2Click15()
     {
-        View15.SetActive(false);
-        View16.SetActive(true);
+        T2View15.SetActive(false);
+        T2View16.SetActive(true);
     }
 
-    public void Click16()
+    public void T2Click16()
     {
-        View16.SetActive(false);
-        View17.SetActive(true);
+        T2View16.SetActive(false);
+        T2View17.SetActive(true);
     }
 
-    public void Click17()
+    public void T2Click17()
     {
-        View17.SetActive(false);
-        gameObject.SetActive(false);
+        T2View17.SetActive(false);
+
     }
 }

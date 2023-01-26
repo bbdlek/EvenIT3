@@ -7,146 +7,127 @@ public class Tutorial3 : MonoBehaviour
 {
 
 
-    public GameObject View1, View2, View3, View4, View5, View6, View7, View8, View9, View10, View11, View12, View13, View14, View15, View16, View17, View18, View19, View20, View21, View22, View23;
-    public Image Btn1, Btn2, Btn3, Btn4, Btn5, Btn6, Btn7, Btn8, Btn9, Btn10, Btn11, Btn12, Btn13, Btn14, Btn15, Btn16, Btn17, Btn18, Btn19, Btn20, Btn21, Btn22, Btn23;
+    public GameObject T3View1, T3View2, T3View3, T3View4, T3View5, T3View6, T3View7, T3View8, T3View9, T3View10, T3View11, T3View12, T3View13, T3View14, T3View15, T3View16, T3View17, T3View18, T3View19, T3View20;
+    public Image T3Btn1, T3Btn2, T3Btn3, T3Btn4, T3Btn5, T3Btn6, T3Btn7, T3Btn8, T3Btn9, T3Btn10, T3Btn11, T3Btn12, T3Btn13, T3Btn14, T3Btn15, T3Btn16, BT3tn17, T3Btn18, T3Btn19, T3Btn20;
 
-    public void Click1()
+    public void T3Click1()
     {
-        View1.SetActive(false);
-        View2.SetActive(true);
+        T3View1.SetActive(false);
+        T3View2.SetActive(true);
     }
 
-    public void Click2()
+    public void T3Click2()
     {
-        View2.SetActive(false);
-        View3.SetActive(true);
+        T3View2.SetActive(false);
+        T3View3.SetActive(true);
     }
 
-    public void Click3()
+    public void T3Click3()
     {
-        View3.SetActive(false);
-        View4.SetActive(true);
+        T3View3.SetActive(false);
+        T3View4.SetActive(true);
     }
 
-    public void Click4()
+    public void T3Click4()
     {
-        View4.SetActive(false);
-        View5.SetActive(true);
+        T3View4.SetActive(false);
+        T3View5.SetActive(true);
     }
 
-    public void Click5()
+    public void T3Click5()
     {
-        View5.SetActive(false);
-        View6.SetActive(true);
+        T3View5.SetActive(false);
+        T3View6.SetActive(true);
     }
 
-    public void Click6()
+    public void T3Click6()
     {
-        View6.SetActive(false);
-        View7.SetActive(true);
+        T3View6.SetActive(false);
+        T3View7.SetActive(true);
     }
 
-    public void Click7()
+    public void T3Click7()
     {
-        View7.SetActive(false);
-        View8.SetActive(true);
+        T3View7.SetActive(false);
+        T3View8.SetActive(true);
     }
 
-    public void Click8()
+    public void T3Click8()
     {
-        View8.SetActive(false);
-        View9.SetActive(true);
+        T3View8.SetActive(false);
+        T3View9.SetActive(true);
     }
 
-    public void Click9()
+    public void T3Click9()
     {
-        View9.SetActive(false);
-        View10.SetActive(true);
+        T3View9.SetActive(false);
+        T3View10.SetActive(true);
     }
 
-    public void Click10()
+    public void T3Click10()
     {
-        View10.SetActive(false);
-        View11.SetActive(true);
+        T3View10.SetActive(false);
+        T3View11.SetActive(true);
     }
 
-    public void Click11()
+    public void T3Click11()
     {
-        View11.SetActive(false);
-        View12.SetActive(true);
+        T3View11.SetActive(false);
+        T3View12.SetActive(true);
     }
 
-    public void Click12()
+    public void T3Click12()
     {
-        View12.SetActive(false);
-        View13.SetActive(true);
+        T3View12.SetActive(false);
+        T3View13.SetActive(true);
     }
 
-    public void Click13()
+    public void T3Click13()
     {
-        View13.SetActive(false);
-        View14.SetActive(true);
+        T3View13.SetActive(false);
+        T3View14.SetActive(true);
     }
 
-    public void Click14()
+    public void T3Click14()
     {
-        View14.SetActive(false);
-        View15.SetActive(true);
+        T3View14.SetActive(false);
+        T3View15.SetActive(true);
     }
 
-    public void Click15()
+    public void T3Click15()
     {
-        View15.SetActive(false);
-        View16.SetActive(true);
+        T3View15.SetActive(false);
+        T3View16.SetActive(true);
     }
 
-    public void Click16()
+    public void T3Click16()
     {
-        View16.SetActive(false);
-        View17.SetActive(true);
+        T3View16.SetActive(false);
+        T3View17.SetActive(true);
     }
 
-    public void Click17()
+    public void T3Click17()
     {
-        View17.SetActive(false);
-        View18.SetActive(true);
+        T3View17.SetActive(false);
+        T3View18.SetActive(true);
     }
 
-    public void Click18()
+    public void T3Click18()
     {
-        View18.SetActive(false);
-        View19.SetActive(true);
+        T3View18.SetActive(false);
+        T3View19.SetActive(true);
     }
 
-    public void Click19()
+    public void T3Click19()
     {
-        View19.SetActive(false);
-        View20.SetActive(true);
+        T3View19.SetActive(false);
+        T3View20.SetActive(true);
     }
 
-    public void Click20()
+    public void T3Click20()
     {
-        View20.SetActive(false);
-        View21.SetActive(true);
+        T3View20.SetActive(false);
+
     }
 
-    public void Click21()
-    {
-        View21.SetActive(false);
-        View22.SetActive(true);
-    }
-
-    public void Click22()
-    {
-        View22.SetActive(false);
-        View23.SetActive(true);
-    }
-
-    public void Click23()
-    {
-        View23.SetActive(false);
-        gameObject.SetActive(false);
-        Time.timeScale = 1;
-        FindObjectOfType<GameManager>().gameState = GameManager.GameState.InGame;
-    }
 }
