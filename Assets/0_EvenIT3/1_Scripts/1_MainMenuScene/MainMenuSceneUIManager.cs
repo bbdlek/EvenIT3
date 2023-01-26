@@ -178,6 +178,9 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             
             //Shop
+            case MainMenuSceneButtons.AzummaPanel:
+                OnClickAzummaPanel();
+                break;
             case MainMenuSceneButtons.ShopCloseBtn:
                 OnClickShopCloseBtn();
                 break;
@@ -257,6 +260,24 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuSceneButtons.InventoryGoToShopBtn:
                 OnClickInventoryGoToShopBtn();
+                break;
+            case MainMenuSceneButtons.InventoryClockBtn:
+                OnClickInventoryClockBtn();
+                break;
+            case MainMenuSceneButtons.InventoryMilkBtn:
+                OnClickInventoryMilkBtn();
+                break;
+            case MainMenuSceneButtons.InventoryMaskBtn:
+                OnClickInventoryMaskBtn();
+                break;
+            case MainMenuSceneButtons.ClockBackBtn:
+                OnClickClockBackBtn();
+                break;
+            case MainMenuSceneButtons.MilkBackBtn:
+                OnClickMilkBackBtn();
+                break;
+            case MainMenuSceneButtons.MaskBackBtn:
+                OnClickMaskBackBtn();
                 break;
         
             //Option
@@ -359,6 +380,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         Chapter6Btn,
 
         //Shop
+        AzummaPanel,
         ShopCloseBtn,
         GachaBtn,
         ItemBtn,
@@ -396,6 +418,12 @@ public class MainMenuSceneUIManager : UIControllerScript
         //Inventory
         InventoryCloseBtn,
         InventoryGoToShopBtn,
+        InventoryClockBtn,
+        InventoryMilkBtn,
+        InventoryMaskBtn,
+        ClockBackBtn,
+        MilkBackBtn,
+        MaskBackBtn,
         
         //Option
         OptionCloseBtn,
@@ -576,7 +604,7 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case 2:
                 FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("Stage/art_teacher_history");
+                    Resources.Load<Sprite>("Stage/art_teacher_english");
                 break;
             case 3:
                 FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
@@ -584,7 +612,7 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case 4:
                 FindUIObject("StagePageTeacherImg").GetComponent<Image>().sprite =
-                    Resources.Load<Sprite>("Stage/art_teacher_english");
+                    Resources.Load<Sprite>("Stage/art_teacher_history");
                 break;
         }
         FindUIObject("StagePageHeader").GetComponent<TMP_Text>().text = "Stage " +
@@ -763,6 +791,27 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
         
     //Shop
+
+    private IEnumerator AzummaWork()
+    {
+        FindUIObject("AzummaPanel").SetActive(true);
+        yield return new WaitForSeconds(2f);
+        FindUIObject("AzummaPanel").SetActive(false);
+    }
+
+    public void StopAzumma()
+    {
+        StopCoroutine(azummaCor);
+        FindUIObject("AzummaPanel").SetActive(false);
+    }
+
+    private Coroutine azummaCor;
+
+    private void OnClickAzummaPanel()
+    {
+        StopAzumma();
+    }
+    
     private void OnClickShopCloseBtn()
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
@@ -792,48 +841,90 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickClockBtn()
     {
-        if(UserManager.Instance.userData.Commodities.Silver < 1300) return;
+        if (UserManager.Instance.userData.Commodities.Silver < 1300)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.ClockItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickMaskBtn()
     {
-        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        if (UserManager.Instance.userData.Commodities.Silver < 900)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.MaskItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickMilkBtn()
     {
-        if(UserManager.Instance.userData.Commodities.Silver < 900) return;
+        if (UserManager.Instance.userData.Commodities.Silver < 900)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.MilkItem;
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
 
     private void OnClickPackage1Btn()
     {
+        if (UserManager.Instance.userData.Commodities.Silver < 2800)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.Package1;
+        FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickPackage2Btn()
     {
+        if (UserManager.Instance.userData.Commodities.Silver < 27000)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.Package2;
+        FindUIObject("BuyCheckPopup").SetActive(true);
     }
 
     private void OnClickFree1Btn()
     {
+        if (UserManager.Instance.userData.Commodities.Gold < 1)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.Silver1000;
+        FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickFree2Btn()
     {
+        if (UserManager.Instance.userData.Commodities.Gold < 5)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.Silver5000;
+        FindUIObject("BuyCheckPopup").SetActive(true);
     }
     
     private void OnClickFree3Btn()
     {
+        if (UserManager.Instance.userData.Commodities.Gold < 9)
+        {
+            azummaCor = StartCoroutine(AzummaWork());
+            return;
+        }
         itemType = ShopItemList.Silver10000;
+        FindUIObject("BuyCheckPopup").SetActive(true);
     }
 
     private void OnClickPaid1Btn()
@@ -865,10 +956,35 @@ public class MainMenuSceneUIManager : UIControllerScript
                 UserManager.Instance.userData.milkItem++;
                 UserManager.Instance.userData.Commodities.Silver -= 900;
                 break;
+            case ShopItemList.Package1:
+                UserManager.Instance.userData.milkItem++;
+                UserManager.Instance.userData.clockItem++;
+                UserManager.Instance.userData.maskItem++;
+                UserManager.Instance.userData.Commodities.Silver -= 2800;
+                break;
+            case ShopItemList.Package2:
+                UserManager.Instance.userData.milkItem += 10;
+                UserManager.Instance.userData.clockItem += 10;
+                UserManager.Instance.userData.maskItem += 10;
+                UserManager.Instance.userData.Commodities.Silver -= 27000;
+                break;
+            case ShopItemList.Silver1000:
+                UserManager.Instance.userData.Commodities.Silver += 1000;
+                UserManager.Instance.userData.Commodities.Gold -= 1;
+                break;
+            case ShopItemList.Silver5000:
+                UserManager.Instance.userData.Commodities.Silver += 5000;
+                UserManager.Instance.userData.Commodities.Gold -= 5;
+                break;
+            case ShopItemList.Silver10000:
+                UserManager.Instance.userData.Commodities.Silver += 10000;
+                UserManager.Instance.userData.Commodities.Gold -= 9;
+                break;
         }
         
         FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
         FindUIObject("BuyCheckPopup").SetActive(false);
     }
     
@@ -886,6 +1002,48 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickInventoryGoToShopBtn()
     {
         ChangeUI(MainMenuScenePanels.ShopPanel);
+    }
+
+    private IEnumerator ItemPanelCoroutine(string panelName)
+    {
+        FindUIObject(panelName).SetActive(false);
+        yield return new WaitForSeconds(2f);
+        FindUIObject(panelName).SetActive(true);
+    }
+
+    private Coroutine itemPanelCor;
+
+    private void OnClickInventoryClockBtn()
+    {
+        itemPanelCor = StartCoroutine(ItemPanelCoroutine("InventoryClockExPanel"));
+    }
+    
+    private void OnClickInventoryMilkBtn()
+    {
+        itemPanelCor = StartCoroutine(ItemPanelCoroutine("InventoryMilkExPanel"));
+    }
+    
+    private void OnClickInventoryMaskBtn()
+    {
+        itemPanelCor = StartCoroutine(ItemPanelCoroutine("InventoryMaskExPanel"));
+    }
+
+    private void OnClickClockBackBtn()
+    {
+        FindUIObject("InventoryClockExPanel").SetActive(false);
+        StopCoroutine(itemPanelCor);
+    }
+    
+    private void OnClickMilkBackBtn()
+    {
+        FindUIObject("InventoryMilkExPanel").SetActive(false);
+        StopCoroutine(itemPanelCor);
+    }
+    
+    private void OnClickMaskBackBtn()
+    {
+        FindUIObject("InventoryMaskExPanel").SetActive(false);
+        StopCoroutine(itemPanelCor);
     }
         
     //Option
@@ -1226,7 +1384,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             if (FindUIObject(DBManagerScript.Instance.snackDB[i].name))
             {
                 FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(2).GetComponent<Text>().text =
-                    "(" + UserManager.Instance.userData.snackList[i] + "/20)";
+                    "(" + UserManager.Instance.userData.snackList[i] + "/" + DBManagerScript.Instance.snackDB[i].P2A + ")";
 
                 if (UserManager.Instance.userData.snackList[i] > 0)
                 {
@@ -1234,7 +1392,7 @@ public class MainMenuSceneUIManager : UIControllerScript
                         .material = null;
                 }
                 
-                if (UserManager.Instance.userData.snackList[i] == 20)
+                if (UserManager.Instance.userData.snackList[i] == DBManagerScript.Instance.snackDB[i].P2A)
                 {
                     collection++;
                     FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(3).gameObject
@@ -1246,10 +1404,14 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     public void InitCollection()
     {
+        FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 1) + "/1)";
+        FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 5) + "/5)";
+        FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 15) + "/15)";
+        FindUIObject("Buff4CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 25) + "/25)";
+        FindUIObject("Buff5CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 35) + "/35)";
         if (collection >= 1)
         {
             FindUIObject("Buff1Txt").GetComponent<TMP_Text>().text = "간식 양 " + DBManagerScript.Instance.buffDB[0].NN + "% 감소";
-            FindUIObject("Buff1CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 1) + "/1)";
             FindUIObject("Buff1Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[0] = true;
         }
@@ -1257,7 +1419,6 @@ public class MainMenuSceneUIManager : UIControllerScript
         if (collection >= 5)
         {
             FindUIObject("Buff2Txt").GetComponent<TMP_Text>().text = "발생 데시벨 " + DBManagerScript.Instance.buffDB[1].NN + "% 감소";
-            FindUIObject("Buff2CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 5) + "/5)";
             FindUIObject("Buff2Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[1] = true;
         }
@@ -1265,7 +1426,6 @@ public class MainMenuSceneUIManager : UIControllerScript
         if (collection >= 15)
         {
             FindUIObject("Buff3Txt").GetComponent<TMP_Text>().text = "최대 데시벨 " + DBManagerScript.Instance.buffDB[2].NN + "% 증가";
-            FindUIObject("Buff3CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 15) + "/15)";
             FindUIObject("Buff3Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[2] = true;
         }
@@ -1273,7 +1433,6 @@ public class MainMenuSceneUIManager : UIControllerScript
         if (collection >= 25)
         {
             FindUIObject("Buff4Txt").GetComponent<TMP_Text>().text = "발생 데시벨 " + DBManagerScript.Instance.buffDB[3].NN + "% 감소";
-            FindUIObject("Buff4CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 25) + "/25)";
             FindUIObject("Buff4Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[3] = true;
         }
@@ -1281,7 +1440,6 @@ public class MainMenuSceneUIManager : UIControllerScript
         if (collection >= 35)
         {
             FindUIObject("Buff5Txt").GetComponent<TMP_Text>().text = "먹는 속도 " + DBManagerScript.Instance.buffDB[4].NN + " 증가";
-            FindUIObject("Buff5CountTxt").GetComponent<TMP_Text>().text = "(" + Mathf.Clamp(collection,0, 35) + "/35)";
             FindUIObject("Buff5Stamp Img").SetActive(true);
             AppManagerScript.Instance.buff[4] = true;
         }

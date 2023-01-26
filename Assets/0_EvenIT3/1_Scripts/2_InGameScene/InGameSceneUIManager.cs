@@ -557,6 +557,104 @@ public class InGameSceneUIManager : UIControllerScript
 
             for (int i = 0; i < rewardSnackNums.Count; i++)
             {
+                Debug.Log(rewardSnackNums[i]);
+            }
+            switch (rewardSnackNums.Count)
+            {
+                case 1:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    break;
+                case 2:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        if (UserManager.Instance.userData.snackList[rewardSnacks[1].no] == rewardSnacks[1].P2A)
+                        {
+                            rewardSnackNums[1] = 0;
+                        }
+                        else
+                        {
+                            if (rewardSnackNums[1] == 0) rewardSnackNums[1] = rewardSnackNums[0];
+                        }
+
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    if (rewardSnackNums[1] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[1];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[1].ToString();
+                    }
+                    break;
+                case 3:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        if (UserManager.Instance.userData.snackList[rewardSnacks[1].no] == rewardSnacks[1].P2A)
+                        {
+                            if (UserManager.Instance.userData.snackList[rewardSnacks[2].no] == rewardSnacks[2].P2A)
+                            {
+                                rewardSnackNums[2] = 0;
+                            }
+                            else
+                            {
+                                if (rewardSnackNums[2] == 0)
+                                {
+                                    if(rewardSnackNums[0] == 0)
+                                    {
+                                        rewardSnackNums[2] = rewardSnackNums[1];
+                                    }
+                                    else
+                                    {
+                                        rewardSnackNums[2] = rewardSnackNums[0];
+                                    }
+                                }
+                            }
+                            rewardSnackNums[1] = 0;
+                        }
+                        else
+                        {
+                            if (rewardSnackNums[1] == 0) rewardSnackNums[1] = rewardSnackNums[0];
+                        }
+
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    if (rewardSnackNums[1] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[1];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[1].ToString();
+                    }
+                    if (rewardSnackNums[2] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[2];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[2].ToString();
+                    }
+                    break;
+            }
+            
+            /*for (int i = 0; i < rewardSnackNums.Count; i++)
+            {
                 if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] == 20)
                 {
                     rewardSnackNums[i] = 0;
@@ -567,7 +665,7 @@ public class InGameSceneUIManager : UIControllerScript
                     SnackReward.GetComponent<Image>().sprite = rewardIcons[i];
                     SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[i].ToString();
                 }
-            }
+            }*/
         }
         else
         {
@@ -598,16 +696,100 @@ public class InGameSceneUIManager : UIControllerScript
 
             for (int i = 0; i < rewardSnackNums.Count; i++)
             {
-                if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] == 20)
-                {
-                    rewardSnackNums[i] = 0;
-                }
-                if (rewardSnackNums[i] != 0)
-                {
-                    GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
-                    SnackReward.GetComponent<Image>().sprite = rewardIcons[i];
-                    SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[i].ToString();
-                }
+                Debug.Log(rewardSnackNums[i]);
+            }
+            switch (rewardSnackNums.Count)
+            {
+                case 1:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    break;
+                case 2:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        if (UserManager.Instance.userData.snackList[rewardSnacks[1].no] == rewardSnacks[1].P2A)
+                        {
+                            rewardSnackNums[1] = 0;
+                        }
+                        else
+                        {
+                            if (rewardSnackNums[1] == 0) rewardSnackNums[1] = rewardSnackNums[0];
+                        }
+
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    if (rewardSnackNums[1] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[1];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[1].ToString();
+                    }
+                    break;
+                case 3:
+                    if (UserManager.Instance.userData.snackList[rewardSnacks[0].no] == rewardSnacks[0].P2A)
+                    {
+                        if (UserManager.Instance.userData.snackList[rewardSnacks[1].no] == rewardSnacks[1].P2A)
+                        {
+                            if (UserManager.Instance.userData.snackList[rewardSnacks[2].no] == rewardSnacks[2].P2A)
+                            {
+                                rewardSnackNums[2] = 0;
+                            }
+                            else
+                            {
+                                if (rewardSnackNums[2] == 0)
+                                {
+                                    if(rewardSnackNums[0] == 0)
+                                    {
+                                        rewardSnackNums[2] = rewardSnackNums[1];
+                                    }
+                                    else
+                                    {
+                                        rewardSnackNums[2] = rewardSnackNums[0];
+                                    }
+                                }
+                            }
+                            rewardSnackNums[1] = 0;
+                        }
+                        else
+                        {
+                            if (rewardSnackNums[1] == 0) rewardSnackNums[1] = rewardSnackNums[0];
+                        }
+
+                        rewardSnackNums[0] = 0;
+                    }
+                    if (rewardSnackNums[0] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[0];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[0].ToString();
+                    }
+                    if (rewardSnackNums[1] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[1];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[1].ToString();
+                    }
+                    if (rewardSnackNums[2] != 0)
+                    {
+                        GameObject SnackReward =  Instantiate(rewardSnackPrefab, FindUIObject("ClearPanelRewards").transform);
+                        SnackReward.GetComponent<Image>().sprite = rewardIcons[2];
+                        SnackReward.GetComponentInChildren<TMP_Text>().text = rewardSnackNums[2].ToString();
+                    }
+                    break;
             }
         }
 
@@ -616,9 +798,9 @@ public class InGameSceneUIManager : UIControllerScript
         for (int i = 0; i < rewardSnacks.Count; i++)
         {
             UserManager.Instance.userData.snackList[rewardSnacks[i].no] += rewardSnackNums[i];
-            if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] > 20)
+            if (UserManager.Instance.userData.snackList[rewardSnacks[i].no] > rewardSnacks[i].P2A)
             {
-                UserManager.Instance.userData.snackList[rewardSnacks[i].no] = 20;
+                UserManager.Instance.userData.snackList[rewardSnacks[i].no] = rewardSnacks[i].P2A;
             } 
         }
 
