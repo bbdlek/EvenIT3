@@ -10025,6 +10025,7 @@ MonoBehaviour:
   sortOrder: 1
   isAutoScaleMode: 1
   isScaleModeValue: 1
+  itemType: 0
   profileEditRosterPrefab: {fileID: 3801595981087491493, guid: f69aa641b5d76a944b82d41ccc6ff5f4, type: 3}
   tempSelectProfileImage: 0
   tempSelectProfileEdge: 0

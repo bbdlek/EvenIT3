@@ -445,8 +445,6 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    if(AppManagerScript.Instance.isStageTutorial)
-                        inGameSceneUIManager.FindUIObject("Mini").SetActive(true);
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
                 break;
@@ -458,6 +456,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
+                    if(AppManagerScript.Instance.isStageTutorial)
+                        inGameSceneUIManager.FindUIObject("Mini").SetActive(true);
                     inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
                 }
                 break;

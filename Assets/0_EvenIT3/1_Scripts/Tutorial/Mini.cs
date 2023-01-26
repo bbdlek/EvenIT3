@@ -35,6 +35,6 @@ public class Mini : MonoBehaviour
     public void MiniClick5()
     {
         MiniView5.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

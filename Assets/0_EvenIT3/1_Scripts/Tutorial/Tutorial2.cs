@@ -30,6 +30,7 @@ public class Tutorial2 : MonoBehaviour
     {
         T2View4.SetActive(false);
         T2View5.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void T2Click5()
@@ -107,6 +108,6 @@ public class Tutorial2 : MonoBehaviour
     public void T2Click17()
     {
         T2View17.SetActive(false);
-
+        T2View17.transform.parent.gameObject.SetActive(false);
     }
 }
