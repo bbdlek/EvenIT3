@@ -5,114 +5,114 @@ using UnityEngine.UI;
 
 public class Tutorial4 : MonoBehaviour
 {
-    public GameObject View1, View2, View3, View4, View5, View6, View7, View8, View9, View10, View11, View12, View13, View14, View15, View16, View17, View18;
-    public Image Btn1, Btn2, Btn3, Btn4, Btn5, Btn6, Btn7, Btn8, Btn9, Btn10, Btn11, Btn12, Btn13, Btn14, Btn15, Btn16, Btn17, Btn18;
+    public GameObject T4View1, T4View2, T4View3, T4View4, T4View5, T4View6, T4View7, T4View8, T4View9, T4View10, T4View11, T4View12, T4View13, T4View14, T4View15, T4View16, T4View17, T4View18;
+    public Image T4Btn1, T4Btn2, T4Btn3, T4Btn4, T4Btn5, T4Btn6, T4Btn7, T4Btn8, vBtn9, vBtn10, T4Btn11, T4Btn12, T4Btn13, T4Btn14, T4Btn15, T4Btn16, T4Btn17, T4Btn18;
 
-    public void Click1()
+    public void T4Click1()
     {
-        View1.SetActive(false);
-        View2.SetActive(true);
+        T4View1.SetActive(false);
+        T4View2.SetActive(true);
     }
 
-    public void Click2()
+    public void T4Click2()
     {
-        View2.SetActive(false);
-        View3.SetActive(true);
+        T4View2.SetActive(false);
+        T4View3.SetActive(true);
     }
 
-    public void Click3()
+    public void T4Click3()
     {
-        View3.SetActive(false);
-        View4.SetActive(true);
+        T4View3.SetActive(false);
+        T4View4.SetActive(true);
     }
 
-    public void Click4()
+    public void T4Click4()
     {
-        View4.SetActive(false);
-        View5.SetActive(true);
+        T4View4.SetActive(false);
+        T4View5.SetActive(true);
     }
 
-    public void Click5()
+    public void T4Click5()
     {
-        View5.SetActive(false);
-        View6.SetActive(true);
+        T4View5.SetActive(false);
+        T4View6.SetActive(true);
     }
 
-    public void Click6()
+    public void T4Click6()
     {
-        View6.SetActive(false);
-        View7.SetActive(true);
+        T4View6.SetActive(false);
+        T4View7.SetActive(true);
     }
 
-    public void Click7()
+    public void T4Click7()
     {
-        View7.SetActive(false);
-        View8.SetActive(true);
+        T4View7.SetActive(false);
+        T4View8.SetActive(true);
     }
 
-    public void Click8()
+    public void T4Click8()
     {
-        View8.SetActive(false);
-        View9.SetActive(true);
+        T4View8.SetActive(false);
+        T4View9.SetActive(true);
     }
 
-    public void Click9()
+    public void T4Click9()
     {
-        View9.SetActive(false);
-        View10.SetActive(true);
+        T4View9.SetActive(false);
+        T4View10.SetActive(true);
     }
 
-    public void Click10()
+    public void T4Click10()
     {
-        View10.SetActive(false);
-        View11.SetActive(true);
+        T4View10.SetActive(false);
+        T4View11.SetActive(true);
     }
 
-    public void Click11()
+    public void T4Click11()
     {
-        View11.SetActive(false);
-        View12.SetActive(true);
+        T4View11.SetActive(false);
+        T4View12.SetActive(true);
     }
 
-    public void Click12()
+    public void T4Click12()
     {
-        View12.SetActive(false);
-        View13.SetActive(true);
+        T4View12.SetActive(false);
+        T4View13.SetActive(true);
     }
 
-    public void Click13()
+    public void T4Click13()
     {
-        View13.SetActive(false);
-        View14.SetActive(true);
+        T4View13.SetActive(false);
+        T4View14.SetActive(true);
     }
 
-    public void Click14()
+    public void T4Click14()
     {
-        View14.SetActive(false);
-        View15.SetActive(true);
+        T4View14.SetActive(false);
+        T4View15.SetActive(true);
     }
 
-    public void Click15()
+    public void T4Click15()
     {
-        View15.SetActive(false);
-        View16.SetActive(true);
+        T4View15.SetActive(false);
+        T4View16.SetActive(true);
     }
 
-    public void Click16()
+    public void T4Click16()
     {
-        View16.SetActive(false);
-        View17.SetActive(true);
+        T4View16.SetActive(false);
+        T4View17.SetActive(true);
     }
 
-    public void Click17()
+    public void T4Click17()
     {
-        View17.SetActive(false);
-        View18.SetActive(true);
+        T4View17.SetActive(false);
+        T4View18.SetActive(true);
     }
 
-    public void Click18()
+    public void T4Click18()
     {
-        View18.SetActive(false);
+        T4View18.SetActive(false);
 
     }
 }
