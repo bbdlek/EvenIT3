@@ -7,8 +7,8 @@ public class Tutorial3 : MonoBehaviour
 {
 
 
-    public GameObject T3View1, T3View2, T3View3, T3View4, T3View5, T3View6, T3View7, T3View8, T3View9, T3View10, T3View11, T3View12, T3View13, T3View14, T3View15, T3View16, T3View17, T3View18, T3View19, T3View20, T3View21, T3View22, T3View23;
-    public Image T3Btn1, T3Btn2, T3Btn3, T3Btn4, T3Btn5, T3Btn6, T3Btn7, T3Btn8, T3Btn9, T3Btn10, T3Btn11, T3Btn12, T3Btn13, T3Btn14, T3Btn15, T3Btn16, BT3tn17, T3Btn18, T3Btn19, T3Btn20, T3Btn21, T3Btn22, T3Btn23;
+    public GameObject T3View1, T3View2, T3View3, T3View4, T3View5, T3View6, T3View7, T3View8, T3View9, T3View10, T3View11, T3View12, T3View13, T3View14, T3View15, T3View16, T3View17, T3View18, T3View19, T3View20;
+    public Image T3Btn1, T3Btn2, T3Btn3, T3Btn4, T3Btn5, T3Btn6, T3Btn7, T3Btn8, T3Btn9, T3Btn10, T3Btn11, T3Btn12, T3Btn13, T3Btn14, T3Btn15, T3Btn16, BT3tn17, T3Btn18, T3Btn19, T3Btn20;
 
     public void T3Click1()
     {
@@ -127,24 +127,7 @@ public class Tutorial3 : MonoBehaviour
     public void T3Click20()
     {
         T3View20.SetActive(false);
-        T3View21.SetActive(true);
-    }
-
-    public void T3Click21()
-    {
-        T3View21.SetActive(false);
-        T3View22.SetActive(true);
-    }
-
-    public void T3Click22()
-    {
-        T3View22.SetActive(false);
-        T3View23.SetActive(true);
-    }
-
-    public void T3Click23()
-    {
-        T3View23.SetActive(false);
 
     }
+
 }
