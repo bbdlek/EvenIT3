@@ -113,6 +113,6 @@ public class Tutorial4 : MonoBehaviour
     public void Click18()
     {
         View18.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

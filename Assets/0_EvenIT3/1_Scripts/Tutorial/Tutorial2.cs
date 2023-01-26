@@ -107,6 +107,6 @@ public class Tutorial2 : MonoBehaviour
     public void Click17()
     {
         View17.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

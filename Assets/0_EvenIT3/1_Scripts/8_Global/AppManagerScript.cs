@@ -19,6 +19,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
     public bool[] selectedItem = new bool[3];
     public bool isRestart = false;
     public bool isWithDraw = false;
+    public bool isStageTutorial = false;
 
     #region Settings
 

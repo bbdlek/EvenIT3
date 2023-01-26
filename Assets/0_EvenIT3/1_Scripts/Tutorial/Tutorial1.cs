@@ -133,6 +133,6 @@ public class Tutorial1 : MonoBehaviour
     public void Click21()
     {
         View21.SetActive(false);
-        
+        gameObject.SetActive(false);
     }
 }

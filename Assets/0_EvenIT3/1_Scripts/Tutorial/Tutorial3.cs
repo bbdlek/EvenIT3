@@ -145,6 +145,8 @@ public class Tutorial3 : MonoBehaviour
     public void Click23()
     {
         View23.SetActive(false);
-
+        gameObject.SetActive(false);
+        Time.timeScale = 1;
+        FindObjectOfType<GameManager>().gameState = GameManager.GameState.InGame;
     }
 }

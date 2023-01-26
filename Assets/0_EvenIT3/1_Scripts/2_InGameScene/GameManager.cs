@@ -60,6 +60,13 @@ public class GameManager : Singleton<GameManager>
         SelectSnack();
         InitStage();
         gameState = GameState.InGame;
+
+        if (AppManagerScript.Instance.isStageTutorial)
+        {
+            inGameSceneUIManager.FindUIObject("Tutorial3").SetActive(true);
+            gameState = GameState.Pause;
+            Time.timeScale = 0;
+        }
         
         //GameStart
         _isTimer = true;
@@ -438,6 +445,8 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
+                    if(AppManagerScript.Instance.isStageTutorial)
+                        inGameSceneUIManager.FindUIObject("Mini").SetActive(true);
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
                 break;

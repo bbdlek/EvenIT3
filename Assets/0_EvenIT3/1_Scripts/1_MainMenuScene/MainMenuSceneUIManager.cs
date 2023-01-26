@@ -18,6 +18,8 @@ public class MainMenuSceneUIManager : UIControllerScript
         AddOnClick();
         InitProfileSprites();
         InitSettingUI();
+        AppManagerScript.Instance.isStageTutorial = false;
+        FindUIObject("StagePageTutorialToggle").GetComponent<Toggle>().isOn = false;
     }
 
     private void OnDisable()
@@ -456,6 +458,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             InitProfileCollection();
             InitProfileScore();
             ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+            FindUIObject("Tutorial1").SetActive(true);
         }
     }
 
@@ -463,6 +466,10 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickStageMoveBtn()
     {
         MasterAudio.PlaySound("StageClick");
+        if (UserManager.Instance.userData.starList.Count == 0)
+        {
+            FindUIObject("Tutorial2").SetActive(true);
+        }
         ChangeUI(MainMenuScenePanels.StagePanel);
         FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
         FindUIObject("Chapter5SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
@@ -558,6 +565,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickChapterToStage(int stage)
     {
         AppManagerScript.Instance.selectedStage = stage;
+        FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
         CheckStageEnable();
         switch (stage)
@@ -1146,13 +1154,13 @@ public class MainMenuSceneUIManager : UIControllerScript
         ShopPanel,
         InventoryPanel,
         OptionPanel,
-        ProfilePanel
+        ProfilePanel,
+        TutorialPanel,
     }
 
     public void ChangeUI(MainMenuScenePanels mainMenuScenePanels)
     {
         FindUIObject("SetNickNamePanel").SetActive(false);
-        FindUIObject("StoryPanel").SetActive(false);
         FindUIObject("MainMenuTouchPanel").SetActive(false);
         FindUIObject("ChapterPanel").SetActive(false);
         FindUIObject("AchievementPanel").SetActive(false);
@@ -1161,14 +1169,11 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("InventoryPanel").SetActive(false);
         FindUIObject("OptionPanel").SetActive(false);
         FindUIObject("ProfilePanel").SetActive(false);
-        
+
         switch (mainMenuScenePanels)
         {
             case MainMenuScenePanels.SetNickNamePanel:
                 FindUIObject("SetNickNamePanel").SetActive(true);
-                break;
-            case MainMenuScenePanels.StoryPanel:
-                FindUIObject("StoryPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.MainMenuTouchPanel:
                 FindUIObject("MainMenuTouchPanel").SetActive(true);
@@ -1195,6 +1200,10 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuScenePanels.ProfilePanel:
                 FindUIObject("ProfilePanel").SetActive(true);
+                break;
+            case MainMenuScenePanels.TutorialPanel:
+                FindUIObject("MainMenuTouchPanel").SetActive(true);
+                FindUIObject("TutorialPanel").SetActive(true);
                 break;
         }
     }
@@ -1442,5 +1451,10 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         string nickName = FindUIObject("SetNickNameInput").GetComponent<TMP_InputField>().text;
         FindUIObject("SetNickNameInputLength").GetComponent<TMP_Text>().text = nickName.Length + "/" + 6;
+    }
+
+    public void TutorialToggleCheck()
+    {
+        AppManagerScript.Instance.isStageTutorial = FindUIObject("StagePageTutorialToggle").GetComponent<Toggle>().isOn;
     }
 }
