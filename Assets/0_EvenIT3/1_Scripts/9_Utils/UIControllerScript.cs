@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -84,8 +85,6 @@ public class UIControllerScript : MonoBehaviour
         protected virtual void ButtonOnClick(int clickBtn)
         {
             NowClickBtnUI = EventSystem.current.currentSelectedGameObject;
-            
-            // MasterAudio.PlaySound("SO_Touch");
 
             Debug.Log($"ClickBtn : {NowClickBtnUI.name}");
         }

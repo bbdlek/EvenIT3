@@ -1,78 +1,128 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Firebase;
-using Firebase.Database;
-using Firebase.Extensions;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Utilities;
 using UnityEngine;
+using UnityEngine.Networking;
+
 
 public class DBManagerScript : Singleton<DBManagerScript>
 {
-    public static FirebaseApp FirebaseApp;
-    
-    public void InitFirebase()
-    {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
-            var dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available) {
-                // Create and hold a reference to your FirebaseApp,
-                // where app is a Firebase.FirebaseApp property of your application class.
-                FirebaseApp = FirebaseApp.DefaultInstance;
+    public Snack[] snackDB;
+    public Teacher[] teacherDB;
+    public Stage[] stageDB;
+    public Item[] itemDB;
+    public SnackType[] snackTypeDB;
+    public Buff[] buffDB;
 
-                InitDatabase();
-                // Set a flag here to indicate whether Firebase is ready to use by your app.
-            } else {
-                Debug.LogError(System.String.Format(
-                    "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
-                // Firebase Unity SDK is not safe to use here.
-            }
-        });
+    [SerializeField] private string stageUrl;
+    [SerializeField] private string teacherUrl;
+    [SerializeField] private string snackUrl;
+    [SerializeField] private string itemUrl;
+    [SerializeField] private string snackTypeUrl;
+    [SerializeField] private string buffUrl;
+
+    private void Start()
+    {
+        StartCoroutine(DownloadTest());
     }
 
-    private DatabaseReference _mDatabaseRef;
-    
-    private void InitDatabase()
-    {
-        _mDatabaseRef = FirebaseDatabase.DefaultInstance.RootReference;
-    }
-
-    #region User
-
-    public async Task<bool> CheckNewUser(string userId)
-    {
-        DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
-        DataSnapshot snapshot = null;
-        await reference.GetValueAsync().ContinueWithOnMainThread(task =>
+    IEnumerator DownloadTest() {
+        var uwr_Stage = new UnityWebRequest(stageUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Stage = Path.Combine(Application.persistentDataPath, "Stage.json");
+        uwr_Stage.downloadHandler = new DownloadHandlerFile(path_Stage);
+        yield return uwr_Stage.SendWebRequest();
+        if (uwr_Stage.isNetworkError || uwr_Stage.isHttpError)
+            Debug.LogError(uwr_Stage.error);
+        else
         {
-            if (task.IsFaulted)
-            {
-                // Handle the error...
-            }
-            else if (task.IsCompleted)
-            {
-                snapshot = task.Result;
-                // Do something with snapshot...
-                return snapshot.HasChild(userId);
-            }
-            return snapshot != null && snapshot.HasChild(userId);
-        });
-        return snapshot.HasChild(userId);
-    }
-
-    public void WriteNewUser(string userId, string nickName)
-    {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
-        User user = new User(nickName);
-        string json = JsonUtility.ToJson(user);
+            Debug.Log("File successfully downloaded and saved to " + path_Stage);
+            var stageData = File.ReadAllText(Application.persistentDataPath + "/Stage.json");
+            //stageDB = JsonConvert.DeserializeObject<Stage[]>(stageData);
+            var stageDataBase = JsonUtility.FromJson<StageDB>("{\"stage\":" + stageData + "}");
+            stageDB = stageDataBase.stage;
+        }
         
-        reference.Child(userId).SetRawJsonValueAsync(json);
+        var uwr_Teacher = new UnityWebRequest(teacherUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Teacher = Path.Combine(Application.persistentDataPath, "Teacher.json");
+        uwr_Teacher.downloadHandler = new DownloadHandlerFile(path_Teacher);
+        yield return uwr_Teacher.SendWebRequest();
+        if (uwr_Teacher.isNetworkError || uwr_Teacher.isHttpError)
+            Debug.LogError(uwr_Teacher.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_Teacher);
+            var teacherData = File.ReadAllText(Application.persistentDataPath + "/Teacher.json");
+            //teacherDB = JsonConvert.DeserializeObject<Teacher[]>(teacherData);
+            var teacherDataBase = JsonUtility.FromJson<TeacherDB>("{\"teacher\":" + teacherData + "}");
+            teacherDB = teacherDataBase.teacher;
+        }
+        
+        var uwr_Snack = new UnityWebRequest(snackUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Snack = Path.Combine(Application.persistentDataPath, "Snack.json");
+        uwr_Snack.downloadHandler = new DownloadHandlerFile(path_Snack);
+        yield return uwr_Snack.SendWebRequest();
+        if (uwr_Snack.isNetworkError || uwr_Snack.isHttpError)
+            Debug.LogError(uwr_Snack.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_Snack);
+            var snackData = File.ReadAllText(Application.persistentDataPath + "/Snack.json");
+            //snackDB = JsonConvert.DeserializeObject<Snack[]>(snackData);
+            var snackDataBase = JsonUtility.FromJson<SnackDB>("{\"snack\":" + snackData + "}");
+            snackDB = snackDataBase.snack;
+        }
+        
+        var uwr_Item = new UnityWebRequest(itemUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Item = Path.Combine(Application.persistentDataPath, "Item.json");
+        uwr_Item.downloadHandler = new DownloadHandlerFile(path_Item);
+        yield return uwr_Item.SendWebRequest();
+        if (uwr_Item.isNetworkError || uwr_Item.isHttpError)
+            Debug.LogError(uwr_Item.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_Item);
+            var itemData = File.ReadAllText(Application.persistentDataPath + "/Item.json");
+            //itemDB = JsonConvert.DeserializeObject<Item[]>(itemData);
+            var itemDataBase = JsonUtility.FromJson<ItemDB>("{\"item\":" + itemData + "}");
+            itemDB = itemDataBase.item;
+        }
+        
+        var uwr_SnackType = new UnityWebRequest(snackTypeUrl, UnityWebRequest.kHttpVerbGET);
+        string path_SnackType = Path.Combine(Application.persistentDataPath, "SnackType.json");
+        uwr_SnackType.downloadHandler = new DownloadHandlerFile(path_SnackType);
+        yield return uwr_SnackType.SendWebRequest();
+        if (uwr_SnackType.isNetworkError || uwr_SnackType.isHttpError)
+            Debug.LogError(uwr_SnackType.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_SnackType);
+            var snackTypeData = File.ReadAllText(Application.persistentDataPath + "/SnackType.json");
+            //snackTypeDB = JsonConvert.DeserializeObject<SnackType[]>(snackTypeData);
+            var snackTypeDataBase = JsonUtility.FromJson<SnackTypeDB>("{\"snackType\":" + snackTypeData + "}");
+            snackTypeDB = snackTypeDataBase.snackType;
+        }
+        
+        var uwr_Buff = new UnityWebRequest(buffUrl, UnityWebRequest.kHttpVerbGET);
+        string path_Buff = Path.Combine(Application.persistentDataPath, "Buff.json");
+        uwr_Buff.downloadHandler = new DownloadHandlerFile(path_Buff);
+        yield return uwr_Buff.SendWebRequest();
+        if (uwr_Buff.isNetworkError || uwr_Buff.isHttpError)
+            Debug.LogError(uwr_Buff.error);
+        else
+        {
+            Debug.Log("File successfully downloaded and saved to " + path_Buff);
+            var buffData = File.ReadAllText(Application.persistentDataPath + "/Buff.json");
+            //snackTypeDB = JsonConvert.DeserializeObject<SnackType[]>(snackTypeData);
+            var buffDataBase = JsonUtility.FromJson<BuffDB>("{\"buff\":" + buffData + "}");
+            buffDB = buffDataBase.buff;
+        }
+        
+        GetComponent<LogInManager>().LoginForLastLoggedInProvider();
+        AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.TitleOpened();
     }
+    
 
-    public void DeleteCurrentUser(string userId)
-    {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userId);
-        reference.RemoveValueAsync();
-    }
-
-    #endregion
 }

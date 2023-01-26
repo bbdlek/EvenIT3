@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/0_EvenIT3/0_Scenes/StartScene_js.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/0_EvenIT3/0_Scenes/StartScene.unity
+    guid: 9e920b109c89dd8449d3db0f40033d9d
   - enabled: 1
     path: Assets/0_EvenIT3/0_Scenes/MainMenuScene.unity
     guid: 6287d4d9508299d46b81948036949c9b
+  - enabled: 1
+    path: Assets/0_EvenIT3/0_Scenes/InGameScene_Easy.unity
+    guid: 28cdae16eae4f864dad07649a42be5c6
+  - enabled: 1
+    path: Assets/0_EvenIT3/0_Scenes/InGameScene_Hard.unity
+    guid: 7f7f979f2bfd9c24790cc1ca51c2ed47
   m_configObjects: {}

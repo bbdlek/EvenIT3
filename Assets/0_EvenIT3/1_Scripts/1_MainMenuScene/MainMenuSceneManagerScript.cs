@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using Toast.Gamebase;
 using UnityEngine;
 
@@ -10,31 +11,43 @@ public class MainMenuSceneManagerScript : MonoBehaviour
 
     private void Awake()
     {
+        MasterAudio.ChangePlaylistByName("BGM_Main");
         InitSceneManager();
     }
 
     private void Start()
     {
         CheckNewUser();
+        mainMenuSceneUIManager.InitSetup(gameObject);
     }
 
     private void InitSceneManager()
     {
         AppManagerScript.Instance.sceneManagerObject = gameObject;
         if (!mainMenuSceneUIManager) mainMenuSceneUIManager = FindObjectOfType<MainMenuSceneUIManager>();
-
-        mainMenuSceneUIManager.InitSetup(gameObject);
     }
 
     private async void CheckNewUser()
     {
-        if (!await DBManagerScript.Instance.CheckNewUser(UserManager.Instance.userID))
+        if (!await FBManagerScript.Instance.CheckNewUser(UserManager.Instance.userID))
         {
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.SetNickNamePanel);
         }
         else
         {
+            FBManagerScript.Instance.GetUserData();
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.MainMenuTouchPanel);
+            mainMenuSceneUIManager.CheckRestart();
+            mainMenuSceneUIManager.ResetCommodities();
+            mainMenuSceneUIManager.ResetItems();
+            mainMenuSceneUIManager.InitProfile();
+            mainMenuSceneUIManager.SetCollectionNum();
+            mainMenuSceneUIManager.InitCollection();
+            mainMenuSceneUIManager.InitProfileEdges();
+            mainMenuSceneUIManager.InitProfileImages();
+            mainMenuSceneUIManager.InitProfileCollection();
+            mainMenuSceneUIManager.InitProfileScore();
         }
+        mainMenuSceneUIManager.InitSettingUI();
     }
 }

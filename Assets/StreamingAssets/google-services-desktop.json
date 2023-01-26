@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:784491189850:android:356511e132c86973aaea63",
+        "mobilesdk_app_id": "1:784491189850:android:515f8d3e3e3c5e42aaea63",
         "android_client_info": {
-          "package_name": "com.DefaultCompany.EvenIT3"
+          "package_name": "com.Snacks.SnackCatcher"
         }
       },
       "oauth_client": [
         {
-          "client_id": "784491189850-6ph605j0322vugrqnf5jtr8pjcq2heih.apps.googleusercontent.com",
+          "client_id": "784491189850-t8lm45jlsivq2amlm159eg3bi289m8g7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.DefaultCompany.EvenIT3",
+            "package_name": "com.Snacks.SnackCatcher",
             "certificate_hash": "ba33cb9073211bbbb42fb0e84b745972d1bd76a6"
           }
         },
@@ -29,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBkbHNmywT0HvikSLPZpAD9jMhGsVuxOlY"
+          "current_key": "AIzaSyA8Jrp1oj1zT6K-5O64RDxbpIHLGfDvYmw"
         }
       ],
       "services": {

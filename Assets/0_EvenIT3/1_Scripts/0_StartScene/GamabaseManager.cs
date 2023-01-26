@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Toast.Gamebase;
@@ -80,7 +81,7 @@ public class GamabaseManager : MonoBehaviour
                             // 테스트 중
                             Debug.Log("IN_TEST");
                             transform.AddComponent<GamebaseEventManager>();
-                            GetComponent<LogInManager>().LoginForLastLoggedInProvider();
+                            //GetComponent<LogInManager>().LoginForLastLoggedInProvider();
                             break;
                         }
                         case GamebaseLaunchingStatus.IN_REVIEW:
