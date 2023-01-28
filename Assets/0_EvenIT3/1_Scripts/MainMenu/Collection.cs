@@ -10,7 +10,6 @@ public class Collection : MonoBehaviour
     public GameObject ExView, OneView, TwoView, ThreeView, Three2View, FourView, FiveView, SixView;
     public Image ExBtn, OneBtn, TwoBtn, ThreeBtn, Three2Btn, FourBtn, FiveBtn, SixBtn;
     public Text CountTxt;
-    int count = 0;
 
 
     // น๖วม
@@ -116,14 +115,5 @@ public class Collection : MonoBehaviour
         FourView.SetActive(false);
         FiveView.SetActive(false);
         SixView.SetActive(true);
-    }
-
-    public void Count()
-    {
-        CountTxt.text = "(" + count + "/20)";
-        if (count > 0)
-        {
-
-        }
     }
 }

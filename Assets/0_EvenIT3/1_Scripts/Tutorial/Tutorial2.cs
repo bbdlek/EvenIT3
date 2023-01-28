@@ -108,6 +108,6 @@ public class Tutorial2 : MonoBehaviour
     public void T2Click17()
     {
         T2View17.SetActive(false);
-        T2View17.transform.parent.gameObject.SetActive(false);
+
     }
 }
