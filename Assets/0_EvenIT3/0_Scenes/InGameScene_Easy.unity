@@ -4895,7 +4895,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initFinish: 0
   sortOrder: 1
-  isAutoScaleMode: 1
   isScaleModeValue: 1
   rewardSnackPrefab: {fileID: 929383790309266292, guid: 2d531e3215da8304797d473099b7145f, type: 3}
   maxSnackNum: 0
@@ -4920,7 +4919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -4957,8 +4956,8 @@ Canvas:
   m_GameObject: {fileID: 366352348}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 855912992}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -11143,6 +11142,7 @@ GameObject:
   - component: {fileID: 855912993}
   - component: {fileID: 855912992}
   - component: {fileID: 855912991}
+  - component: {fileID: 855912994}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11216,6 +11216,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &855912994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855912990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc11adaa984381742b44476c6bf71023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894623421
 GameObject:
   m_ObjectHideFlags: 0

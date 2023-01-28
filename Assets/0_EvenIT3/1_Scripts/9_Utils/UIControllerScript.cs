@@ -26,22 +26,11 @@ public class UIControllerScript : MonoBehaviour
         private Dictionary<string, GameObject> _uiDictionary;
 
         protected GameObject NowClickBtnUI;
-
-        [SerializeField] protected bool isAutoScaleMode = true;
+        
         [SerializeField] [Range(0f, 1f)] protected float isScaleModeValue = 1f;
 
         public virtual void InitSetup(GameObject scriptObject)
         {
-            if (isAutoScaleMode)
-            {
-                var scaler = GetComponent<CanvasScaler>();
-                scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-                if (Screen.height / (float) Screen.width > 0.5625f) // Change Canvas Reference
-                    scaler.matchWidthOrHeight = 1f - isScaleModeValue;
-                else
-                    scaler.matchWidthOrHeight = isScaleModeValue;
-            }
-
             GetComponent<Canvas>().sortingOrder = (int) sortOrder;
             _uiDictionary = new Dictionary<string, GameObject>();
             _rootObject = gameObject;

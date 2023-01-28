@@ -486,7 +486,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             InitProfileCollection();
             InitProfileScore();
             ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
-            FindUIObject("Tutorial1").SetActive(true);
+            //FindUIObject("Tutorial1").SetActive(true);
         }
     }
 
@@ -594,14 +594,14 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickChapterToStage(int stage)
     {
-        if (UserManager.Instance.userData.starList.Count == 0)
+        /*if (UserManager.Instance.userData.starList.Count == 0)
         {
             FindUIObject("Tutorial2-2").SetActive(true);
-        }
+        }*/
         
         AppManagerScript.Instance.selectedStage = stage;
         
-        FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
+        //FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
         
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
 
@@ -622,7 +622,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             temp.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Snacks/" +
                 DBManagerScript.Instance.snackDB[DBManagerScript.Instance.stageDB[stageNum].snack2].name);
         }
-        if (DBManagerScript.Instance.stageDB[stageNum].snack2 != -1)
+        if (DBManagerScript.Instance.stageDB[stageNum].snack3 != -1)
         {
             GameObject temp = Instantiate(stagePageItemRoster, FindUIObject("StagePageItemList").transform);
             temp.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Snacks/" +
