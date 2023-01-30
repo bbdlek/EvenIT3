@@ -806,5 +806,10 @@ public class InGameSceneUIManager : UIControllerScript
 
         FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("ClearPanel").SetActive(true);
+        if (!PlayerPrefs.HasKey("Tutorial4"))
+        {
+            PlayerPrefs.SetInt("Tutorial4", 1);
+            FindUIObject("Tutorial4-1").SetActive(true);
+        }
     }
 }

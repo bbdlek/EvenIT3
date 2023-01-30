@@ -127,7 +127,9 @@ public class Tutorial3 : MonoBehaviour
     public void T3Click20()
     {
         T3View20.SetActive(false);
-
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("Tutorial_Teacher").SetActive(false);
+        GameManager.Instance.gameState = GameManager.GameState.InGame;
+        Time.timeScale = 1;
     }
 
 }

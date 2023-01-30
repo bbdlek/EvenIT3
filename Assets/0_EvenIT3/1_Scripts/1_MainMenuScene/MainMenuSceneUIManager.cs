@@ -36,6 +36,17 @@ public class MainMenuSceneUIManager : UIControllerScript
             OnClickChapterToStage(AppManagerScript.Instance.selectedStage);
             AppManagerScript.Instance.isRestart = false;
         }
+        else
+        {
+            if (PlayerPrefs.HasKey("Tutorial4"))
+            {
+                if (PlayerPrefs.GetInt("Tutorial4") == 1)
+                {
+                    FindUIObject("Tutorial4-4").SetActive(true);
+                    PlayerPrefs.SetInt("Tutorial4", 2);
+                }
+            }
+        }
     }
 
     private void AddOnClick()
@@ -486,7 +497,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             InitProfileCollection();
             InitProfileScore();
             ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
-            //FindUIObject("Tutorial1").SetActive(true);
+            FindUIObject("Tutorial1").SetActive(true);
         }
     }
 
@@ -509,7 +520,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         ChangeUI(MainMenuScenePanels.AchievementPanel);
     }
     
-    private void OnClickCollectionMoveBtn()
+    public void OnClickCollectionMoveBtn()
     {
         MasterAudio.PlaySound("CollectionClick");
         FindUIObject("CollectionExplainPanel").SetActive(true);
@@ -601,7 +612,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         
         AppManagerScript.Instance.selectedStage = stage;
         
-        //FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
+        FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
         
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
 
@@ -740,7 +751,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
-    private void OnClickBuffBtn()
+    public void OnClickBuffBtn()
     {
         FindUIObject("CollectionExplainPanel").SetActive(true);
         FindUIObject("Chapter1Panel").SetActive(false);
@@ -752,7 +763,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("Chapter6Panel").SetActive(false);
     }
 
-    private void OnClickChapter1Btn()
+    public void OnClickChapter1Btn()
     {
         FindUIObject("CollectionExplainPanel").SetActive(false);
         FindUIObject("Chapter1Panel").SetActive(true);
@@ -1514,6 +1525,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         SettingBgmVolume();
         SettingEffectVolume();
         ResetCommodities();
+        ResetEnergy();
     }
 
     public void SettingBgmVolume()
@@ -1571,6 +1583,17 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;
         FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem > 0;*/
+    }
+
+    public void InitEnergy()
+    {
+        UserManager.Instance.LoadFromDB();
+        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.m_HeartAmount.ToString();
+    }
+
+    public void ResetEnergy()
+    {
+        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.m_HeartAmount.ToString();
     }
     
     //Stage

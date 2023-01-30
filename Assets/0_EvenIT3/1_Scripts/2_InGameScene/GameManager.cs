@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager>
         if (AppManagerScript.Instance.isStageTutorial)
         {
             inGameSceneUIManager.FindUIObject("Tutorial3").SetActive(true);
+            inGameSceneUIManager.FindUIObject("Tutorial_Teacher").SetActive(true);
             gameState = GameState.Pause;
             Time.timeScale = 0;
         }
@@ -445,6 +446,11 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
+                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    {
+                        PlayerPrefs.SetInt("miniTutorial", 1);
+                        inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                    }
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
                 break;
@@ -456,8 +462,12 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    if(AppManagerScript.Instance.isStageTutorial)
-                        inGameSceneUIManager.FindUIObject("Mini").SetActive(true);
+                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    {
+                        PlayerPrefs.SetInt("miniTutorial", 1);
+                        inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                    }
+
                     inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
                 }
                 break;

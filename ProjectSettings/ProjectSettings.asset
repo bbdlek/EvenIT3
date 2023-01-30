@@ -858,7 +858,8 @@ PlayerSettings:
     Build: 0
     Collab: 0
     Game Performance: 0
-    Purchasing: 0
+    Legacy Analytics: 1
+    Purchasing: 1
     UDP: 0
     Unity Ads: 0
   luminIcon:
@@ -875,11 +876,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 8728e817-d5e1-42ed-9449-1f2d455e647d
+  cloudProjectId: 8fd86d9c-b899-4254-bb98-7c758ef200a2
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: SnackCatcher
+  organizationId: eveniteam3
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

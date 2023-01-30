@@ -43,6 +43,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
             mainMenuSceneUIManager.InitProfileImages();
             mainMenuSceneUIManager.InitProfileCollection();
             mainMenuSceneUIManager.InitProfileScore();
+            mainMenuSceneUIManager.InitEnergy();
         }
     }
 }

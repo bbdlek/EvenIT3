@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 
 public class DBManagerScript : Singleton<DBManagerScript>
 {
+    public bool isDBReady;
     public Snack[] snackDB;
     public Teacher[] teacherDB;
     public Stage[] stageDB;
@@ -26,6 +27,7 @@ public class DBManagerScript : Singleton<DBManagerScript>
 
     private void Start()
     {
+        isDBReady = false;
         StartCoroutine(DownloadTest());
     }
 
@@ -118,10 +120,23 @@ public class DBManagerScript : Singleton<DBManagerScript>
             //snackTypeDB = JsonConvert.DeserializeObject<SnackType[]>(snackTypeData);
             var buffDataBase = JsonUtility.FromJson<BuffDB>("{\"buff\":" + buffData + "}");
             buffDB = buffDataBase.buff;
+            isDBReady = true;
         }
         
-        GetComponent<LogInManager>().LoginForLastLoggedInProvider();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.TitleOpened();
+        
+        if(isDBReady)
+        {
+            GetComponent<LogInManager>().LoginForLastLoggedInProvider();
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager
+                .TitleOpened();
+        }
+        else
+        {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager
+                .FindUIObject("DBInfo").GetComponent<TMPro.TMP_Text>().text = "서버에 문제가 있습니다. 잠시후 재접속 해주세요.";
+            yield return new WaitForSeconds(5f);
+            Application.Quit();
+        }
     }
     
 

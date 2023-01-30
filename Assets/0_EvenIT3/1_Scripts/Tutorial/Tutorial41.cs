@@ -23,6 +23,6 @@ public class Tutorial41 : MonoBehaviour
     public void T4Click3()
     {
         T4View3.SetActive(false);
-
+        gameObject.SetActive(false);
     }
 }

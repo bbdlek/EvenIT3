@@ -30,6 +30,9 @@ public class User
         starList = new List<int>();
         snackList = new List<int>(DBManagerScript.Instance.snackDB.Length);
 
+        energy = 5;
+        lastDate = DateTime.Now.ToLocalTime().ToBinary().ToString();
+
         profileImageIndex = 0;
         profileEdgeIndex = 0;
     }

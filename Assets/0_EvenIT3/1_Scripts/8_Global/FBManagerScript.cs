@@ -110,6 +110,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
                         UserManager.Instance.userData.snackList.Add(0);
                     }
                 }
+                UserManager.Instance.LoadFromDB();
 
             }
         });

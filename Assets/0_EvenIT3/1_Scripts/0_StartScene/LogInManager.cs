@@ -215,6 +215,8 @@ public class LogInManager : MonoBehaviour
             {
                 Debug.Log("Withdraw succeeded.");
                 UserManager.Instance.ClearUserManager();
+                PlayerPrefs.DeleteKey("Tutorial4");
+                PlayerPrefs.DeleteKey("miniTutorial");
                 AppManagerScript.Instance.ChangeScene(SceneName.StartScene);
             }
             else

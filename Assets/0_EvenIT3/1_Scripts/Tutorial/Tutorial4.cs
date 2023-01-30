@@ -14,7 +14,8 @@ public class Tutorial4 : MonoBehaviour
     {
         T4View4.SetActive(false);
         T4View5.SetActive(true);
-        Collection.GetComponent<Collection>().ClickOne();
+        FindObjectOfType<MainMenuSceneUIManager>().OnClickCollectionMoveBtn();
+        FindObjectOfType<MainMenuSceneUIManager>().OnClickChapter1Btn();
     }
 
     public void T4Click5()
@@ -51,7 +52,7 @@ public class Tutorial4 : MonoBehaviour
     {
         T4View10.SetActive(false);
         T4View11.SetActive(true);
-        Collection.GetComponent<Collection>().ClickEx();
+        FindObjectOfType<MainMenuSceneUIManager>().OnClickBuffBtn();
     }
 
     public void T4Click11()
@@ -87,7 +88,13 @@ public class Tutorial4 : MonoBehaviour
     public void T4Click16()
     {
         T4View16.SetActive(false);
-        T4View17.SetActive(true);
+        gameObject.SetActive(false);
+        UserManager.Instance.userData.snackList[0] += 10;
+        Mathf.Clamp(UserManager.Instance.userData.snackList[0], 0, 20);
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindObjectOfType<MainMenuSceneUIManager>().SetCollectionNum();
+        FindObjectOfType<MainMenuSceneUIManager>().InitCollection();
+        FindObjectOfType<MainMenuSceneUIManager>().InitProfileCollection();
     }
 
     public void T4Click17()
@@ -99,6 +106,12 @@ public class Tutorial4 : MonoBehaviour
     public void T4Click18()
     {
         T4View18.SetActive(false);
-
+        gameObject.SetActive(false);
+        UserManager.Instance.userData.snackList[0] += 10;
+        Mathf.Clamp(UserManager.Instance.userData.snackList[0], 0, 20);
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindObjectOfType<MainMenuSceneUIManager>().SetCollectionNum();
+        FindObjectOfType<MainMenuSceneUIManager>().InitCollection();
+        FindObjectOfType<MainMenuSceneUIManager>().InitProfileCollection();
     }
 }
