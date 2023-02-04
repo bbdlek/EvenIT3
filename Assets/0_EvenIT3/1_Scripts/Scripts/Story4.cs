@@ -50,5 +50,6 @@ public class Story4 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "봤어? 봤어? 나 어땠어? 잘하지?", 1));
         yield return StartCoroutine(NormalChat("건치요정", "응 봤어! 앞으로 계속 그렇게 하면 돼. 어때? 내가 쉽다고 했지?", 2));
         yield return StartCoroutine(NormalChat("주인공", "쉽지는 않았지만 이젠 요령을 좀 터득했어.\n부적을 모으는 건 시간문제야!", 1));
+        Destroy(transform.parent.gameObject);
     }
 }

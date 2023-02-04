@@ -58,5 +58,6 @@ public class Story14 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "아… 알았어\n(속마음: 와… 성질이 아주 고약한데 ?)\n너가 그 녀석보다 더 강하다는 건 알겠는데 왜 이 학교에\n나타난 거야 ? ", 3));
         yield return StartCoroutine(NormalChat("뉴충치요정", "왜 나타났냐고 ? 그런 걸 왜 물어보는 거지 ? 당연히 충치를 퍼트리기 위해서지", 4));
         yield return StartCoroutine(NormalChat("주인공", "도와줘 건치요정!!! 큰일 났어!!! 충치요정이 다시 나타났다구!!!!!", 5));
+        Destroy(transform.parent.gameObject);
     }
 }

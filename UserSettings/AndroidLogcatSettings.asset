@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "LMV500N53b05663",
         "name": "com.Snacks.SnackCatcher",
-        "processId": 13645,
+        "processId": 16285,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -138,6 +138,60 @@
             "deviceId": "LMV500N53b05663",
             "name": "com.Snacks.SnackCatcher",
             "processId": 13645,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 6970,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 8106,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 9074,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 9821,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 14655,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 7677,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 8215,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 9917,
+            "exited": false
+        },
+        {
+            "deviceId": "LMV500N53b05663",
+            "name": "com.Snacks.SnackCatcher",
+            "processId": 16285,
             "exited": false
         }
     ],

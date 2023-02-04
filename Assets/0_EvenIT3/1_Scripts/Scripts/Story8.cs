@@ -62,5 +62,6 @@ public class Story8 : MonoBehaviour
         yield return StartCoroutine(NormalChat("충치 요정", "흐음....내가 왜 저 사람들의 고통을 생각해줘야 하는 거지 ?\n난 잘 모르겠는데 말이지...", 3));
         yield return StartCoroutine(NormalChat("주인공", "야!!! 충치가 얼마나 아픈 줄 알아??? 너 일로 와!!", 5));
         yield return StartCoroutine(NormalChat("건치 요정", "둘다 그마아아아아안!", 6));
+        Destroy(transform.parent.gameObject);
     }
 }

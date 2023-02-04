@@ -69,6 +69,20 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = 0;
         }
         
+        if(stageNum == 12)
+        {
+            if (UserManager.Instance.userData.starList.Count < stageNum + 1)
+            {
+                if(!PlayerPrefs.HasKey("LookHardOpening"))
+                {
+                    PlayerPrefs.SetInt("LookHardOpening", 1);
+                    Instantiate(Resources.Load<GameObject>("Story/HardOpening"), inGameSceneUIManager.transform);
+                    gameState = GameState.Pause;
+                    Time.timeScale = 0;
+                }
+            }
+        }
+        
         //GameStart
         _isTimer = true;
     }
@@ -308,6 +322,10 @@ public class GameManager : Singleton<GameManager>
     {
         if (curSnack< maxSnack - 1)
         {
+            UserManager.Instance.userData.achievementCount[46] += 1;
+            UserManager.Instance.userData.achievementCount[47] += 1;
+            UserManager.Instance.userData.achievementCount[48] += 1;
+            UserManager.Instance.userData.achievementCount[49] += 1;
             curSnack++;
             SelectSnack();
         }
@@ -316,6 +334,40 @@ public class GameManager : Singleton<GameManager>
             remainTime = curTime;
             Debug.Log(remainTime);
             MasterAudio.PlaySound("GameClear");
+            //Achievement
+            UserManager.Instance.userData.achievementCount[stageNum] = 1;
+            if (stageNum == DBManagerScript.Instance.stageDB.Length - 1)
+            {
+                UserManager.Instance.userData.achievementCount[54] = 1;
+            }
+            
+            int chapter = AppManagerScript.Instance.selectedChapter - 1;
+            switch (stageNum)
+            {
+                case 0:
+                    AppManagerScript.Instance.continuousStage[chapter] = 1;
+                    break;
+                case 1:
+                    if (AppManagerScript.Instance.continuousStage[chapter] == 1)
+                    {
+                        AppManagerScript.Instance.continuousStage[chapter] = 2;
+                    }
+                    break;
+                case 2:
+                    if (AppManagerScript.Instance.continuousStage[chapter] == 2)
+                    {
+                        AppManagerScript.Instance.continuousStage[chapter] = 3;
+                    }
+                    break;
+                case 3:
+                    if (AppManagerScript.Instance.continuousStage[chapter] == 3)
+                    {
+                        AppManagerScript.Instance.continuousStage[chapter] = 4;
+                        UserManager.Instance.userData.achievementCount[24 + chapter] = 1;
+                    }
+                    break;
+            }
+            
             switch (AppManagerScript.Instance.selectedChapter)
             {
                 case 1:
@@ -428,7 +480,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private IEnumerator FailedMotion(int type) // type 0: Timer, Decibel
+    private IEnumerator FailedMotion(int type) // type 0: Timer, Decibel, Turn
     {
         player.playerState = Player.State.Idle;
         inGameSceneUIManager.FindUIObject("SurpriseEffect").SetActive(true);
@@ -438,11 +490,15 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(0.5f);
         switch (type)
         {
-            case 0:
+            case 0: //시간초과
                 if (timerItem == 0)
                 {
                     MasterAudio.PlaySound("GameOver");
+                    UserManager.Instance.userData.achievementCount[30] += 1;
+                    UserManager.Instance.userData.achievementCount[31] += 1;
+                    UserManager.Instance.userData.achievementCount[32] += 1;
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
+                    AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
                 }
                 else
                 {
@@ -454,11 +510,15 @@ public class GameManager : Singleton<GameManager>
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
                 break;
-            case 1:
+            case 1: //데시벨
                 if (shieldItem == 0)
                 {
                     MasterAudio.PlaySound("GameOver");
+                    UserManager.Instance.userData.achievementCount[36] += 1;
+                    UserManager.Instance.userData.achievementCount[37] += 1;
+                    UserManager.Instance.userData.achievementCount[38] += 1;
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
+                    AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
                 }
                 else
                 {
@@ -469,6 +529,27 @@ public class GameManager : Singleton<GameManager>
                     }
 
                     inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
+                }
+                break;
+            case 2: //뒤돌기
+                if (shieldItem == 0)
+                {
+                    MasterAudio.PlaySound("GameOver");
+                    UserManager.Instance.userData.achievementCount[33] += 1;
+                    UserManager.Instance.userData.achievementCount[34] += 1;
+                    UserManager.Instance.userData.achievementCount[35] += 1;
+                    inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
+                    AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
+                }
+                else
+                {
+                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    {
+                        PlayerPrefs.SetInt("miniTutorial", 1);
+                        inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                    }
+
+                    inGameSceneUIManager.FindUIObject("FailedLookPanel").SetActive(true);
                 }
                 break;
         }

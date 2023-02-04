@@ -233,6 +233,10 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickFailedLookPanelBuyBtn()
     {
+        UserManager.Instance.userData.achievementCount[43] += 1;
+        UserManager.Instance.userData.achievementCount[44] += 1;
+        UserManager.Instance.userData.achievementCount[45] += 1;
+        GameManager.Instance.shieldItem = 0;
         Time.timeScale = 1;
         FindUIObject("FailedLookPanel").SetActive(false);
         FindUIObject("SurpriseEffect").SetActive(false);
@@ -245,6 +249,10 @@ public class InGameSceneUIManager : UIControllerScript
         FindUIObject("FailedLookPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
         MasterAudio.PlaySound("GameOver");
+        UserManager.Instance.userData.achievementCount[30] += 1;
+        UserManager.Instance.userData.achievementCount[31] += 1;
+        UserManager.Instance.userData.achievementCount[32] += 1;
+        AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
     }
     
     //FailedDecibel
@@ -270,6 +278,10 @@ public class InGameSceneUIManager : UIControllerScript
         FindUIObject("FailedDecibelPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
         MasterAudio.PlaySound("GameOver");
+        UserManager.Instance.userData.achievementCount[36] += 1;
+        UserManager.Instance.userData.achievementCount[37] += 1;
+        UserManager.Instance.userData.achievementCount[38] += 1;
+        AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
     }
     
     //FailedOver
@@ -295,6 +307,10 @@ public class InGameSceneUIManager : UIControllerScript
         FindUIObject("FailedOverPanel").SetActive(false);
         FindUIObject("FailPanel").SetActive(true);
         MasterAudio.PlaySound("GameOver");
+        UserManager.Instance.userData.achievementCount[33] += 1;
+        UserManager.Instance.userData.achievementCount[34] += 1;
+        UserManager.Instance.userData.achievementCount[35] += 1;
+        AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
     }
 
     private void OnClickClearPanelMainMenuBtn()
@@ -362,16 +378,25 @@ public class InGameSceneUIManager : UIControllerScript
     //Item
     private void OnClickItem1Btn()
     {
+        UserManager.Instance.userData.achievementCount[30] += 1;
+        UserManager.Instance.userData.achievementCount[31] += 1;
+        UserManager.Instance.userData.achievementCount[32] += 1;
         StartCoroutine(Player.Instance.Buff_Ice());
     }
     
     private void OnClickItem2Btn()
     {
+        UserManager.Instance.userData.achievementCount[30] += 1;
+        UserManager.Instance.userData.achievementCount[31] += 1;
+        UserManager.Instance.userData.achievementCount[32] += 1;
         StartCoroutine(Player.Instance.Buff_Milk());
     }
     
     private void OnClickItem3Btn()
     {
+        UserManager.Instance.userData.achievementCount[30] += 1;
+        UserManager.Instance.userData.achievementCount[31] += 1;
+        UserManager.Instance.userData.achievementCount[32] += 1;
         StartCoroutine(Player.Instance.Buff_Mask());
     }
     
@@ -415,6 +440,31 @@ public class InGameSceneUIManager : UIControllerScript
 
     public void SetUpStarIcons(int stars)
     {
+        //Achievement
+        if(GameManager.Instance.stageNum == 11)
+        {
+            if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
+            {
+                if(!PlayerPrefs.HasKey("LookEnding"))
+                {
+                    PlayerPrefs.SetInt("LookEnding", 1);
+                    Instantiate(Resources.Load<GameObject>("Story/Ending"), transform);
+                }
+            }
+        }
+        
+        if(GameManager.Instance.stageNum == 23)
+        {
+            if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
+            {
+                if(!PlayerPrefs.HasKey("LookHardEnding"))
+                {
+                    PlayerPrefs.SetInt("LookHardEnding", 1);
+                    Instantiate(Resources.Load<GameObject>("Story/HardEnding"), transform);
+                }
+            }
+        }
+
         rewardGoldNum = 0;
 
         switch (GameManager.Instance.maxSnack)

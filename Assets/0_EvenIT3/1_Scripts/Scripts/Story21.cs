@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,7 +59,9 @@ public class Story21 : MonoBehaviour
         yield return StartCoroutine(NormalChat("뉴충치요정", "으으으으 그만!! 그만!그만!그만!", 2));
         yield return StartCoroutine(NormalChat("", " ", 3));
         yield return StartCoroutine(NormalChat("", " ", 4));
+        MasterAudio.PlaySound("6-1_3");
         yield return StartCoroutine(NormalChat("", "하얘졌던 주변공간이 다시 원래대로 돌아왔다	", 5));
         yield return StartCoroutine(NormalChat("주인공", "도대체 아까 그 장면은 뭐였던거지 ?\n왜 충치요정이랑 건치요정이랑 같이 있는건데 ? 설마....", 5));
+        Destroy(transform.parent.gameObject);
     }
 }

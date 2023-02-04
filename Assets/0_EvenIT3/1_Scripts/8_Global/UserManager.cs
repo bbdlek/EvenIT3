@@ -28,7 +28,7 @@ public class UserManager : Singleton<UserManager>
 
     #region Energy
     
-    public int m_HeartAmount = 0; //보유 하트 개수
+    public int m_HeartAmount = 5; //보유 하트 개수
     public DateTime m_AppQuitTime = new DateTime(1970, 1, 1).ToLocalTime();
     private const int MAX_HEART = 5; //하트 최대값
     public int HeartRechargeInterval = 1800;// 하트 충전 간격(단위:초)
@@ -90,7 +90,6 @@ public class UserManager : Singleton<UserManager>
         {
             if (PlayerPrefs.HasKey("HeartAmount"))
             {
-                Debug.Log("PlayerPrefs has key : HeartAmount");
                 m_HeartAmount = PlayerPrefs.GetInt("HeartAmount");
                 if (m_HeartAmount < 0)
                 {
@@ -102,7 +101,6 @@ public class UserManager : Singleton<UserManager>
                 m_HeartAmount = MAX_HEART;
             }
             //heartAmountLabel.text = m_HeartAmount.ToString();
-            Debug.Log("Loaded HeartAmount : " + m_HeartAmount);
             result = true;
         }
         catch (System.Exception e)
@@ -121,7 +119,6 @@ public class UserManager : Singleton<UserManager>
             PlayerPrefs.Save();
             userData.energy = m_HeartAmount;
             FBManagerScript.Instance.UpdateCurrentUser();
-            Debug.Log("Saved HeartAmount : " + m_HeartAmount);
             result = true;
         }
         catch (System.Exception e)
@@ -138,12 +135,10 @@ public class UserManager : Singleton<UserManager>
         {
             if (PlayerPrefs.HasKey("AppQuitTime"))
             {
-                Debug.Log("PlayerPrefs has key : AppQuitTime");
                 var appQuitTime = string.Empty;
                 appQuitTime = PlayerPrefs.GetString("AppQuitTime");
                 m_AppQuitTime = DateTime.FromBinary(Convert.ToInt64(appQuitTime));
             }
-            Debug.Log(string.Format("Loaded AppQuitTime : {0}", m_AppQuitTime.ToString()));
             //appQuitTimeLabel.text = string.Format("AppQuitTime : {0}", m_AppQuitTime.ToString());
             result = true;
         }
@@ -164,7 +159,6 @@ public class UserManager : Singleton<UserManager>
             PlayerPrefs.Save();
             userData.lastDate = appQuitTime;
             FBManagerScript.Instance.UpdateCurrentUser();
-            Debug.Log("Saved AppQuitTime : " + DateTime.Now.ToLocalTime().ToString());
             result = true;
         }
         catch (System.Exception e)
@@ -180,11 +174,8 @@ public class UserManager : Singleton<UserManager>
             StopCoroutine(m_RechargeTimerCoroutine);
         }
         var timeDifferenceInSec = (int)((DateTime.Now.ToLocalTime() - m_AppQuitTime).TotalSeconds);
-        Debug.Log("TimeDifference In Sec :" + timeDifferenceInSec + "s");
         var heartToAdd = timeDifferenceInSec / HeartRechargeInterval;
-        Debug.Log("Heart to add : " + heartToAdd);
         var remainTime = timeDifferenceInSec % HeartRechargeInterval;
-        Debug.Log("RemainTime : " + remainTime);
         m_HeartAmount += heartToAdd;
         if (m_HeartAmount >= MAX_HEART)
         {
@@ -195,7 +186,6 @@ public class UserManager : Singleton<UserManager>
             m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(remainTime, onFinish));
         }
         //heartAmountLabel.text = string.Format("Hearts : {0}", m_HeartAmount.ToString());
-        Debug.Log("HeartAmount : " + m_HeartAmount);
     }
     public void UseHeart(Action onFinish = null)
     {
@@ -217,7 +207,6 @@ public class UserManager : Singleton<UserManager>
     }
     private IEnumerator DoRechargeTimer(int remainTime, Action onFinish = null)
     {
-        Debug.Log("DoRechargeTimer");
         if (remainTime <= 0)
         {
             m_RechargeRemainTime = HeartRechargeInterval;
@@ -226,12 +215,10 @@ public class UserManager : Singleton<UserManager>
         {
             m_RechargeRemainTime = remainTime;
         }
-        Debug.Log("heartRechargeTimer : " + m_RechargeRemainTime + "s");
         //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
         
         while (m_RechargeRemainTime > 0)
         {
-            Debug.Log("heartRechargeTimer : " + m_RechargeRemainTime + "s");
             //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
             m_RechargeRemainTime -= 1;
             yield return new WaitForSeconds(1f);
@@ -242,7 +229,6 @@ public class UserManager : Singleton<UserManager>
             m_HeartAmount = MAX_HEART;
             m_RechargeRemainTime = 0;
             //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
-            Debug.Log("HeartAmount reached max amount");
             m_RechargeTimerCoroutine = null;
         }
         else
@@ -250,7 +236,6 @@ public class UserManager : Singleton<UserManager>
             m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(HeartRechargeInterval, onFinish));
         }
         //heartAmountLabel.text = string.Format("Hearts : {0}", m_HeartAmount.ToString());
-        Debug.Log("HeartAmount : " + m_HeartAmount);
     }
 
     #endregion

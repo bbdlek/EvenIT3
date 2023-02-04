@@ -52,5 +52,6 @@ public class Story17 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "뭐 ? 333법칙 ? 그걸 왜 니가 나한테 물어봐 ?\n넌 충치를 퍼트리기 위해 왔다면서", 2));
         yield return StartCoroutine(NormalChat("뉴충치요정", "...뭐? 아 그렇지", 1));
         yield return StartCoroutine(NormalChat("주인공", "(속마음 : 뭐지? 저 충치요정 뭔가 이상해)", 2));
+        Destroy(transform.parent.gameObject);
     }
 }

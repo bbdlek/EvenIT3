@@ -55,5 +55,6 @@ public class Story2 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "그럼 내가 알고 있는 선생님이 아닐 수도 있다는 거야?", 1));
         yield return StartCoroutine(NormalChat("건치요정", "그렇지. 그러니까 항상 조심해야 해", 2));
         yield return StartCoroutine(NormalChat("주인공", "그럼 어서 빨리 선생님을 구하러 가야겠어!", 3));
+        Destroy(transform.parent.gameObject);
     }
 }

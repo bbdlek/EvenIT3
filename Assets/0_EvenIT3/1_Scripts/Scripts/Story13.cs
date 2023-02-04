@@ -60,5 +60,6 @@ public class Story13 : MonoBehaviour
         yield return StartCoroutine(NormalChat("??요정", "나? 내가 누구일 것 같아?", 4));
         yield return StartCoroutine(NormalChat("주인공", "그걸 내가 어떻게 알아! 도대체 정체가 뭐야?", 3));
         yield return StartCoroutine(NormalChat("??요정", "후후후후", 4));
+        Destroy(transform.parent.gameObject);
     }
 }

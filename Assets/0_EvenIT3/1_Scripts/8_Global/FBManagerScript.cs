@@ -87,10 +87,10 @@ public class FBManagerScript : Singleton<FBManagerScript>
         reference.RemoveValueAsync();
     }
 
-    public void GetUserData()
+    public async Task GetUserData()
     {
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(UserManager.Instance.userID).Child("UserData");
-        reference.GetValueAsync().ContinueWith(task =>
+        await reference.GetValueAsync().ContinueWith(async task =>
         {
             if (task.IsFaulted)
             {
@@ -100,20 +100,28 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 var snapshot = task.Result;
                 string json = snapshot.GetRawJsonValue();
                 Debug.Log(json);
-                Debug.Log(JsonUtility.FromJson<User>(json));
-                UserManager.Instance.userData = JsonUtility.FromJson<User>(json);
-                Debug.Log(DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count);
-                if (UserManager.Instance.userData.snackList.Count != DBManagerScript.Instance.snackDB.Length)
-                {
-                    for (int i = 0; i < DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count + 1; i++)
-                    {
-                        UserManager.Instance.userData.snackList.Add(0);
-                    }
-                }
+                //UserManager.Instance.userData = JsonConvert.DeserializeObject<User>(json);
+                UserManager.Instance.userData = await Task.Run(() => JsonUtility.FromJson<User>(json));
+                await Task.Run(CompareDBAndUserData);
                 UserManager.Instance.LoadFromDB();
-
             }
         });
+    }
+
+    private void CompareDBAndUserData()
+    {
+        int snackLen = DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count;
+        for (int i = 0; i < snackLen; i++)
+        {
+            UserManager.Instance.userData.snackList.Add(0);
+        }
+
+        int achieveLen = DBManagerScript.Instance.achievementDB.Length - UserManager.Instance.userData.achievementList.Count;
+        for (int i = 0; i < achieveLen; i++)
+        {
+            UserManager.Instance.userData.achievementList.Add(false);
+            UserManager.Instance.userData.achievementCount.Add(0);
+        }
     }
 
     public void UpdateCurrentUser()

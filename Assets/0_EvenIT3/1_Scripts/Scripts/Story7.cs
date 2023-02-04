@@ -58,5 +58,6 @@ public class Story7 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "하지만 너무 불안하단 말이야... 내가 부적을 다 모을 수 있을지도 걱정이고..", 3));
         yield return StartCoroutine(NormalChat("건치 요정", "그마아아아아안!!! 그런 걱정은 하지 마! 내가 옆에 있잖아!\n우리 둘이 힘을 합친다면 충분히 모든 부적을 모을 수 있어!", 4));
         yield return StartCoroutine(NormalChat("주인공", "그래!! 난 할 수 있다!!!!", 5));
+        Destroy(transform.parent.gameObject);
     }
 }

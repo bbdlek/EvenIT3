@@ -55,5 +55,6 @@ public class Story10 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "나....나도...", 2));
         yield return StartCoroutine(NormalChat("건치 요정", "그래도 얼마 안남았어!", 3));
         yield return StartCoroutine(NormalChat("주인공", "그래! 얼마 안 남은거 빨리 모아서 해결하자고!\n가자~~!!!", 4));
+        Destroy(transform.parent.gameObject);
     }
 }

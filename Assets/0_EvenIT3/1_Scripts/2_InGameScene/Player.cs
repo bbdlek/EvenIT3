@@ -116,7 +116,7 @@ public class Player : Singleton<Player>
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(true);
         eatingSpeed += eatingSpeed * DBManagerScript.Instance.itemDB[2].NN / 100;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
         eatingSpeed = prevEatingSpeed;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item2BtnActive").SetActive(false);
         isMilk = false;
@@ -131,7 +131,7 @@ public class Player : Singleton<Player>
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3Btn").GetComponent<UnityEngine.UI.Button>().interactable = false;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(true);
         decibelAmount -= decibelAmount * DBManagerScript.Instance.itemDB[1].NN / 100;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
         decibelAmount = prevDecibelAmount;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Item3BtnActive").SetActive(false);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("DecibelMask").SetActive(false);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -84,8 +85,11 @@ public class HardEnding : MonoBehaviour
         yield return StartCoroutine(NormalChat("", "약 1시간이 지난 후 건치요정이 천천히 입을 열었다	", 9));
         yield return StartCoroutine(NormalChat("건치요정", "나 이제 가봐야 할것 같아", 10));
         yield return StartCoroutine(NormalChat("주인공", "뭐? 좀만 더 있다가 가지...", 11));
+        MasterAudio.ChangePlaylistByName("BGM_Hard_Ending");
         yield return StartCoroutine(NormalChat("건치요정", "아니 이제는 진짜 돌아가야해.\n저 항아리는 내가 가지고 갈게 그럼 앞으로 충치요정의 봉인이 풀리는 일은 없을거야.\n그럼 잘있어...양치 꼭 잘하고!", 12));
         yield return StartCoroutine(NormalChat("주인공", "그래, 너도 잘지내!", 13));
         yield return StartCoroutine(NormalChat("", "The End	", 14));
+        MasterAudio.ChangePlaylistByName("BGM_Main");
+        Destroy(transform.parent.gameObject);
     }
 }

@@ -27,7 +27,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
     {
         if (!await FBManagerScript.Instance.CheckNewUser(UserManager.Instance.userID))
         {
-            mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.SetNickNamePanel);
+            mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.StoryPanel);
         }
         else
         {
@@ -44,6 +44,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
             mainMenuSceneUIManager.InitProfileCollection();
             mainMenuSceneUIManager.InitProfileScore();
             mainMenuSceneUIManager.InitEnergy();
+            mainMenuSceneUIManager.InitAchievement();
         }
     }
 }

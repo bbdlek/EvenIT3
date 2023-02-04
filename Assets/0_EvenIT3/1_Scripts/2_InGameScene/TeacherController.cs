@@ -45,6 +45,7 @@ public class TeacherController : MonoBehaviour
     public Image teacherImg;
 
     [SerializeField] private bool isEnglishSkill = false;
+    [SerializeField] private bool isHistorySkill = false;
 
     private int _stageNum;
 
@@ -73,6 +74,7 @@ public class TeacherController : MonoBehaviour
         {
             GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount *
                 DBManagerScript.Instance.teacherDB[_teacherNo].NN / 100;
+            StartCoroutine(HistorySkill());
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 12)
         {
@@ -101,6 +103,22 @@ public class TeacherController : MonoBehaviour
         GameManager.Instance.player.curDecibelAmount -= 30f;
         GameManager.Instance.maxDecibel -= 30f;
         isEnglishSkill = false;
+        StartCoroutine(EnglishSkill());
+    }
+    
+    private IEnumerator HistorySkill()
+    {
+        yield return new WaitForSeconds(Random.Range(6, 10));
+        if (teacherState != TeacherState.Idle)
+        {
+            StartCoroutine(HistorySkill());
+            yield break;
+        }
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doClose");
+        isHistorySkill = true;
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doOpen");
+        isHistorySkill = false;
         StartCoroutine(EnglishSkill());
     }
 
@@ -134,7 +152,7 @@ public class TeacherController : MonoBehaviour
     {
         float turnTime = Random.Range(_minDelay, _maxDelay);
         yield return new WaitForSeconds(turnTime);
-        if (isEnglishSkill)
+        if (isEnglishSkill || isHistorySkill)
         {
             StartCoroutine(LookCoroutine());
             yield break;

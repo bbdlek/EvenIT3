@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -76,11 +77,14 @@ public class Ending : MonoBehaviour
         yield return StartCoroutine(NormalChat("건치요정", "자 여기 있어", 7));
         yield return StartCoroutine(NormalChat("", " ", 8));
         yield return StartCoroutine(NormalChat("", "건치요정이 주인공에게 작은 이빨모양 피규어를 건네준다.	", 9));
+        MasterAudio.PlaySound("easy ending_8");
         yield return StartCoroutine(NormalChat("주인공", "이게 뭐야?", 9));
         yield return StartCoroutine(NormalChat("건치요정", "나랑 비슷하게 생긴 아주 귀여운 피규어야.\n거기에는 내 힘이 아주 조금 들어있어서 네가 양치를 잘한다면 앞으로\n충치 생기는 일은 없을 거야 ㅎ", 10));
         yield return StartCoroutine(NormalChat("주인공", "고마워 ㅎㅎ 앞으로 잘 지내~~", 11));
         yield return StartCoroutine(NormalChat("", "건치요정은 그렇게 원래 살던 곳으로 떠났다	", 0));
+        MasterAudio.PlaySound("easy ending_13");
         yield return StartCoroutine(NormalChat("", "하지만 그들은 몰랐다.... 그것이 끝이 아니라는 것을....  The End...", 0));
         yield return StartCoroutine(NormalChat("", " ", 12));
+        Destroy(transform.parent.gameObject);
     }
 }

@@ -188,6 +188,7 @@ public class LogInManager : MonoBehaviour
             UserManager.Instance.userID = Gamebase.GetUserID();
         }
         FBManagerScript.Instance.GetUserData();
+        Debug.Log(DBManagerScript.Instance);
     }
 
     public void LogOut()

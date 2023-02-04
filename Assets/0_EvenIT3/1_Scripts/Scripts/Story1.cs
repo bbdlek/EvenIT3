@@ -64,5 +64,6 @@ public class Story1 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "그럼 너가 하던가!!", 3));
         yield return StartCoroutine(NormalChat("건치요정", "(슬픈척하며) 하지만 나는 학생이 아닌걸.... 내가 사람이었으면 직접했겠지....\n이건 너만이 할 수 있는 일이야.", 5));
         yield return StartCoroutine(NormalChat("주인공", "(속마음 : 나만 할 수 있는 일? 오, 뭐야 나 멋있잖아!)\n한번 해볼게!!", 6));
+        Destroy(transform.parent.gameObject);
     }
 }

@@ -248,16 +248,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.Free3Btn:
                 OnClickFree3Btn();
                 break;
-            case MainMenuSceneButtons.Paid1Btn:
-                OnClickPaid1Btn();
-                break;
-            case MainMenuSceneButtons.Paid2Btn:
-                OnClickPaid2Btn();
-                break;
-            case MainMenuSceneButtons.Paid3Btn:
-                OnClickPaid3Btn();
-                break;
-            
+
             case MainMenuSceneButtons.BuyCheckYesBtn:
                 OnClickBuyCheckYesBtn();
                 break;
@@ -417,11 +408,8 @@ public class MainMenuSceneUIManager : UIControllerScript
         Free1Btn,
         Free2Btn,
         Free3Btn,
-        Paid1Btn,
-        Paid2Btn,
-        Paid3Btn,
-        
-            //BuyCheck
+
+        //BuyCheck
         BuyCheckYesBtn,
         BuyCheckNoBtn,
         
@@ -487,6 +475,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             FBManagerScript.Instance.WriteNewUser(UserManager.Instance.userID, nickName);
             FBManagerScript.Instance.GetUserData();
             FindUIObject("SetNickNamePanel").SetActive(false);
+            ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
             ResetCommodities();
             ResetItems();
             InitProfile();
@@ -496,7 +485,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             InitProfileImages();
             InitProfileCollection();
             InitProfileScore();
-            ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+            InitAchievement();
             FindUIObject("Tutorial1").SetActive(true);
         }
     }
@@ -505,14 +494,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickStageMoveBtn()
     {
         MasterAudio.PlaySound("StageClick");
-        if (UserManager.Instance.userData.starList.Count == 0)
-        {
-            FindUIObject("Tutorial2-1").SetActive(true);
-        }
         ChangeUI(MainMenuScenePanels.StagePanel);
-        FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
-        FindUIObject("Chapter5SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
-        FindUIObject("Chapter6SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
     }
     
     private void OnClickAchievementMoveBtn()
@@ -523,26 +505,13 @@ public class MainMenuSceneUIManager : UIControllerScript
     public void OnClickCollectionMoveBtn()
     {
         MasterAudio.PlaySound("CollectionClick");
-        FindUIObject("CollectionExplainPanel").SetActive(true);
-        FindUIObject("Chapter1Panel").SetActive(false);
-        FindUIObject("Chapter2Panel").SetActive(false);
-        FindUIObject("Chapter3Panel").SetActive(false);
-        FindUIObject("Chapter3Panel2").SetActive(false);
-        FindUIObject("Chapter4Panel").SetActive(false);
-        FindUIObject("Chapter5Panel").SetActive(false);
-        FindUIObject("Chapter6Panel").SetActive(false);
-        FindUIObject("Chapter4Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
-        FindUIObject("Chapter5Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
-        FindUIObject("Chapter6Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
         ChangeUI(MainMenuScenePanels.CollectionPanel);
     }
     
     private void OnClickShopMoveBtn()
     {
         MasterAudio.PlaySound("DoorClick");
-        FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
-        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
-        FindUIObject("ShopMoveBtn").GetComponent<Animator>().SetTrigger("OpenDoor");
+        ChangeUI(MainMenuScenePanels.ShopPanel);  
     }
     
     private void OnClickInventoryMoveBtn()
@@ -564,7 +533,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     //Chapter
     
-    private void OnClickChapterSelectBtn(int chapter)
+    public void OnClickChapterSelectBtn(int chapter)
     {
         AppManagerScript.Instance.selectedChapter = chapter;
         CheckStageStar();
@@ -603,7 +572,7 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     [SerializeField] private GameObject stagePageItemRoster;
 
-    private void OnClickChapterToStage(int stage)
+    public void OnClickChapterToStage(int stage)
     {
         /*if (UserManager.Instance.userData.starList.Count == 0)
         {
@@ -712,6 +681,10 @@ public class MainMenuSceneUIManager : UIControllerScript
     //Stage
     private void OnClickStageStartBtn()
     {
+        if (UserManager.Instance.userData.energy == 0)
+        {
+            AppManagerScript.Instance.InitCautionPanel(0);
+        }
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
         if(stageNum < 12)
         {
@@ -735,6 +708,22 @@ public class MainMenuSceneUIManager : UIControllerScript
     }
         
     //Achievement
+
+    [SerializeField] private GameObject achievementContentRoster;
+
+    public void InitAchievement()
+    {
+        for (int i = 0; i < DBManagerScript.Instance.achievementDB.Length; i++)
+        {
+            GameObject tempRoster = Instantiate(achievementContentRoster, FindUIObject("AchievementContent").transform);
+            var rosterManager = tempRoster.GetComponent<AchievementRosterManager>();
+            rosterManager.InitRoster(DBManagerScript.Instance.achievementDB[i].no, DBManagerScript.Instance.achievementDB[i].type, DBManagerScript.Instance.achievementDB[i].NN);
+            if(DBManagerScript.Instance.achievementDB[i].no > 23)
+                tempRoster.SetActive(!UserManager.Instance.userData.achievementList[i]);
+        }
+        
+    }
+    
     private void OnClickAchievementCloseBtn()
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
@@ -742,7 +731,14 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickAchievementAllObtainBtn()
     {
-        
+        for (int i = 0; i < FindUIObject("AchievementContent").transform.childCount; i++)
+        {
+            if (FindUIObject("AchievementContent").transform.GetChild(i).GetComponent<AchievementRosterManager>().canGet 
+                && FindUIObject("AchievementContent").transform.GetChild(i).gameObject.activeSelf && FindUIObject("AchievementContent").transform.GetChild(i).GetComponent<AchievementRosterManager>().No > 23)
+            {
+                FindUIObject("AchievementContent").transform.GetChild(i).GetComponent<AchievementRosterManager>().OnClickGetBtn();
+            }
+        }
     }
     
     //Collection
@@ -979,17 +975,23 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
 
-    private void OnClickPaid1Btn()
+    public void OnClickPaid1BtnComplete()
     {
-        itemType = ShopItemList.Gold1;
+        UserManager.Instance.userData.Commodities.Gold += 2;
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
     }
-    private void OnClickPaid2Btn()
+    public void OnClickPaid2BtnComplete()
     {
-        itemType = ShopItemList.Gold10;
+        UserManager.Instance.userData.Commodities.Gold += 10;
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
     }
-    private void OnClickPaid3Btn()
+    public void OnClickPaid3BtnComplete()
     {
-        itemType = ShopItemList.Gold20;
+        UserManager.Instance.userData.Commodities.Gold += 20;
+        FBManagerScript.Instance.UpdateCurrentUser();
+        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
     }
 
     private void OnClickBuyCheckYesBtn()
@@ -1031,6 +1033,34 @@ public class MainMenuSceneUIManager : UIControllerScript
             case ShopItemList.Silver10000:
                 UserManager.Instance.userData.Commodities.Silver += 10000;
                 UserManager.Instance.userData.Commodities.Gold -= 9;
+                break;
+            case ShopItemList.NormalGacha1:
+                UserManager.Instance.userData.achievementCount[55] += 1;
+                UserManager.Instance.userData.achievementCount[56] += 1;
+                UserManager.Instance.userData.achievementCount[57] += 1;
+                UserManager.Instance.userData.achievementCount[58] += 1;
+                UserManager.Instance.userData.achievementCount[59] += 1;
+                break;
+            case ShopItemList.NormalGacha5:
+                UserManager.Instance.userData.achievementCount[55] += 5;
+                UserManager.Instance.userData.achievementCount[56] += 5;
+                UserManager.Instance.userData.achievementCount[57] += 5;
+                UserManager.Instance.userData.achievementCount[58] += 5;
+                UserManager.Instance.userData.achievementCount[59] += 5;
+                break;
+            case ShopItemList.SpecialGacha1:
+                UserManager.Instance.userData.achievementCount[60] += 1;
+                UserManager.Instance.userData.achievementCount[61] += 1;
+                UserManager.Instance.userData.achievementCount[62] += 1;
+                UserManager.Instance.userData.achievementCount[63] += 1;
+                UserManager.Instance.userData.achievementCount[64] += 1;
+                break;
+            case ShopItemList.SpecialGacha5:
+                UserManager.Instance.userData.achievementCount[60] += 5;
+                UserManager.Instance.userData.achievementCount[61] += 5;
+                UserManager.Instance.userData.achievementCount[62] += 5;
+                UserManager.Instance.userData.achievementCount[63] += 5;
+                UserManager.Instance.userData.achievementCount[64] += 5;
                 break;
         }
         
@@ -1387,20 +1417,42 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuScenePanels.MainMenuTouchPanel:
                 FindUIObject("MainMenuTouchPanel").SetActive(true);
+                Debug.Log("JH");
                 break;
             case MainMenuScenePanels.StagePanel:
                 FindUIObject("ChapterPageBG").SetActive(true);
                 FindUIObject("StagePageBG").SetActive(false);
                 FindUIObject("ChapterPanel").SetActive(true);
+                if (UserManager.Instance.userData.starList.Count == 0)
+                {
+                    FindUIObject("Tutorial2-1").SetActive(true);
+                }
+                FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+                FindUIObject("Chapter5SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+                FindUIObject("Chapter6SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
                 break;
             case MainMenuScenePanels.AchievementPanel:
                 FindUIObject("AchievementPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.CollectionPanel:
+                FindUIObject("CollectionExplainPanel").SetActive(true);
+                FindUIObject("Chapter1Panel").SetActive(false);
+                FindUIObject("Chapter2Panel").SetActive(false);
+                FindUIObject("Chapter3Panel").SetActive(false);
+                FindUIObject("Chapter3Panel2").SetActive(false);
+                FindUIObject("Chapter4Panel").SetActive(false);
+                FindUIObject("Chapter5Panel").SetActive(false);
+                FindUIObject("Chapter6Panel").SetActive(false);
+                FindUIObject("Chapter4Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+                FindUIObject("Chapter5Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+                FindUIObject("Chapter6Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
                 FindUIObject("CollectionPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.ShopPanel:
                 FindUIObject("ShopPanel").SetActive(true);
+                FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
+                FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+                FindUIObject("ShopMoveBtn").GetComponent<Animator>().SetTrigger("OpenDoor");
                 break;
             case MainMenuScenePanels.InventoryPanel:
                 FindUIObject("InventoryPanel").SetActive(true);
@@ -1414,6 +1466,9 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuScenePanels.TutorialPanel:
                 FindUIObject("MainMenuTouchPanel").SetActive(true);
                 FindUIObject("TutorialPanel").SetActive(true);
+                break;
+            case MainMenuScenePanels.StoryPanel:
+                Instantiate(Resources.Load<GameObject>("Story/Opening"), transform);
                 break;
         }
     }
@@ -1447,6 +1502,10 @@ public class MainMenuSceneUIManager : UIControllerScript
                 if (UserManager.Instance.userData.snackList[i] == DBManagerScript.Instance.snackDB[i].P2A)
                 {
                     collection++;
+                    UserManager.Instance.userData.achievementCount[50] += 1;
+                    UserManager.Instance.userData.achievementCount[51] += 1;
+                    UserManager.Instance.userData.achievementCount[52] += 1;
+                    UserManager.Instance.userData.achievementCount[53] += 1;
                     FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(3).gameObject
                         .SetActive(true);
                 }

@@ -57,5 +57,6 @@ public class Story9 : MonoBehaviour
         yield return StartCoroutine(NormalChat("건치 요정", "그만큼 충치 요정의 힘도 커졌다는 거야.\n거기다 충치 요정한테 들켜서 더 힘을 쓰기가 어려워...", 2));
         yield return StartCoroutine(NormalChat("주인공", "힘을 쓰기가 어렵다니? 어떻게 좀 해봐!", 3));
         yield return StartCoroutine(NormalChat("건치 요정", "나도 노력하고 있단 말이야!!!", 4));
+        Destroy(transform.parent.gameObject);
     }
 }

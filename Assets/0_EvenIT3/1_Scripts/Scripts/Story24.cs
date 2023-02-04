@@ -58,5 +58,6 @@ public class Story24 : MonoBehaviour
         yield return StartCoroutine(NormalChat("건치요정", "싫어!! 저리가!!! 저리가란말이야!!!", 3));
         yield return StartCoroutine(NormalChat("주인공", "아니.난 절대 물러설 수 없어!\n기다려 건치요정! 내가 널 꼭 구해줄게!!", 4));
         yield return StartCoroutine(NormalChat("건치요정", "으아아아아아아!!!", 5));
+        Destroy(transform.parent.gameObject);
     }
 }

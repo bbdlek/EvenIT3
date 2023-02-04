@@ -111,7 +111,7 @@
             "adapters"                         : [
                 {
                     "name" : "IapGoogle",
-                    "used" : true,
+                    "used" : false,
                     "canOnlyChooseEitherUnityOrNative" : false,
                     "fileName"                         : "com.toast.android.gamebase:gamebase-adapter-purchase-google",
                     "moreInfo"                         : null

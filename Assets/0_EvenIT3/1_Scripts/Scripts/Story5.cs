@@ -56,5 +56,6 @@ public class Story5 : MonoBehaviour
         yield return StartCoroutine(NormalChat("건치 요정", "어떻게...충치 요정의 힘이 생각보다 너무 빠르게 강해지는 것 같아", 2));
         yield return StartCoroutine(NormalChat("주인공", "그럼 어떡해?", 3));
         yield return StartCoroutine(NormalChat("건치 요정", "우리가 할 수 있는 것은 부적을 모으는 것뿐이야!\n그래도 부적을 모으면 버프를 받을 수 있으니까 그나마 다행이야.\n빨리 가자! 더 늦어지면 위험해!", 4));
+        Destroy(transform.parent.gameObject);
     }
 }

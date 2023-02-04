@@ -55,5 +55,6 @@ public class Story11 : MonoBehaviour
         yield return StartCoroutine(NormalChat("건치 요정", "이제 진짜 얼마 남지 않았어..!! 조금만 힘내자!", 2));
         yield return StartCoroutine(NormalChat("충치 요정", "내가 이대로 당하고만 있을 것 같아 ???\n으아악!! 모두 부숴버리겠어!!", 3));
         yield return StartCoroutine(NormalChat("주인공, 건치 요정", "안돼에에에에에에에에!!! 멈춰!!!!", 4));
+        Destroy(transform.parent.gameObject);
     }
 }

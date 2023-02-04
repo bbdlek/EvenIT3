@@ -52,5 +52,6 @@ public class Story12 : MonoBehaviour
         yield return StartCoroutine(NormalChat("주인공", "해치웠나?", 1));
         yield return StartCoroutine(NormalChat("건치 요정", "그런것 같은데 ? 와아아아 잘했어~~!!!!\n우리가 해냈어!!!", 2));
         yield return StartCoroutine(NormalChat("주인공", "와아아아아아아아", 3));
+        Destroy(transform.parent.gameObject);
     }
 }
