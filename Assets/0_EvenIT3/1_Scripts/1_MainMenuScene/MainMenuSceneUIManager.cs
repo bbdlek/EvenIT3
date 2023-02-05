@@ -76,6 +76,11 @@ public class MainMenuSceneUIManager : UIControllerScript
         MainMenuSceneButtons tempClickBtn = (MainMenuSceneButtons)clickBtn;
         switch (tempClickBtn)
         {
+            //ETC
+            case MainMenuSceneButtons.EnergyBuyBtn:
+                OnClickEnergyBuyBtn();
+                break;
+            
             //Set Nick Name
             case MainMenuSceneButtons.SetNickNameConfirmBtn:
 #pragma warning disable CS4014
@@ -298,6 +303,12 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.CustomerServicePanelInstaBG:
                 OnClickOptionInstaBtn();
                 break;
+            case MainMenuSceneButtons.CustomerServicePanelCouponBG:
+                OnClickOptionCouponBtn();
+                break;
+            case MainMenuSceneButtons.CustomerServicePanelCustomerServiceBG:
+                OnClickOptionCSBtn();
+                break;
             case MainMenuSceneButtons.OptionLogOutBtn:
                 OnClickOptionLogOutBtn();
                 break;
@@ -330,12 +341,21 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.EditNickNamePanelCloseBtn:
                 OnClickEditNickNamePanelCloseBtn();
                 break;
-
+            
+            case MainMenuSceneButtons.EnergyBuyPanelADBtn:
+                ADManagerScript.Instance.ShowEnergyRewardAd();
+                break;
+            case MainMenuSceneButtons.EnergyBuyPanelBuyBtn:
+                OnClickEnergyBuyPanelBuyBtn();
+                break;
         }
     }
     
     private enum MainMenuSceneButtons
     {
+        //ETC
+        EnergyBuyBtn,
+        
         //SetNickName
         SetNickNameConfirmBtn,
         
@@ -430,7 +450,9 @@ public class MainMenuSceneUIManager : UIControllerScript
         CustomerServicePanelTerm2BG,
         CustomerServicePanelBlogBG,
         CustomerServicePanelInstaBG,
-        
+        CustomerServicePanelCouponBG,
+        CustomerServicePanelCustomerServiceBG,
+
         OptionLogOutBtn,
         OptionWithDrawBtn,
         
@@ -443,6 +465,15 @@ public class MainMenuSceneUIManager : UIControllerScript
         ProfileEditCloseBtn,
         EditNickNameConfirmBtn,
         EditNickNamePanelCloseBtn,
+        
+        //EnergyBuyPanel
+        EnergyBuyPanelADBtn,
+        EnergyBuyPanelBuyBtn
+    }
+
+    private void OnClickEnergyBuyBtn()
+    {
+        FindUIObject("EnergyBuyPanel").SetActive(true);
     }
     
     //Set Nick Name
@@ -684,6 +715,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         if (UserManager.Instance.userData.energy == 0)
         {
             AppManagerScript.Instance.InitCautionPanel(0);
+            return;
         }
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
         if(stageNum < 12)
@@ -1156,6 +1188,35 @@ public class MainMenuSceneUIManager : UIControllerScript
         Application.OpenURL("https://www.instagram.com/snackcatcher_official/");
     }
 
+    private void OnClickOptionCouponBtn()
+    {
+        //쿠폰 입력창
+    }
+
+    private void OnClickOptionCSBtn()
+    {
+        Gamebase.Contact.OpenContact((error) =>
+        {
+            if (Gamebase.IsSuccess(error) == true)
+            {
+                // A user close the contact web view.
+            }
+            else if (error.code == GamebaseErrorCode.UI_CONTACT_FAIL_INVALID_URL)  // 6911
+            {
+                // TODO: Gamebase Console Service Center URL is invalid.
+                // Please check the url field in the TOAST Gamebase Console.
+            } 
+            else if (error.code == GamebaseErrorCode.UI_CONTACT_FAIL_ANDROID_DUPLICATED_VIEW) // 6913
+            { 
+                // The customer center web view is already opened.
+            } 
+            else 
+            {
+                // An error occur when opening the contact web view.
+            }
+        });
+    }
+
     private void OnClickOptionLogOutBtn()
     {
         AppManagerScript.Instance.isWithDraw = true;
@@ -1377,6 +1438,21 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickEditNickNamePanelCloseBtn()
     {
         FindUIObject("EditNickNamePanel").SetActive(false);
+    }
+
+    private void OnClickEnergyBuyPanelBuyBtn()
+    {
+        if (UserManager.Instance.userData.Commodities.Gold < 5)
+        {
+            AppManagerScript.Instance.InitCautionPanel(2);
+        }
+        else
+        {
+            UserManager.Instance.userData.Commodities.Gold -= 5;
+            UserManager.Instance.userData.energy += 5;
+            FBManagerScript.Instance.UpdateCurrentUser();
+            FindUIObject("EnergyBuyPanel").SetActive(false);
+        }
     }
 
     #endregion
@@ -1647,12 +1723,12 @@ public class MainMenuSceneUIManager : UIControllerScript
     public void InitEnergy()
     {
         UserManager.Instance.LoadFromDB();
-        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.m_HeartAmount.ToString();
+        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.energy + " / 5";
     }
 
     public void ResetEnergy()
     {
-        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.m_HeartAmount.ToString();
+        FindUIObject("EnergyTxt").GetComponent<TMP_Text>().text = UserManager.Instance.userData.energy + " / 5";;
     }
     
     //Stage

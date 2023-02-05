@@ -499,6 +499,8 @@ public class GameManager : Singleton<GameManager>
                     UserManager.Instance.userData.achievementCount[32] += 1;
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
+                    UserManager.Instance.userData.energy -= 1;
+                    FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {
@@ -519,6 +521,8 @@ public class GameManager : Singleton<GameManager>
                     UserManager.Instance.userData.achievementCount[38] += 1;
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
+                    UserManager.Instance.userData.energy -= 1;
+                    FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {
@@ -540,6 +544,8 @@ public class GameManager : Singleton<GameManager>
                     UserManager.Instance.userData.achievementCount[35] += 1;
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
+                    UserManager.Instance.userData.energy -= 1;
+                    FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {

@@ -12313,6 +12313,7 @@ GameObject:
   - component: {fileID: 2112035517}
   - component: {fileID: 2112035514}
   - component: {fileID: 2112035519}
+  - component: {fileID: 2112035520}
   m_Layer: 0
   m_Name: AppManager
   m_TagString: Untagged
@@ -13139,3 +13140,16 @@ MonoBehaviour:
   buffUrl: https://drive.google.com/uc?export=download&id=12CgEP0Yu8t3Me9a55A5fbxKBYNp7whVv
   achievementUrl: https://drive.google.com/uc?export=download&id=1FOxQGWg25a87aZSg-m6oAvqSEzoTndjV
   achievementTypeUrl: https://drive.google.com/uc?export=download&id=1NatxZ-lndA4jpkgNhLeAHNh74jQz1Pq8
+--- !u!114 &2112035520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112035513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c55ef6d0fce017479719b3db0de7959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adEnergyRewardID: ca-app-pub-3940256099942544/5224354917

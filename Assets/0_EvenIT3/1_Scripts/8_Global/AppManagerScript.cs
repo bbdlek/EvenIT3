@@ -47,26 +47,26 @@ public class AppManagerScript : Singleton<AppManagerScript>
         switch (type)
         {
             case 0: //에너지
-                tempCautionPanel.transform.Find("CautionPanelItemIcon").GetComponent<UnityEngine.UI.Image>().sprite =
+                tempCautionPanel.transform.GetChild(1).GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite =
                     cautionIcons[0];
-                tempCautionPanel.transform.Find("CautionPanelItemMoney").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(1).GetChild(1).GetComponent<TMPro.TMP_Text>().text =
                     "X 5\n금화 5개";
-                tempCautionPanel.transform.Find("CautionPanelBody").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
                     "보유하신 에너지가 부족합니다.\n충전하시겠습니까?";
-                tempCautionPanel.transform.Find("CautionPanelBuyBtn").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+                tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
                         Destroy(tempCautionPanel);
                     });
                 break;
             case 1: //은화
-                tempCautionPanel.transform.Find("CautionPanelItemIcon").GetComponent<UnityEngine.UI.Image>().sprite =
+                tempCautionPanel.transform.GetChild(1).GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite =
                     cautionIcons[1];
-                tempCautionPanel.transform.Find("CautionPanelItemMoney").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(1).GetChild(1).GetComponent<TMPro.TMP_Text>().text =
                     "X 1000\n금화 1개";
-                tempCautionPanel.transform.Find("CautionPanelBody").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
                     "보유하신 은화가 부족합니다.\n충전하시겠습니까?";
-                tempCautionPanel.transform.Find("CautionPanelBuyBtn").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+                tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
                         ChangeScene(SceneName.MainMenuScene);
@@ -75,13 +75,13 @@ public class AppManagerScript : Singleton<AppManagerScript>
                     });
                 break;
             case 2: //금화
-                tempCautionPanel.transform.Find("CautionPanelItemIcon").GetComponent<UnityEngine.UI.Image>().sprite =
+                tempCautionPanel.transform.GetChild(1).GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite =
                     cautionIcons[2];
-                tempCautionPanel.transform.Find("CautionPanelItemMoney").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(1).GetChild(1).GetComponent<TMPro.TMP_Text>().text =
                     "X 2\n1000원";
-                tempCautionPanel.transform.Find("CautionPanelBody").GetComponent<TMPro.TMP_Text>().text =
+                tempCautionPanel.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text =
                     "보유하신 금화가 부족합니다.\n충전하시겠습니까?";
-                tempCautionPanel.transform.Find("CautionPanelBuyBtn").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+                tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
                         ChangeScene(SceneName.MainMenuScene);

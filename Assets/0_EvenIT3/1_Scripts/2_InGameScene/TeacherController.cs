@@ -108,7 +108,7 @@ public class TeacherController : MonoBehaviour
     
     private IEnumerator HistorySkill()
     {
-        yield return new WaitForSeconds(Random.Range(6, 10));
+        yield return new WaitForSecondsRealtime(Random.Range(6, 10));
         if (teacherState != TeacherState.Idle)
         {
             StartCoroutine(HistorySkill());
@@ -116,10 +116,10 @@ public class TeacherController : MonoBehaviour
         }
         GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doClose");
         isHistorySkill = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(7.517f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doOpen");
         isHistorySkill = false;
-        StartCoroutine(EnglishSkill());
+        StartCoroutine(HistorySkill());
     }
 
     private void Update()
