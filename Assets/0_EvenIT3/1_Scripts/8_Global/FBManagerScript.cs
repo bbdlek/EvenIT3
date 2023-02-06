@@ -108,6 +108,29 @@ public class FBManagerScript : Singleton<FBManagerScript>
         });
     }
 
+    private string _tempNickName;
+
+    public string GetUserNickName(string userID)
+    {
+        GetUserNickNameAsync(userID);
+        return _tempNickName;
+    }
+
+    private async void GetUserNickNameAsync(string userID)
+    {
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userID).Child("nickName");
+        await reference.GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.Log("Error");
+            }else if (task.IsCompleted)
+            {
+                _tempNickName = task.Result.Value.ToString();
+            }
+        });
+    }
+
     private void CompareDBAndUserData()
     {
         int snackLen = DBManagerScript.Instance.snackDB.Length - UserManager.Instance.userData.snackList.Count;

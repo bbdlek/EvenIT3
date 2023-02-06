@@ -10,10 +10,22 @@ public class ADManagerScript : Singleton<ADManagerScript>
     private RewardedAd _adEnergyReward;
 
     [SerializeField] private string adEnergyRewardID;
-    
+    [SerializeField] private string adEnergyRewardIDTest;
+
     private void Start()
     {
-        _adEnergyReward = new RewardedAd(adEnergyRewardID);
+        RequestConfiguration requestConfiguration =
+            new RequestConfiguration.Builder()
+                .SetSameAppKeyEnabled(true).build();
+        MobileAds.SetRequestConfiguration(requestConfiguration);
+        
+        MobileAds.Initialize(initStatus => { });
+        
+        _adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
+        //_adEnergyReward = new RewardedAd(adEnergyRewardID);
+
+        AdRequest request = new AdRequest.Builder().Build();
+        this._adEnergyReward.LoadAd(request);
         
         // Called when an ad request has successfully loaded.
         this._adEnergyReward.OnAdLoaded += HandleEnergyRewardedAdLoaded;
@@ -31,7 +43,8 @@ public class ADManagerScript : Singleton<ADManagerScript>
     
     public void CreateAndLoadRewardedAd()
     {
-        this._adEnergyReward = new RewardedAd(adEnergyRewardID);
+        this._adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
+        //this._adEnergyReward = new RewardedAd(adEnergyRewardID);
 
         this._adEnergyReward.OnAdLoaded += HandleEnergyRewardedAdLoaded;
         this._adEnergyReward.OnUserEarnedReward += HandleUserEarnedEnergyReward;
@@ -45,6 +58,7 @@ public class ADManagerScript : Singleton<ADManagerScript>
     
     public void HandleEnergyRewardedAdLoaded(object sender, EventArgs args)
     {
+        Debug.Log("Received");
         MonoBehaviour.print("HandleEnergyRewardedAdLoaded event received");
     }
 

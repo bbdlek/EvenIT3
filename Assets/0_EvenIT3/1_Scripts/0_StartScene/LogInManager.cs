@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Toast.Gamebase;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,12 +10,12 @@ public class LogInManager : MonoBehaviour
     // 이전 로그인
     public void LoginForLastLoggedInProvider()
     {
-        Gamebase.LoginForLastLoggedInProvider((authToken, error) =>
+        Gamebase.LoginForLastLoggedInProvider(async (authToken, error) =>
         {
             if (Gamebase.IsSuccess(error))
             {
                 Debug.Log("Login succeeded.");
-                AfterLogin();
+                await AfterLogin();
             }
             else
             {
@@ -45,13 +46,13 @@ public class LogInManager : MonoBehaviour
     // 게스트 로그인
     public void GuestLogin()
     {
-        Gamebase.Login(GamebaseAuthProvider.GUEST, (authToken, error) =>
+        Gamebase.Login(GamebaseAuthProvider.GUEST, async (authToken, error) =>
         {
             if (Gamebase.IsSuccess(error))
             {
                 string userId = authToken.member.userId;
                 Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
-                AfterLogin();
+                await AfterLogin();
             }
             else
             {
@@ -75,13 +76,13 @@ public class LogInManager : MonoBehaviour
     // 구글 로그인
     public void GoogleLogin()
     {
-        Gamebase.Login(GamebaseAuthProvider.GOOGLE, (authToken, error) =>
+        Gamebase.Login(GamebaseAuthProvider.GOOGLE, async (authToken, error) =>
         {
             if (Gamebase.IsSuccess(error))
             {
                 string userId = authToken.member.userId;
                 Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
-                AfterLogin();
+                await AfterLogin();
             }
             else
             {
@@ -105,13 +106,13 @@ public class LogInManager : MonoBehaviour
     // 구글 로그인
     public void FBLogin()
     {
-        Gamebase.Login(GamebaseAuthProvider.FACEBOOK, (authToken, error) =>
+        Gamebase.Login(GamebaseAuthProvider.FACEBOOK, async (authToken, error) =>
         {
             if (Gamebase.IsSuccess(error))
             {
                 string userId = authToken.member.userId;
                 Debug.Log(string.Format("Login succeeded. Gamebase userId is {0}", userId));
-                AfterLogin();
+                await AfterLogin();
             }
             else
             {
@@ -163,7 +164,7 @@ public class LogInManager : MonoBehaviour
         });
     }
 
-    public void AfterLogin()
+    public async Task AfterLogin()
     {
         if (_savedPushConfiguration != null)
         {
@@ -187,7 +188,7 @@ public class LogInManager : MonoBehaviour
             AppManagerScript.Instance.sceneManagerObject.GetComponent<StartSceneManagerScript>().startSceneUIManager.ChangeUI(StartSceneUIManager.StartScenePanels.TouchToStart);
             UserManager.Instance.userID = Gamebase.GetUserID();
         }
-        FBManagerScript.Instance.GetUserData();
+        await FBManagerScript.Instance.GetUserData();
         Debug.Log(DBManagerScript.Instance);
     }
 

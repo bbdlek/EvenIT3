@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DarkTonic.MasterAudio;
+using Toast.Gamebase;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -333,6 +335,7 @@ public class GameManager : Singleton<GameManager>
         {
             remainTime = curTime;
             Debug.Log(remainTime);
+            Debug.Log(LeaderboardManagerScript.Instance.UploadLeaderboard(stageNum, remainTime));
             MasterAudio.PlaySound("GameClear");
             //Achievement
             UserManager.Instance.userData.achievementCount[stageNum] = 1;

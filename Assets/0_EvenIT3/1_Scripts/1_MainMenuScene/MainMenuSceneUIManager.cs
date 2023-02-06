@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using DarkTonic.MasterAudio;
@@ -8,6 +11,7 @@ using TMPro;
 using Toast.Gamebase;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class MainMenuSceneUIManager : UIControllerScript
@@ -253,6 +257,15 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.Free3Btn:
                 OnClickFree3Btn();
                 break;
+            /*case MainMenuSceneButtons.Paid1Btn:
+                OnClickPaid1Btn();
+                break;
+            case MainMenuSceneButtons.Paid2Btn:
+                OnClickPaid2Btn();
+                break;
+            case MainMenuSceneButtons.Paid3Btn:
+                OnClickPaid3Btn();
+                break;*/
 
             case MainMenuSceneButtons.BuyCheckYesBtn:
                 OnClickBuyCheckYesBtn();
@@ -428,6 +441,9 @@ public class MainMenuSceneUIManager : UIControllerScript
         Free1Btn,
         Free2Btn,
         Free3Btn,
+        /*Paid1Btn,
+        Paid2Btn,
+        Paid3Btn,*/
 
         //BuyCheck
         BuyCheckYesBtn,
@@ -615,6 +631,23 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("StagePageTutorialToggle").SetActive(AppManagerScript.Instance.selectedChapter == 1 && AppManagerScript.Instance.selectedStage == 1);
         
         int stageNum = (AppManagerScript.Instance.selectedChapter - 1) * 4 + AppManagerScript.Instance.selectedStage - 1;
+
+        var leaderBoardUserList = LeaderboardManagerScript.Instance.GetTop5Users(stageNum);
+        
+        for (int n = 0; n < leaderBoardUserList.Count; n++)
+        {
+            if (leaderBoardUserList[n].userId == "None")
+            {
+                FindUIObject("StageRankingTop5Panel").transform.GetChild(n + 1).gameObject.SetActive(false);
+            }
+            else
+            {
+                FindUIObject("StageRankingTop5Panel").transform.GetChild(n + 1).GetChild(1).GetComponent<TMP_Text>()
+                    .text = leaderBoardUserList[n].userId;
+                FindUIObject("StageRankingTop5Panel").transform.GetChild(n + 1).GetChild(2).GetComponent<TMP_Text>()
+                    .text = leaderBoardUserList[n].score.ToString();
+            }
+        }
 
         for (int i = 0; i < FindUIObject("StagePageItemList").transform.childCount; i++)
         {
@@ -1007,23 +1040,17 @@ public class MainMenuSceneUIManager : UIControllerScript
         FindUIObject("BuyCheckPopup").SetActive(true);
     }
 
-    public void OnClickPaid1BtnComplete()
+    public void OnClickPaid1Btn()
     {
-        UserManager.Instance.userData.Commodities.Gold += 2;
-        FBManagerScript.Instance.UpdateCurrentUser();
-        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        //AppManagerScript.Instance.GetComponent<SnackIAPManager>().BuyGold2();
     }
-    public void OnClickPaid2BtnComplete()
+    public void OnClickPaid2Btn()
     {
-        UserManager.Instance.userData.Commodities.Gold += 10;
-        FBManagerScript.Instance.UpdateCurrentUser();
-        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        //AppManagerScript.Instance.GetComponent<SnackIAPManager>().BuyGold10();
     }
-    public void OnClickPaid3BtnComplete()
+    public void OnClickPaid3Btn()
     {
-        UserManager.Instance.userData.Commodities.Gold += 20;
-        FBManagerScript.Instance.UpdateCurrentUser();
-        FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        //AppManagerScript.Instance.GetComponent<SnackIAPManager>().BuyGold20();
     }
 
     private void OnClickBuyCheckYesBtn()

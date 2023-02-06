@@ -86,6 +86,11 @@ public class TeacherController : MonoBehaviour
         }
     }
 
+    private IEnumerator KoreanSkill()
+    {
+        yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);
+    }
+
     private IEnumerator EnglishSkill()
     {
         yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);

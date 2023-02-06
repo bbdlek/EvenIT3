@@ -2,6 +2,7 @@
 <dependencies>
   <androidPackages>
     <androidPackage spec="com.toast.android.gamebase:gamebase-sdk:2.44.2" />
+    <androidPackage spec="com.toast.android.gamebase:gamebase-adapter-auth-facebook:2.44.2" />
     <androidPackage spec="com.toast.android.gamebase:gamebase-adapter-auth-google:2.44.2" />
     <androidPackage spec="com.toast.android.gamebase:gamebase-adapter-push-fcm:2.44.2" />
   </androidPackages>

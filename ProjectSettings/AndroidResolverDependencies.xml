@@ -13,6 +13,7 @@
     <package>com.google.firebase:firebase-common:20.2.0</package>
     <package>com.google.firebase:firebase-database:20.1.0</package>
     <package>com.google.firebase:firebase-database-unity:10.3.0</package>
+    <package>com.toast.android.gamebase:gamebase-adapter-auth-facebook:2.44.2</package>
     <package>com.toast.android.gamebase:gamebase-adapter-auth-google:2.44.2</package>
     <package>com.toast.android.gamebase:gamebase-adapter-push-fcm:2.44.2</package>
     <package>com.toast.android.gamebase:gamebase-sdk:2.44.2</package>
