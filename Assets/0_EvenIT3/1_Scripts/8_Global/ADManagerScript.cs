@@ -21,8 +21,8 @@ public class ADManagerScript : Singleton<ADManagerScript>
         
         MobileAds.Initialize(initStatus => { });
         
-        _adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
-        //_adEnergyReward = new RewardedAd(adEnergyRewardID);
+        //_adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
+        _adEnergyReward = new RewardedAd(adEnergyRewardID);
 
         AdRequest request = new AdRequest.Builder().Build();
         this._adEnergyReward.LoadAd(request);
@@ -43,8 +43,8 @@ public class ADManagerScript : Singleton<ADManagerScript>
     
     public void CreateAndLoadRewardedAd()
     {
-        this._adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
-        //this._adEnergyReward = new RewardedAd(adEnergyRewardID);
+        //this._adEnergyReward = new RewardedAd(adEnergyRewardIDTest);
+        this._adEnergyReward = new RewardedAd(adEnergyRewardID);
 
         this._adEnergyReward.OnAdLoaded += HandleEnergyRewardedAdLoaded;
         this._adEnergyReward.OnUserEarnedReward += HandleUserEarnedEnergyReward;

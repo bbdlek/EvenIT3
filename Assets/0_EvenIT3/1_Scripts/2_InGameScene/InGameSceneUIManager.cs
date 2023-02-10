@@ -319,7 +319,7 @@ public class InGameSceneUIManager : UIControllerScript
         FBManagerScript.Instance.UpdateCurrentUser();
     }
 
-    private void OnClickClearPanelMainMenuBtn()
+    public void OnClickClearPanelMainMenuBtn()
     {
         Time.timeScale = 1;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
@@ -512,13 +512,13 @@ public class InGameSceneUIManager : UIControllerScript
                 FindUIObject("ClearPanelStars1").SetActive(true);
                 if(GameManager.Instance.stageNum < 12)
                 {
-                    maxSnackNum = Random.Range(0, 3);
-                    rewardSilverNum = 100;
+                    maxSnackNum = Random.Range(1, 3);
+                    rewardSilverNum = 300;
                 }
                 else
                 {
                     maxSnackNum = Random.Range(0, 3);
-                    rewardSilverNum = 300;
+                    rewardSilverNum = 500;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
@@ -534,13 +534,13 @@ public class InGameSceneUIManager : UIControllerScript
                 FindUIObject("ClearPanelStars2").SetActive(true);
                 if(GameManager.Instance.stageNum < 12)
                 {
-                    maxSnackNum = Random.Range(0, 3);
-                    rewardSilverNum = 200;
+                    maxSnackNum = Random.Range(1, 4);
+                    rewardSilverNum = 400;
                 }
                 else
                 {
                     maxSnackNum = Random.Range(1, 3);
-                    rewardSilverNum = 400;
+                    rewardSilverNum = 600;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
@@ -556,13 +556,13 @@ public class InGameSceneUIManager : UIControllerScript
                 FindUIObject("ClearPanelStars3").SetActive(true);
                 if(GameManager.Instance.stageNum < 12)
                 {
-                    maxSnackNum = Random.Range(1, 3);
-                    rewardSilverNum = 300;
+                    maxSnackNum = Random.Range(2, 5);
+                    rewardSilverNum = 500;
                 }
                 else
                 {
-                    maxSnackNum = Random.Range(1, 4);
-                    rewardSilverNum = 500;
+                    maxSnackNum = Random.Range(2, 4);
+                    rewardSilverNum = 700;
                 }
                 if (UserManager.Instance.userData.starList.Count < GameManager.Instance.stageNum + 1)
                 {
@@ -577,9 +577,18 @@ public class InGameSceneUIManager : UIControllerScript
 
         if (GameManager.Instance.isFirst)
         {
-            maxSnackNum = 2;
-            rewardSilverNum = 500;
-            rewardGoldNum = 5;
+            
+            if(GameManager.Instance.stageNum < 12)
+            {
+                rewardSilverNum = 500;
+                rewardGoldNum = 5;
+            }
+            else
+            {
+                rewardSilverNum = 1000;
+                rewardGoldNum = 5;
+            }
+            
             
             switch (GameManager.Instance.maxSnack)
             {
@@ -862,9 +871,8 @@ public class InGameSceneUIManager : UIControllerScript
 
         FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("ClearPanel").SetActive(true);
-        if (!PlayerPrefs.HasKey("Tutorial4"))
+        if (!UserManager.Instance.userData.tutorial4)
         {
-            PlayerPrefs.SetInt("Tutorial4", 1);
             FindUIObject("Tutorial4-1").SetActive(true);
         }
     }

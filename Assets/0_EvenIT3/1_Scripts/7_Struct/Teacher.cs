@@ -15,6 +15,8 @@ public class Teacher
     public float maxDelay;
     public string skillName;
     public string skillType;
+    public int minCool;
+    public int maxCool;
     public float NN;
     public string explain;
     public string art_front;

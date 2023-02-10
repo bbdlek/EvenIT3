@@ -81,8 +81,6 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     public void DeleteCurrentUser(string userId)
     {
-        var nickRef = FirebaseDatabase.DefaultInstance.GetReference("NickName");
-        nickRef.Child(UserManager.Instance.userData.nickName).RemoveValueAsync();
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userId);
         reference.RemoveValueAsync();
     }
@@ -110,25 +108,30 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     private string _tempNickName;
 
-    public string GetUserNickName(string userID)
+    public async Task<string> GetUserNickName(string userId)
     {
-        GetUserNickNameAsync(userID);
-        return _tempNickName;
-    }
-
-    private async void GetUserNickNameAsync(string userID)
-    {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userID).Child("nickName");
+        string nickName = String.Empty;
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
         await reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
             {
-                Debug.Log("Error");
-            }else if (task.IsCompleted)
+                Debug.Log("Get QuitTime Error");
+            }
+            else if(task.IsCompletedSuccessfully)
             {
-                _tempNickName = task.Result.Value.ToString();
+                DataSnapshot snapshot = task.Result;
+                foreach (var dataSnapshot in snapshot.Children)
+                {
+                    if(dataSnapshot.Key == userId)
+                    {
+                        nickName = (string)dataSnapshot.Child("UserData").Child("nickName").Value;
+                        break;
+                    }
+                }
             }
         });
+        return nickName;
     }
 
     private void CompareDBAndUserData()

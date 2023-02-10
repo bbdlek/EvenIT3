@@ -219,6 +219,8 @@ public class LogInManager : MonoBehaviour
                 UserManager.Instance.ClearUserManager();
                 PlayerPrefs.DeleteKey("Tutorial4");
                 PlayerPrefs.DeleteKey("miniTutorial");
+                PlayerPrefs.DeleteKey("Tutorial21");
+                PlayerPrefs.DeleteKey("LookHardOpening");
                 AppManagerScript.Instance.ChangeScene(SceneName.StartScene);
             }
             else

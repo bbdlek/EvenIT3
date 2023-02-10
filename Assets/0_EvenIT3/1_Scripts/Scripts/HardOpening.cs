@@ -74,5 +74,7 @@ public class HardOpening : MonoBehaviour
         yield return StartCoroutine(NormalChat("앞자리 친구", "아닌데… 나 하루 3번 식후 3분 이내 3분 동안 양치 열심히 했는데 ?\n내가 얼마나 333 법칙을 잘 지키는데", 6));
         yield return StartCoroutine(NormalChat("주인공", "야! 그렇게 양치를 열심히 했는데 충치가 왜 생기냐 ?\n너 양치 대충 한 거아냐 ?\n(속마음: 에이… 아니겠지....설마...)(뭐지 이 불안함은...)", 7));
         Destroy(transform.parent.gameObject);
+        GameManager.Instance.gameState = GameManager.GameState.InGame;
+        Time.timeScale = 1;
     }
 }

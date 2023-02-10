@@ -2046,6 +2046,216 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &512067583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512067584}
+  - component: {fileID: 512067587}
+  - component: {fileID: 512067586}
+  - component: {fileID: 512067585}
+  m_Layer: 2
+  m_Name: sound_door knock1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512067584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512067583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1411229549}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &512067585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512067583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b7eb7dcef8b0e48a8572747ca7c64d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &512067586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512067583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931518f9ca6c3844891dee74db8ed494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  probabilityToPlay: 100
+  importance: 5
+  isUninterruptible: 0
+  useLocalization: 0
+  useRandomPitch: 0
+  randomPitchMode: 0
+  randomPitchMin: 0
+  randomPitchMax: 0
+  useRandomVolume: 0
+  randomVolumeMode: 0
+  randomVolumeMin: 0
+  randomVolumeMax: 0
+  clipAlias: 
+  audLocation: 0
+  resourceFileName: 
+  original_pitch: 0
+  original_volume: 0
+  isExpanded: 1
+  isChecked: 1
+  useFades: 0
+  fadeInTime: 0
+  fadeOutTime: 0
+  useCustomLooping: 0
+  minCustomLoops: 1
+  maxCustomLoops: 5
+  useRandomStartTime: 0
+  randomStartMinPercent: 0
+  randomStartMaxPercent: 0
+  randomEndPercent: 100
+  useIntroSilence: 0
+  introSilenceMin: 0
+  introSilenceMax: 0
+  fadeMaxVolume: 0
+  curFadeMode: 0
+  curPitchMode: 0
+  curDetectEndMode: 0
+  frames: 0
+--- !u!82 &512067587
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512067583}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 632a68805a111424bb91a55b4b6caf47, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 10
+  MaxDistance: 100
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: -10.0039835
+      outSlope: -10.0039835
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 0.5
+      inSlope: -2.5009959
+      outSlope: -2.5009959
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4
+      value: 0.25
+      inSlope: -0.62524897
+      outSlope: -0.62524897
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.10003992
+      outSlope: -0.10003992
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4753,6 +4963,7 @@ Transform:
   - {fileID: 1292623189}
   - {fileID: 1689265420}
   - {fileID: 258163629}
+  - {fileID: 1411229549}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6999,6 +7210,105 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1411229548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411229549}
+  - component: {fileID: 1411229550}
+  m_Layer: 2
+  m_Name: sound_door knock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411229549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411229548}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 512067584}
+  m_Father: {fileID: 960039660}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1411229550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411229548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db10a6d491569a8419b6f5e1bffc5243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  busIndex: 2
+  spatialBlendType: 1
+  spatialBlend: 1
+  groupPlayType: 0
+  isSelected: 0
+  isExpanded: 1
+  groupMasterVolume: 1
+  retriggerPercentage: 100
+  curVariationMode: 0
+  alwaysHighestPriority: 0
+  ignoreListenerPause: 0
+  importance: 5
+  isUninterruptible: 0
+  chainLoopDelayMin: 0
+  chainLoopDelayMax: 0
+  chainLoopMode: 0
+  chainLoopNumLoops: 0
+  useDialogFadeOut: 0
+  dialogFadeOutTime: 0.5
+  curVariationSequence: 0
+  useNoRepeatRefill: 1
+  useInactivePeriodPoolRefill: 0
+  inactivePeriodSeconds: 5
+  groupVariations:
+  - {fileID: 512067586}
+  bulkVariationMode: 0
+  comments: 
+  logSound: 0
+  copySettingsExpanded: 0
+  expandLinkedGroups: 0
+  childSoundGroups: []
+  endLinkedGroups: []
+  linkedStartGroupSelectionType: 0
+  linkedStopGroupSelectionType: 0
+  limitMode: 0
+  limitPerXFrames: 1
+  minimumTimeBetween: 0.1
+  useClipAgePriority: 0
+  limitPolyphony: 0
+  voiceLimitCount: 1
+  targetDespawnedBehavior: 0
+  despawnFadeTime: 1
+  isUsingOcclusion: 0
+  willOcclusionOverrideRaycastOffset: 0
+  occlusionRayCastOffset: 0
+  willOcclusionOverrideFrequencies: 0
+  occlusionMaxCutoffFreq: 0
+  occlusionMinCutoffFreq: 22000
+  isSoloed: 0
+  isMuted: 0
+  soundPlayedEventActive: 0
+  soundPlayedCustomEvent: 
+  willCleanUpDelegatesAfterStop: 1
+  frames: 178
 --- !u!1 &1439177087
 GameObject:
   m_ObjectHideFlags: 0
@@ -12376,7 +12686,7 @@ MonoBehaviour:
   isRestart: 0
   isWithDraw: 0
   isStageTutorial: 0
-  continuousStage: 00000000000000000000000000000000
+  continuousStage: 000000000000000000000000000000000000000000000000
   bgmVolume: 0
   effectVolume: 0
   isVibration: 0
@@ -12709,6 +13019,8 @@ MonoBehaviour:
     maxDelay: 12
     skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.0"
     skillType: "min delay N\uCD08 \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 0
     explain: 
     art_front: 
@@ -12724,6 +13036,8 @@ MonoBehaviour:
     maxDelay: 12
     skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.1"
     skillType: "min delay N\uCD08 \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 1
     explain: 
     art_front: 
@@ -12739,6 +13053,8 @@ MonoBehaviour:
     maxDelay: 12
     skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.2"
     skillType: "min delay N\uCD08 \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 2
     explain: 
     art_front: 
@@ -12754,6 +13070,8 @@ MonoBehaviour:
     maxDelay: 12
     skillName: "\uAD6D\uC5B4\uCC45 \uC77D\uAE30 lv.3"
     skillType: "min delay N\uCD08 \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 3
     explain: 
     art_front: 
@@ -12770,6 +13088,8 @@ MonoBehaviour:
     skillName: "\uC61B\uB0A0 \uC774\uC57C\uAE30 lv.0"
     skillType: "\uC720\uC800\uC758 \uB370\uC2DC\uBCA8 \uBC1C\uC0DD\uB7C9\uC774 N%
       \uB298\uC5B4\uB0A8"
+    minCool: 0
+    maxCool: 0
     NN: 0
     explain: 
     art_front: 
@@ -12786,6 +13106,8 @@ MonoBehaviour:
     skillName: "\uC61B\uB0A0 \uC774\uC57C\uAE30 lv.1"
     skillType: "\uC720\uC800\uC758 \uB370\uC2DC\uBCA8 \uBC1C\uC0DD\uB7C9\uC774 N%
       \uB298\uC5B4\uB0A8"
+    minCool: 0
+    maxCool: 0
     NN: 1
     explain: 
     art_front: 
@@ -12802,6 +13124,8 @@ MonoBehaviour:
     skillName: "\uC61B\uB0A0 \uC774\uC57C\uAE30 lv.3"
     skillType: "\uC720\uC800\uC758 \uB370\uC2DC\uBCA8 \uBC1C\uC0DD\uB7C9\uC774 N%
       \uB298\uC5B4\uB0A8"
+    minCool: 0
+    maxCool: 0
     NN: 2
     explain: 
     art_front: 
@@ -12818,6 +13142,8 @@ MonoBehaviour:
     skillName: "\uC61B\uB0A0 \uC774\uC57C\uAE30 lv.4"
     skillType: "\uC720\uC800\uC758 \uB370\uC2DC\uBCA8 \uBC1C\uC0DD\uB7C9\uC774 N%
       \uB298\uC5B4\uB0A8"
+    minCool: 0
+    maxCool: 0
     NN: 3
     explain: 
     art_front: 
@@ -12834,6 +13160,8 @@ MonoBehaviour:
     skillName: "\uC808\uB300 \uC74C\uAC10 lv.0"
     skillType: "\uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300 \uB370\uC2DC\uBCA8 \uC218\uCE58
       N \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 0
     explain: 
     art_front: 
@@ -12850,6 +13178,8 @@ MonoBehaviour:
     skillName: "\uC808\uB300 \uC74C\uAC10 lv.1"
     skillType: "\uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300 \uB370\uC2DC\uBCA8 \uC218\uCE58
       N \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 1
     explain: 
     art_front: 
@@ -12866,6 +13196,8 @@ MonoBehaviour:
     skillName: "\uC808\uB300 \uC74C\uAC10 lv.2"
     skillType: "\uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300 \uB370\uC2DC\uBCA8 \uC218\uCE58
       N \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 2
     explain: 
     art_front: 
@@ -12882,6 +13214,8 @@ MonoBehaviour:
     skillName: "\uC808\uB300 \uC74C\uAC10 lv.3"
     skillType: "\uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300 \uB370\uC2DC\uBCA8 \uC218\uCE58
       N \uAC10\uC18C"
+    minCool: 0
+    maxCool: 0
     NN: 3
     explain: 
     art_front: 
@@ -12898,6 +13232,8 @@ MonoBehaviour:
     skillName: "\uC601\uC5B4 \uB4E3\uAE30 \uD3C9\uAC00 lv.0"
     skillType: "N\uCD08\uC5D0 \uD55C \uBC88 \uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
+    minCool: 0
+    maxCool: 0
     NN: 5
     explain: 
     art_front: 
@@ -12914,6 +13250,8 @@ MonoBehaviour:
     skillName: "\uC601\uC5B4 \uB4E3\uAE30 \uD3C9\uAC00 lv.1"
     skillType: "N\uCD08\uC5D0 \uD55C \uBC88 \uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
+    minCool: 0
+    maxCool: 0
     NN: 7
     explain: 
     art_front: 
@@ -12930,6 +13268,8 @@ MonoBehaviour:
     skillName: "\uC601\uC5B4 \uB4E3\uAE30 \uD3C9\uAC00 lv.2"
     skillType: "N\uCD08\uC5D0 \uD55C \uBC88 \uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
+    minCool: 0
+    maxCool: 0
     NN: 9
     explain: 
     art_front: 
@@ -12946,6 +13286,8 @@ MonoBehaviour:
     skillName: "\uC601\uC5B4 \uB4E3\uAE30 \uD3C9\uAC00 lv.3"
     skillType: "N\uCD08\uC5D0 \uD55C \uBC88 \uD5C8\uC6A9 \uAC00\uB2A5\uD55C \uCD5C\uB300
       \uB370\uC2DC\uBCA8 \uC218\uCE58 30 \uC99D\uAC00"
+    minCool: 0
+    maxCool: 0
     NN: 11
     explain: 
     art_front: 
@@ -13169,3 +13511,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appID: Q4V7wZwf
   appSecretKey: SiaKwLk2
+  userDB: []
+  myRankDB: []

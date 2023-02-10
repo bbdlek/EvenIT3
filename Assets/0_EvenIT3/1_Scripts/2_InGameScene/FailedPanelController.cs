@@ -27,7 +27,8 @@ public class FailedPanelController : MonoBehaviour
     private IEnumerator Timer()
     {
         yield return new WaitForSecondsRealtime(1f);
-        panelTimer -= 1;
+        if(!GameManager.Instance.isMiniTutorialOn)
+            panelTimer -= 1;
         timerTxt.text = panelTimer.ToString();
         if (panelTimer == 0)
         {

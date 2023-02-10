@@ -11,7 +11,7 @@ public class TeacherController : MonoBehaviour
 {
     public enum TeacherState
     {
-        Idle, BeforeLook, Look, End
+        Idle, BeforeLook, Look, End, Skill
     }
 
     private TeacherState _teacherState;
@@ -39,11 +39,13 @@ public class TeacherController : MonoBehaviour
     public Sprite teacherBack;
     public Sprite teacherFront;
     public Sprite teacherAngry;
+    public Sprite teacherSkill;
     public Sprite[] teacherBacks;
     public Sprite[] teacherFronts;
     public Sprite[] teacherAngrySprites;
     public Image teacherImg;
 
+    [SerializeField] private bool isKoreanSkill = false;
     [SerializeField] private bool isEnglishSkill = false;
     [SerializeField] private bool isHistorySkill = false;
 
@@ -68,12 +70,10 @@ public class TeacherController : MonoBehaviour
          _teacherNo = DBManagerScript.Instance.stageDB[_stageNum].teacherNo;
         if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 4)
         {
-            _minDelay -= DBManagerScript.Instance.teacherDB[_teacherNo].NN;
+            StartCoroutine(KoreanSkill());
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 8)
         {
-            GameManager.Instance.player.decibelAmount += GameManager.Instance.player.decibelAmount *
-                DBManagerScript.Instance.teacherDB[_teacherNo].NN / 100;
             StartCoroutine(HistorySkill());
         }
         else if (DBManagerScript.Instance.stageDB[_stageNum].teacherNo < 12)
@@ -88,21 +88,35 @@ public class TeacherController : MonoBehaviour
 
     private IEnumerator KoreanSkill()
     {
-        yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);
+        yield return new WaitForSeconds(Random.Range((float)DBManagerScript.Instance.teacherDB[_teacherNo].minCool, DBManagerScript.Instance.teacherDB[_teacherNo].maxCool + 1));
+        isKoreanSkill = true;
+        MasterAudio.PlaySound("sound_door knock");
+        yield return new WaitForSeconds(0.9f);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("KoreanSkill").SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("KoreanSkill").SetActive(false);
+        teacherObj.GetComponent<Animator>().enabled = false;
+        teacherState = TeacherState.Skill;
+        yield return new WaitForSeconds(5f);
+        teacherState = TeacherState.Idle;
+        teacherObj.GetComponent<Animator>().enabled = true;
+        isKoreanSkill = false;
+        StartCoroutine(KoreanSkill());
+
     }
 
     private IEnumerator EnglishSkill()
     {
-        yield return new WaitForSeconds(DBManagerScript.Instance.teacherDB[_teacherNo].NN);
+        yield return new WaitForSeconds(Random.Range((float)DBManagerScript.Instance.teacherDB[_teacherNo].minCool, DBManagerScript.Instance.teacherDB[_teacherNo].maxCool + 1));
         if (teacherState != TeacherState.Idle)
         {
             StartCoroutine(EnglishSkill());
             yield break;
         }
+        isEnglishSkill = true;
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(true);
         MasterAudio.PlaySound("Skill_English");
         GameManager.Instance.maxDecibel += 30f;
-        isEnglishSkill = true;
         yield return new WaitForSeconds(3f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
         GameManager.Instance.player.curDecibelAmount -= 30f;
@@ -113,14 +127,14 @@ public class TeacherController : MonoBehaviour
     
     private IEnumerator HistorySkill()
     {
-        yield return new WaitForSecondsRealtime(Random.Range(6, 10));
+        yield return new WaitForSecondsRealtime(Random.Range((float)DBManagerScript.Instance.teacherDB[_teacherNo].minCool, DBManagerScript.Instance.teacherDB[_teacherNo].maxCool + 1));
         if (teacherState != TeacherState.Idle)
         {
             StartCoroutine(HistorySkill());
             yield break;
         }
-        GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doClose");
         isHistorySkill = true;
+        GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doClose");
         yield return new WaitForSecondsRealtime(7.517f);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("HistorySkill").GetComponent<Animator>().SetTrigger("doOpen");
         isHistorySkill = false;
@@ -136,6 +150,10 @@ public class TeacherController : MonoBehaviour
         else if(teacherState == TeacherState.End)
         {
             teacherImg.sprite = teacherAngry;
+        }
+        else if (teacherState == TeacherState.Skill)
+        {
+            teacherImg.sprite = teacherSkill;
         }
         else
         {
@@ -157,7 +175,7 @@ public class TeacherController : MonoBehaviour
     {
         float turnTime = Random.Range(_minDelay, _maxDelay);
         yield return new WaitForSeconds(turnTime);
-        if (isEnglishSkill || isHistorySkill)
+        if (isEnglishSkill || isHistorySkill || isKoreanSkill)
         {
             StartCoroutine(LookCoroutine());
             yield break;

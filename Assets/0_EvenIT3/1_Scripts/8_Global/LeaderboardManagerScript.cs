@@ -14,6 +14,7 @@ public class LeaderboardManagerScript : Singleton<LeaderboardManagerScript>
     [SerializeField] private string appSecretKey;
 
     [SerializeField] private LeaderboardUserInfo[] userDB;
+    [SerializeField] private LeaderboardUserInfo[] myRankDB;
 
     public List<LeaderboardUserInfo> GetTop5Users(int stageNum)
     {
@@ -40,7 +41,7 @@ public class LeaderboardManagerScript : Singleton<LeaderboardManagerScript>
         int index = responseText.IndexOf("[", StringComparison.Ordinal);
         int indexLast = responseText.IndexOf("]", StringComparison.Ordinal);
         
-        var userData = responseText.Substring(206, indexLast - index + 1);
+        var userData = responseText.Substring(index, indexLast - index + 1);
 
         var userDataBase = JsonConvert.DeserializeObject<LeaderboardUserInfoDB>("{\"userInfo\":" + userData + "}");
         userDB = userDataBase.userInfo;
@@ -60,6 +61,46 @@ public class LeaderboardManagerScript : Singleton<LeaderboardManagerScript>
         }
         
         return leaderboardUserInfos;
+    }
+
+    public LeaderboardUserInfo GetMyRank(int stageNum)
+    {
+        string responseText = string.Empty;
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api-gamebase.nhncloudservice.com/tcgb-leaderboard/v1.3/apps/{appID}/factors/{stageNum + 1}/users?userId={UserManager.Instance.userID}");
+        request.Method = "GET";
+        request.Timeout = 30 * 1000; // 30초
+        request.ContentType = "application/json";
+        request.Headers.Add("X-Secret-Key", appSecretKey); // 헤더 추가 방법
+
+        using (HttpWebResponse resp = (HttpWebResponse)request.GetResponse())
+        {
+            HttpStatusCode status = resp.StatusCode;
+            Console.WriteLine(status);  // 정상이면 "OK"
+
+            Stream respStream = resp.GetResponseStream();
+            using (StreamReader sr = new StreamReader(respStream))
+            {
+                responseText = sr.ReadToEnd();
+            }
+
+            if (status != HttpStatusCode.OK)
+            {
+                return new LeaderboardUserInfo();
+            }
+        }
+
+        Debug.Log(responseText);
+
+        int index = responseText.IndexOf("userInfo", StringComparison.Ordinal);
+
+        var userData = responseText.Substring(index + 10, responseText.Length - index - 11);
+        Debug.Log(userData);
+
+        var userDataBase = JsonConvert.DeserializeObject<LeaderboardUserInfoDB>("{\"userInfo\":[" + userData + "]}");
+        myRankDB = userDataBase.userInfo;
+        
+        return myRankDB[0];
     }
 
     public string UploadLeaderboard(int stageNum, float remainTime)

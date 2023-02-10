@@ -89,6 +89,7 @@ public class Tutorial4 : MonoBehaviour
     {
         T4View16.SetActive(false);
         gameObject.SetActive(false);
+        UserManager.Instance.userData.tutorial4 = true;
         UserManager.Instance.userData.snackList[0] += 10;
         Mathf.Clamp(UserManager.Instance.userData.snackList[0], 0, 20);
         FBManagerScript.Instance.UpdateCurrentUser();

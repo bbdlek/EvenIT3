@@ -26,6 +26,18 @@ public class User
     public int energy;
     public string lastDate;
 
+    //Tutorial
+    public bool tutorial1;
+    public bool tutorial2;
+    public bool tutorial3;
+    public bool tutorial41;
+    public bool tutorial4;
+    public bool tutorialMini;
+    public bool lookHardOpening;
+    
+    //Coupon
+    public bool firstCouponUsed;
+
     public void NewUser(string nickName)
     {
         this.nickName = nickName;
@@ -47,5 +59,7 @@ public class User
 
         profileImageIndex = 0;
         profileEdgeIndex = 0;
+
+        firstCouponUsed = false;
     }
 }

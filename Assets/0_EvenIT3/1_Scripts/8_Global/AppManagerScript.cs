@@ -56,6 +56,16 @@ public class AppManagerScript : Singleton<AppManagerScript>
                 tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
+                        if (UserManager.Instance.userData.Commodities.Gold >= 5)
+                        {
+                            UserManager.Instance.userData.Commodities.Gold -= 5;
+                            UserManager.Instance.userData.energy += 5;
+                            _fbManager.UpdateCurrentUser();
+                        }
+                        else
+                        {
+                            InitCautionPanel(2);
+                        }
                         Destroy(tempCautionPanel);
                     });
                 break;
@@ -69,8 +79,16 @@ public class AppManagerScript : Singleton<AppManagerScript>
                 tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
-                        ChangeScene(SceneName.MainMenuScene);
-                        FindObjectOfType<MainMenuSceneUIManager>().ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.ShopPanel);
+                        if (UserManager.Instance.userData.Commodities.Gold >= 1)
+                        {
+                            UserManager.Instance.userData.Commodities.Gold -= 1;
+                            UserManager.Instance.userData.Commodities.Silver += 1000;
+                            _fbManager.UpdateCurrentUser();
+                        }
+                        else
+                        {
+                            InitCautionPanel(2);
+                        }
                         Destroy(tempCautionPanel);
                     });
                 break;
@@ -84,8 +102,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
                 tempCautionPanel.transform.GetChild(3).GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
                     () =>
                     {
-                        ChangeScene(SceneName.MainMenuScene);
-                        FindObjectOfType<MainMenuSceneUIManager>().ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.ShopPanel);
+                        FindObjectOfType<SnackIAPManager>().BuyGold2();
                         Destroy(tempCautionPanel);
                     });
                 break;

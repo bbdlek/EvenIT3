@@ -33,7 +33,7 @@ public class UserManager : Singleton<UserManager>
     private const int MAX_HEART = int.MaxValue; //하트 최대값
     public int HeartRechargeInterval = 1800;// 하트 충전 간격(단위:초)
     private Coroutine m_RechargeTimerCoroutine = null;
-    private int m_RechargeRemainTime = 0;
+    public int m_RechargeRemainTime = 0;
 
     //게임 초기화, 중간 이탈, 중간 복귀 시 실행되는 함수
     public void OnApplicationFocus(bool value)
@@ -96,7 +96,7 @@ public class UserManager : Singleton<UserManager>
             }
             else
             {
-                userData.energy = MAX_HEART;
+                userData.energy = 5;
             }
             //heartAmountLabel.text = userData.energy.ToString();
             result = true;
@@ -174,10 +174,14 @@ public class UserManager : Singleton<UserManager>
         var timeDifferenceInSec = (int)((DateTime.Now.ToLocalTime() - m_AppQuitTime).TotalSeconds);
         var heartToAdd = timeDifferenceInSec / HeartRechargeInterval;
         var remainTime = timeDifferenceInSec % HeartRechargeInterval;
-        userData.energy += heartToAdd;
-        if (userData.energy >= MAX_HEART)
+        if (userData.energy >= 5)
         {
-            userData.energy = MAX_HEART;
+            heartToAdd = 0;
+        }
+        userData.energy += heartToAdd;
+        if (userData.energy >= 5)
+        {
+            userData.energy = userData.energy;
         }
         else
         {
@@ -222,9 +226,9 @@ public class UserManager : Singleton<UserManager>
             yield return new WaitForSeconds(1f);
         }
         userData.energy++;
-        if (userData.energy >= MAX_HEART)
+        if (userData.energy >= 5)
         {
-            userData.energy = MAX_HEART;
+            userData.energy = 5;
             m_RechargeRemainTime = 0;
             //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
             m_RechargeTimerCoroutine = null;

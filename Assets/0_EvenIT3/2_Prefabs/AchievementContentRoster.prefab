@@ -1111,8 +1111,10 @@ MonoBehaviour:
   No: 0
   Type: 0
   NN: 0
+  canGet: 0
   _headerText: {fileID: 6500913580199199927}
   _fillText: {fileID: 6500913580301856922}
   _fillImage: {fileID: 6500913579674448499}
   _contentMoveBtn: {fileID: 6500913580101170629}
   _contentGetBtn: {fileID: 8364819702806156093}
+  rewardRoster: {fileID: 5029855923954974675, guid: b29320cf6df0d404ba50eef937a0a611, type: 3}

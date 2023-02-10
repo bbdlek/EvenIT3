@@ -67,7 +67,7 @@ public class Tutorial3 : MonoBehaviour
     public void T3Click10()
     {
         T3View10.SetActive(false);
-        T3View11.SetActive(true);
+        T3View15.SetActive(true);
     }
 
     public void T3Click11()
@@ -126,6 +126,8 @@ public class Tutorial3 : MonoBehaviour
 
     public void T3Click20()
     {
+        UserManager.Instance.userData.tutorial3 = true;
+        FBManagerScript.Instance.UpdateCurrentUser();
         T3View20.SetActive(false);
         GameManager.Instance.inGameSceneUIManager.FindUIObject("Tutorial_Teacher").SetActive(false);
         GameManager.Instance.gameState = GameManager.GameState.InGame;

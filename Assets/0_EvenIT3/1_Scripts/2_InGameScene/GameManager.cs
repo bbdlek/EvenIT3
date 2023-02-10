@@ -75,9 +75,10 @@ public class GameManager : Singleton<GameManager>
         {
             if (UserManager.Instance.userData.starList.Count < stageNum + 1)
             {
-                if(!PlayerPrefs.HasKey("LookHardOpening"))
+                if(!UserManager.Instance.userData.lookHardOpening)
                 {
-                    PlayerPrefs.SetInt("LookHardOpening", 1);
+                    UserManager.Instance.userData.lookHardOpening = true;
+                    FBManagerScript.Instance.UpdateCurrentUser();
                     Instantiate(Resources.Load<GameObject>("Story/HardOpening"), inGameSceneUIManager.transform);
                     gameState = GameState.Pause;
                     Time.timeScale = 0;
@@ -335,8 +336,11 @@ public class GameManager : Singleton<GameManager>
         {
             remainTime = curTime;
             Debug.Log(remainTime);
-            Debug.Log(LeaderboardManagerScript.Instance.UploadLeaderboard(stageNum, remainTime));
+            Debug.Log(LeaderboardManagerScript.Instance.UploadLeaderboard(stageNum, setTime - remainTime));
             MasterAudio.PlaySound("GameClear");
+            inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
+            inGameSceneUIManager.FindUIObject("KoreanSkill").SetActive(false);
+            inGameSceneUIManager.FindUIObject("HistorySkill").SetActive(false);
             //Achievement
             UserManager.Instance.userData.achievementCount[stageNum] = 1;
             if (stageNum == DBManagerScript.Instance.stageDB.Length - 1)
@@ -345,7 +349,7 @@ public class GameManager : Singleton<GameManager>
             }
             
             int chapter = AppManagerScript.Instance.selectedChapter - 1;
-            switch (stageNum)
+            switch (AppManagerScript.Instance.selectedStage - 1)
             {
                 case 0:
                     AppManagerScript.Instance.continuousStage[chapter] = 1;
@@ -483,10 +487,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public bool isMiniTutorialOn;
+
     private IEnumerator FailedMotion(int type) // type 0: Timer, Decibel, Turn
     {
         player.playerState = Player.State.Idle;
         inGameSceneUIManager.FindUIObject("SurpriseEffect").SetActive(true);
+        inGameSceneUIManager.FindUIObject("ListeningEffect").SetActive(false);
+        inGameSceneUIManager.FindUIObject("KoreanSkill").SetActive(false);
+        inGameSceneUIManager.FindUIObject("HistorySkill").SetActive(false);
         yield return new WaitForSeconds(1f);
         teacher.teacherObj.GetComponent<Animator>().enabled = false;
         teacher.teacherState = TeacherController.TeacherState.End;
@@ -507,10 +516,10 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    if (!UserManager.Instance.userData.tutorialMini)
                     {
-                        PlayerPrefs.SetInt("miniTutorial", 1);
                         inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                        isMiniTutorialOn = true;
                     }
                     inGameSceneUIManager.FindUIObject("FailedOverPanel").SetActive(true);
                 }
@@ -529,10 +538,10 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    if (!UserManager.Instance.userData.tutorialMini)
                     {
-                        PlayerPrefs.SetInt("miniTutorial", 1);
                         inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                        isMiniTutorialOn = true;
                     }
 
                     inGameSceneUIManager.FindUIObject("FailedDecibelPanel").SetActive(true);
@@ -552,10 +561,10 @@ public class GameManager : Singleton<GameManager>
                 }
                 else
                 {
-                    if (!PlayerPrefs.HasKey("miniTutorial"))
+                    if (!UserManager.Instance.userData.tutorialMini)
                     {
-                        PlayerPrefs.SetInt("miniTutorial", 1);
                         inGameSceneUIManager.FindUIObject("MiniTutorial").SetActive(true);
+                        isMiniTutorialOn = true;
                     }
 
                     inGameSceneUIManager.FindUIObject("FailedLookPanel").SetActive(true);

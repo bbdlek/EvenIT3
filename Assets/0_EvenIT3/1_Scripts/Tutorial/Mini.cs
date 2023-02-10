@@ -34,7 +34,10 @@ public class Mini : MonoBehaviour
 
     public void MiniClick5()
     {
+        UserManager.Instance.userData.tutorialMini = true;
+        FBManagerScript.Instance.UpdateCurrentUser();
         MiniView5.SetActive(false);
         gameObject.SetActive(false);
+        GameManager.Instance.isMiniTutorialOn = false;
     }
 }
