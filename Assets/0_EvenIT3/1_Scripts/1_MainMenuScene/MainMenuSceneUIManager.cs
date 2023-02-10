@@ -1330,7 +1330,7 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
         }
         
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         SetTickets();
         FindUIObject("FreeMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
         FindUIObject("PaidMoneyText").GetComponent<TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
@@ -1411,12 +1411,12 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickOptionTerm1Btn()
     {
-        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos/sample.html");
+        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos-Q4V7wZwf/329-1437-ko.html");
     }
     
     private void OnClickOptionTerm2Btn()
     {
-        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos/sample.html");
+        Application.OpenURL("https://api-storage.cloud.toast.com/v1/AUTH_3a96d957f48e4d219e96ae174542a211/tos-Q4V7wZwf/329-1438-ko.html");
     }
     
     private void OnClickOptionBlogBtn()
@@ -1491,7 +1491,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             UserManager.Instance.userData.maskItem += 1;
             UserManager.Instance.userData.milkItem += 1;
             UserManager.Instance.userData.epicTicket += 1;
-            FBManagerScript.Instance.UpdateCurrentUser();
+            //FBManagerScript.Instance.UpdateCurrentUser();
             FindUIObject("CouponPanelInputErrorTxt").GetComponent<TMP_Text>().color = new Color32(41, 140, 0, 255);
             FindUIObject("CouponPanelInputErrorTxt").GetComponent<TMP_Text>().text = "보상이 지급되었습니다.";
         }
@@ -1667,7 +1667,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         UserManager.Instance.userData.profileEdgeIndex = tempSelectProfileEdge;
         UserManager.Instance.userData.profileImageIndex = tempSelectProfileImage;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("ProfileImage").GetComponent<Image>().sprite =
             _profileImageList[UserManager.Instance.userData.profileImageIndex];
         FindUIObject("ProfileImageBG").GetComponent<Image>().sprite =
@@ -1725,7 +1725,7 @@ public class MainMenuSceneUIManager : UIControllerScript
         {
             UserManager.Instance.userData.Commodities.Gold -= 5;
             UserManager.Instance.userData.energy += 5;
-            FBManagerScript.Instance.UpdateCurrentUser();
+            //FBManagerScript.Instance.UpdateCurrentUser();
             FindUIObject("EnergyBuyPanel").SetActive(false);
         }
     }

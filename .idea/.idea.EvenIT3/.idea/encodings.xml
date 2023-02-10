@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise" />
+  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Ending.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/HardEnding.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/HardOpening.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story1.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story10.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story11.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story12.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story13.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story15.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story16.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story17.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story18.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story19.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story2.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story20.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story21.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story22.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story23.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story24.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story3.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story4.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story5.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story6.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story7.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story8.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/0_EvenIT3/1_Scripts/Scripts/Story9.cs" charset="x-windows-949" />
+  </component>
 </project>

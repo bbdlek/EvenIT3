@@ -49,6 +49,7 @@ public class UserManager : Singleton<UserManager>
         {
             SaveHeartInfo();
             SaveAppQuitTime();
+            FBManagerScript.Instance.UpdateCurrentUser();
         }
     }
     //게임 종료 시 실행되는 함수
@@ -57,6 +58,7 @@ public class UserManager : Singleton<UserManager>
         Debug.Log("GoodsRechargeTester: OnApplicationQuit()");
         SaveHeartInfo();
         SaveAppQuitTime();
+        FBManagerScript.Instance.UpdateCurrentUser();
     }
     //버튼 이벤트에 이 함수를 연동한다.
     public void OnClickUseHeart()
@@ -116,7 +118,6 @@ public class UserManager : Singleton<UserManager>
             PlayerPrefs.SetInt("HeartAmount", userData.energy);
             PlayerPrefs.Save();
             userData.energy = userData.energy;
-            FBManagerScript.Instance.UpdateCurrentUser();
             result = true;
         }
         catch (System.Exception e)
@@ -156,7 +157,7 @@ public class UserManager : Singleton<UserManager>
             PlayerPrefs.SetString("AppQuitTime", appQuitTime);
             PlayerPrefs.Save();
             userData.lastDate = appQuitTime;
-            FBManagerScript.Instance.UpdateCurrentUser();
+            //FBManagerScript.Instance.UpdateCurrentUser();
             result = true;
         }
         catch (System.Exception e)
@@ -174,17 +175,10 @@ public class UserManager : Singleton<UserManager>
         var timeDifferenceInSec = (int)((DateTime.Now.ToLocalTime() - m_AppQuitTime).TotalSeconds);
         var heartToAdd = timeDifferenceInSec / HeartRechargeInterval;
         var remainTime = timeDifferenceInSec % HeartRechargeInterval;
-        if (userData.energy >= 5)
+        if (userData.energy < 5)
         {
-            heartToAdd = 0;
-        }
-        userData.energy += heartToAdd;
-        if (userData.energy >= 5)
-        {
-            userData.energy = userData.energy;
-        }
-        else
-        {
+            userData.energy += heartToAdd;
+            Mathf.Clamp(userData.energy, 0, 5);
             m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(remainTime, onFinish));
         }
         //heartAmountLabel.text = string.Format("Hearts : {0}", userData.energy.ToString());

@@ -95,7 +95,7 @@ public class ADManagerScript : Singleton<ADManagerScript>
             "HandleEnergyRewardedAdRewarded event received for "
             + amount.ToString() + " " + type);
         UserManager.Instance.userData.energy += 1;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         FindObjectOfType<MainMenuSceneUIManager>().FindUIObject("EnergyBuyPanel").SetActive(false);
     }
 

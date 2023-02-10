@@ -108,7 +108,7 @@ public class Tutorial2 : MonoBehaviour
     public void T2Click17()
     {
         UserManager.Instance.userData.tutorial2 = true;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         T2View17.SetActive(false);
 
     }

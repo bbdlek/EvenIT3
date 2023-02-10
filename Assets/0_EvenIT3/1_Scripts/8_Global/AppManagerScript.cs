@@ -60,7 +60,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
                         {
                             UserManager.Instance.userData.Commodities.Gold -= 5;
                             UserManager.Instance.userData.energy += 5;
-                            _fbManager.UpdateCurrentUser();
+                            //_fbManager.UpdateCurrentUser();
                         }
                         else
                         {
@@ -83,7 +83,7 @@ public class AppManagerScript : Singleton<AppManagerScript>
                         {
                             UserManager.Instance.userData.Commodities.Gold -= 1;
                             UserManager.Instance.userData.Commodities.Silver += 1000;
-                            _fbManager.UpdateCurrentUser();
+                            //_fbManager.UpdateCurrentUser();
                         }
                         else
                         {

@@ -24,7 +24,7 @@ public class Tutorial41 : MonoBehaviour
     {
         FindObjectOfType<InGameSceneUIManager>().OnClickClearPanelMainMenuBtn();
         UserManager.Instance.userData.tutorial41 = true;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         T4View3.SetActive(false);
         gameObject.SetActive(false);
     }

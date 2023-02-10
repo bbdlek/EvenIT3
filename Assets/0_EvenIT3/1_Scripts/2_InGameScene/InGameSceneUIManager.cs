@@ -254,7 +254,7 @@ public class InGameSceneUIManager : UIControllerScript
         UserManager.Instance.userData.achievementCount[32] += 1;
         AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
         UserManager.Instance.UseHeart();
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
     }
     
     //FailedDecibel
@@ -285,7 +285,7 @@ public class InGameSceneUIManager : UIControllerScript
         UserManager.Instance.userData.achievementCount[38] += 1;
         AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
         UserManager.Instance.UseHeart();
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
     }
     
     //FailedOver
@@ -316,7 +316,7 @@ public class InGameSceneUIManager : UIControllerScript
         UserManager.Instance.userData.achievementCount[35] += 1;
         AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
         UserManager.Instance.UseHeart();
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
     }
 
     public void OnClickClearPanelMainMenuBtn()
@@ -869,7 +869,7 @@ public class InGameSceneUIManager : UIControllerScript
             } 
         }
 
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         FindUIObject("ClearPanel").SetActive(true);
         if (!UserManager.Instance.userData.tutorial4)
         {

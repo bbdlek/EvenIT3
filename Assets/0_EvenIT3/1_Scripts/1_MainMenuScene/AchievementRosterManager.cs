@@ -168,7 +168,7 @@ public class AchievementRosterManager : MonoBehaviour
         }
 
         UserManager.Instance.userData.achievementList[No] = true;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.SetTrophy();
         if(Type != 0)
         {

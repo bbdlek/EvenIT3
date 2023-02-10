@@ -133,7 +133,7 @@ public class Tutorial1 : MonoBehaviour
     public void Click21()
     {
         UserManager.Instance.userData.tutorial1 = true;
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         View21.SetActive(false);
         gameObject.SetActive(false);
     }

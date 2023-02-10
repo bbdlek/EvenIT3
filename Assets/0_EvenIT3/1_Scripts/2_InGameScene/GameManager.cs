@@ -161,16 +161,16 @@ public class GameManager : Singleton<GameManager>
                 inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 120, -44);
                 break;
             case 3:
-                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 10 / 140, -44);
-                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 20 / 140, -44);
+                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 10 / 155, -44);
+                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 20 / 155, -44);
                 break;
             case 4:
                 inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 100, -44);
                 inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 40 / 100, -44);
                 break;
             case 5:
-                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 120, -44);
-                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 40 / 120, -44);
+                inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 30 / 90, -44);
+                inGameSceneUIManager.FindUIObject("3StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 40 / 90, -44);
                 break;
             case 6:
                 inGameSceneUIManager.FindUIObject("2StarIcon").GetComponent<RectTransform>().anchoredPosition = new Vector2(1500 * 10 / 140, -44);
@@ -512,7 +512,7 @@ public class GameManager : Singleton<GameManager>
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
                     UserManager.Instance.userData.energy -= 1;
-                    FBManagerScript.Instance.UpdateCurrentUser();
+                    //FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {
@@ -534,7 +534,7 @@ public class GameManager : Singleton<GameManager>
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
                     UserManager.Instance.userData.energy -= 1;
-                    FBManagerScript.Instance.UpdateCurrentUser();
+                    //FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {
@@ -557,7 +557,7 @@ public class GameManager : Singleton<GameManager>
                     inGameSceneUIManager.FindUIObject("FailPanel").SetActive(true);
                     AppManagerScript.Instance.continuousStage[AppManagerScript.Instance.selectedChapter - 1] = 0;
                     UserManager.Instance.userData.energy -= 1;
-                    FBManagerScript.Instance.UpdateCurrentUser();
+                    //FBManagerScript.Instance.UpdateCurrentUser();
                 }
                 else
                 {

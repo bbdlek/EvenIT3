@@ -233,7 +233,7 @@ public class GachaManager : MonoBehaviour
 
     public void NormalGachaAnimation()
     {
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         for (int i = 0; i < gachaRewardCounts.Length; i++)
         {
             if (gachaRewardCounts[i] != 0)
@@ -258,7 +258,7 @@ public class GachaManager : MonoBehaviour
     
     public void EpicGachaAnimation()
     {
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         for (int i = 0; i < gachaRewardCounts.Length; i++)
         {
             if (gachaRewardCounts[i] != 0)

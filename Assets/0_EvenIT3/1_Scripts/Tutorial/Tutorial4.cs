@@ -92,7 +92,7 @@ public class Tutorial4 : MonoBehaviour
         UserManager.Instance.userData.tutorial4 = true;
         UserManager.Instance.userData.snackList[0] += 10;
         Mathf.Clamp(UserManager.Instance.userData.snackList[0], 0, 20);
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         FindObjectOfType<MainMenuSceneUIManager>().SetCollectionNum();
         FindObjectOfType<MainMenuSceneUIManager>().InitCollection();
         FindObjectOfType<MainMenuSceneUIManager>().InitProfileCollection();
@@ -110,7 +110,7 @@ public class Tutorial4 : MonoBehaviour
         gameObject.SetActive(false);
         UserManager.Instance.userData.snackList[0] += 10;
         Mathf.Clamp(UserManager.Instance.userData.snackList[0], 0, 20);
-        FBManagerScript.Instance.UpdateCurrentUser();
+        //FBManagerScript.Instance.UpdateCurrentUser();
         FindObjectOfType<MainMenuSceneUIManager>().SetCollectionNum();
         FindObjectOfType<MainMenuSceneUIManager>().InitCollection();
         FindObjectOfType<MainMenuSceneUIManager>().InitProfileCollection();

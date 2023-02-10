@@ -111,7 +111,8 @@ public class FBManagerScript : Singleton<FBManagerScript>
     public async Task<string> GetUserNickName(string userId)
     {
         string nickName = String.Empty;
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userId).Child("UserData")
+            .Child("nickName");
         await reference.GetValueAsync().ContinueWith(task =>
         {
             if (task.IsFaulted)
@@ -121,14 +122,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
             else if(task.IsCompletedSuccessfully)
             {
                 DataSnapshot snapshot = task.Result;
-                foreach (var dataSnapshot in snapshot.Children)
-                {
-                    if(dataSnapshot.Key == userId)
-                    {
-                        nickName = (string)dataSnapshot.Child("UserData").Child("nickName").Value;
-                        break;
-                    }
-                }
+                nickName = (string)snapshot.Value;
             }
         });
         return nickName;
@@ -152,11 +146,11 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     public void UpdateCurrentUser()
     {
-        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users");
+        var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(Gamebase.GetUserID());
         string json = JsonUtility.ToJson(UserManager.Instance.userData);
         Debug.Log(json);
 
-        reference.Child(Gamebase.GetUserID()).Child("UserData").SetRawJsonValueAsync(json);
+        reference.Child("UserData").SetRawJsonValueAsync(json);
     }
 
     public void SaveEnergyAmount(string uid, int energyAmount)
