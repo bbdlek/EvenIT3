@@ -12976,6 +12976,7 @@ GameObject:
   - component: {fileID: 1090465045}
   - component: {fileID: 1090465046}
   - component: {fileID: 1090465047}
+  - component: {fileID: 1090465048}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -13137,6 +13138,22 @@ MonoBehaviour:
   isKoreanSkill: 0
   isEnglishSkill: 0
   isHistorySkill: 0
+--- !u!114 &1090465048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090465043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40517ebe71bb81459a5c6e5ecba1e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environment: production
+  gold2ProductId: gold_2
+  gold10ProductId: gold_10
+  gold20ProductId: gold_20
 --- !u!1 &1090542985
 GameObject:
   m_ObjectHideFlags: 0

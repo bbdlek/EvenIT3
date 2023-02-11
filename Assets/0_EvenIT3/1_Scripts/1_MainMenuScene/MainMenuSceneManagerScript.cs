@@ -31,7 +31,7 @@ public class MainMenuSceneManagerScript : MonoBehaviour
         }
         else
         {
-            FBManagerScript.Instance.GetUserData();
+            //FBManagerScript.Instance.GetUserData();
             mainMenuSceneUIManager.ChangeUI(MainMenuSceneUIManager.MainMenuScenePanels.MainMenuTouchPanel);
             mainMenuSceneUIManager.CheckRestart();
             mainMenuSceneUIManager.ResetCommodities();

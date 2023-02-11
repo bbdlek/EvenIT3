@@ -233,15 +233,23 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickFailedLookPanelBuyBtn()
     {
-        UserManager.Instance.userData.achievementCount[43] += 1;
-        UserManager.Instance.userData.achievementCount[44] += 1;
-        UserManager.Instance.userData.achievementCount[45] += 1;
-        GameManager.Instance.shieldItem = 0;
-        Time.timeScale = 1;
-        FindUIObject("FailedLookPanel").SetActive(false);
-        FindUIObject("SurpriseEffect").SetActive(false);
-        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
-        GameManager.Instance.gameState = GameManager.GameState.InGame;
+        if (UserManager.Instance.userData.Commodities.Gold < 2)
+        {
+            AppManagerScript.Instance.InitCautionPanel(2);
+        }
+        else
+        {
+            UserManager.Instance.userData.achievementCount[43] += 1;
+            UserManager.Instance.userData.achievementCount[44] += 1;
+            UserManager.Instance.userData.achievementCount[45] += 1;
+            GameManager.Instance.shieldItem = 0;
+            UserManager.Instance.userData.Commodities.Gold -= 2;
+            Time.timeScale = 1;
+            FindUIObject("FailedLookPanel").SetActive(false);
+            FindUIObject("SurpriseEffect").SetActive(false);
+            GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
+            GameManager.Instance.gameState = GameManager.GameState.InGame;
+        }
     }
     
     public void OnClickFailedLookPanelRefuseBtn()
@@ -265,14 +273,22 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickFailedDecibelPanelBuyBtn()
     {
-        GameManager.Instance.player.curDecibelAmount = 0;
-        GameManager.Instance.shieldItem = 0;
-        Time.timeScale = 1;
-        FindUIObject("FailedDecibelPanel").SetActive(false);
-        FindUIObject("SurpriseEffect").SetActive(false);
-        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
-        GameManager.Instance.player.playerState = Player.State.Idle;
-        GameManager.Instance.gameState = GameManager.GameState.InGame;
+        if (UserManager.Instance.userData.Commodities.Gold < 2)
+        {
+            AppManagerScript.Instance.InitCautionPanel(2);
+        }
+        else
+        {
+            GameManager.Instance.player.curDecibelAmount = 0;
+            GameManager.Instance.shieldItem = 0;
+            UserManager.Instance.userData.Commodities.Gold -= 2;
+            Time.timeScale = 1;
+            FindUIObject("FailedDecibelPanel").SetActive(false);
+            FindUIObject("SurpriseEffect").SetActive(false);
+            GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
+            GameManager.Instance.player.playerState = Player.State.Idle;
+            GameManager.Instance.gameState = GameManager.GameState.InGame;
+        }
     }
     
     public void OnClickFailedDecibelPanelRefuseBtn()
@@ -296,14 +312,22 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickFailedOverPanelBuyBtn()
     {
-        GameManager.Instance.curTime = DBManagerScript.Instance.itemDB[4].NN;
-        GameManager.Instance.timerItem = 0;
-        Time.timeScale = 1;
-        FindUIObject("FailedOverPanel").SetActive(false);
-        FindUIObject("SurpriseEffect").SetActive(false);
-        GameManager.Instance._isTimer = true;
-        GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
-        GameManager.Instance.gameState = GameManager.GameState.InGame;
+        if (UserManager.Instance.userData.Commodities.Gold < 2)
+        {
+            AppManagerScript.Instance.InitCautionPanel(2);
+        }
+        else
+        {
+            GameManager.Instance.curTime = DBManagerScript.Instance.itemDB[4].NN;
+            GameManager.Instance.timerItem = 0;
+            UserManager.Instance.userData.Commodities.Gold -= 2;
+            Time.timeScale = 1;
+            FindUIObject("FailedOverPanel").SetActive(false);
+            FindUIObject("SurpriseEffect").SetActive(false);
+            GameManager.Instance._isTimer = true;
+            GameManager.Instance.teacher.teacherState = TeacherController.TeacherState.Idle;
+            GameManager.Instance.gameState = GameManager.GameState.InGame;
+        }
     }
     
     public void OnClickFailedOverPanelRefuseBtn()

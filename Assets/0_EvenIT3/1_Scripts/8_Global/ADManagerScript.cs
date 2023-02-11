@@ -84,6 +84,7 @@ public class ADManagerScript : Singleton<ADManagerScript>
     public void HandleEnergyRewardedAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleEnergyRewardedAdClosed event received");
+        UserManager.Instance.userData.energy += 1;
         CreateAndLoadRewardedAd();
     }
 
@@ -94,9 +95,8 @@ public class ADManagerScript : Singleton<ADManagerScript>
         MonoBehaviour.print(
             "HandleEnergyRewardedAdRewarded event received for "
             + amount.ToString() + " " + type);
-        UserManager.Instance.userData.energy += 1;
         //FBManagerScript.Instance.UpdateCurrentUser();
-        FindObjectOfType<MainMenuSceneUIManager>().FindUIObject("EnergyBuyPanel").SetActive(false);
+        //FindObjectOfType<MainMenuSceneUIManager>().FindUIObject("EnergyBuyPanel").SetActive(false);
     }
 
     public void ShowEnergyRewardAd()

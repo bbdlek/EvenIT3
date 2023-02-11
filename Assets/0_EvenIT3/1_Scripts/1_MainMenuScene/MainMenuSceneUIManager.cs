@@ -728,12 +728,12 @@ public class MainMenuSceneUIManager : UIControllerScript
             } 
             else if (leaderBoardMyRank.rank == 2)
             {
-                FindUIObject("StageRankingMineImg").SetActive(false);
+                FindUIObject("StageRankingMineImg").SetActive(true);
                 FindUIObject("StageRankingMineImg").GetComponent<Image>().color = new Color32(192, 192, 192, 255);
             } 
             else if (leaderBoardMyRank.rank == 3)
             {
-                FindUIObject("StageRankingMineImg").SetActive(false);
+                FindUIObject("StageRankingMineImg").SetActive(true);
                 FindUIObject("StageRankingMineImg").GetComponent<Image>().color = new Color32(205, 127, 50, 255);
             }
             else

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class LogInManager : MonoBehaviour
 {
+    
     // 이전 로그인
     public void LoginForLastLoggedInProvider()
     {

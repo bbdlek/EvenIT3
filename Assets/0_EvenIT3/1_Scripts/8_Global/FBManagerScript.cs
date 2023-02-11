@@ -17,6 +17,24 @@ public class FBManagerScript : Singleton<FBManagerScript>
     
     public void InitFirebase()
     {
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        
+        auth.SignInAnonymouslyAsync().ContinueWith(task => {
+            if (task.IsCanceled) {
+                Debug.LogError("SignInAnonymouslyAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted) {
+                Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+        });
+        
+        
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available) {
@@ -110,6 +128,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
 
     public async Task<string> GetUserNickName(string userId)
     {
+        Debug.Log("Start");
         string nickName = String.Empty;
         var reference = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(userId).Child("UserData")
             .Child("nickName");
@@ -125,6 +144,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 nickName = (string)snapshot.Value;
             }
         });
+        Debug.Log("End");
         return nickName;
     }
 

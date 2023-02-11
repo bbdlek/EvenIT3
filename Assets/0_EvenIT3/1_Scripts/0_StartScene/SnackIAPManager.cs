@@ -106,24 +106,45 @@ public class SnackIAPManager : MonoBehaviour, IStoreListener
     {
         UserManager.Instance.userData.Commodities.Gold += 2;
         FBManagerScript.Instance.UpdateCurrentUser();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        if(AppManagerScript.Instance.sceneName == SceneName.MainMenuScene)
+        {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Silver.ToString();
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Gold.ToString();
+        }
     }
     
     void AddGold10()
     {
         UserManager.Instance.userData.Commodities.Gold += 10;
         FBManagerScript.Instance.UpdateCurrentUser();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        if(AppManagerScript.Instance.sceneName == SceneName.MainMenuScene)
+        {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Silver.ToString();
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Gold.ToString();
+        }
     }
     
     void AddGold20()
     {
         UserManager.Instance.userData.Commodities.Gold += 20;
         FBManagerScript.Instance.UpdateCurrentUser();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Silver.ToString();
-        AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>().mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text = UserManager.Instance.userData.Commodities.Gold.ToString();
+        if(AppManagerScript.Instance.sceneName == SceneName.MainMenuScene)
+        {
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("FreeMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Silver.ToString();
+            AppManagerScript.Instance.sceneManagerObject.GetComponent<MainMenuSceneManagerScript>()
+                    .mainMenuSceneUIManager.FindUIObject("PaidMoneyText").GetComponent<TMPro.TMP_Text>().text =
+                UserManager.Instance.userData.Commodities.Gold.ToString();
+        }
     }
 
     
