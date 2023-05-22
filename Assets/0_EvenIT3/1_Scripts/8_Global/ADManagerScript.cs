@@ -72,6 +72,7 @@ public class ADManagerScript : Singleton<ADManagerScript>
     public void HandleEnergyRewardedAdOpening(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleEnergyRewardedAdOpening event received");
+        UserManager.Instance.AddHeartByAD();
     }
 
     public void HandleEnergyRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
@@ -84,7 +85,6 @@ public class ADManagerScript : Singleton<ADManagerScript>
     public void HandleEnergyRewardedAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleEnergyRewardedAdClosed event received");
-        UserManager.Instance.userData.energy += 1;
         CreateAndLoadRewardedAd();
     }
 

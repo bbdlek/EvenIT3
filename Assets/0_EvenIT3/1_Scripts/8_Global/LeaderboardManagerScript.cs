@@ -15,6 +15,7 @@ public class LeaderboardManagerScript : Singleton<LeaderboardManagerScript>
 
     [SerializeField] private LeaderboardUserInfo[] userDB;
     [SerializeField] private LeaderboardUserInfo[] myRankDB;
+    public List<LeaderboardUserInfo[]> RankUserDB;
 
     public List<LeaderboardUserInfo> GetTop5Users(int stageNum)
     {
@@ -135,5 +136,54 @@ public class LeaderboardManagerScript : Singleton<LeaderboardManagerScript>
         }
 
         return responseText;
+    }
+    
+    [SerializeField]
+    
+    public void GetHallOfFameUser(int season)
+    {
+        for (int i = 1; i < 25; i++)
+        {
+            string responseText = string.Empty;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://api-gamebase.nhncloudservice.com/tcgb-leaderboard/v1.3/apps/{appID}/factors/{i}/users?isPast=true&start=1&size=5");
+            request.Method = "GET";
+            request.Timeout = 30 * 1000; // 30초
+            request.ContentType = "application/json";
+            request.Headers.Add("X-Secret-Key", appSecretKey); // 헤더 추가 방법
+
+            using (HttpWebResponse resp = (HttpWebResponse)request.GetResponse())
+            {
+                HttpStatusCode status = resp.StatusCode;
+                Console.WriteLine(status);  // 정상이면 "OK"
+
+                Stream respStream = resp.GetResponseStream();
+                using (StreamReader sr = new StreamReader(respStream))
+                {
+                    responseText = sr.ReadToEnd();
+                }
+            }
+        
+            int index = responseText.IndexOf("[", StringComparison.Ordinal);
+            int indexLast = responseText.IndexOf("]", StringComparison.Ordinal);
+        
+            var userData = responseText.Substring(index, indexLast - index + 1);
+            var userDataBase = JsonConvert.DeserializeObject<LeaderboardUserInfoDB>("{\"userInfo\":" + userData + "}");
+            RankUserDB.Add(userDataBase.userInfo);
+        }
+
+        List<LeaderboardUserInfo> leaderboardUserInfos = new List<LeaderboardUserInfo>();
+        for (int i = 0; i < userDB.Length; i++)
+        {
+            leaderboardUserInfos.Add(userDB[i]);
+        }
+
+        int count = leaderboardUserInfos.Count;
+
+        for (int i = 0; i < 5 - count; i++)
+        {
+            leaderboardUserInfos.Add(new LeaderboardUserInfo());
+            Debug.Log("Added");
+        }
     }
 }

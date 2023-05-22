@@ -32,7 +32,12 @@ public class DBManagerScript : Singleton<DBManagerScript>
     private void Start()
     {
         isDBReady = false;
-        downloadCor = StartCoroutine(DownloadTest());
+        if(!AppManagerScript.Instance.isLocalMode)
+            downloadCor = StartCoroutine(DownloadTest());
+        else
+        {
+            
+        }
     }
 
     private Coroutine downloadCor;
@@ -246,6 +251,20 @@ public class DBManagerScript : Singleton<DBManagerScript>
             yield return new WaitForSeconds(5f);
             Application.Quit();
         }
+    }
+
+    private void InitLocalDB()
+    {
+        var snackTypeData = File.ReadAllText(Application.persistentDataPath + "/SnackType.json");
+        var snackTypeDataBase = JsonConvert.DeserializeObject<SnackTypeDB>("{\"snackType\":" + snackTypeData + "}");
+        snackTypeDB = snackTypeDataBase.snackType;
+        var buffData = File.ReadAllText(Application.persistentDataPath + "/Buff.json");
+        var buffDataBase = JsonConvert.DeserializeObject<BuffDB>("{\"buff\":" + buffData + "}");
+        buffDB = buffDataBase.buff;
+        var achievementData = File.ReadAllText(Application.persistentDataPath + "/Achievements.json");
+        var achievementDataBase = JsonUtility.FromJson<AchievementsDB>("{\"achievements\":" + achievementData + "}");
+        achievementDB = achievementDataBase.achievements;
+        isDBReady = true;
     }
     
 

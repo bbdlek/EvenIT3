@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class AppManagerScript : Singleton<AppManagerScript>
 {
+    public bool isLocalMode = false;
     private GamabaseManager _gamabaseManager;
     private FBManagerScript _fbManager;
     public GameObject sceneManagerObject;

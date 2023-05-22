@@ -221,6 +221,7 @@ public class InGameSceneUIManager : UIControllerScript
     
     private void OnClickPausePanelMainMenuBtn()
     {
+        UserManager.Instance.UseHeart();
         AppManagerScript.Instance.isRestart = false;
         AppManagerScript.Instance.ChangeScene(SceneName.MainMenuScene);
     }

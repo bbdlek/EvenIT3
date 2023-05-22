@@ -17,6 +17,7 @@ public class AchievementRosterManager : MonoBehaviour
     [SerializeField] private TMP_Text _headerText;
     [SerializeField] private TMP_Text _fillText;
     [SerializeField] private Image _fillImage;
+    [SerializeField] private Image _rewardIcon;
 
     [SerializeField] private Button _contentMoveBtn;
     [SerializeField] private Button _contentGetBtn;
@@ -81,6 +82,8 @@ public class AchievementRosterManager : MonoBehaviour
         }
         _fillText.text = Mathf.Clamp(UserManager.Instance.userData.achievementCount[No], 0, NN) + " / " + NN;
         _fillImage.fillAmount = UserManager.Instance.userData.achievementCount[No] / NN;
+        _rewardIcon.sprite =
+            Resources.Load<Sprite>("Achievements/" + DBManagerScript.Instance.achievementDB[No].reward);
         canGet = UserManager.Instance.userData.achievementCount[No] == (int)NN;
         _contentGetBtn.interactable = canGet;
     }

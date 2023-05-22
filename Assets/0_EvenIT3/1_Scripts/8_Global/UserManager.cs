@@ -69,7 +69,7 @@ public class UserManager : Singleton<UserManager>
     
     public void Init()
     {
-        m_RechargeRemainTime = 0;
+        //m_RechargeRemainTime = 0;
         m_AppQuitTime = new DateTime(1970, 1, 1).ToLocalTime();
         Debug.Log("heartRechargeTimer : " + m_RechargeRemainTime + "s");
         //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
@@ -80,6 +80,7 @@ public class UserManager : Singleton<UserManager>
         Debug.Log(userData.lastDate);
         Debug.Log(m_AppQuitTime);
         m_AppQuitTime = DateTime.FromBinary(Convert.ToInt64(userData.lastDate));
+        SetRechargeScheduler();
     }
     
     public bool LoadHeartInfo()
@@ -173,14 +174,19 @@ public class UserManager : Singleton<UserManager>
             StopCoroutine(m_RechargeTimerCoroutine);
         }
         var timeDifferenceInSec = (int)((DateTime.Now.ToLocalTime() - m_AppQuitTime).TotalSeconds);
+        Debug.Log(timeDifferenceInSec);
         var heartToAdd = timeDifferenceInSec / HeartRechargeInterval;
-        var remainTime = timeDifferenceInSec % HeartRechargeInterval;
+        Debug.Log(m_RechargeRemainTime);
+        Debug.Log(timeDifferenceInSec % HeartRechargeInterval);
+        var remainTime = m_RechargeRemainTime - timeDifferenceInSec % HeartRechargeInterval;
+        Debug.Log(heartToAdd);
         if (userData.energy < 5)
         {
-            userData.energy += heartToAdd;
-            Mathf.Clamp(userData.energy, 0, 5);
-            m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(remainTime, onFinish));
+            int tempHeart = userData.energy + heartToAdd;
+            if (tempHeart > 5) tempHeart = 5;
+            userData.energy = tempHeart;
         }
+        m_RechargeTimerCoroutine = StartCoroutine(DoRechargeTimer(remainTime, onFinish));
         //heartAmountLabel.text = string.Format("Hearts : {0}", userData.energy.ToString());
     }
     public void UseHeart(Action onFinish = null)
@@ -188,6 +194,14 @@ public class UserManager : Singleton<UserManager>
         if (userData.energy <= 0)
         {
             return;
+        }
+        
+        if(userData.energy == 5)
+        {
+            if (m_RechargeTimerCoroutine != null)
+            {
+                StopCoroutine(m_RechargeTimerCoroutine);
+            }
         }
         
         userData.energy--;
@@ -201,28 +215,37 @@ public class UserManager : Singleton<UserManager>
             onFinish();
         }
     }
+
+    public void AddHeartByAD()
+    {
+        userData.energy++;
+        SetRechargeScheduler();
+    }
     private IEnumerator DoRechargeTimer(int remainTime, Action onFinish = null)
     {
-        if (remainTime <= 0)
+        if (userData.energy < 5)
         {
-            m_RechargeRemainTime = HeartRechargeInterval;
-        }
-        else
-        {
-            m_RechargeRemainTime = remainTime;
-        }
-        //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
-        
-        while (m_RechargeRemainTime > 0)
-        {
+            if (remainTime <= 0)
+            {
+                m_RechargeRemainTime = HeartRechargeInterval;
+            }
+            else
+            {
+                m_RechargeRemainTime = remainTime;
+            }
             //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
-            m_RechargeRemainTime -= 1;
-            yield return new WaitForSeconds(1f);
+
+            while (m_RechargeRemainTime > 0)
+            {
+                //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
+                m_RechargeRemainTime -= 1;
+                yield return new WaitForSeconds(1f);
+            }
+
+            userData.energy++;
         }
-        userData.energy++;
         if (userData.energy >= 5)
         {
-            userData.energy = 5;
             m_RechargeRemainTime = 0;
             //heartRechargeTimer.text = string.Format("Timer : {0} s", m_RechargeRemainTime);
             m_RechargeTimerCoroutine = null;

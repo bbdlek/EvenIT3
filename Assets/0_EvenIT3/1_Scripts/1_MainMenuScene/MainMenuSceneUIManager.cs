@@ -135,6 +135,9 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.ChapterPageCloseBtn:
                 OnClickChapterPageCloseBtn();
                 break;
+            case MainMenuSceneButtons.HallOfFamePageMoveBtn:
+                OnClickHallOfFamePageMoveBtn();
+                break;
             
             case MainMenuSceneButtons.ChapterToStage1:
                 OnClickChapterToStage(1);
@@ -150,6 +153,40 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuSceneButtons.StagePageCloseBtn:
                 OnClickStagePageCloseBtn();
+                break;
+            
+            case MainMenuSceneButtons.HChapter1SelectBtn:
+                OnClickChapterSelectBtn(1);
+                break;
+            case MainMenuSceneButtons.HChapter2SelectBtn:
+                OnClickChapterSelectBtn(2);
+                break;
+            case MainMenuSceneButtons.HChapter3SelectBtn:
+                OnClickChapterSelectBtn(3);
+                break;
+            case MainMenuSceneButtons.HChapter4SelectBtn:
+                OnClickChapterSelectBtn(4);
+                break;
+            case MainMenuSceneButtons.HChapter5SelectBtn:
+                OnClickChapterSelectBtn(5);
+                break;
+            case MainMenuSceneButtons.HChapter6SelectBtn:
+                OnClickChapterSelectBtn(6);
+                break;
+            case MainMenuSceneButtons.HallOfFamePageScoreTableBtn:
+                OnClickHallOfFamePageScoreTableBtn();
+                break;
+            case MainMenuSceneButtons.HallOfFamePageScoreTableCloseBtn:
+                OnClickHallOfFamePageScoreTableCloseBtn();
+                break;
+            case MainMenuSceneButtons.HallOfFamePageBGCloseBtn:
+                OnClickHallOfFamePageBGCloseBtn();
+                break;
+            case MainMenuSceneButtons.HallOfFamePagePrevBtn:
+                OnClickHallOfFamePagePrevBtn();
+                break;
+            case MainMenuSceneButtons.HallOfFamePageNextBtn:
+                OnClickHallOfFamePageNextBtn();
                 break;
             
             //Stage
@@ -328,6 +365,18 @@ public class MainMenuSceneUIManager : UIControllerScript
             case MainMenuSceneButtons.OptionWithDrawBtn:
                 OnClickOptionWithDrawBtn();
                 break;
+            case MainMenuSceneButtons.LogOutConfirmBtn:
+                OnClickLogOutConfirmBtn();
+                break;
+            case MainMenuSceneButtons.LogOutDenyBtn:
+                OnClickLogOutDenyBtn();
+                break;
+            case MainMenuSceneButtons.WithdrawConfirmBtn:
+                OnClickWithdrawConfirmBtn();
+                break;
+            case MainMenuSceneButtons.WithdrawDenyBtn:
+                OnClickWithdrawDenyBtn();
+                break;
             case MainMenuSceneButtons.CouponPanelAcceptBtn:
                 OnClickCouponPanelAcceptBtn();
                 break;
@@ -391,13 +440,27 @@ public class MainMenuSceneUIManager : UIControllerScript
         Chapter4SelectBtn,
         Chapter5SelectBtn,
         Chapter6SelectBtn,
+        HChapter1SelectBtn,
+        HChapter2SelectBtn,
+        HChapter3SelectBtn,
+        HChapter4SelectBtn,
+        HChapter5SelectBtn,
+        HChapter6SelectBtn,
         ChapterPageCloseBtn,
+        HallOfFamePageMoveBtn,
         
         ChapterToStage1,
         ChapterToStage2,
         ChapterToStage3,
         ChapterToStage4,
         StagePageCloseBtn,
+        
+        HallOfFamePageScoreTableBtn,
+        HallOfFamePageScoreTableCloseBtn,
+        HallOfFamePageBGCloseBtn,
+        HallOfFamePagePrevBtn,
+        HallOfFamePageNextBtn,
+
 
         //Stage
         StageStartBtn,
@@ -477,6 +540,10 @@ public class MainMenuSceneUIManager : UIControllerScript
 
         OptionLogOutBtn,
         OptionWithDrawBtn,
+        LogOutConfirmBtn,
+        LogOutDenyBtn,
+        WithdrawConfirmBtn,
+        WithdrawDenyBtn,
         
         //Profile
         ProfileCloseBtn,
@@ -495,6 +562,7 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickEnergyBuyBtn()
     {
+        UserManager.Instance.SetRechargeScheduler();
         FindUIObject("EnergyBuyPanel").SetActive(true);
     }
     
@@ -558,6 +626,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     public void OnClickCollectionMoveBtn()
     {
+        SetCollectionNum();
         MasterAudio.PlaySound("CollectionClick");
         ChangeUI(MainMenuScenePanels.CollectionPanel);
     }
@@ -627,6 +696,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     public void OnClickChapterSelectBtn(int chapter)
     {
+        FindUIObject("HallOfFamePageBG").SetActive(false);
         AppManagerScript.Instance.selectedChapter = chapter;
         CheckStageStar();
         FindUIObject("ChapterPageHeader").GetComponent<TMP_Text>().text = "챕터 " + chapter;
@@ -662,6 +732,14 @@ public class MainMenuSceneUIManager : UIControllerScript
     private void OnClickChapterPageCloseBtn()
     {
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    private void OnClickHallOfFamePageMoveBtn()
+    {
+        FindUIObject("HallOfFamePageP1").SetActive(true);
+        FindUIObject("HallOfFameLeftPage").SetActive(false);
+        FindUIObject("HallOfFameRightPage").SetActive(false);
+        FindUIObject("HallOfFamePageBG").SetActive(true);
     }
 
     [SerializeField] private GameObject stagePageItemRoster;
@@ -800,11 +878,11 @@ public class MainMenuSceneUIManager : UIControllerScript
         if(stageNum < 12)
         {
             //Check Item
-            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = UserManager.Instance.userData.milkItem != 0;
+            FindUIObject("StagePageItem1").GetComponent<Toggle>().isOn = false;
             FindUIObject("StagePageItem1").GetComponent<Toggle>().interactable = UserManager.Instance.userData.milkItem != 0;
-            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = UserManager.Instance.userData.clockItem != 0;
+            FindUIObject("StagePageItem2").GetComponent<Toggle>().isOn = false;
             FindUIObject("StagePageItem2").GetComponent<Toggle>().interactable = UserManager.Instance.userData.clockItem != 0;
-            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = UserManager.Instance.userData.maskItem != 0;
+            FindUIObject("StagePageItem3").GetComponent<Toggle>().isOn = false;
             FindUIObject("StagePageItem3").GetComponent<Toggle>().interactable = UserManager.Instance.userData.maskItem != 0;
             FindUIObject("StagePageItem1Cross").SetActive(false);
             FindUIObject("StagePageItem2Cross").SetActive(false);
@@ -833,6 +911,33 @@ public class MainMenuSceneUIManager : UIControllerScript
     {
         FindUIObject("ChapterPageBG").SetActive(true);
         FindUIObject("StagePageBG").SetActive(false);
+    }
+
+    private void OnClickHallOfFamePageScoreTableBtn()
+    {
+        FindUIObject("HallOfFamePageScoreTableBG").SetActive(true);
+    }
+
+    private void OnClickHallOfFamePageScoreTableCloseBtn()
+    {
+        FindUIObject("HallOfFamePageScoreTableBG").SetActive(false);
+    }
+
+    private void OnClickHallOfFamePageBGCloseBtn()
+    {
+        ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
+    }
+
+    [SerializeField] private int curPage = 0;
+
+    private void OnClickHallOfFamePagePrevBtn()
+    {
+        curPage -= 2;
+    }
+    
+    private void OnClickHallOfFamePageNextBtn()
+    {
+        curPage += 2;
     }
     
     //Stage
@@ -876,7 +981,7 @@ public class MainMenuSceneUIManager : UIControllerScript
             Destroy(FindUIObject("AchievementContent").transform.GetChild(c).gameObject);
         }
 
-        for (int i = 0; i < DBManagerScript.Instance.achievementDB.Length; i++)
+        for (int i = 24; i < DBManagerScript.Instance.achievementDB.Length; i++)
         {
             GameObject tempRoster = Instantiate(achievementContentRoster, FindUIObject("AchievementContent").transform);
             var rosterManager = tempRoster.GetComponent<AchievementRosterManager>();
@@ -1067,6 +1172,7 @@ public class MainMenuSceneUIManager : UIControllerScript
     
     private void OnClickShopCloseBtn()
     {
+        SetCollectionNum();
         ChangeUI(MainMenuScenePanels.MainMenuTouchPanel);
     }
 
@@ -1462,17 +1568,37 @@ public class MainMenuSceneUIManager : UIControllerScript
 
     private void OnClickOptionLogOutBtn()
     {
+        FindUIObject("LogOutPanel").SetActive(true);
+    }
+
+    private void OnClickOptionWithDrawBtn()
+    {
+        FindUIObject("WithdrawPanel").SetActive(true);
+    }
+
+    private void OnClickLogOutConfirmBtn()
+    {
         AppManagerScript.Instance.isWithDraw = true;
         PlayerPrefs.SetInt("IsFirst", 0);
         AppManagerScript.Instance.GetComponent<LogInManager>().LogOut();
     }
 
-    private void OnClickOptionWithDrawBtn()
+    private void OnClickLogOutDenyBtn()
+    {
+        FindUIObject("LogOutPanel").SetActive(false);
+    }
+    
+    private void OnClickWithdrawConfirmBtn()
     {
         AppManagerScript.Instance.isWithDraw = true;
         PlayerPrefs.SetInt("IsFirst", 0);
         FBManagerScript.Instance.DeleteCurrentUser(UserManager.Instance.userID);
         AppManagerScript.Instance.GetComponent<LogInManager>().WithDraw();
+    }
+
+    private void OnClickWithdrawDenyBtn()
+    {
+        FindUIObject("WithdrawPanel").SetActive(false);
     }
 
     private void OnClickCouponPanelAcceptBtn()
@@ -1514,6 +1640,13 @@ public class MainMenuSceneUIManager : UIControllerScript
         Debug.Log((float)collection / DBManagerScript.Instance.snackDB.Length);
         FindUIObject("ProfileCollectionPercentageBody").GetComponent<TMP_Text>().text =
             ((float)collection / DBManagerScript.Instance.snackDB.Length * 100).ToString("F2");
+        int achievement = 0;
+        for (int i = 0; i < UserManager.Instance.userData.achievementList.Count; i++)
+        {
+            if (UserManager.Instance.userData.achievementList[i]) achievement++;
+        }
+        FindUIObject("ProfileAchievementBody").GetComponent<TMP_Text>().text =
+            ((float)achievement / DBManagerScript.Instance.achievementDB.Length * 100).ToString("F2");
     }
 
     public void InitProfileScore()
@@ -1620,9 +1753,9 @@ public class MainMenuSceneUIManager : UIControllerScript
             }
         }
         
-        profileImageContent.GetChild(1).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[46];
-        profileImageContent.GetChild(2).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[47];
-        profileImageContent.GetChild(3).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[48];
+        profileImageContent.GetChild(3).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[46];
+        profileImageContent.GetChild(6).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[47];
+        profileImageContent.GetChild(5).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[48];
         profileImageContent.GetChild(4).GetComponent<Button>().interactable = UserManager.Instance.userData.achievementList[49];
 
     }
@@ -1768,7 +1901,6 @@ public class MainMenuSceneUIManager : UIControllerScript
                 break;
             case MainMenuScenePanels.MainMenuTouchPanel:
                 FindUIObject("MainMenuTouchPanel").SetActive(true);
-                Debug.Log("JH");
                 break;
             case MainMenuScenePanels.StagePanel:
                 FindUIObject("ChapterPageBG").SetActive(true);
@@ -1781,9 +1913,9 @@ public class MainMenuSceneUIManager : UIControllerScript
                         FindUIObject("Tutorial2-1").SetActive(true);
                     }
                 }
-                FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+                /*FindUIObject("Chapter4SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
                 FindUIObject("Chapter5SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
-                FindUIObject("Chapter6SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);
+                FindUIObject("Chapter6SelectBtn").SetActive(UserManager.Instance.userData.starList.Count >= 12);*/
                 break;
             case MainMenuScenePanels.AchievementPanel:
                 InitAchievement();
@@ -1798,9 +1930,9 @@ public class MainMenuSceneUIManager : UIControllerScript
                 FindUIObject("Chapter4Panel").SetActive(false);
                 FindUIObject("Chapter5Panel").SetActive(false);
                 FindUIObject("Chapter6Panel").SetActive(false);
-                FindUIObject("Chapter4Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+                /*FindUIObject("Chapter4Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
                 FindUIObject("Chapter5Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
-                FindUIObject("Chapter6Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);
+                FindUIObject("Chapter6Btn").SetActive(UserManager.Instance.userData.starList.Count > 12);*/
                 FindUIObject("CollectionPanel").SetActive(true);
                 break;
             case MainMenuScenePanels.ShopPanel:
@@ -1858,15 +1990,15 @@ public class MainMenuSceneUIManager : UIControllerScript
                 {
                     UserManager.Instance.userData.snackList[i] = DBManagerScript.Instance.snackDB[i].P2A;
                     collection++;
-                    UserManager.Instance.userData.achievementCount[50] += 1;
-                    UserManager.Instance.userData.achievementCount[51] += 1;
-                    UserManager.Instance.userData.achievementCount[52] += 1;
-                    UserManager.Instance.userData.achievementCount[53] += 1;
                     FindUIObject(DBManagerScript.Instance.snackDB[i].name).transform.GetChild(3).gameObject
                         .SetActive(true);
                 }
             }
         }
+        UserManager.Instance.userData.achievementCount[50] = collection;
+        UserManager.Instance.userData.achievementCount[51] = collection;
+        UserManager.Instance.userData.achievementCount[52] = collection;
+        UserManager.Instance.userData.achievementCount[53] = collection;
     }
 
     public void InitCollection()

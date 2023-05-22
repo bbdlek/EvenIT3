@@ -43,7 +43,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 FirebaseApp = FirebaseApp.DefaultInstance;
 
                 InitDatabase();
-                transform.AddComponent<UserManager>();
+                //transform.AddComponent<UserManager>();
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             } else {
                 Debug.LogError(System.String.Format(
@@ -120,6 +120,7 @@ public class FBManagerScript : Singleton<FBManagerScript>
                 UserManager.Instance.userData = await Task.Run(() => JsonUtility.FromJson<User>(json));
                 await Task.Run(CompareDBAndUserData);
                 UserManager.Instance.LoadFromDB();
+                UserManager.Instance.SetRechargeScheduler();
             }
         });
     }
@@ -233,4 +234,27 @@ public class FBManagerScript : Singleton<FBManagerScript>
     }
 
     #endregion
+    
+    public async Task<bool> CheckRankExist(int season)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("Rank");
+        DataSnapshot snapshot = null;
+        await reference.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                // Handle the error...
+            }
+            else if (task.IsCompleted)
+            {
+                snapshot = task.Result;
+                // Do something with snapshot...
+                //GetUserData();
+                Debug.Log(snapshot.HasChild(season.ToString()));
+                return snapshot.HasChild(season.ToString());
+            }
+            return snapshot != null && snapshot.HasChild(season.ToString());
+        });
+        return snapshot.HasChild(season.ToString());
+    }
 }

@@ -45,7 +45,7 @@ public class Player : Singleton<Player>
         GameManager.Instance.quantity  = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].quantity;
         if (AppManagerScript.Instance.buff[0]) GameManager.Instance.quantity -= GameManager.Instance.quantity * DBManagerScript.Instance.buffDB[0].NN / 100;
         eatingSpeed = DBManagerScript.Instance.snackTypeDB[GameManager.Instance.selectedSnack.type].eatingSpeed;
-        if (AppManagerScript.Instance.buff[4]) eatingSpeed += DBManagerScript.Instance.buffDB[4].NN;
+        if (AppManagerScript.Instance.buff[4]) eatingSpeed += DBManagerScript.Instance.buffDB[4].NN / 100 * eatingSpeed;
         
         curQuantity = 0;
     }
